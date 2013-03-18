@@ -193,6 +193,24 @@ function getPath($urlBase, $id_category, $path = '', $highlight = '', $categoryT
 			return substr($path, 0, strlen($path) - 3);
 		return getPath($urlBase, $category->id_parent, $path, '', 'cms');
 	}
+	elseif ($categoryType == 'recipe')
+	{
+		$category = new RecipeCategory($id_category, $context->language->id);
+		if (!$category->id)
+			return $path;
+
+		$name = ($highlight != NULL) ? str_ireplace($highlight, '<span class="highlight">'.$highlight.'</span>', RecipeCategory::hideCMSCategoryPosition($category->name)) : RecipeCategory::hideCMSCategoryPosition($category->name);
+		$edit = '<a href="'.$urlBase.'&id_recipe_category='.$category->id.'&addcategory&token=' . Tools::getAdminToken('AdminRecipeContent'.(int)(Tab::getIdFromClassName('AdminRecipeContent')).(int)$context->employee->id).'">
+				<img src="../img/admin/edit.gif" alt="Modify" /></a> ';
+		if ($category->id == 1)
+			$edit = '<a href="'.$urlBase.'&id_recipe_category='.$category->id.'&viewcategory&token=' . Tools::getAdminToken('AdminRecipeContent'.(int)(Tab::getIdFromClassName('AdminRecipeContent')).(int)$context->employee->id).'">
+					<img src="../img/admin/home.gif" alt="Home" /></a> ';
+		$path = $edit.'<a href="'.$urlBase.'&id_recipe_category='.$category->id.'&viewcategory&token=' . Tools::getAdminToken('AdminRecipeContent'.(int)(Tab::getIdFromClassName('AdminRecipeContent')).(int)$context->employee->id).'">
+		'.$name.'</a> > '.$path;
+		if ($category->id == 1)
+			return substr($path, 0, strlen($path) - 3);
+		return getPath($urlBase, $category->id_parent, $path, '', 'recipe');
+	}
 }
 
 function getDirContent($path)

@@ -84,7 +84,6 @@
 						<input type="text" value="" id="product_autocomplete_input" />
 						{l s='Begin typing the first letters of the product name, then select the product from the drop-down list'}
 					</p>
-					<p class="preference_description">{l s='(Do not forget to save the product afterward)'}</p>
 					<!--<img onclick="$(this).prev().search();" style="cursor: pointer;" src="../img/admin/add.gif" alt="{l s='Add an accessory'}" title="{l s='Add an accessory'}" />-->
 				</div>
 				<div id="divAccessories">
@@ -92,6 +91,30 @@
 					{foreach from=$accessories item=accessory}
 						{$accessory.name|escape:'htmlall':'UTF-8'}{if !empty($accessory.reference)}{$accessory.reference}{/if}
 						<span class="delAccessory" name="{$accessory.id_product}" style="cursor: pointer;">
+							<img src="../img/admin/delete.gif" class="middle" alt="" />
+						</span><br />
+					{/foreach}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="col-left"><label>{l s='Recipes:'}</label></td>
+			<td style="padding-bottom:5px;">
+				<input type="hidden" name="inputRecipes" id="inputRecipes" value="{foreach from=$recipes item=recipe}{$recipe.id_product}-{/foreach}" />
+				<input type="hidden" name="nameRecipes" id="nameRecipes" value="{foreach from=$recipes item=recipe}{$recipe.name|escape:'htmlall':'UTF-8'}¤{/foreach}" />
+
+				<div id="ajax_choose_recipe">
+					<p style="clear:both;margin-top:0;">
+						<input type="text" value="" id="recipe_autocomplete_input" />
+						{l s='Begin typing the first letters of the recipe name, then select the recipe from the drop-down list'}
+					</p>
+					<p class="preference_description">{l s='(Do not forget to save the product afterward)'}</p>
+				</div>
+				<div id="divRecipes">
+					{* @todo : donot use 3 foreach, but assign var *}
+					{foreach from=$recipes item=recipe}
+						{$recipe.name|escape:'htmlall':'UTF-8'}{if !empty($recipe.reference)}{$recipe.reference}{/if}
+						<span class="delRecipe" name="{$recipe.id_product}" style="cursor: pointer;">
 							<img src="../img/admin/delete.gif" class="middle" alt="" />
 						</span><br />
 					{/foreach}

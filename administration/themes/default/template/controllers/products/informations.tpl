@@ -239,6 +239,10 @@
 					<input  type="checkbox" name="available_for_order" id="available_for_order" value="1" {if $product->available_for_order}checked="checked"{/if}  />
 					<label for="available_for_order" class="t">{l s='available for order'}</label>
 				</li>
+				<li>
+					<input type="checkbox" name="is_subscription" id="is_subscription" value="1" {if $product->is_subscription}checked="checked"{/if}/>
+					<label for="is_subscription" class="t">{l s='Subscription'}</label>
+				</li>
 			<li>
 				<input type="checkbox" name="show_price" id="show_price" value="1" {if $product->show_price}checked="checked"{/if} {if $product->available_for_order}disabled="disabled"{/if}/>
 				<label for="show_price" class="t">{l s='show price'}</label>
@@ -292,6 +296,32 @@
 						{include file="controllers/products/textarea_lang.tpl" languages=$languages
 						input_name='description'
 						input_value=$product->description
+						}
+					<p class="clear"></p>
+				</td>
+			</tr>
+			<tr>
+				<td class="col-left">
+					{include file="controllers/products/multishop/checkbox.tpl" field="tricks" type="tinymce" multilang="true"}
+					<label>{l s='tips and Tricks:'}<br /></label>
+				</td>
+				<td style="padding-bottom:5px;">
+						{include file="controllers/products/textarea_lang.tpl" languages=$languages
+						input_name='tricks'
+						input_value=$product->tricks
+						}
+					<p class="clear"></p>
+				</td>
+			</tr>
+			<tr>
+				<td class="col-left">
+					{include file="controllers/products/multishop/checkbox.tpl" field="breeder" type="tinymce" multilang="true"}
+					<label>{l s='World of breeder:'}<br /></label>
+				</td>
+				<td style="padding-bottom:5px;">
+						{include file="controllers/products/textarea_lang.tpl" languages=$languages
+						input_name='breeder'
+						input_value=$product->breeder
 						}
 					<p class="clear"></p>
 				</td>
