@@ -3,5 +3,213 @@
 class AdminZonesController extends AdminZonesControllerCore
 {
 
+	public function renderForm()
+	{
+		$this->fields_form = array(
+			'legend' => array(
+				'title' => $this->l('Zones'),
+				'image' => '../img/admin/world.gif'
+			),
+			'input' => array(
+				array(
+					'type' => 'text',
+					'label' => $this->l('Name'),
+					'name' => 'name',
+					'size' => 33,
+					'required' => true,
+					'desc' => $this->l('Zone name (e.g. Africa, West Coast, Neighboring Countries)'),
+				),
+				array(
+					'type' => 'radio',
+					'label' => $this->l('Active:'),
+					'name' => 'active',
+					'required' => false,
+					'class' => 't',
+					'is_bool' => true,
+					'values' => array(
+						array(
+							'id' => 'active_on',
+							'value' => 1,
+							'label' => $this->l('Enabled')
+						),
+						array(
+							'id' => 'active_off',
+							'value' => 0,
+							'label' => $this->l('Disabled')
+						)
+					),
+					'desc' => $this->l('Allow or disallow shipping to this zone')
+				),
+				array(
+					'type' => 'hidden',
+					'name' => 'calendar',
+					'values' => array(
+						array(
+							'id' => 'calendar_val',
+							'value' => 1
+						)
+					)
+				),
+				array(
+					'type' => 'hidden',
+					'name' => 'replacement_cheat',
+					'values' => array(
+						array(
+							'id' => 'replacement_cheat',
+							'value' => 1
+						)
+					)
+				)
+			)
+		);
+
+		if (Shop::isFeatureActive())
+		{
+			$this->fields_form['input'][] = array(
+				'type' => 'shop',
+				'label' => $this->l('Group shop association:'),
+				'name' => 'checkBoxShopAsso',
+			);
+		}
+
+		$this->fields_form['submit'] = array(
+			'title' => $this->l('Save   '),
+			'class' => 'button'
+		);
+
+		// ORIGINAL FORM
+		if (!$this->default_form_language)
+			$this->getLanguages();
+
+		if (Tools::getValue('submitFormAjax'))
+			$this->content .= $this->context->smarty->fetch('form_submit_ajax.tpl');
+		if ($this->fields_form && is_array($this->fields_form))
+		{
+			if (!$this->multiple_fieldsets)
+				$this->fields_form = array(array('form' => $this->fields_form));
+
+			// For add a fields via an override of $fields_form, use $fields_form_override
+			if (is_array($this->fields_form_override) && !empty($this->fields_form_override))
+				$this->fields_form[0]['form']['input'][] = $this->fields_form_override;
+
+			$helper = new HelperForm($this);
+			$this->setHelperDisplay($helper);
+			$helper->submit_action = 'submitAdd'.$this->table.'AndStay';
+			$helper->fields_value = $this->getFieldsValue($this->object);
+			$helper->tpl_vars = $this->tpl_form_vars;
+			!is_null($this->base_tpl_form) ? $helper->base_tpl = $this->base_tpl_form : '';
+			if ($this->tabAccess['view'])
+			{
+				if (Tools::getValue('back'))
+					$helper->tpl_vars['back'] = Tools::safeOutput(Tools::getValue('back'));
+				else
+					$helper->tpl_vars['back'] = Tools::safeOutput(Tools::getValue(self::$currentIndex.'&token='.$this->token));
+			}
+			$form = $helper->generateForm($this->fields_form);
+
+
+			$links=array();
+			$currentZone =  Tools::getValue('id_zone');
+			$month =  Tools::getValue('month');
+			$year =  Tools::getValue('year');
+			// Si month et year définis
+			if ($month && $year) {
+				$d = new DateTime($year.'-'.$month);
+			} else {
+				$d = new DateTime();
+			}
+			// Creation des variables next month et previous month et des liens qui vont avec
+			$d->modify( 'next month' );
+			$nMonth =  $d->format( 'm' );
+			$nYear =  $d->format( 'Y' );
+			$d->modify( 'previous month' );
+			$d->modify( 'previous month' );
+			$pMonth =  $d->format( 'm' );
+			$pYear =  $d->format( 'Y' );
+			$link = $this->toolbar_btn["back"]["href"]."&updatezone&id_zone=".$currentZone;
+			$linkP = $link."&month=".$pMonth."&year=".$pYear;
+			$linkN = $link."&month=".$nMonth."&year=".$nYear;
+
+			// genering html
+			// var_dump($linkP,$linkN);
+			$cal = '
+			<div id="calendar_admin">
+				<div class="nav">
+					<a class="prev" href="'.$linkP.'">Précédent</a>
+					<a class="next" href="'.$linkN.'">Suivant</a>
+				</div>
+				';
+
+			if ($month && $year) {
+				$cal .= AdminZonesController::Calendrier($month, $year, $links);
+			} else {
+				$cal .= AdminZonesController::Calendrier(date('m'), date('Y'), $links);
+			}
+
+			$cal .= '</div>';
+
+			$test = str_replace('<input type="hidden" name="replacement_cheat" id="replacement_cheat" value="" />', $cal, $form);
+			return $test;
+		}
+		// return AdminController::renderForm();
+	}
+
+	function Calendrier($month,$year,$links) {
+
+		$MonthNames = array(1 => "Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre");
+		$monthname = $MonthNames[$month+0];
+		$html="";
+		// on ouvre la table
+		$html.= '<table class="cal" cellspacing="10">';
+
+		// Première ligne = mois et année ou link[0]
+		$title = array_key_exists(0, $links) ? $links[0] : $monthname.' '.$year;
+		$html.= '<tr><td colspan="7" class="cal_titre">'.$title.'</td>'."</tr>\n";
+
+		// Seconde lignes = initiales des jours de la semaine
+		$DayNames = array("L","M","M","J","V","S","D");
+		$html.= '<tr>'; foreach ($DayNames as $d) $html.= '<th>'.$d.'</th>'; $html.= "</tr>\n";
+
+		// On regarde si aujourd'hui est dans ce mois pour mettre un style particulier
+		if ($year == date('Y') && $month == date('m'))
+			$today = date('d');
+		  else
+			$today = 0;
+
+		$time = mktime(0,0,0,$month,1,$year);	// timestamp du 1er du mois demandé
+		$days_in_month = date('t',$time);		// nombre de jours dans le mois
+		$firstday = date('w',$time);			// jour de la semaine du 1er du mois
+		if ($firstday == 0) $firstday = 7;	// attention, en php, dimanche = 0
+
+		$daycode = 1; // ($daycode % 7) va nous indiquer le jour de la semaine.
+						// on commence par le lundi, c'est-à-dire 1.
+
+		// on ouvre une première ligne pour le calendrier proprement dit :
+		$html.= '<tr>';
+
+		// on met des cases blanches jusqu'à la veille du 1er du mois :
+		for ( ; $daycode<$firstday; $daycode++) $html.= '<td>&nbsp;</td>';
+
+		// boucle sur tous les jours du mois :
+		for ($numday = 1; $numday <= $days_in_month; $numday++, $daycode++) {
+			// si on en est au lundi (sauf le 1er), 
+			// on ferme la ligne précédente et on en ouvre une nouvelle 
+			if ($daycode%7 == 1 && $numday != 1) $html.= "</tr>\n".'<tr>';
+			// on ouvre la case (avec un style particulier s'il s'agit d'aujourd'hui)
+			$html.= ($numday == $today ? '<td class="today">' : '<td>');
+			// on affiche le numéro du jour ou le contenu donné par l'utilisateur
+			$html.= (array_key_exists($numday, $links) ? $links[$numday] : $numday);
+			// on ferme la case
+			$html.= '</td>';
+		}
+
+		// on met des cases blanches pour completer la dernière semaine si besoin :
+		for ( ; $daycode%7 != 1; $daycode++) $html.= '<td>&nbsp;</td>';
+
+		// on ferme la dernière ligne, et la table.
+		$html.= '</tr>'; $html.= "</table>\n\n";
+
+		return $html;
+	}
 }
 
