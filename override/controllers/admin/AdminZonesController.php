@@ -147,14 +147,12 @@ class AdminZonesController extends AdminZonesControllerCore
 			// {"04":{"1":"open","4":"open","11":"open","19":"open","25":"open"}}
 
 			$opens = json_decode($this->fields_value['calendar']);
-			$op = ($opens->$year->$month) ? $opens->$year->$month : array();
-			if ($month && $year) {
-				$cal .= AdminZonesController::Calendrier($month, $year, $op);
-			} else {
+			if (!$month && !$year) {
 				$month = date('m');
 				$year = date('Y');
-				$cal .= AdminZonesController::Calendrier(date('m'), date('Y'), $op);
 			}
+			$op = ($opens->$year->$month) ? $opens->$year->$month : array();
+			$cal .= AdminZonesController::Calendrier($month, $year, $op);
 
 			$cal .= '</div>';
 
