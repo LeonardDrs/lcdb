@@ -204,6 +204,26 @@ class AdminGroupsControllerCore extends AdminController
 					'desc' => $this->l('Will automatically apply this value as a discount on all products for members of this customer group.')
 				),
 				array(
+					'type' => 'radio',
+					'label' => $this->l('Groupment:'),
+					'name' => 'is_group',
+					'required' => false,
+					'class' => 't',
+					'is_bool' => true,
+					'values' => array(
+						array(
+							'id' => 'is_group_on',
+							'value' => 1,
+							'label' => $this->l('Enabled')
+						),
+						array(
+							'id' => 'is_group_off',
+							'value' => 0,
+							'label' => $this->l('Disabled')
+						)
+					)
+				),
+				array(
 					'type' => 'select',
 					'label' => $this->l('Price display method:'),
 					'name' => 'price_display_method',

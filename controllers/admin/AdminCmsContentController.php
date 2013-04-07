@@ -42,7 +42,7 @@ class AdminCmsContentControllerCore extends AdminController
 		self::$category = new CMSCategory($id_cms_category);
 		if (!Validate::isLoadedObject(self::$category))
 			die('Category cannot be loaded');
-
+			
 		$this->table = 'cms';
 		$this->className = 'CMS';
 		$this->bulk_actions = array('delete' => array('text' => $this->l('Delete selected'), 'confirm' => $this->l('Delete selected items?')));

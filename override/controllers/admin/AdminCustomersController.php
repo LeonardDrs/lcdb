@@ -116,6 +116,44 @@ class AdminCustomersController extends AdminCustomersControllerCore
 		);
 
 	}
+	
+	public function initContent()
+	{
+		
+		if($_GET['export']==true){
+			echo 'oui';
+		}
+		
+		if ($this->action == 'select_delete')
+			$this->context->smarty->assign(array(
+				'delete_form' => true,
+				'url_delete' => htmlentities($_SERVER['REQUEST_URI']),
+				'boxes' => $this->boxes,
+			));
+
+		if (!$this->can_add_customer && !$this->display)
+			$this->informations[] = $this->l('You have to select a shop if you want to create a customer');
+
+		parent::initContent();
+	}
+	
+	public function initToolbar()
+	{
+		parent::initToolbar();
+		if (!$this->can_add_customer)
+			unset($this->toolbar_btn['new']);
+		else if (!$this->display) //display import button only on listing
+		{
+			$this->toolbar_btn['import'] = array(
+				'href' => $this->context->link->getAdminLink('AdminImport', true).'&import_type='.$this->table,
+				'desc' => $this->l('Import')
+			);
+			$this->toolbar_btn['export'] = array(
+				'href' => self::$currentIndex.'&amp;export=true&amp;token='.$this->token,
+				'desc' => $this->l('Export')
+			);
+		}
+	}
 
 }
 

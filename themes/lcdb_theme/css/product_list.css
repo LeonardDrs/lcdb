@@ -1,0 +1,427 @@
+ul#product_list {
+	list-style-type: none
+}
+#product_list li {
+	margin-bottom: 14px;
+	padding: 12px 8px;
+	border: 1px solid #eee;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px
+}
+#product_list li a {
+	color: #374853;
+	text-decoration: none
+}
+
+#product_list li .left_block {
+	float:left;
+	padding-top:58px;
+	width:15px
+}
+#product_list li .left_block  .compare label {display:none;}
+#product_list li p.compare input {
+	vertical-align: text-bottom
+}
+#product_list li .center_block {
+	float: left;
+	padding:0 7px;
+	width: 342px;/* 356 */
+	border-right:1px dotted #ccc
+}
+#product_list a.product_img_link {
+	overflow:hidden;
+	position:relative;
+	float: left;
+	display:block;
+	margin-right: 14px;
+	border: 1px solid #ccc;
+}
+#product_list a.product_img_link img {
+	display: block;
+	vertical-align: bottom;
+}
+#product_list li span.new {
+	display: block;
+	position: absolute;
+	top: 15px;
+	right:-30px;
+	padding: 1px 4px;
+	width: 101px;
+	font-size:10px;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform:rotate(45deg);
+	/*-ms-transform: rotate(45deg);*/
+	background-color: #990000;
+	transform: rotate(45deg);  /* Newer browsers */
+}
+.ie9 #product_list li span.new{top:-18px;right:-38px}
+.ie8 #product_list li span.new{top:-18px;right:-38px}
+.ie7 #product_list li span.new {top:-30px;right:-25px}
+.lt-ie6 #featured-products_block_center .product_image span.new {top:-30px;right:-25px}
+#product_list li h3 {
+	padding:0 0 10px 0;
+	font-size:13px;
+	color:#000
+}
+#product_list li a {
+	color: #000;
+	text-decoration: none;
+}
+
+#product_list li p.product_desc {
+	overflow: hidden;
+	padding:0;
+	line-height:16px;
+}
+#product_list li p.product_desc,
+#product_list li p.product_desc a {
+	color:#666;
+}
+
+#product_list li .right_block {
+	position:relative;
+	float: left;
+	width: 145px;
+	text-align: right
+}
+#product_list li .discount, ul#product_list li .on_sale, ul#product_list li .online_only {
+	display: block;
+	font-weight: bold;
+	color: #990000;
+	text-transform: uppercase
+}
+#product_list li .discount {
+	position:absolute;
+	top:0;
+	right:0;
+	display: inline-block;
+	font-weight: bold;
+	padding: 1px 5px;
+	font-size: 10px;
+	color: #fff;
+	text-transform: uppercase;
+	background: none repeat scroll 0 0 #9B0000
+}
+#product_list li .online_only {
+	margin:0 0 10px 0
+}
+#product_list li .content_price {
+	margin:26px 0 15px 0;
+}
+#product_list li .price {
+	display: block;
+	margin-bottom: 15px;
+	font-weight:bold;
+	font-size: 18px;
+	color:#990000
+}
+#product_list li span.availability {
+	color: #488C40
+}
+#product_list li .ajax_add_to_cart_button {
+	padding-left: 20px
+}
+#product_list li .ajax_add_to_cart_button span {
+	display: block;
+	position: absolute;
+	top: -1px;
+	left: -12px;
+	height: 26px;
+	width: 26px;
+	background: url(../img/icon/pict_add_cart.png) no-repeat 0 0 transparent
+}
+#product_list li .lnk_view {
+	display: block;
+	margin-top:15px;
+	padding:0 10px;
+	border:none;
+	font-weight:bold;
+	color:#0088CC;
+	background:url(../img/arrow_right_1.png) no-repeat 100% 4px transparent
+}
+#product_list li .lnk_view:hover {text-decoration:underline}
+
+/* ************************************************************************************************
+		PAGE CATALOGUE (Liste des produits)
+************************************************************************************************ */
+#center_column.page-list-product .big-bloc{
+	padding-left:0px;
+	padding-right:0px;
+}
+/* Titre */
+#center_column .title_list_product p,
+#center_column .title_list_product h1{
+	margin:0;
+	padding:0;
+}
+#center_column .title_list_product{
+	padding-bottom: 5px;
+	border-bottom: 1px solid #342110;
+	margin: 0px 24px 0px 24px;
+}
+#center_column .title_list_product #big_cow{
+	margin: auto;
+	margin-bottom: 5px;
+}
+#center_column .title_list_product h1{
+	font-family:'MyriadWebPro', Arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 16px;
+	text-align:center;
+	text-decoration: none;
+}
+#center_column .title_list_product p{
+	text-align:center;
+	font-family: 'MyriadWebPro-Italic';
+	margin-top: 1px;
+}
+/* Tri */
+#center_column .block-sort{
+	margin: 10px 24px 0px 24px;
+}
+#center_column .block-sort form{
+	display: inline;
+}
+#center_column .block-sort form select{
+	font-family: 'MyriadWebPro-Italic';
+	padding: 3px;
+	width: 184px;
+}
+/* Liste des produits */
+.list-product p, .list-product h3, .list-product h2{
+	padding: 0;
+	margin:0;
+}
+.list-product .category{
+	margin-top: 70px;
+}
+.list-product .category:first-child{
+	margin-top: 30px;
+}
+.list-product .category-title{
+	padding-bottom: 12px;
+	border-bottom: 1px solid #342110;
+	margin: 0px 24px 0px 24px;
+}
+.list-product .category-title h2{
+	margin-top: 10px;
+	color: #4E9912;
+	font-family: 'MyriadWebPro-Bold';
+	font-size: 18px;
+	text-align: center;
+}
+.list-product .category-title span{
+	display: block;
+	margin: auto;
+}
+.list-product .category-title #big_stove{
+	background: url('../img/img_solo/gros_a_griller.png') no-repeat 0 0;
+	width: 75px;
+	height: 39px;
+}
+.list-product .category-title #pot{
+	background: url('../img/img_solo/a_mijoter.png') no-repeat 0 0;
+	width: 62px;
+	height: 43px;
+}
+.list-product .category-title #oven{
+	background: url('../img/img_solo/four.png') no-repeat 0 0;
+	width: 62px;
+	height: 48px;
+}
+.list-product .block-product{
+	padding: 10px 0px 14px 0px;
+	border-bottom: 1px solid #342110;
+}
+.list-product .block-product .identification-description,
+.list-product .block-product .detail{
+	float: left;
+	padding-top: 9px;
+}
+.list-product .block-product .infos,
+.list-product .block-product .action-product{
+	padding: 0px 5px 0px 5px;
+}
+.list-product .block-product .infos:after{
+	content:"";
+	display:block;
+	visibility:hidden;
+	clear:both;
+}
+.ie7 .list-product .block-product .infos{
+	overflow: auto;
+}
+.list-product .block-product .identification-description{
+	width:324px;
+	height: 90px;
+}
+.list-product .block-product .identification{
+	margin-bottom: 10px;
+}
+.list-product .block-product .identification h3{
+	font-size: 14px;
+}
+.list-product .block-product .identification p{
+	font-size: 13px;
+	font-family: 'MyriadWebPro-Italic';
+}
+.list-product .block-product .identification-description .label-rouge{
+	background: url('../img/img_solo/petit_label_rouge.png') no-repeat left 2px;
+	padding-left: 45px;
+}
+.list-product .block-product .identification-description .label-bio{
+	background: url('../img/img_solo/petit_label_bio.png') no-repeat top left;
+	padding-left: 35px;
+}
+.list-product .block-product .identification-description p.warning{
+	background:none;
+	border:none;
+	color: #d44137;
+	font-size: 13px;
+}
+.list-product .block-product .detail{
+	width: 50px;
+	margin-left: 7px;
+}
+.list-product .block-product .detail span{
+	display:block;
+	font-size: 16px;
+	font-family: 'MyriadWebPro-Italic';
+}
+.list-product .block-product .detail span{
+	background: url('../img/img_solo/jours.png') no-repeat left 2px;
+	padding: 5px 0px 5px 23px;
+}
+.list-product .block-product .detail span:first-child{
+	background: url('../img/img_solo/silhouette.png') no-repeat 3px 3px;
+	padding-left: 26px;
+}
+.list-product .block-product .price{
+	float:right;
+	width:112px;
+	padding-top: 9px;
+}
+.list-product .block-product .price:after{
+	content:"";
+	display: block;
+	visibility:hidden;
+	clear: both;
+}
+.ie7 .list-product .block-product .price{
+	overflow: auto;
+}
+.list-product .block-product .reduction{
+	padding-top: 2px;
+}
+.list-product .block-product .price p.reduction_rate{
+	padding: 1px 2px 1px 2px;
+	background-color: white;
+	border: 1px solid #4E9912;
+	display:block;
+	text-align:center;
+	width:42px;
+	margin: 0px auto 0px auto;
+}
+.list-product .block-product .price p{
+	text-align:center;
+}
+.list-product .block-product .price .selling_price p{
+	color: #4E9912;
+}
+.list-product .block-product .price p.price-piece{
+	font-size: 28px;
+	font-family: 'MyriadWebPro-Bold';
+}
+.list-product .block-product .price p.price-kg{
+	font-size: 14px;
+	color:#342110;
+}
+.list-product .block-product .reduction .full_price,
+.list-product .block-product .reduction .selling_price{
+	float: left;
+	padding-top: 4px;
+}
+.list-product .block-product .reduction .full_price{
+	margin-right: 10px;
+}
+.list-product .block-product .reduction .full_price p{
+	text-decoration:line-through;
+	color: #4E9912;
+}
+.list-product .block-product .reduction .full_price p span{
+	color: #ab9583;
+}
+.list-product .block-product .reduction p.price-piece{
+	font-size: 22px;
+}
+.list-product .block-product .reduction p.price-kg{
+	font-size: 11px;
+}
+.list-product .block-product .action-product{
+	clear:both;
+}
+.ie7 .list-product .block-product .action-product{
+	overflow: auto;
+}
+.list-product .block-product .action-product:after{
+	content: "";
+	display: block;
+	visibility: hidden;
+	clear: both;
+}
+.list-product .block-product .action-product a{
+	float:left;
+	padding-top: 18px;
+}
+.list-product .block-product .action-product form{
+	float:right;
+}
+.list-product .block-product .action-product a{
+	color: #4E9912;
+	font-family: 'MyriadWebPro-Italic';
+	text-decoration:none;
+}
+.list-product .block-product .action-product .form-panier .ajout-panier{
+	padding: 5px 10px 5px 10px;
+	font-size: 13px;
+	font-family: 'MyriadWebPro', Arial, sans-serif;
+}
+.ie7 .list-product .block-product .action-product .form-panier .ajout-panier{
+	border-width: 0px;
+	padding: 5px;
+}
+.list-product .block-product .action-product .form-panier  .moreless{
+	font-size: 18px;
+	width: 18px;
+}
+.list-product .block-product .action-product .form-panier input{
+	font-size: 22px;
+	padding:0;
+	width: 40px;
+}
+.ie7 .list-product .block-product .action-product .form-panier input{
+	width: 42px;
+}
+.list-product .more-product{
+	background: url('../img/img_solo/question.png') no-repeat left top;
+	padding: 10px 0px 10px 60px;
+	margin: 50px 0px 30px 20px;	
+}
+.list-product .more-product p.blod{
+	font-family: 'MyriadWebPro-Bold';
+}
+.list-product .more-product p a{
+	color: #4D9810;
+	text-decoration: underline;
+}
+.list-product .more-product p{
+	font-family: 'MyriadWebPro-Italic';
+}
+
+
+

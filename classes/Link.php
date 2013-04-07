@@ -208,6 +208,25 @@ class LinkCore
 
 		return $url.Dispatcher::getInstance()->createUrl('cms_category_rule', $id_lang, $params, $this->allow);
 	}
+	
+	public function getRecipeCategoryLink($category, $alias = null, $id_lang = null)
+	{
+		if (!$id_lang)
+			$id_lang = Context::getContext()->language->id;
+		$url = _PS_BASE_URL_.__PS_BASE_URI__.$this->getLangLink($id_lang);
+
+		if (!is_object($category))
+			$category = new CMSCategory($category, $id_lang);
+
+		// Set available keywords
+		$params = array();
+		$params['id'] = $category->id;
+		$params['rewrite'] = (!$alias) ? $category->link_rewrite : $alias;
+		$params['meta_keywords'] =	Tools::str2url($category->meta_keywords);
+		$params['meta_title'] = Tools::str2url($category->meta_title);
+
+		return $url.Dispatcher::getInstance()->createUrl('cms_category_rule', $id_lang, $params, $this->allow);
+	}
 
 	/**
 	 * Create a link to a CMS page
@@ -219,6 +238,35 @@ class LinkCore
 	 * @return string
 	 */
 	public function getCMSLink($cms, $alias = null, $ssl = false, $id_lang = null)
+	{
+		$base = (($ssl && $this->ssl_enable) ? _PS_BASE_URL_SSL_ : _PS_BASE_URL_);
+
+		if (!$id_lang)
+			$id_lang = Context::getContext()->language->id;
+		$url = $base.__PS_BASE_URI__.$this->getLangLink($id_lang);
+
+		if (!is_object($cms))
+			$cms = new CMS($cms, $id_lang);
+
+		// Set available keywords
+		$params = array();
+		$params['id'] = $cms->id;
+		$params['rewrite'] = (!$alias) ? (is_array($cms->link_rewrite) ? $cms->link_rewrite[(int)$id_lang] : $cms->link_rewrite) : $alias;
+
+		if (isset($cms->meta_keywords) && !empty($cms->meta_keywords))
+			$params['meta_keywords'] = is_array($cms->meta_keywords) ?  Tools::str2url($cms->meta_keywords[(int)$id_lang]) :  Tools::str2url($cms->meta_keywords);
+		else
+			$params['meta_keywords'] = '';
+
+		if (isset($cms->meta_title) && !empty($cms->meta_title))
+			$params['meta_title'] = is_array($cms->meta_title) ? Tools::str2url($cms->meta_title[(int)$id_lang]) : Tools::str2url($cms->meta_title);
+		else
+			$params['meta_title'] = '';
+
+		return $url.Dispatcher::getInstance()->createUrl('cms_rule', $id_lang, $params, $this->allow);
+	}
+	
+	public function getRecipeLink($cms, $alias = null, $ssl = false, $id_lang = null)
 	{
 		$base = (($ssl && $this->ssl_enable) ? _PS_BASE_URL_SSL_ : _PS_BASE_URL_);
 
