@@ -83,6 +83,7 @@ class AdminZonesController extends AdminZonesControllerCore
 
 		if (Tools::getValue('submitFormAjax'))
 			$this->content .= $this->context->smarty->fetch('form_submit_ajax.tpl');
+		
 		if ($this->fields_form && is_array($this->fields_form))
 		{
 			if (!$this->multiple_fieldsets)
@@ -107,8 +108,9 @@ class AdminZonesController extends AdminZonesControllerCore
 			}
 			$form = $helper->generateForm($this->fields_form);
 
+			// Calendar
 
-			$links=array();
+				// Vars
 			$currentZone =  Tools::getValue('id_zone');
 			$month =  Tools::getValue('month');
 			$year =  Tools::getValue('year');
@@ -133,23 +135,30 @@ class AdminZonesController extends AdminZonesControllerCore
 			// genering html
 			// var_dump($linkP,$linkN);
 			$cal = '
-			<div id="calendar_admin">
+			<div id="calendar_admin" class="margin-form" data-array="'.htmlspecialchars($this->fields_value['calendar']).'">
 				<div class="nav">
 					<a class="prev" href="'.$linkP.'">Précédent</a>
 					<a class="next" href="'.$linkN.'">Suivant</a>
 				</div>
 				';
 
+			// {"2013":{"04":[1,4,11,19,25]}}
+			// {"04":[1,4,7,11,19,25]}
+			// {"04":{"1":"open","4":"open","11":"open","19":"open","25":"open"}}
+
+			$opens = json_decode($this->fields_value['calendar']);
 			if ($month && $year) {
-				$cal .= AdminZonesController::Calendrier($month, $year, $links);
+				$cal .= AdminZonesController::Calendrier($month, $year, $opens->$year->$month);
 			} else {
-				$cal .= AdminZonesController::Calendrier(date('m'), date('Y'), $links);
+				$month = date('m');
+				$year = date('Y');
+				$cal .= AdminZonesController::Calendrier(date('m'), date('Y'), $opens->$year->$month);
 			}
 
 			$cal .= '</div>';
 
-			$test = str_replace('<input type="hidden" name="replacement_cheat" id="replacement_cheat" value="" />', $cal, $form);
-			return $test;
+			$cheat = str_replace('<input type="hidden" name="replacement_cheat" id="replacement_cheat" value="" />', $cal, $form);
+			return $cheat;
 		}
 		// return AdminController::renderForm();
 	}
@@ -163,7 +172,7 @@ class AdminZonesController extends AdminZonesControllerCore
 		$html.= '<table class="cal" cellspacing="10">';
 
 		// Première ligne = mois et année ou link[0]
-		$title = array_key_exists(0, $links) ? $links[0] : $monthname.' '.$year;
+		$title = $monthname.' '.$year;
 		$html.= '<tr><td colspan="7" class="cal_titre">'.$title.'</td>'."</tr>\n";
 
 		// Seconde lignes = initiales des jours de la semaine
@@ -196,9 +205,16 @@ class AdminZonesController extends AdminZonesControllerCore
 			// on ferme la ligne précédente et on en ouvre une nouvelle 
 			if ($daycode%7 == 1 && $numday != 1) $html.= "</tr>\n".'<tr>';
 			// on ouvre la case (avec un style particulier s'il s'agit d'aujourd'hui)
-			$html.= ($numday == $today ? '<td class="today">' : '<td>');
-			// on affiche le numéro du jour ou le contenu donné par l'utilisateur
-			$html.= (array_key_exists($numday, $links) ? $links[$numday] : $numday);
+			$class = ($numday == $today) ? 'today ' : '';
+			$class .= (in_array($numday, $links) ? 'open' : '');
+			// $html.= '<td';
+			// $html.= ($numday == $today ? ' class="today">' : '>');
+			// $html.= (in_array($numday, $links) ? ' class="open">' : '>');
+
+
+			$html.= (!empty($class) ? '<td class="'.$class.'">' : '<td>');
+			// on affiche le numéro du jour
+			$html.= $numday;
 			// on ferme la case
 			$html.= '</td>';
 		}
@@ -210,6 +226,39 @@ class AdminZonesController extends AdminZonesControllerCore
 		$html.= '</tr>'; $html.= "</table>\n\n";
 
 		return $html;
+	}
+
+	public function setMedia()
+	{
+		$this->addCSS(_PS_CSS_DIR_.'admin.css', 'all');
+		$this->addCSS(_THEME_CSS_DIR_.'zones.css', 'all');
+		$admin_webpath = str_ireplace(_PS_ROOT_DIR_, '', _PS_ADMIN_DIR_);
+		$admin_webpath = preg_replace('/^'.preg_quote(DIRECTORY_SEPARATOR, '/').'/', '', $admin_webpath);
+		$this->addCSS(__PS_BASE_URI__.$admin_webpath.'/themes/'.$this->bo_theme.'/css/admin.css', 'all');
+		if ($this->context->language->is_rtl)
+			$this->addCSS(_THEME_CSS_DIR_.'rtl.css');
+
+		$this->addJquery();
+		$this->addjQueryPlugin(array('cluetip', 'hoverIntent', 'scrollTo', 'alerts', 'chosen'));
+
+		$this->addJS(array(
+			_PS_JS_DIR_.'admin.js',
+			_PS_JS_DIR_.'toggle.js',
+			_PS_JS_DIR_.'tools.js',
+			_PS_JS_DIR_.'ajax.js',
+			_PS_JS_DIR_.'toolbar.js',
+			_THEME_JS_DIR_.'zones.js'
+		));
+
+		if (!Tools::getValue('submitFormAjax'))
+		{
+			$this->addJs(_PS_JS_DIR_.'notifications.js');
+			if (Configuration::get('PS_HELPBOX'))
+				$this->addJS(_PS_JS_DIR_.'helpAccess.js');
+		}
+
+		// Execute Hook AdminController SetMedia
+		Hook::exec('actionAdminControllerSetMedia', array());
 	}
 }
 

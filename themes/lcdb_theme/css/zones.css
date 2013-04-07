@@ -1,0 +1,14 @@
+#calendar_admin {
+
+}
+
+#calendar_admin td {
+	text-align: center;
+}
+
+#calendar_admin .open {
+	background: pink;
+}
+#calendar_admin .today {
+	font-weight: bold;
+}
