@@ -1,9 +1,41 @@
-#calendar_admin {
+#calendar_admin table {
+	position: relative;
+}
 
+#calendar_admin .nav {
+	width: 178px;
+}
+
+#calendar_admin .nav .next{
+	float: right;
 }
 
 #calendar_admin td {
 	text-align: center;
+	cursor: pointer;
+}
+
+#calendar_admin td .desc {
+	position: absolute;
+	display: none;
+	left: 180px;
+	top: 60px;
+	width: 250px;
+	cursor: initial;
+	font-weight: normal;
+}
+
+#calendar_admin td .desc .check {
+	display: inline;
+}
+
+#calendar_admin td .desc input {
+	display: block;
+	margin: 0 auto;
+	width: 10px;
+}
+#calendar_admin td .desc .okk {
+	cursor: pointer;
 }
 
 #calendar_admin .open {

@@ -41,6 +41,59 @@ class AdminZonesController extends AdminZonesControllerCore
 					'desc' => $this->l('Allow or disallow shipping to this zone')
 				),
 				array(
+					'type' => 'radio',
+					'label' => $this->l('Horaires:'),
+					'name' => 'horaire',
+					'required' => false,
+					'class' => 't',
+					'is_bool' => true,
+					'values' => array(
+						array(
+							'id' => 'horaire_on',
+							'value' => 1,
+							'label' => $this->l('Enabled')
+						),
+						array(
+							'id' => 'horaire_off',
+							'value' => 0,
+							'label' => $this->l('Disabled')
+						)
+					),
+					'desc' => $this->l('Activer ou non les horaires de livraison pour cette zone')
+				),
+				array(
+					'type' => 'text',
+					'label' => $this->l('Début'),
+					'name' => 'h_start',
+					'size' => 33,
+					'required' => false,
+					'desc' => $this->l('Heure de début de tournée (format hh:mm)'),
+				),
+				array(
+					'type' => 'text',
+					'label' => $this->l('Fin'),
+					'name' => 'h_end',
+					'size' => 33,
+					'required' => false,
+					'desc' => $this->l('Heure de fin de tournée (format hh:mm)'),
+				),
+				array(
+					'type' => 'text',
+					'label' => $this->l('Tranche'),
+					'name' => 'tranche',
+					'size' => 33,
+					'required' => false,
+					'desc' => $this->l('Tranche horaire (en heure)'),
+				),
+				array(
+					'type' => 'text',
+					'label' => $this->l('Créneau'),
+					'name' => 'creneau',
+					'size' => 33,
+					'required' => false,
+					'desc' => $this->l('Créneau horaire minimum (en heure)'),
+				),
+				array(
 					'type' => 'hidden',
 					'name' => 'calendar',
 					'values' => array(
@@ -144,7 +197,7 @@ class AdminZonesController extends AdminZonesControllerCore
 
 			// {"2013":{"04":[1,4,11,19,25]}}
 			// {"04":[1,4,7,11,19,25]}
-			// {"04":{"1":"open","4":"open","11":"open","19":"open","25":"open"}}
+			// {"04":{"1":"-2","4":"-2","11":"-2","19":"-2","25":"-2"}}
 
 			$opens = json_decode($this->fields_value['calendar']);
 			if (!$month && !$year) {
@@ -163,12 +216,11 @@ class AdminZonesController extends AdminZonesControllerCore
 	}
 
 	function Calendrier($month,$year,$links) {
-
 		$MonthNames = array(1 => "Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre");
 		$monthname = $MonthNames[$month+0];
 		$html="";
 		// on ouvre la table
-		$html.= '<table class="cal" cellspacing="10">';
+		$html.= '<table class="cal" cellspacing="10" data-year="'.$year.'" data-month="'.$month.'">';
 
 		// Première ligne = mois et année ou link[0]
 		$title = $monthname.' '.$year;
@@ -187,7 +239,7 @@ class AdminZonesController extends AdminZonesControllerCore
 		$time = mktime(0,0,0,$month,1,$year);	// timestamp du 1er du mois demandé
 		$days_in_month = date('t',$time);		// nombre de jours dans le mois
 		$firstday = date('w',$time);			// jour de la semaine du 1er du mois
-		if ($firstday == 0) $firstday = 7;	// attention, en php, dimanche = 0
+		if ($firstday == 0) $firstday = 7;		// attention, en php, dimanche = 0
 
 		$daycode = 1; // ($daycode % 7) va nous indiquer le jour de la semaine.
 						// on commence par le lundi, c'est-à-dire 1.
@@ -205,14 +257,18 @@ class AdminZonesController extends AdminZonesControllerCore
 			if ($daycode%7 == 1 && $numday != 1) $html.= "</tr>\n".'<tr>';
 			// on ouvre la case (avec un style particulier s'il s'agit d'aujourd'hui)
 			$class = ($numday == $today) ? 'today ' : '';
-			$class .= (in_array($numday, $links) ? 'open' : '');
+			$class .= (isset($links->$numday) ? 'open' : '');
 			// $html.= '<td';
 			// $html.= ($numday == $today ? ' class="today">' : '>');
 			// $html.= (in_array($numday, $links) ? ' class="open">' : '>');
 
-
-			$html.= (!empty($class) ? '<td class="'.$class.'">' : '<td>');
+			$html.= '<td'.(!empty($class) ? ' class="'.$class.'"': '').' data-day="'.$numday.'" data-val="'.$links->$numday.'">';
 			// on affiche le numéro du jour
+			$html.= '<div class="desc">
+				<strong>'.$numday.' '.$title.'</strong> <br>
+				Ouvert à la livraison <input type="checkbox" class="check" '.(isset($links->$numday) ? ' checked' : '').'> <br>
+				Jours de différence avant la fin de commande <input type="text" class="text" value="'.($links->$numday ? $links->$numday : 2).'"> <span class="okk">Ok</span>
+			</div>'; 
 			$html.= $numday;
 			// on ferme la case
 			$html.= '</td>';
