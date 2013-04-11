@@ -535,6 +535,8 @@
   'Recipe' => '',
   'RecipeCategory' => '',
   'RecipeCategoryCore' => 'override/classes/RecipeCategory.php',
+  'RecipeController' => '',
+  'RecipeControllerCore' => 'override/controllers/front/RecipeController.php',
   'RecipeCore' => 'override/classes/Recipe.php',
   'Referrer' => 'override/classes/Referrer.php',
   'ReferrerCore' => 'classes/Referrer.php',

@@ -13,6 +13,9 @@
 					{l s='Your account has been created.'}
 				</p>
 			{/if}
+			<hr class="mon-compte"/>
+			<p>{l s='Welcome to your account page. You can manage your personal information, your order and your delivery address.'}</p>
+			<hr />
 		</div>
 	</div><!-- / #center_column -->
 </div><!-- / .content -->

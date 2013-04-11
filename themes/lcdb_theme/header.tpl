@@ -100,13 +100,9 @@
 						</li>
 						<li class="recettes"><a href="#" title="Recettes">Recettes</a>
 							<ul>
-								<li class="first"><a href="#" title="Boeuf">Boeuf</a></li>
-								<li><a href="#" title="Veau">Veau</a></li>
-								<li><a href="#" title="Agneau">Agneau</a></li>
-								<li><a href="#" title="Porc">Porc</a></li>
-								<li><a href="#" title="Volaille">Volaille</a></li>
-								<li><a href="#" title="Lapin">Lapin</a></li>
-								<li class="last"><a href="#" title="Autres">Autres</a></li>
+								{foreach from=$menu_recipe item=cat name=foo}
+									<li class="{if $smarty.foreach.foo.first}first {/if}{if $smarty.foreach.foo.last}last {/if}"><a href="{$link->getRecipeCategoryLink($cat.id_recipe_category, false)|escape:'htmlall':'UTF-8'}" title="Veau">{$cat.name}</a></li>
+								{/foreach}
 							</ul>
 						</li>
 						<li class="center"></li>

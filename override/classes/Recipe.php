@@ -38,6 +38,8 @@ class RecipeCore extends ObjectModel
 	public $ingredients_content;
 	public $recipe_content;
 	public $tips_content;
+	public $meta_title;
+	public $link_rewrite;
 	public $id_recipe_category;
 	public $position;
 	public $active;
@@ -53,6 +55,7 @@ class RecipeCore extends ObjectModel
 			'id_recipe_category' => 	array('type' => self::TYPE_INT, 'validate' => 'isUnsignedInt'),
 			'position' => 			array('type' => self::TYPE_INT),
 			'active' => 			array('type' => self::TYPE_BOOL),
+			
 			// Lang fields
 			'title' =>	array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 128),
 			'type_meat' =>	array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 128),
@@ -65,6 +68,8 @@ class RecipeCore extends ObjectModel
 			'ingredients_content' =>	array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString', 'size' => 3999999999999),
 			'recipe_content' =>	array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString', 'size' => 3999999999999),
 			'tips_content' =>	array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString', 'size' => 3999999999999),
+			'meta_title' =>			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 128),
+			'link_rewrite' => 		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isLinkRewrite', 'required' => true, 'size' => 128),
 		),
 	);
 
@@ -75,21 +80,21 @@ class RecipeCore extends ObjectModel
 
 	public function add($autodate = true, $null_values = false)
 	{
-		$this->position = Recipe::getLastPosition((int)$this->id_cms_category);
+		$this->position = Recipe::getLastPosition((int)$this->id_recipe_category);
 		return parent::add($autodate, true);
 	}
 
 	public function update($null_values = false)
 	{
 		if (parent::update($null_values))
-			return $this->cleanPositions($this->id_cms_category);
+			return $this->cleanPositions($this->id_recipe_category);
 		return false;
 	}
 
 	public function delete()
 	{
 	 	if (parent::delete())
-			return $this->cleanPositions($this->id_cms_category);
+			return $this->cleanPositions($this->id_recipe_category);
 		return false;
 	}
 
@@ -112,13 +117,13 @@ class RecipeCore extends ObjectModel
 		if ($result)
 			foreach ($result as $row)
 			{
-				$row['link'] = $link->getCMSLink((int)$row['id_recipe'], $row['link_rewrite']);
+				$row['link'] = $link->getRecipeLink((int)$row['id_recipe'], $row['link_rewrite']);
 				$links[] = $row;
 			}
 		return $links;
 	}
 
-	public static function listCms($id_lang = null, $id_block = false, $active = true)
+	public static function listRecipe($id_lang = null, $id_block = false, $active = true)
 	{
 		if (empty($id_lang))
 			$id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
@@ -139,7 +144,7 @@ class RecipeCore extends ObjectModel
 		if (!$res = Db::getInstance()->executeS('
 			SELECT cp.`id_recipe`, cp.`position`, cp.`id_recipe_category`
 			FROM `'._DB_PREFIX_.'recipe` cp
-			WHERE cp.`id_recipe_category` = '.(int)$this->id_cms_category.'
+			WHERE cp.`id_recipe_category` = '.(int)$this->id_recipe_category.'
 			ORDER BY cp.`position` ASC'
 		))
 			return false;
@@ -199,7 +204,7 @@ class RecipeCore extends ObjectModel
 		return (Db::getInstance()->getValue($sql));
 	}
 
-	public static function getCMSPages($id_lang = null, $id_cms_category = null, $active = true)
+	public static function getRecipePages($id_lang = null, $id_recipe_category = null, $active = true)
 	{
 		$sql = new DbQuery();
 		$sql->select('*');
@@ -210,20 +215,20 @@ class RecipeCore extends ObjectModel
 		if ($active)
 			$sql->where('c.active = 1');
 
-		if ($id_cms_category)
-			$sql->where('c.id_recipe_category = '.(int)$id_cms_category);
+		if ($id_recipe_category)
+			$sql->where('c.id_recipe_category = '.(int)$id_recipe_category);
 
 		$sql->orderBy('position');
 
 		return Db::getInstance()->executeS($sql);
 	}
 
-	public static function getUrlRewriteInformations($id_cms)
+	public static function getUrlRewriteInformations($id_recipe)
 	{
 	    $sql = 'SELECT l.`id_lang`, c.`link_rewrite`
 				FROM `'._DB_PREFIX_.'recipe_lang` AS c
 				LEFT JOIN  `'._DB_PREFIX_.'lang` AS l ON c.`id_lang` = l.`id_lang`
-				WHERE c.`id_recipe` = '.(int)$id_cms.'
+				WHERE c.`id_recipe` = '.(int)$id_recipe.'
 				AND l.`active` = 1';
 
 		return Db::getInstance()->executeS($sql);

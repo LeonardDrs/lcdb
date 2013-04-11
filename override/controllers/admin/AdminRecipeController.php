@@ -202,6 +202,25 @@ class AdminRecipeControllerCore extends AdminController
 					'hint' => $this->l('Invalid characters:').' <>;=#{}'
 				),
 				array(
+					'type' => 'text',
+					'label' => $this->l('Meta title:'),
+					'name' => 'meta_title',
+					'id' => 'name', // for copy2friendlyUrl compatibility
+					'lang' => true,
+					'required' => true,
+					'class' => 'copy2friendlyUrl',
+					'hint' => $this->l('Invalid characters:').' <>;=#{}',
+					'size' => 50
+				),
+				array(
+					'type' => 'text',
+					'label' => $this->l('Friendly URL'),
+					'name' => 'link_rewrite',
+					'required' => true,
+					'lang' => true,
+					'hint' => $this->l('Only letters and the minus (-) character are allowed')
+				),
+				array(
 					'type' => 'radio',
 					'label' => $this->l('Displayed:'),
 					'name' => 'active',
@@ -286,7 +305,7 @@ class AdminRecipeControllerCore extends AdminController
 	{
 		if (Tools::isSubmit('viewrecipe') && ($id_recipe = (int)Tools::getValue('id_recipe')) && ($recipe = new Recipe($id_recipe, $this->context->language->id)) && Validate::isLoadedObject($recipe))
 		{
-			$redir = $this->context->link->getCMSLink($recipe);
+			$redir = $this->context->link->getRecipeLink($recipe);
 			if (!$recipe->active)
 			{
 				$admin_dir = dirname($_SERVER['PHP_SELF']);
@@ -363,7 +382,7 @@ class AdminRecipeControllerCore extends AdminController
                 if (Tools::isSubmit('submitAddrecipeAndPreview'))
                 {
                     $alias = $this->getFieldValue($recipe, 'link_rewrite', $this->context->language->id);
-                    $preview_url = $this->context->link->getCMSLink($recipe, $alias, $this->context->language->id);
+                    $preview_url = $this->context->link->getRecipeLink($recipe, $alias, $this->context->language->id);
 
                     if (!$recipe->active)
                     {

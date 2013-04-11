@@ -41,7 +41,7 @@ class Link extends LinkCore
 	public function getRecipeLink($recipe, $alias = null, $ssl = false, $id_lang = null)
 	{
 		$base = (($ssl && $this->ssl_enable) ? _PS_BASE_URL_SSL_ : _PS_BASE_URL_);
-
+		
 		if (!$id_lang)
 			$id_lang = Context::getContext()->language->id;
 		$url = $base.__PS_BASE_URI__.$this->getLangLink($id_lang);
@@ -54,16 +54,10 @@ class Link extends LinkCore
 		$params['id'] = $recipe->id;
 		$params['rewrite'] = (!$alias) ? (is_array($recipe->link_rewrite) ? $recipe->link_rewrite[(int)$id_lang] : $recipe->link_rewrite) : $alias;
 
-		if (isset($recipe->meta_keywords) && !empty($recipe->meta_keywords))
-			$params['meta_keywords'] = is_array($recipe->meta_keywords) ?  Tools::str2url($recipe->meta_keywords[(int)$id_lang]) :  Tools::str2url($recipe->meta_keywords);
-		else
-			$params['meta_keywords'] = '';
-
 		if (isset($recipe->meta_title) && !empty($recipe->meta_title))
 			$params['meta_title'] = is_array($recipe->meta_title) ? Tools::str2url($recipe->meta_title[(int)$id_lang]) : Tools::str2url($recipe->meta_title);
 		else
 			$params['meta_title'] = '';
-
 		return $url.Dispatcher::getInstance()->createUrl('recipe_rule', $id_lang, $params, $this->allow);
 	}
 }

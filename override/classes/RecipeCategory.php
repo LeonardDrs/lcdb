@@ -191,9 +191,9 @@ class RecipeCategoryCore extends ObjectModel
 		$category['recipe'] = Db::getInstance()->executeS($sql);
 		if ($links == 1)
 		{
-			$category['link'] = $link->getCMSCategoryLink($current, $category['link_rewrite']);
+			$category['link'] = $link->getRecipeCategoryLink($current, $category['link_rewrite']);
 			foreach ($category['recipe'] as $key => $recipe)
-				$category['recipe'][$key]['link'] = $link->getCMSLink($recipe['id_recipe'], $recipe['link_rewrite']);
+				$category['recipe'][$key]['link'] = $link->getRecipeLink($recipe['id_recipe'], $recipe['link_rewrite']);
 		}
 		return $category;
 	}
@@ -359,6 +359,30 @@ class RecipeCategoryCore extends ObjectModel
 			$row['name'] = RecipeCategory::hideCMSCategoryPosition($row['name']);
 		return $result;
 	}
+	
+	public function getSubCategoriesByDepth($id_cat, $depth, $id_lang, $active = true)
+	{
+	 	if (!Validate::isBool($active))
+	 		die(Tools::displayError());
+
+		$result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+		SELECT c.*, cl.id_lang, cl.name, cl.description, cl.link_rewrite, cl.meta_title, cl.meta_keywords, cl.meta_description
+		FROM `'._DB_PREFIX_.'recipe_category` c
+		LEFT JOIN `'._DB_PREFIX_.'recipe_category_lang` cl ON (c.`id_recipe_category` = cl.`id_recipe_category` AND `id_lang` = '.(int)$id_lang.')
+		WHERE `id_parent` = '.(int)$id_cat.'
+		'.($active ? 'AND `active` = 1' : '').'
+		GROUP BY c.`id_recipe_category`
+		ORDER BY `name` ASC');
+		
+		if($result[0]['level_depth'] != $depth){
+			foreach ($result as &$row)
+			{
+				$row['subcats'] = $this->getSubCategoriesByDepth($row['id_recipe_category'], $depth, $id_lang, $active);
+			}
+		}
+		
+		return $result;
+	}
 
 	/**
 	  * Hide CMSCategory prefix used for position
@@ -451,7 +475,7 @@ class RecipeCategoryCore extends ObjectModel
 	{
 		if (!$link)
 			$link = Context::getContext()->link;
-		return $link->getCMSCategoryLink($this->id, $this->link_rewrite);
+		return $link->getRecipeCategoryLink($this->id, $this->link_rewrite);
 	}
 
 	public function getName($id_lang = null)

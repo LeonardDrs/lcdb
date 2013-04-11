@@ -18,41 +18,41 @@
 	float: left;
 }
 #recipe #center_column #difficulte{
-	background: url('../img/asset/img_solo/difficulte.png') no-repeat;
+	background: url('../img/img_solo/difficulte.png') no-repeat;
 	padding-left: 24px;
 }
 #recipe #center_column #preparation{
-	background: url('../img/asset/img_solo/preparation.png') no-repeat;
+	background: url('../img/img_solo/preparation.png') no-repeat;
 	padding-left: 19px;
 }
 #recipe #center_column #cuisson{
-	background: url('../img/asset/img_solo/cuisson.png') no-repeat;
+	background: url('../img/img_solo/cuisson.png') no-repeat;
 	padding-left: 19px;
 }
 #recipe #center_column #quantite{
-	background: url('../img/asset/img_solo/quantite.png') no-repeat;
+	background: url('../img/img_solo/quantite.png') no-repeat;
 	padding-left: 22px;
 }
 #recipe #center_column .difficulte_level span{
 	display: none;
 }
 #recipe #center_column .difficulte_0{
-	background: url('../img/asset/img_solo/star_0.png') no-repeat center center;
+	background: url('../img/img_solo/star_0.png') no-repeat center center;
 }
 #recipe #center_column .difficulte_1{
-	background: url('../img/asset/img_solo/star_1.png') no-repeat center center;
+	background: url('../img/img_solo/star_1.png') no-repeat center center;
 }
 #recipe #center_column .difficulte_2{
-	background: url('../img/asset/img_solo/star_2.png') no-repeat center center;
+	background: url('../img/img_solo/star_2.png') no-repeat center center;
 }
 #recipe #center_column .difficulte_3{
-	background: url('../img/asset/img_solo/star_3.png') no-repeat center center;
+	background: url('../img/img_solo/star_3.png') no-repeat center center;
 }
 #recipe #center_column .difficulte_4{
-	background: url('../img/asset/img_solo/star_4.png') no-repeat center center;
+	background: url('../img/img_solo/star_4.png') no-repeat center center;
 }
 #recipe #center_column .difficulte_5{
-	background: url('../img/asset/img_solo/star_5.png') no-repeat center center;
+	background: url('../img/img_solo/star_5.png') no-repeat center center;
 }
 /* ************************************************************************************************
 		PAGE LISTE RECETTES
@@ -61,7 +61,7 @@
 	float: left;
 }
 #recipe #center_column .title span#stove{
-	background: url('../img/asset/img_solo/a_griller.png') no-repeat top center;
+	background: url('../img/img_solo/a_griller.png') no-repeat top center;
 	width: 46px;
 	height: 25px;
 	float: left;

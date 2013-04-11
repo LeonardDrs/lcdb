@@ -1,6 +1,9 @@
+#my-account #center_column {
+    width:712px;
+    margin: 0 24px 0 12px;
+}
 
-
-#my-account #center_column .left-side {
+#my-account #center_column .step .left-side {
     border-right: 1px solid #6E503B;
     margin-right: 20px;
 }
@@ -18,7 +21,9 @@
 }
 
 
-/*  PAGE ABONNEMENT */
+/* ************************************************************************************************
+        PAGE abonnement
+************************************************************************************************ */
 #my-account #center_column h2.green-title {
     margin-bottom: 0;
     line-height: 22px;
@@ -36,16 +41,16 @@
     margin-right: 10px;
 }
 
-#my-account .img-step-1 { background: url('../img/asset/img_solo/abonnement-1.png') no-repeat; }
-#my-account .img-step-2 { background: url('../img/asset/img_solo/abonnement-2.png') no-repeat; }
-#my-account .img-step-3 { background: url('../img/asset/img_solo/abonnement-3.png') no-repeat; }
-#my-account .img-step-4 { background: url('../img/asset/img_solo/abonnement-4.png') no-repeat; }
+#my-account .img-step-1 { background: url('../img/img_solo/abonnement-1.png') no-repeat; }
+#my-account .img-step-2 { background: url('../img/img_solo/abonnement-2.png') no-repeat; }
+#my-account .img-step-3 { background: url('../img/img_solo/abonnement-3.png') no-repeat; }
+#my-account .img-step-4 { background: url('../img/img_solo/abonnement-4.png') no-repeat; }
 
 #my-account .step ul,
-#my-account .left-side,
-#my-account .right-side,
-#my-account .left-side p,
-#my-account .left-side ul {
+#my-account .step .left-side,
+#my-account .step .right-side,
+#my-account .step .left-side p,
+#my-account .step .left-side ul {
     float: left;
 }
 
@@ -54,21 +59,18 @@
     margin-left: 10px;
 }
 
-#my-account .step ul label {
-    margin-left: 10px;
-}
-
-#my-account .left-side ul li {
+#my-account .step .left-side ul li {
     margin-bottom: 5px;
 }
 
-#my-account .left-side {
+#my-account .step .left-side {
     width: 195px;
 }
 
-#my-account #center_column .left-side.last-step {
+#my-account #center_column .step .left-side.last-step {
     width: auto;
     border: none;
+    margin-right: 0;
 }
 
 #my-account .step .colis-label {
@@ -88,9 +90,27 @@
     float: left;
 }
 
+#my-account #step1 .right-side {
+    width: 445px;
+}
+.ie7 #my-account #step1 .right-side,
+.ie7 #my-account #step1 .left-side {
+    height: 102px;
+}
+
 #my-account #step1 .right-side label {
     width: 135px;
     margin-right: 20px;
+}
+
+#my-account #step1 .sbHolder{
+    float: left;
+    position: relative;
+    width: 60px;
+}
+#my-account #step1 .sbOptions,
+#my-account #step1 .sbSelector{
+    width: 60px;
 }
 
 #my-account #step1 .right-side p {
@@ -172,7 +192,7 @@
 
 #my-account #villes-abonnees {
     display: none;
-    background: url('../img/asset/img_solo/popin-overlay.png') repeat;
+    background: url('../img/img_solo/popin-overlay.png') repeat;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -188,7 +208,7 @@
     left: 50%;
     top: 50%;
     margin: -158px 0 0 -155px;
-    background: url('../img/asset/textures/fond-papier-clair.jpg') repeat-y 0 0;
+    background: url('../img/textures/fond-papier-clair.jpg') repeat-y 0 0;
     -moz-border-radius: 4px;
          border-radius: 4px;
     padding: 30px;
@@ -206,5 +226,67 @@
     height: 16px;
     top: 6px;
     right: 6px;
-    background: url('../img/asset/img_solo/popin-close.png') no-repeat;
+    background: url('../img/img_solo/popin-close.png') no-repeat;
+}
+#my-account #step3 .frequence-list span {
+    float: left;
+}
+#my-account #step3 .frequence-list span.pronom {
+    line-height: 27px;
+}
+#my-account #step3 .sbHolder {
+    float: left;
+    position: relative;
+    width: 87px;
+    margin-left: 5px;
+}
+#my-account #step3 .sbOptions,
+#my-account #step3 .sbSelector {
+    width: 87px;
+}
+
+#my-account #step4 ul {
+    width: 565px;
+    margin-left: 15px;
+}
+
+#my-account #step4 input {
+    float: left;
+}
+
+#my-account #step4 label {
+    float: left;
+    max-width: 535px;
+    width: 535px;
+}
+
+#my-account #abonnement-submit {
+    width: 200px;
+    display: block;
+    margin: 35px auto;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    font-family: 'MyriadWebPro-Semibold', Arial, sans-serif;
+    border: 1px solid #d44137;
+    background: #b02c25;
+    background: -moz-linear-gradient(top,  #e7665f 0%, #871711 62%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7665f), color-stop(62%,#871711));
+    background: -webkit-linear-gradient(top,  #e7665f 0%,#871711 62%);
+    background: -o-linear-gradient(top,  #e7665f 0%,#871711 62%);
+    background: -ms-linear-gradient(top,  #e7665f 0%,#871711 62%);
+    background: linear-gradient(to bottom,  #e7665f 0%,#871711 62%);
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 3px 3px 5px 0px #8f8f8f;        
+       -moz-box-shadow: 3px 3px 5px 0px #8f8f8f;
+         -o-box-shadow: 3px 3px 5px 0px #8f8f8f;
+            box-shadow: 3px 3px 5px 0px #8f8f8f;
+}
+
+/* ************************************************************************************************
+        PAGE mon compte
+************************************************************************************************ */
+#my-account hr.mon-compte {
+    margin-top: 80px;
 }
