@@ -60,5 +60,6 @@ class Link extends LinkCore
 			$params['meta_title'] = '';
 		return $url.Dispatcher::getInstance()->createUrl('recipe_rule', $id_lang, $params, $this->allow);
 	}
+	
 }
 

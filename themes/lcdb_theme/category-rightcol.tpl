@@ -14,7 +14,7 @@
 	<span class="bloc-title ribbon-mot-boucher"></span>
 	<h3>Le saviez-vous ?</h3>
 	<p>Les viandes Bio sont réputées pour etre des viandes saines et non pas particulièremnet savourauses comme le sont les  viandes Label Rouge qui vous garantissent un plaisir  gustatif incomparable.</p>
-	<img src="img/asset/img_solo/labelrouge.png" alt="label rouge different d'agriculture biologique" />
+	<img src="{$base_dir}themes/lcdb_theme/img/img_solo/labelrouge.png" alt="label rouge different d'agriculture biologique" />
 	<a href="#" title="En savoir plus sur les labels">En savoir plus sur les labels</a>
 </div>
 <div class="small-bloc temoignage">

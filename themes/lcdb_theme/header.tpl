@@ -116,8 +116,11 @@
 						<li class="infos"><a href="#" title="Infos pratiques">Infos pratiques</a>
 							<ul>
 								{foreach from=$menu_infos item=page name=foo}
-									<li class="{if $smarty.foreach.foo.first}first {/if}{if $smarty.foreach.foo.last}last {/if}"><a href="{$link->getCMSLink($page.id_cms, $page.link_rewrite)}" title="{$page.meta_title}">{$page.meta_title}</a></li>
+									<li class="{if $smarty.foreach.foo.first}first {/if}"><a href="{$link->getCMSLink($page.id_cms, $page.link_rewrite)}" title="{$page.meta_title}">{$page.meta_title}</a></li>
 								{/foreach}
+								<li><a href="{$base_dir}index.php?controller=delivery">Livraison</a></li>
+								<li><a href="{$base_dir}index.php?controller=post">Presse</a></li>
+								<li class="last"><a href="{$link->getCMSCategoryLink(7)}">Question fréquentes</a></li>
 							</ul>
 						</li>
 						<li class="contact"><a href="{$link->getPageLink('contact', true)}">Contact</a></li>

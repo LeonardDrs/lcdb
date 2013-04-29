@@ -1,4 +1,4 @@
-<?php
+re<?php
 
 class AttributeGroup extends AttributeGroupCore
 {

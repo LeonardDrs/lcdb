@@ -8,6 +8,18 @@
 	</div>
 	<div id="basket">
 		<span class="illustration"></span>
-		<p>Panier (<span class="price">52</span> €)</p>
+		<p>Panier (
+			<span class="price ajax_cart_total{if $cart_qties == 0}{/if}">
+				{if $cart_qties > 0}
+					{if $priceDisplay == 1}
+						{assign var='blockuser_cart_flag' value='Cart::BOTH_WITHOUT_SHIPPING'|constant}
+						{convertPrice price=$cart->getOrderTotal(false, $blockuser_cart_flag)}
+					{else}
+						{assign var='blockuser_cart_flag' value='Cart::BOTH_WITHOUT_SHIPPING'|constant}
+						{convertPrice price=$cart->getOrderTotal(true, $blockuser_cart_flag)}
+					{/if}
+				{/if}
+			</span>
+		)</p>
 	</div>
 </div>

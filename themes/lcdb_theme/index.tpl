@@ -1,35 +1,5 @@
 <div class="content clearfix">
-	<div class="order-meat-message">
-		<div class="cow">
-			<span class="clip"></span>
-			<span class="corner-top"></span>
-			<span class="corner-right"></span>
-			<span class="corner-bottom"></span>
-			<span class="corner-left"></span>
-			<img src="img/photos/cow.jpg" alt="Les vaches des colis du boucher" />
-		</div>
-		<div class="label-message">
-			<span class="illustration"></span>
-			<div class="label">
-				<p><span></span>Viandes certifiées<span></span></p>
-				<ul>
-					<li><span>Label Rouge</span></li>
-					<li><span>Agriculture Biologique</span></li>
-				</ul>
-			</div>
-			<div class="message">
-				<span></span>
-				<p>Les Colis du Boucher sont nés d'une envie simple et gourmande: recréer le lien
-				qui avait disparu entre les fermes et les familles afin de proposer à tous de manger
-				de la viande saine, de qualité, avec la garantie de son origine et du travail bien
-				fait, le tout à un prix juste.</p>
-				<p class="signature">Guy & Melchior</p>
-			</div>
-		</div>
-		<div class="order-meat">
-			<a href="#" title="Commander nos viandes"><span></span>Commander nos viandes<span></span></a>
-		</div>
-	</div>
+	{$HOOK_HOME}
 	<div class="content-infos-site">
 		<div class="infos-measure">
 			<h2>Notre démarche</h2>
@@ -62,7 +32,7 @@
 				<h2>En direct du blog</h2>
 				<article>
 					<a href="#" title="Accéder au blog">
-						<img src="img/photos/vache.jpg" alt="une vache dans un près" />
+						<img src="{$base_dir}themes/lcdb_theme/img/photos/vache.jpg" alt="une vache dans un près" />
 					</a>
 					<div class="subject">
 						<h3>

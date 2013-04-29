@@ -126,21 +126,25 @@ var fieldRequired = '{l s='Please fill in all required fields, then save the cus
 	<div id="left_column">
 		{include file="$tpl_dir./category-leftcol.tpl"}
 	</div><!-- / .content-left -->
-	<div id="center_column">
 		
-		{include file="$tpl_dir./errors.tpl"}
-		
-		{if $errors|@count == 0}
-			{if $product->id == 3}
+	{include file="$tpl_dir./errors.tpl"}
+	
+	{if $errors|@count == 0}
+		{if $product->id == 3}
+			<div id="center_column">
 				{include file="$tpl_dir./product-surprise.tpl"}
-			{elseif $product->id == 4}
+			</div>
+		{elseif $product->id == 4}
+			<div id="center_column">
 				{include file="$tpl_dir./product-gift.tpl"}
-			{else}
+			</div>
+		{else}
+			<div id="center_column" class="page-list-product">
 				{include file="$tpl_dir./product-default.tpl"}
-			{/if}
+			</div>
 		{/if}
+	{/if}
 		
-	</div><!-- / .content-center -->
 	<div id="right_column">
 		{include file="$tpl_dir./category-rightcol.tpl"}
 	</div><!-- / .content-right -->

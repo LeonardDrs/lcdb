@@ -24,102 +24,51 @@
 	{/if}
 	
 	<div class="price-infos" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-		<img src="img/asset/img_solo/colis-surprise.png" title="colis cadeau"/>
+		<img src="{$base_dir}themes/lcdb_theme/img/img_solo/colis-surprise.png" title="colis surprise"/>
 		
-		{if $have_image}
-			<span id="view_full_size">
-				<img src="{$link->getImageLink($product->link_rewrite, $cover.id_image, 'large_default')}" {if $jqZoomEnabled}class="jqzoom" alt="{$link->getImageLink($product->link_rewrite, $cover.id_image, 'thickbox_default')}"{else} title="{$product->name|escape:'htmlall':'UTF-8'}" alt="{$product->name|escape:'htmlall':'UTF-8'}" {/if} id="bigpic" width="{$largeSize.width}" height="{$largeSize.height}" />
-				<span class="span_link">{l s='View full size'}</span>
-			</span>
-		{else}
-			<span id="view_full_size">
-				<img src="{$img_prod_dir}{$lang_iso}-default-large_default.jpg" id="bigpic" alt="" title="{$product->name|escape:'htmlall':'UTF-8'}" width="{$largeSize.width}" height="{$largeSize.height}" />
-				<span class="span_link">{l s='View full size'}</span>
-			</span>
-		{/if}
-		
-		
-		{if $product->short_description != null}	
-			<p class="colis-surprise-description">{$product->short_description}</p>
+		{if $product->description_short != null}	
+			<p class="colis-surprise-description">{$product->description_short}</p>
 		{/if}
 		<div class="price-details">
+			
+			{if !$priceDisplay || $priceDisplay == 2}
+				{assign var='productPrice' value=$product->getPrice(true, $smarty.const.NULL, $priceDisplayPrecision)}
+				{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(false, $smarty.const.NULL)}
+			{elseif $priceDisplay == 1}
+				{assign var='productPrice' value=$product->getPrice(false, $smarty.const.NULL, $priceDisplayPrecision)}
+				{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(true, $smarty.const.NULL)}
+			{/if}
+			
 			<div class="detailed-price">
-				<span class="price" itemprop="price">35 &euro;</span>
+				{if $priceDisplay >= 0 && $priceDisplay <= 2}
+					<span class="price" itemprop="price" id="our_price_display">{convertPrice price=$productPrice}</span>
+				{/if}
 			</div>
 		</div>
-		
-		
-		{if $product->show_price AND !isset($restricted_country_mode) AND !$PS_CATALOG_MODE}
-			<div class="price">
-				{if !$priceDisplay || $priceDisplay == 2}
-					{assign var='productPrice' value=$product->getPrice(true, $smarty.const.NULL, $priceDisplayPrecision)}
-					{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(false, $smarty.const.NULL)}
-				{elseif $priceDisplay == 1}
-					{assign var='productPrice' value=$product->getPrice(false, $smarty.const.NULL, $priceDisplayPrecision)}
-					{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(true, $smarty.const.NULL)}
-				{/if}
-
-				<p class="our_price_display">
-				{if $priceDisplay >= 0 && $priceDisplay <= 2}
-					<span id="our_price_display">{convertPrice price=$productPrice}</span>
-				{/if}
-				</p>
-
-				{if $priceDisplay == 2}
-					<br />
-					<span id="pretaxe_price"><span id="pretaxe_price_display">{convertPrice price=$product->getPrice(false, $smarty.const.NULL)}</span>&nbsp;{l s='tax excl.'}</span>
-				{/if}
-			</div>
-		{/if}
-		
 		
 	</div><!-- / .price-infos -->
 	
 	<div class="add-to-basket-form">
-		<form class="form-panier clearfix" method="">
+		<form class="form-panier clearfix" action="{$link->getPageLink('cart')}" method="post">
+			<!-- hidden -->
+			<input type="hidden" name="token" value="{$static_token}" />
+			<input type="hidden" name="id_product" value="{$product->id|intval}" id="product_page_product_id" />
+			<input type="hidden" name="add" value="1" />
+			<input type="hidden" name="id_product_attribute" id="idCombination" value="" />
+			<!-- select -->
 			<select>
 				<option>Label Rouge et Bio</option>
 			</select>
 			<button type="button" name="minus" class="moreless minus">-</button>
-			<input class="quantity" type="text" maxlength="2" value="0" name="quantity" disabled>
+			<input  id="quantity_wanted" class="quantity" type="text" maxlength="2" value="0" name="quantity" disabled>
 			<button type="button" name="plus" class="moreless plus">+</button>
+			<!-- button -->
 			<button type="submit" name="submit" class="ajout-panier">ajouter au panier</button>
 		</form>
-		
-		<form id="buy_block" {if $PS_CATALOG_MODE AND !isset($groups) AND $product->quantity > 0}class="hidden"{/if} action="{$link->getPageLink('cart')}" method="post">
-
-			<!-- hidden datas -->
-			<p class="hidden">
-				<input type="hidden" name="token" value="{$static_token}" />
-				<input type="hidden" name="id_product" value="{$product->id|intval}" id="product_page_product_id" />
-				<input type="hidden" name="add" value="1" />
-				<input type="hidden" name="id_product_attribute" id="idCombination" value="" />
-			</p>
-
-			<!-- quantity wanted -->
-			<p id="quantity_wanted_p"{if (!$allow_oosp && $product->quantity <= 0) OR $virtual OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
-				<label>{l s='Quantity:'}</label>
-				<input type="text" name="qty" id="quantity_wanted" class="text" value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product->minimal_quantity > 1}{$product->minimal_quantity}{else}1{/if}{/if}" size="2" maxlength="3" {if $product->minimal_quantity > 1}onkeyup="checkMinimalQuantity({$product->minimal_quantity});"{/if} />
-			</p>
-			
-			{if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
-				<span class="exclusive">
-					<span></span>
-					{l s='Add to cart'}
-				</span>
-			{else}
-				<p id="add_to_cart" class="buttons_bottom_block">
-					<span></span>
-					<input type="submit" name="Submit" value="{l s='Add to cart'}" class="exclusive" />
-				</p>
-			{/if}
-			
-			{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
-
-		</form>
-		
-		
 	</div><!-- / .add-to-basket-form -->
+	
+	{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
+	
 	<div class="misc-infos">
 		<p class="portions"><span class="img-portions"></span> 10 à 12 <span class="colis-portions">portions</span></p>
 		<p class="jours"><span class="img-jours"></span> 7 à 14 <span class="colis-jours">jours</span></p>

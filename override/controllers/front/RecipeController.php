@@ -34,7 +34,7 @@ class RecipeControllerCore extends FrontController
 		if (Validate::isLoadedObject($this->recipe))
 		{
 			$adtoken = Tools::getAdminToken('AdminRecipeContent'.(int)Tab::getIdFromClassName('AdminRecipeContent').(int)Tools::getValue('id_employee'));
-			if (!$this->recipe->isAssociatedToShop() || !$this->recipe->active && Tools::getValue('adtoken') != $adtoken)
+			if (!$this->recipe->active && Tools::getValue('adtoken') != $adtoken)
 			{
 				header('HTTP/1.1 404 Not Found');
 				header('Status: 404 Not Found');

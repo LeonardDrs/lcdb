@@ -1,6 +1,9 @@
 
-<form id="form-search" method="get">
-	<input id="search" type="text" placeholder="Recherche..." name="search">
+<form id="form-search" method="get" action="{$link->getPageLink('search', true)}">
+	<input type="text" id="search" name="search" placeholder="Recherche..." />
+	<input type="hidden" name="orderby" value="position" />
+	<input type="hidden" name="controller" value="search" />
+	<input type="hidden" name="orderway" value="desc" />
 	<button type="submit" name="submit">OK</button>
 </form>
 <nav class="secondary-menu small-bloc">

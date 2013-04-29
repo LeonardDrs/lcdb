@@ -15,10 +15,9 @@
 <div class="rte{if $content_only} content_only{/if}">
 	{$recipe->content}
 </div>
-
 <div id="center_column" class="recipe_card">
 	<div class="backlink">
-		<a href="liste_recettes.html" title="retourner à la liste des recettes">
+		<a href="javascript:history.back()" title="retourner à la liste des recettes">
 			Retourner à la liste des recettes
 		</a>
 	</div>
@@ -31,62 +30,46 @@
 			<ul class="presentation">
 				<li>
 					<span id="difficulte">Difficulté</span>
-					<span class="difficulte_level difficulte_3"><span>3/5</span></span>
+					<span class="difficulte_level difficulte_{$recipe->difficulty}"><span>{$recipe->difficulty}/5</span></span>
 				</li>
 				<li>
 					<span id="preparation">Préparation</span>
-					<span itemprop="prepTime">1h10</span>
+					<span itemprop="prepTime">{$recipe->duration}</span>
 				</li>
 				<li>
 					<span id="cuisson">Cuisson</span>
-					<span itemprop="cookTime">20 min.</span>
+					<span itemprop="cookTime">{$recipe->cooking_time}</span>
 				</li>
 				<li>
 					<span id="quantite">Quantite</span>
-					<span itemprop="recipeYield">6 pers.</span>
+					<span itemprop="recipeYield">{$recipe->number_people} pers.</span>
 				</li>
 			</ul>
 		</div>
 		<div id="content_recipe">
-			<div id="recipe_intro">
-				<p>Signe de qualité de la bête, votre paleron présente un nerf au milieu de sa tranche:
-				il suffira à chacun des convives de l'ôter simplement de deux coups de couteau. Le paleron
-				est aussi un morceau qui s'adapte très bien en cuisson longue dans un bourguignon ou un pot-au-feu.</p>
-			</div>
-			<div id="recipe_ingredients">
+			<div id="recipe_intro" class="content">{$recipe->prior_content}</div>
+			<div id="recipe_ingredients" class="content">
 				<h2>Ingredients</h2>
-				<ul>
-					<li>
-						<span itemprop="ingredients">Environs 1kg de <span class="bold">Paleron</span> en tranche des Colis du Boucher</span> 
-						<a href="#" title="Commander ce produit">Commander ce produit</a>
-					</li>
-					<li itemprop="ingredients">1 boîte de coulis de tomate</li>
-					<li itemprop="ingredients">2 oignons</li>
-					<li itemprop="ingredients">10 cl de vin Rouge</li>
-					<li itemprop="ingredients">500 gr de champignons de Paris</li>
-					<li itemprop="ingredients">20 g de beurre</li>
-					<li itemprop="ingredients">1 cu. à café d'herbes de Provence</li>
-					<li itemprop="ingredients">Sel, poivre</li>
-				</ul>
+				<div>
+					{$recipe->ingredients_content}
+				</div>
 			</div>
-			<div id="recipe_detail">
+			<div id="recipe_detail" class="content">
 				<h2>Recette</h2>
-				<ol itemprop="recipeInstructions">
-					<li><span>Pelez et émincé finement les oignons, nettoyez et coupez grossièrement les champignons.</span></li>
-					<li><span>Dans une poële faites fondre le beurre, déposez les tranches de paleron, faites les dorer
-					environ 4 min par face puis ajouter les oignons et faites encore revenir 5 min.</span></li>
-					<li><span>Ajouter les champignons, la sauce tomate, le vin, les herbes, salez, poivrez et laissez
-					mijotez environ 45 min, en remuant régulièrement.</span></li>
-				</ol>
+				<div itemprop="recipeInstructions">
+					{$recipe->recipe_content}
+				</div>
 			</div>
-			<div id="recipe_council">
+			<div id="recipe_council" class="content">
 				<h2>Le conseil du boucher</h2>
-				<p>Accompagnez votre plat de blé, servez avec le vin utilisé dans la préparation, un Bourgueil par exemple.</p>
+				<div>
+					{$recipe->tips_content}
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="backlink">
-		<a href="liste_recettes.html" title="retourner à la liste des recettes">
+		<a href="javascript:history.back()" title="retourner à la liste des recettes">
 			Retourner à la liste des recettes
 		</a>
 	</div>

@@ -1,7 +1,7 @@
 <div id="columns" class="content clearfix">
-	<div id="center_column">
-		<div class="big-bloc clearfix">
-			
+	<div id="left_column"></div><!-- / #left_column -->
+	<div id="center_column" class="presse">
+		<div class="big-bloc">
 			{if isset($cms) && !isset($cms_category)}
 				{if !$cms->active}
 					<br />
@@ -16,12 +16,14 @@
 						</p>
 					</div>
 				{/if}
+				<h1>{$cms->meta_title}</h1>
 				<div class="rte{if $content_only} content_only{/if}">
 					{$cms->content}
 				</div>
 			{elseif isset($cms_category)}
 				<div class="block-cms">
 					<h1><a href="{if $cms_category->id eq 1}{$base_dir}{else}{$link->getCMSCategoryLink($cms_category->id, $cms_category->link_rewrite)}{/if}">{$cms_category->name|escape:'htmlall':'UTF-8'}</a></h1>
+					{$cms_category->description}
 					{if isset($sub_category) & !empty($sub_category)}	
 						<p class="title_block">{l s='List of sub categories in %s:' sprintf=$cms_category->name}</p>
 						<ul class="bullet">
