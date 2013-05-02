@@ -1,103 +1,66 @@
-div.addresses {
-   position:relative;
-   padding:15px;
-   border:1px solid #ccc;
-	font-size:12px;
-   background:#f8f8f8
+
+#addresses #center_column {
+width: 712px;
+margin: 0 24px 0 12px;
 }
 
-ul.address {
-   list-style-type:none;
-   float:left;
-   position:relative;
-   width:345px !important
+#addresses .address p.information{
+	border-bottom: 1px solid #342110;
+	padding-bottom: 5px;
 }
-#address_delivery {margin-right:35px;}
-#address_invoice {margin-right:0}
-#delivery_address {margin-right:65px;}
-
-ul.address li {
-	padding:0 15px;
-	font-weight:bold;
-	line-height:18px;
-	text-transform:uppercase
+#addresses .address .big-bloc > p.information{
+	margin-bottom: 40px;
 }
 
-ul.address li.address_title {
-   height: 29px;
-   font-weight: bold;
-   line-height:29px;
-   color:#fff;
-    text-shadow:0 1px 0 #666;
-   background:url(../img/bg_table_th.png) repeat-x 0 -10px #999
+/* PAGE mes adresses - Liste */
+#addresses #center_column.address .big-bloc{
+	padding: 20px;
 }
-
-ul.address li.address_firstname,
-ul.address li.address_company {
-	margin-top:8px
+#addresses .address #address-list{
+	border-top: 1px solid #342110;
 }
-
-ul.address  li.address_update {
-	margin-top:20px
-}
-ul.address  li.address_update,
-ul.address li.address_delete {
-	font-size:11px;
-   text-transform:none
-}
-
-.address_add {
-   padding:20px 0
-}
-
-.address_select {
-	border:1px solid #ccc;
-	width: 200px;
-	margin-left: 10px;
-}
-label[for=id_address_delivery], label[for=id_address_invoice] {
+#addresses .address .details-address{
+	width: 238px;
 	float: left;
-	width: 225px;
+	padding-right:93px;
+	margin: 25px 0px 10px 0px;
 }
-.addressesAreEquals label {
-	margin-left: 5px;
+#addresses .address .details-address > p{
+	margin-bottom: 0px;
 }
-.addressesAreEquals input {
-	float: left;
+#addresses .address #address-list:after{
+	display: block;
+	content: "";
+	visibility: hidden;
+	clear: both;
 }
-p.address_delivery, p.addressesAreEquals {
-	padding-bottom: 14px
+.ie7 #addresses .address #address-list{
+	overflow: auto;
 }
-
-/* PAGE ADRESSES ******************************************************************************* */
-.addresses ul.address {
-   list-style-type:none;
-   float:left;
-   position:relative;
-	margin:30px 30px 0 0;
-   width:345px !important
+#addresses .address .details-address p.information{
+	font-family: 'MyriadWebPro-Bold';
+	margin-bottom: 8px;
 }
-.addresses ul.address.alternate_item,
-.addresses ul.address.last_item {margin-right:0}
-.addresses ul.address li {
-	padding:0 15px;
-	font-weight:bold;
-	line-height:18px;
-	text-transform:uppercase
+#addresses .address .action-link a{
+	color: #4D9810;
+	display: block;
+	font-family: 'MyriadWebPro-Italic';
 }
-.addresses ul.address .address_title {
-	margin-bottom:5px;
-	height: 29px;
-   font-weight: bold;
-   line-height:29px;
-   color:#fff;
-    text-shadow:0 1px 0 #666;
-   background:url(../img/bg_table_th.png) repeat-x 0 -10px #999
+#addresses .address .action-link {
+	border-top: 1px solid #342110;
+	padding-top:8px;
+	margin-top:8px;
 }
-.addresses ul.address .address_update {margin-top:20px}
-.addresses ul.address .address_update,
-.addresses ul.address .address_delete {
-	font-size:11px;
-   text-transform:none
+#addresses .address .action-link a span{
+	margin-right: 10px;
 }
-
+#addresses .address .action{
+	margin-top: 15px;
+	clear: both;
+}
+#addresses .address .action a{
+	width: 192px;
+	display: block;
+	margin:auto;
+	text-align: center;
+}

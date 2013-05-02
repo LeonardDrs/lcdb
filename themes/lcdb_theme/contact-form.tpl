@@ -3,7 +3,7 @@
 {capture name=path}{l s='Contact'}{/capture}
 
 <div id="columns" class="content clearfix">
-	<div id="center_column">
+	<div id="center_column" class="presse">
 		<div class="big-bloc clearfix">
 			<h1>{l s='Customer Service'} - {if isset($customerThread) && $customerThread}{l s='Your reply'}{else}{l s='Contact us'}{/if}</h1>
 

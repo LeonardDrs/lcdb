@@ -69,47 +69,44 @@
 	<div id="left_column">
 		{include file="./account-left-col.tpl"}
 	</div><!-- / #left_column -->
-	<div id="center_column">
+	<div id="center_column" class="address">
 		<div class="big-bloc">
-			<h1>{l s='My addresses'}</h1>
-			<p>{l s='Please configure your default billing and delivery addresses when placing an order. You may also add additional addresses, which can be useful for sending gifts or receiving an order at your office.'}</p>
-
-			{if isset($multipleAddresses) && $multipleAddresses}
-			<div class="addresses">
-				<h3>{l s='Your addresses are listed below.'}</h3>
-				<p>{l s='Be sure to update them if they have changed.'}</p>
-				{assign var="adrs_style" value=$addresses_style}
-				<div class="bloc_adresses clearfix">
-				{foreach from=$multipleAddresses item=address name=myLoop}
-					<ul class="address {if $smarty.foreach.myLoop.last}last_item{elseif $smarty.foreach.myLoop.first}first_item{/if} {if $smarty.foreach.myLoop.index % 2}alternate_item{else}item{/if}">
-						<li class="address_title">{$address.object.alias}</li>
-						{foreach from=$address.ordered name=adr_loop item=pattern}
-							{assign var=addressKey value=" "|explode:$pattern}
-							<li>
-							{foreach from=$addressKey item=key name="word_loop"}
-								<span{if isset($addresses_style[$key])} class="{$addresses_style[$key]}"{/if}>
-									{$address.formated[$key|replace:',':'']|escape:'htmlall':'UTF-8'}
-								</span>
+			<h1>Mes adresses</h1>
+			<p>Choisissez vos adresses de facturation et de livraison. Ces dernières seront présélectionnées lors de vos 
+				commandes. Vous pouvez également ajouter d’autres adresses, ce qui est particulièrement intéressant pour 
+				envoyer de cadeaux ou recevoir votre commande au bureau.</p>
+			<div id="address-list">
+				{if isset($multipleAddresses) && $multipleAddresses}
+					{assign var="adrs_style" value=$addresses_style}
+					{foreach from=$multipleAddresses item=address name=myLoop}
+						<div class="details-address">
+							<p class="information title">{$address.object.alias}</p>
+							{foreach from=$address.ordered name=adr_loop item=pattern}
+								{assign var=addressKey value=" "|explode:$pattern}
+								<p>
+									{foreach from=$addressKey item=key name="word_loop"}
+										<span{if isset($addresses_style[$key])} class="{$addresses_style[$key]}"{/if}>
+											{$address.formated[$key|replace:',':'']|escape:'htmlall':'UTF-8'}
+										</span>
+									{/foreach}
+								</p>
 							{/foreach}
-							</li>
-						{/foreach}
-						<li class="address_update"><a href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}")}" title="{l s='Update'}">&raquo; {l s='Update'}</a></li>
-						<li class="address_delete"><a href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}&delete")}" onclick="return confirm('{l s='Are you sure?' js=1}');" title="{l s='Delete'}">&raquo; {l s='Delete'}</a></li>
-					</ul>
-				{/foreach}
-				</div>
-				<p class="clear" />
+							<div class="action-link">
+								<a href="#" href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}")}" title="Modifier cette adresse"><span>&rarr;</span>Modifier cette adresse</a>
+								<a href="#" href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}&delete")}" onclick="return confirm('{l s='Are you sure?' js=1}');" title="Supprimer"><span>&rarr;</span>Supprimer</a>
+							</div>
+						</div>
+					{/foreach}
+				{else}
+					<p class="warning">
+						{l s='No addresses available.'}&nbsp;
+						<a href="{$link->getPageLink('address', true)}">{l s='Add new address'}</a>
+					</p>
+				{/if}
 			</div>
-			{else}
-				<p class="warning">{l s='No addresses available.'}&nbsp;<a href="{$link->getPageLink('address', true)}">{l s='Add new address'}</a></p>
-			{/if}
-
-			<div class="clear address_add"><a href="{$link->getPageLink('address', true)}" title="{l s='Add an address'}" class="button_large">{l s='Add an address'}</a></div>
-
-			<ul class="footer_links">
-				<li><a href="{$link->getPageLink('my-account', true)}"><img src="{$img_dir}icon/my-account.gif" alt="" class="icon" /> {l s='Back to your account'}</a></li>
-				<li class="f_right"><a href="{$base_dir}"><img src="{$img_dir}icon/home.gif" alt="" class="icon" /> {l s='Home'}</a></li>
-			</ul>
+			<div class="action">
+				<a href="{$link->getPageLink('address', true)}" title="{l s='Add an address'}" class="red-button gradient">{l s='Add an address'}</a>
+			</div>
 		</div>
 	</div><!-- / #center_column -->
 </div><!-- / .content -->

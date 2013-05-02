@@ -2424,6 +2424,9 @@ ul.idTabs li {
 		PAIMENT - PAGE ORDER
 ************************************************************************************************ */
 
+.bloc-checkout{
+	padding: 20px 20px 0px 20px;
+}
 
 /* ************************************************************************************************
 		STYLE DU CALENDRIER
@@ -2587,182 +2590,6 @@ ul.idTabs li {
   	height: 260px; /* ie */ 
 }
 
-
-
-/* ************************************************************************************************
-		STYLE DU CHECKOUT - 1) IDENTIFICATION
-************************************************************************************************ */
-#order .bloc-checkout h2{
-	font: 16px/30px 'MyriadWebPro-Bold', Arial, sans-serif;
-	border-bottom: 1px dashed #342110;
-	padding-bottom: 10px;
-	margin-bottom: 70px;
-}
-#order .bloc.content-register{
-	width: 424px;
-	border: 1px solid #bead9f;
-	background-color: rgba(255,255,255,0.4);
-	-webkit-border-radius: 8px;
-	   -moz-border-radius: 8px;
-	        border-radius: 8px;
-	padding: 10px;
-	float: left;
-	margin-right: 26px;
-	min-height: 363px;
-	height: auto !important; /* ie */ 
-  	height: 363px; /* ie */ 
-  	position: relative;
-  	font-size: 14px;
-}
-#order .bloc.content-register h2{
-	background: url('../img/asset/img_solo/checkout-first-command.png') no-repeat 0 0;
-	padding-left: 40px;
-	margin-bottom: 70px;
-}
-#order .bloc.content-login{
-	width: 424px;
-	border: 1px solid #bead9f;
-	background-color: rgba(255,255,255,0.4);
-	-webkit-border-radius: 8px;
-	   -moz-border-radius: 8px;
-	        border-radius: 8px;
-	padding: 10px;
-	float: left;
-	min-height: 363px;
-	height: auto !important; /* ie */ 
-  	height: 363px; /* ie */ 
-  	position: relative;
-  	font-size: 14px;
-}
-#order .content-login h2{
-	background: url('../img/asset/img_solo/checkout-login.png') no-repeat 0 0;
-	padding-left: 24px;
-}
-#order .content-register .red-button{
-	padding-left: 30px;
-	padding-right: 30px;
-	display: block;
-}
-#order .content-register .register-button,
-#order .content-login .login-button{
-	position: absolute;
-	bottom: 18px;
-	right: 18px;
-}
-#order .content-login form { padding-left: 10px; }
-#order .content-login form label,
-#order .content-login form input { display: block; }
-
-#order .content-login form #mail-address { margin-bottom: 20px; }
-
-#order .content-login form #mail-address,
-#order .content-login form #password { width: 290px; }
-
-#order .content-login form .checkbox input { display: inline-block; }
-
-#order .content-login a.green-title {
-	display: block; 
-	margin: 9px 0 20px;
-	font-size: 13px;
-	text-decoration: none;
-}
-
-#order .content-login a.green-title:hover {
-	text-decoration: underline;
-}
-
-#order .bloc.content-register-form {
-	width: 880px;
-}
-
-#order .content-register-form h1 {
-	font-size: 16px;
-	padding: 0 0 10px 40px;
-	line-height: 30px;
-	border-bottom: 1px dashed #342110;
-	background: url('../img/asset/img_solo/checkout-first-command.png') no-repeat 0 0;
-}
-
-#order .content-register-form .required { color: #bd544f; }
-
-#order .content-register-form form {
-	padding-left: 86px;
-}
-
-#order .content-register-form .left-side,
-#order .content-register-form .right-side {
-	width: 300px;
-	float: left;
-	zoom: 1;
-}
-
-#order .content-register-form .right-side { width: 390px; padding-top: 52px; }
-
-#order .content-register-form .left-side { margin-right: 70px; }
-
-#order .content-register-form form label,
-#order .content-register-form form input {
-	display: block;
-}
-
-#order .content-register-form form label,
-#order .content-register-form form p { margin-bottom: 3px; font-size: 14px; }
-#order .content-register-form form input { margin-bottom: 15px; width: 294px; }
-
-#order .content-register-form form label.radio,
-#order .content-register-form form .radio input,
-#order .content-register-form form label.checkbox,
-#order .content-register-form form .checkbox input,
-#order .content-register-form .register-button input {
-	display: inline-block;
-	width: auto;
-}
-#order .content-register-form form label.radio,
-#order .content-register-form form label.checkbox{
-	margin-right: 20px;
-}
-
-#order .content-register-form form p.annotation {
-	font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
-}
-
-#order .content-register-form .register-button {
-	text-align: center;
-	margin-top: 10px;
-}
-
-#order .content-register-form .register-button input {
-	width: 170px;
-}
-
-#order .content-register-form p.required-fields {
-	font-size: 12px;
-}
-
-#order .content-register-form p.cnil {
-	font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
-}
-
-#order .content-register-form a {
-	color: #4d9810;
-}
-
-#order .content-register-form a:hover { text-decoration: underline; }
-
-#order .content-register-form .sbHolder {
-    position: relative;
-    width: 300px;
-}
-#order .content-register-form .sbHolder a { text-decoration: none; color: #342110; }
-#order .content-register-form .sbOptions { width: 270px; }
-#order .content-register-form .sbSelector { width: 300px; }
-
-#order .content-register-form #from-ce { margin-bottom: 18px; display: none; }
-
-#order .content-register-form #ce-more,
-#order .content-register-form #ce-less { margin-bottom: 5px; }
-
-#order .content-register-form #come-from-ce { margin-bottom: 9px; }
 
 /* ************************************************************************************************
 		STYLE DU CHECKOUT - 2) ADRESSE DE LIVRAISON
@@ -2977,9 +2804,7 @@ ul.idTabs li {
 /* ************************************************************************************************
 		STYLE DU CHECKOUT - 3) DATE DE LIVRAISON
 ************************************************************************************************ */
-.bloc-checkout{
-	padding: 20px 20px 0px 20px;
-}
+
 #columns.page-checkout{
 	margin-bottom:0px;
 }
@@ -4425,77 +4250,127 @@ ul.idTabs li {
 	font-weight: bolder;
 }
 
-
 /* ************************************************************************************************
-		PAGE ADD ADRESS
+        PAGE mes adresses - Formulaire
 ************************************************************************************************ */
-
-form#add_adress {}
-#add_adress fieldset {
-	margin:0;
-	border:1px solid #ccc;
-	background:#F8F8F8
+/*--- FORMULAIRE ---*/
+#address #center_column {
+width: 712px;
+margin: 0 24px 0 12px;
 }
-#add_adress h3 {
-	margin:0 0 15px 0;
-	padding:8px;
-	font-size:14px;
-	color:#fff;
-	text-transform:uppercase;
-	background:url(../img/bg_form_h3.png) repeat-x 0 0 #989898
+#address .address h1{
+	margin-bottom: 0px;
 }
-#center_column #add_adress p {margin:0; padding:0 0 10px 0}
-#add_adress p.required {color:#222}
-#add_adress p.required  sup {color:#990000}
-
-#add_adress p.text label,
-#add_adress p.password label,
-#add_adress p.select label,
-#add_adress p.select span,
-#add_adress p.textarea label {
-	display:inline-block;
-	padding:6px 15px;
-	width:230px;/* 260 */
-	font-size:14px;
-	text-align:right
+#address .address .big-bloc > p{
+	margin-top: 4px;
+	margin-bottom: 15px;
 }
-#add_adress p.text input,
-#add_adress p.password input,
-#add_adress p.select input {
-	padding:0 5px;
-	height:22px;
-	width:360px;/* 370 */
-	border:1px solid #ccc;
-	font-size: 12px;
-	color:#666
+#address .address p.information{
+	border-bottom: 1px solid #342110;
+	padding-bottom: 5px;
 }
-#add_adress p.checkbox input {
-	margin-left:260px;
+#address .address .big-bloc > p.information{
+	margin-bottom: 40px;
 }
-#add_adress p.select select {
-	margin-right:10px;
-	border:1px solid #ccc;
-	font-size: 12px;
-	color:#666
+#address .address span.asterisque{
+	color: #ae2b25;
 }
-#add_adress p.textarea label {vertical-align:top}
-#add_adress p.textarea textarea {
-	height:80px;
-	width:370px;
-	border:1px solid #ccc;
-	font-size: 12px;
-	color:#666
+#address .address .big-bloc form > div{
+	float: right;
+	width: 306px;
 }
-#center_column  #add_adress p.submit2 {
-	margin-top:20px;
-	text-align:right
-}
-
-#add_adress span.form_info,
-#add_adress span.inline-infos {
+#address .address form label{
 	display:block;
-	margin:5px 0 0 265px;
-	color:#666
+}
+#address .address form label[for="address_title"]{
+	position: absolute;
+}
+#address .address form input,
+#address .address form select,
+#address .address form textarea{
+	width: 298px;
+	margin-bottom: 20px;
+}
+#address .address form input#address_title{
+	margin-top: 16px;
+}
+#address .address form input#mobile{
+	margin-bottom: 14px;
+}
+#address .address form textarea{
+	padding: 3px;
+	resize: none;
+	border: 1px solid #BCB3A9;
+	height: 70px;
+}
+#address .address form .select{
+	margin-bottom: 20px;
+}
+#address .address form .select label{
+	display:inline-block;
+	vertical-align: top;
+	padding: 5px 3px 0px 0px;
+}
+#address .address form .sbHolder{
+	font-family: 'MyriadWebPro';
+	display: inline-block;
+}
+#address .address form .sbHolder,
+#address .address form .sbSelector,
+#address .address form .sbOptions{
+	width: 95px;
+}
+#address .address form input:focus,
+#address .address form textarea:focus{
+	outline: none;
+	border: 1px solid #BA884F; 
+}
+#address .address .big-bloc form > div:first-child{
+	float: left;
+}
+#address .address .big-bloc form > div + div{
+	border-bottom: 1px solid #342110;
+}
+#address .address .big-bloc form > .action{
+	clear: both;
+	width: 100%;
+	float: none;
+	border: none;
+	display: block;
+	padding-top: 25px;
+}
+#address .address .big-bloc form > .action button{
+	padding: 8px 25px 8px 25px;
+	width: 194px;
+	margin: auto;
+	display: block;
+}
+.ie7 #address .address .big-bloc form > .action button{
+	width:220px;
+}
+#address .address .big-bloc form:after{
+	content:"";
+	display:block;
+	visibility: hidden;
+	clear: both;
+}
+.ie7 #address .address .big-bloc form{
+	overflow: auto;
+}
+#address .address .warning{
+	border: none;
+	background: none;
+	margin:0;
+	padding:0;
+}
+#address .address .warning > div{
+	margin: 50px 0px 50px 0px;
+	background: url('../img/asset/img_solo/warning.png') no-repeat 0 center;
+	padding-left: 40px;
+}
+#address .address .warning > div p{
+	margin:0;
+	color: #ae2b25;
 }
 
 /* ************************************************************************************************

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-04-18 20:38:36
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-01 01:21:11
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/discount.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:180603987551703dacea5f59-47003208%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:468002220518051e7a09f04-10341626%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '1355a38445edda6516c2528e0e6bab99a7955d6a' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/discount.tpl',
-      1 => 1361836057,
+      1 => 1367349275,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '180603987551703dacea5f59-47003208',
+  'nocache_hash' => '468002220518051e7a09f04-10341626',
   'function' => 
   array (
   ),
@@ -27,9 +27,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_51703dad135245_60502762',
+  'unifunc' => 'content_518051e7bbeac8_82136534',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51703dad135245_60502762')) {function content_51703dad135245_60502762($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_518051e7bbeac8_82136534')) {function content_518051e7bbeac8_82136534($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?>
 <?php $_smarty_tpl->_capture_stack[0][] = array('path', null, null); ob_start(); ?><a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('my-account',true);?>
 "><?php echo smartyTranslate(array('s'=>'My account'),$_smarty_tpl);?>
@@ -41,34 +41,39 @@ if (!empty($_capture_buffer)) {
  if (isset( $_capture_append)) $_smarty_tpl->append( $_capture_append, ob_get_contents());
  Smarty::$_smarty_vars['capture'][$_capture_buffer]=ob_get_clean();
 } else $_smarty_tpl->capture_error();?>
-<?php echo $_smarty_tpl->getSubTemplate (($_smarty_tpl->tpl_vars['tpl_dir']->value)."./breadcrumb.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 
+<div id="columns" class="content clearfix">
+	<div id="left_column">
+		<?php echo $_smarty_tpl->getSubTemplate ("./account-left-col.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 
-<h1><?php echo smartyTranslate(array('s'=>'My vouchers'),$_smarty_tpl);?>
+	</div><!-- / #left_column -->
+	<div id="center_column">
+		<div class="big-bloc">
+			<h1><?php echo smartyTranslate(array('s'=>'My vouchers'),$_smarty_tpl);?>
 </h1>
 
-<?php if (isset($_smarty_tpl->tpl_vars['cart_rules']->value)&&count($_smarty_tpl->tpl_vars['cart_rules']->value)&&$_smarty_tpl->tpl_vars['nb_cart_rules']->value){?>
-<table class="discount std table_block">
-	<thead>
-		<tr>
-			<th class="discount_code first_item"><?php echo smartyTranslate(array('s'=>'Code'),$_smarty_tpl);?>
+			<?php if (isset($_smarty_tpl->tpl_vars['cart_rules']->value)&&count($_smarty_tpl->tpl_vars['cart_rules']->value)&&$_smarty_tpl->tpl_vars['nb_cart_rules']->value){?>
+			<table class="discount std table_block">
+				<thead>
+					<tr>
+						<th class="discount_code first_item"><?php echo smartyTranslate(array('s'=>'Code'),$_smarty_tpl);?>
 </th>
-			<th class="discount_description item"><?php echo smartyTranslate(array('s'=>'Description'),$_smarty_tpl);?>
+						<th class="discount_description item"><?php echo smartyTranslate(array('s'=>'Description'),$_smarty_tpl);?>
 </th>
-			<th class="discount_quantity item"><?php echo smartyTranslate(array('s'=>'Quantity'),$_smarty_tpl);?>
+						<th class="discount_quantity item"><?php echo smartyTranslate(array('s'=>'Quantity'),$_smarty_tpl);?>
 </th>
-			<th class="discount_value item"><?php echo smartyTranslate(array('s'=>'Value'),$_smarty_tpl);?>
+						<th class="discount_value item"><?php echo smartyTranslate(array('s'=>'Value'),$_smarty_tpl);?>
 *</th>
-			<th class="discount_minimum item"><?php echo smartyTranslate(array('s'=>'Minimum'),$_smarty_tpl);?>
+						<th class="discount_minimum item"><?php echo smartyTranslate(array('s'=>'Minimum'),$_smarty_tpl);?>
 </th>
-			<th class="discount_cumulative item"><?php echo smartyTranslate(array('s'=>'Cumulative'),$_smarty_tpl);?>
+						<th class="discount_cumulative item"><?php echo smartyTranslate(array('s'=>'Cumulative'),$_smarty_tpl);?>
 </th>
-			<th class="discount_expiration_date last_item"><?php echo smartyTranslate(array('s'=>'Expiration date'),$_smarty_tpl);?>
+						<th class="discount_expiration_date last_item"><?php echo smartyTranslate(array('s'=>'Expiration date'),$_smarty_tpl);?>
 </th>
-		</tr>
-	</thead>
-	<tbody>
-	<?php  $_smarty_tpl->tpl_vars['discountDetail'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['discountDetail']->_loop = false;
+					</tr>
+				</thead>
+				<tbody>
+				<?php  $_smarty_tpl->tpl_vars['discountDetail'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['discountDetail']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['cart_rules']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
  $_smarty_tpl->tpl_vars['discountDetail']->total= $_smarty_tpl->_count($_from);
  $_smarty_tpl->tpl_vars['discountDetail']->iteration=0;
@@ -84,72 +89,75 @@ $_smarty_tpl->tpl_vars['discountDetail']->_loop = true;
  $_smarty_tpl->tpl_vars['smarty']->value['foreach']['myLoop']['index']++;
  $_smarty_tpl->tpl_vars['smarty']->value['foreach']['myLoop']['last'] = $_smarty_tpl->tpl_vars['discountDetail']->last;
 ?>
-		<tr class="<?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['myLoop']['first']){?>first_item<?php }elseif($_smarty_tpl->getVariable('smarty')->value['foreach']['myLoop']['last']){?>last_item<?php }else{ ?>item<?php }?> <?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['myLoop']['index']%2){?>alternate_item<?php }?>">
-			<td class="discount_code"><?php echo $_smarty_tpl->tpl_vars['discountDetail']->value['code'];?>
+					<tr class="<?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['myLoop']['first']){?>first_item<?php }elseif($_smarty_tpl->getVariable('smarty')->value['foreach']['myLoop']['last']){?>last_item<?php }else{ ?>item<?php }?> <?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['myLoop']['index']%2){?>alternate_item<?php }?>">
+						<td class="discount_code"><?php echo $_smarty_tpl->tpl_vars['discountDetail']->value['code'];?>
 </td>
-			<td class="discount_description"><?php echo $_smarty_tpl->tpl_vars['discountDetail']->value['name'];?>
+						<td class="discount_description"><?php echo $_smarty_tpl->tpl_vars['discountDetail']->value['name'];?>
 </td>
-			<td class="discount_quantity"><?php echo $_smarty_tpl->tpl_vars['discountDetail']->value['quantity_for_user'];?>
+						<td class="discount_quantity"><?php echo $_smarty_tpl->tpl_vars['discountDetail']->value['quantity_for_user'];?>
 </td>
-			<td class="discount_value">
-				<?php if ($_smarty_tpl->tpl_vars['discountDetail']->value['id_discount_type']==1){?>
-					<?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['discountDetail']->value['value'], 'htmlall', 'UTF-8');?>
+						<td class="discount_value">
+							<?php if ($_smarty_tpl->tpl_vars['discountDetail']->value['id_discount_type']==1){?>
+								<?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['discountDetail']->value['value'], 'htmlall', 'UTF-8');?>
 %
-				<?php }elseif($_smarty_tpl->tpl_vars['discountDetail']->value['id_discount_type']==2){?>
-					<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['convertPrice'][0][0]->convertPrice(array('price'=>$_smarty_tpl->tpl_vars['discountDetail']->value['value']),$_smarty_tpl);?>
+							<?php }elseif($_smarty_tpl->tpl_vars['discountDetail']->value['id_discount_type']==2){?>
+								<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['convertPrice'][0][0]->convertPrice(array('price'=>$_smarty_tpl->tpl_vars['discountDetail']->value['value']),$_smarty_tpl);?>
 
-				<?php }elseif($_smarty_tpl->tpl_vars['discountDetail']->value['id_discount_type']==3){?>
-					<?php echo smartyTranslate(array('s'=>'Free shipping'),$_smarty_tpl);?>
+							<?php }elseif($_smarty_tpl->tpl_vars['discountDetail']->value['id_discount_type']==3){?>
+								<?php echo smartyTranslate(array('s'=>'Free shipping'),$_smarty_tpl);?>
 
-				<?php }else{ ?>
-					-
-				<?php }?>
-			</td>
-			<td class="discount_minimum">
-				<?php if ($_smarty_tpl->tpl_vars['discountDetail']->value['minimal']==0){?>
-					<?php echo smartyTranslate(array('s'=>'None'),$_smarty_tpl);?>
+							<?php }else{ ?>
+								-
+							<?php }?>
+						</td>
+						<td class="discount_minimum">
+							<?php if ($_smarty_tpl->tpl_vars['discountDetail']->value['minimal']==0){?>
+								<?php echo smartyTranslate(array('s'=>'None'),$_smarty_tpl);?>
 
-				<?php }else{ ?>
-					<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['convertPrice'][0][0]->convertPrice(array('price'=>$_smarty_tpl->tpl_vars['discountDetail']->value['minimal']),$_smarty_tpl);?>
+							<?php }else{ ?>
+								<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['convertPrice'][0][0]->convertPrice(array('price'=>$_smarty_tpl->tpl_vars['discountDetail']->value['minimal']),$_smarty_tpl);?>
 
-				<?php }?>
-			</td>
-			<td class="discount_cumulative">
-				<?php if ($_smarty_tpl->tpl_vars['discountDetail']->value['cumulable']==1){?>
-					<img src="<?php echo $_smarty_tpl->tpl_vars['img_dir']->value;?>
+							<?php }?>
+						</td>
+						<td class="discount_cumulative">
+							<?php if ($_smarty_tpl->tpl_vars['discountDetail']->value['cumulable']==1){?>
+								<img src="<?php echo $_smarty_tpl->tpl_vars['img_dir']->value;?>
 icon/yes.gif" alt="<?php echo smartyTranslate(array('s'=>'Yes'),$_smarty_tpl);?>
 " class="icon" /> <?php echo smartyTranslate(array('s'=>'Yes'),$_smarty_tpl);?>
 
-				<?php }else{ ?>
-					<img src="<?php echo $_smarty_tpl->tpl_vars['img_dir']->value;?>
+							<?php }else{ ?>
+								<img src="<?php echo $_smarty_tpl->tpl_vars['img_dir']->value;?>
 icon/no.gif" alt="<?php echo smartyTranslate(array('s'=>'No'),$_smarty_tpl);?>
 " class="icon" valign="middle" /> <?php echo smartyTranslate(array('s'=>'No'),$_smarty_tpl);?>
 
-				<?php }?>
-			</td>
-			<td class="discount_expiration_date"><?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['dateFormat'][0][0]->dateFormat(array('date'=>$_smarty_tpl->tpl_vars['discountDetail']->value['date_to']),$_smarty_tpl);?>
+							<?php }?>
+						</td>
+						<td class="discount_expiration_date"><?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['dateFormat'][0][0]->dateFormat(array('date'=>$_smarty_tpl->tpl_vars['discountDetail']->value['date_to']),$_smarty_tpl);?>
 </td>
-		</tr>
-	<?php } ?>
-	</tbody>
-</table>
-<p>
-	*<?php echo smartyTranslate(array('s'=>'Tax included'),$_smarty_tpl);?>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+			<p>
+				*<?php echo smartyTranslate(array('s'=>'Tax included'),$_smarty_tpl);?>
 
+			</p>
+			<?php }else{ ?>
+				<p class="warning"><?php echo smartyTranslate(array('s'=>'You do not have any vouchers.'),$_smarty_tpl);?>
 </p>
-<?php }else{ ?>
-	<p class="warning"><?php echo smartyTranslate(array('s'=>'You do not have any vouchers.'),$_smarty_tpl);?>
-</p>
-<?php }?>
+			<?php }?>
 
-<ul class="footer_links">
-	<li><a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('my-account',true);?>
+			<ul class="footer_links">
+				<li><a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('my-account',true);?>
 "><img src="<?php echo $_smarty_tpl->tpl_vars['img_dir']->value;?>
 icon/my-account.gif" alt="" class="icon" /> <?php echo smartyTranslate(array('s'=>'Back to your account'),$_smarty_tpl);?>
 </a></li>
-	<li class="f_right"><a href="<?php echo $_smarty_tpl->tpl_vars['base_dir']->value;?>
+				<li class="f_right"><a href="<?php echo $_smarty_tpl->tpl_vars['base_dir']->value;?>
 "><img src="<?php echo $_smarty_tpl->tpl_vars['img_dir']->value;?>
 icon/home.gif" alt="" class="icon" /> <?php echo smartyTranslate(array('s'=>'Home'),$_smarty_tpl);?>
 </a></li>
-</ul>
-<?php }} ?>
+			</ul>
+			
+		</div>
+	</div><!-- / #center_column -->
+</div><!-- / .content --><?php }} ?>

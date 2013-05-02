@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-04-29 19:01:27
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-02 13:57:12
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/category-rightcol.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2024885075517ea767644f84-40963886%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:244554537518254980d4cd2-80050843%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2024885075517ea767644f84-40963886',
+  'nocache_hash' => '244554537518254980d4cd2-80050843',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_517ea76765f428_35266088',
+  'unifunc' => 'content_518254980e6768_76376584',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_517ea76765f428_35266088')) {function content_517ea76765f428_35266088($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_518254980e6768_76376584')) {function content_518254980e6768_76376584($_smarty_tpl) {?>
 <?php echo $_smarty_tpl->tpl_vars['HOOK_RIGHT_COLUMN']->value;?>
 
 <div class="small-bloc frais-livraison">

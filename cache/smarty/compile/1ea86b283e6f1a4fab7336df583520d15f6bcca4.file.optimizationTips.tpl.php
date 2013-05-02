@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-04-29 22:12:25
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-02 13:54:13
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/administration/themes/default/template/controllers/home/optimizationTips.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1902065959517ed429c63909-75157236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:924123394518253e5671121-10529567%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1902065959517ed429c63909-75157236',
+  'nocache_hash' => '924123394518253e5671121-10529567',
   'function' => 
   array (
   ),
@@ -24,9 +24,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_517ed429cd4969_66955426',
+  'unifunc' => 'content_518253e5736d86_34449436',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_517ed429cd4969_66955426')) {function content_517ed429cd4969_66955426($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_518253e5736d86_34449436')) {function content_518253e5736d86_34449436($_smarty_tpl) {?>
 <div class="admin-box1">
 <h5><?php echo smartyTranslate(array('s'=>'Configuration checklist'),$_smarty_tpl);?>
 

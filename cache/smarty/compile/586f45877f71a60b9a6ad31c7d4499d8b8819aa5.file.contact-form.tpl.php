@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-04-18 20:32:47
+<?php /* Smarty version Smarty-3.1.8, created on 2013-04-30 18:09:12
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/contact-form.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:156643643751703c4f012cf2-28783920%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1459608446517feca8c9f607-74506120%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '586f45877f71a60b9a6ad31c7d4499d8b8819aa5' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/contact-form.tpl',
-      1 => 1365036865,
+      1 => 1367338148,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '156643643751703c4f012cf2-28783920',
+  'nocache_hash' => '1459608446517feca8c9f607-74506120',
   'function' => 
   array (
   ),
@@ -39,9 +39,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_51703c4f3b5846_84731886',
+  'unifunc' => 'content_517feca90b9662_49525704',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51703c4f3b5846_84731886')) {function content_51703c4f3b5846_84731886($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_517feca90b9662_49525704')) {function content_517feca90b9662_49525704($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?>
 
 <?php $_smarty_tpl->_capture_stack[0][] = array('path', null, null); ob_start(); ?><?php echo smartyTranslate(array('s'=>'Contact'),$_smarty_tpl);?>
@@ -53,7 +53,7 @@ if (!empty($_capture_buffer)) {
 } else $_smarty_tpl->capture_error();?>
 
 <div id="columns" class="content clearfix">
-	<div id="center_column">
+	<div id="center_column" class="presse">
 		<div class="big-bloc clearfix">
 			<h1><?php echo smartyTranslate(array('s'=>'Customer Service'),$_smarty_tpl);?>
  - <?php if (isset($_smarty_tpl->tpl_vars['customerThread']->value)&&$_smarty_tpl->tpl_vars['customerThread']->value){?><?php echo smartyTranslate(array('s'=>'Your reply'),$_smarty_tpl);?>
