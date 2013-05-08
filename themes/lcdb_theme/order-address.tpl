@@ -314,6 +314,7 @@
 					</ul>
 				</div>
 			</div>
+			<input type="submit" value="etape suivante" />
 		</form>
 	</div>
 </div>

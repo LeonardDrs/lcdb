@@ -6,7 +6,7 @@
 			<div class="content-checkout">
 				<h1>Date de livraison</h1>
 				<div class="bloc-time">
-					<form method="get" id="date-livraison">
+					<form action="{$link->getPageLink('order', true, NULL)}" method="post" id="date-livraison">
 						<p>Choisissez votre date de livraison:</p>
 						<div id="selected-date-hours">
 							<div id="selected-date">

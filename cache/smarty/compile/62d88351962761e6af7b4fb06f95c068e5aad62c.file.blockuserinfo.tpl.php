@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-02 13:57:10
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-07 13:04:45
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/modules/blockuserinfo/blockuserinfo.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1075408000518254961c6790-85418387%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3640358525188dfcdaf8231-43582819%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '62d88351962761e6af7b4fb06f95c068e5aad62c' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/modules/blockuserinfo/blockuserinfo.tpl',
-      1 => 1367338457,
+      1 => 1367503169,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1075408000518254961c6790-85418387',
+  'nocache_hash' => '3640358525188dfcdaf8231-43582819',
   'function' => 
   array (
   ),
@@ -27,38 +27,43 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_5182549629c9b8_57661117',
+  'unifunc' => 'content_5188dfcdbc77b1_27626489',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5182549629c9b8_57661117')) {function content_5182549629c9b8_57661117($_smarty_tpl) {?><div class="register-basket">
-	<div id="connection-register">
-		<?php if (!$_smarty_tpl->tpl_vars['logged']->value){?>
-			<a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('my-account',true);?>
+<?php if ($_valid && !is_callable('content_5188dfcdbc77b1_27626489')) {function content_5188dfcdbc77b1_27626489($_smarty_tpl) {?><div class="register-basket clearfix">
+	<div class="user-block">
+		<div id="connection-register">
+			<?php if (!$_smarty_tpl->tpl_vars['logged']->value){?>
+				<a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('my-account',true);?>
 " title="se connecter">Connexion</a> / <a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('authentification',true);?>
 " title="s'inscrire">Inscription</a>
-		<?php }else{ ?>
-			<a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('my-account',true);?>
+			<?php }else{ ?>
+				<a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('my-account',true);?>
 " title="mon compte">Mon compte</a> /
-			<a href="<?php echo $_smarty_tpl->tpl_vars['base_dir']->value;?>
+				<a href="<?php echo $_smarty_tpl->tpl_vars['base_dir']->value;?>
 ?logout" title="mon compte">Déconnexion</a>
-		<?php }?>
-	</div>
-	<div id="basket">
-		<span class="illustration"></span>
-		<p>Panier (
-			<span class="price ajax_cart_total<?php if ($_smarty_tpl->tpl_vars['cart_qties']->value==0){?><?php }?>">
-				<?php if ($_smarty_tpl->tpl_vars['cart_qties']->value>0){?>
-					<?php if ($_smarty_tpl->tpl_vars['priceDisplay']->value==1){?>
-						<?php $_smarty_tpl->tpl_vars['blockuser_cart_flag'] = new Smarty_variable(constant('Cart::BOTH_WITHOUT_SHIPPING'), null, 0);?>
-						<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['convertPrice'][0][0]->convertPrice(array('price'=>$_smarty_tpl->tpl_vars['cart']->value->getOrderTotal(false,$_smarty_tpl->tpl_vars['blockuser_cart_flag']->value)),$_smarty_tpl);?>
+			<?php }?>
+		</div>
+		<div id="basket">
+			<span class="illustration"></span>
+			<p><a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('order',true);?>
+">Panier (
+				<span class="price ajax_cart_total<?php if ($_smarty_tpl->tpl_vars['cart_qties']->value==0){?><?php }?>">
+					<?php if ($_smarty_tpl->tpl_vars['cart_qties']->value>0){?>
+						<?php if ($_smarty_tpl->tpl_vars['priceDisplay']->value==1){?>
+							<?php $_smarty_tpl->tpl_vars['blockuser_cart_flag'] = new Smarty_variable(constant('Cart::BOTH_WITHOUT_SHIPPING'), null, 0);?>
+							<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['convertPrice'][0][0]->convertPrice(array('price'=>$_smarty_tpl->tpl_vars['cart']->value->getOrderTotal(false,$_smarty_tpl->tpl_vars['blockuser_cart_flag']->value)),$_smarty_tpl);?>
 
+						<?php }else{ ?>
+							<?php $_smarty_tpl->tpl_vars['blockuser_cart_flag'] = new Smarty_variable(constant('Cart::BOTH_WITHOUT_SHIPPING'), null, 0);?>
+							<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['convertPrice'][0][0]->convertPrice(array('price'=>$_smarty_tpl->tpl_vars['cart']->value->getOrderTotal(true,$_smarty_tpl->tpl_vars['blockuser_cart_flag']->value)),$_smarty_tpl);?>
+
+						<?php }?>
 					<?php }else{ ?>
-						<?php $_smarty_tpl->tpl_vars['blockuser_cart_flag'] = new Smarty_variable(constant('Cart::BOTH_WITHOUT_SHIPPING'), null, 0);?>
-						<?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['convertPrice'][0][0]->convertPrice(array('price'=>$_smarty_tpl->tpl_vars['cart']->value->getOrderTotal(true,$_smarty_tpl->tpl_vars['blockuser_cart_flag']->value)),$_smarty_tpl);?>
-
+						vide
 					<?php }?>
-				<?php }?>
-			</span>
-		)</p>
+				</span>
+			)</a></p>
+		</div>
 	</div>
 </div>
 <?php }} ?>

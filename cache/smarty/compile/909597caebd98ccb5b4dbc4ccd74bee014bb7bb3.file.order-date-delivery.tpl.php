@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-04-30 21:17:28
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-02 14:24:11
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/order-date-delivery.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1367734758518018c8866d00-43923871%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:196275490751825aebae0423-81281747%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '909597caebd98ccb5b4dbc4ccd74bee014bb7bb3' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/order-date-delivery.tpl',
-      1 => 1366306659,
+      1 => 1367497252,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1367734758518018c8866d00-43923871',
+  'nocache_hash' => '196275490751825aebae0423-81281747',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_518018c8890197_56218812',
+  'unifunc' => 'content_51825aebb2ba91_66075519',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_518018c8890197_56218812')) {function content_518018c8890197_56218812($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_51825aebb2ba91_66075519')) {function content_51825aebb2ba91_66075519($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?><div id="columns" class="content clearfix">
 	<div class="bloc-checkout">
 			<?php echo $_smarty_tpl->getSubTemplate ("./order-steps.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
@@ -35,7 +35,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			<div class="content-checkout">
 				<h1>Date de livraison</h1>
 				<div class="bloc-time">
-					<form method="get" id="date-livraison">
+					<form action="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('order',true,null);?>
+" method="post" id="date-livraison">
 						<p>Choisissez votre date de livraison:</p>
 						<div id="selected-date-hours">
 							<div id="selected-date">
