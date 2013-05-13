@@ -586,6 +586,7 @@ product_tabs['Prices'] = new function(){
 
 product_tabs['Associations'] = new function(){
 	var self = this;
+	
 	this.initAccessoriesAutocomplete = function (){
 		$('#product_autocomplete_input')
 			.autocomplete('ajax_products_list.php', {
@@ -678,6 +679,99 @@ product_tabs['Associations'] = new function(){
 			extraParams: {excludeIds : self.getAccessoriesIds()}
 		});
 	};
+	
+	this.initRecipesAutocomplete = function (){
+		$('#recipe_autocomplete_input')
+			.autocomplete('ajax_recipes_list.php', {
+				minChars: 1,
+				autoFill: true,
+				max:20,
+				matchContains: true,
+				mustMatch:true,
+				scroll:false,
+				cacheLength:0,
+				formatItem: function(item) {
+					return item[1]+' - '+item[0];
+				}
+			}).result(self.addRecipe);
+
+		$('#recipe_autocomplete_input').setOptions({
+			extraParams: {
+				excludeIds : self.getRecipesIds()
+			}
+		});
+	};
+
+	this.getRecipesIds = function()
+	{
+		if ($('#inputRecipes').val() === undefined)
+			return '';
+		var ids = 'id_recipe' + ',';
+		ids += $('#inputRecipes').val().replace(/\\-/g,',').replace(/\\,$/,'');
+		ids = ids.replace(/\,$/,'');
+
+		return ids;
+	}
+
+	this.addRecipe = function(event, data, formatted)
+	{
+		if (data == null)
+			return false;
+		var recipeId = data[1];
+		var recipeName = data[0];
+
+		var $divRecipes = $('#divRecipes');
+		var $inputRecipes = $('#inputRecipes');
+		var $nameRecipes = $('#nameRecipes');
+
+		/* delete recipe from select + add recipe line to the div, input_name, input_ids elements */
+		$divRecipes.html($divRecipes.html() + recipeName + ' <span class="delRecipe" name="' + recipeId + '" style="cursor: pointer;"><img src="../img/admin/delete.gif" /></span><br />');
+		$nameRecipes.val($nameRecipes.val() + recipeName + '¤');
+		$inputRecipes.val($inputRecipes.val() + RecipeId + '-');
+		$('#recipe_autocomplete_input').val('');
+		$('#recipe_autocomplete_input').setOptions({
+			extraParams: {excludeIds : self.getRecipesIds()}
+		});
+	};
+
+	this.delRecipe = function(id)
+	{
+		var div = getE('divRecipes');
+		var input = getE('inputRecipes');
+		var name = getE('nameRecipes');
+
+		// Cut hidden fields in array
+		var inputCut = input.value.split('-');
+		var nameCut = name.value.split('¤');
+
+		if (inputCut.length != nameCut.length)
+			return jAlert('Bad size');
+
+		// Reset all hidden fields
+		input.value = '';
+		name.value = '';
+		div.innerHTML = '';
+		for (i in inputCut)
+		{
+			// If empty, error, next
+			if (!inputCut[i] || !nameCut[i])
+				continue ;
+
+			// Add to hidden fields no selected products OR add to select field selected product
+			if (inputCut[i] != id)
+			{
+				input.value += inputCut[i] + '-';
+				name.value += nameCut[i] + '¤';
+				div.innerHTML += nameCut[i] + ' <span class="delRecipe" name="' + inputCut[i] + '" style="cursor: pointer;"><img src="../img/admin/delete.gif" /></span><br />';
+			}
+			else
+				$('#selectRecipes').append('<option selected="selected" value="' + inputCut[i] + '-' + nameCut[i] + '">' + inputCut[i] + ' - ' + nameCut[i] + '</option>');
+		}
+
+		$('#recipe_autocomplete_input').setOptions({
+			extraParams: {excludeIds : self.getRecipesIds()}
+		});
+	};
 
 	/**
 	 * Update the manufacturer select element with the list of existing manufacturers
@@ -710,11 +804,14 @@ product_tabs['Associations'] = new function(){
 
 	this.onReady = function(){
 		self.initAccessoriesAutocomplete();
+		self.initRecipesAutocomplete();
 		self.getManufacturers();
 		$('#divAccessories').delegate('.delAccessory', 'click', function(){
 			self.delAccessory($(this).attr('name'));
 		});
-
+		$('#divRecipes').delegate('.delRecipe', 'click', function(){
+			self.delAccessory($(this).attr('name'));
+		});
 		if (display_multishop_checkboxes)
 			ProductMultishop.checkAllAssociations();
 	};

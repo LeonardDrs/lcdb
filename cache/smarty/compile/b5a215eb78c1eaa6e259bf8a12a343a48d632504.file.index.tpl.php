@@ -1,30 +1,33 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-06 21:02:45
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-12 22:53:41
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:8482216355187fe5534cc38-03772508%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:84436919551900155e184a8-76961787%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'b5a215eb78c1eaa6e259bf8a12a343a48d632504' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/index.tpl',
-      1 => 1367265356,
+      1 => 1368369929,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '8482216355187fe5534cc38-03772508',
+  'nocache_hash' => '84436919551900155e184a8-76961787',
   'function' => 
   array (
   ),
   'variables' => 
   array (
     'HOOK_HOME' => 0,
+    'link' => 0,
+    'messages' => 0,
+    'content' => 0,
     'base_dir' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_5187fe5535e966_73351232',
+  'unifunc' => 'content_51900155e825b1_39032826',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5187fe5535e966_73351232')) {function content_5187fe5535e966_73351232($_smarty_tpl) {?><div class="content clearfix">
+<?php if ($_valid && !is_callable('content_51900155e825b1_39032826')) {function content_51900155e825b1_39032826($_smarty_tpl) {?><div class="content clearfix">
 	<?php echo $_smarty_tpl->tpl_vars['HOOK_HOME']->value;?>
 
 	<div class="content-infos-site">
@@ -37,21 +40,33 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<li class="livraison">Votre <span class="color">livraison</span><span class="illustration"></span></li>
 			</ul>
 			<div class="clearfix"></div>
-			<a href="#" title="En savoir plus sur notre démarche">
+			<a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getCMSLink(13);?>
+" title="En savoir plus sur notre démarche">
 				&rarr;<span> En savoir plus sur notre démarche</span>
 			</a>
 		</div>
 		<div class="entries-and-blog">
 			<div class="entries">
 				<h2>Livre d'or</h2>
-				<p><span>&laquo;</span> Les suprêmes étaient excellents. Je vous remercie de votre 
-				extrême attention aux gens et à ce que vous faites, que vous faites fort
-				bien, c'est assez rare donc je vous le dis et vous en remercie. <span>&raquo;</span></p>
-				<p class="signature">Joëlle B., Fabrègues, Hérault</p>
-				<a href="#" title="Voir tous les commentaires">
+				<?php  $_smarty_tpl->tpl_vars['content'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['content']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['messages']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['content']->key => $_smarty_tpl->tpl_vars['content']->value){
+$_smarty_tpl->tpl_vars['content']->_loop = true;
+?>
+					<p><span>&laquo;</span><?php echo $_smarty_tpl->tpl_vars['content']->value['message'];?>
+<span>&raquo;</span></p>
+					<p class="signature"><?php echo $_smarty_tpl->tpl_vars['content']->value['firstname'];?>
+ <?php echo $_smarty_tpl->tpl_vars['content']->value['lastname'];?>
+, <?php echo $_smarty_tpl->tpl_vars['content']->value['city'];?>
+</p>
+					<?php break 1?>
+				<?php } ?>
+				<a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('guestbook');?>
+" title="Voir tous les commentaires">
 					&rarr;<span> Voir tous les commentaires</span>
 				</a>
-				<a href="#" title="Laisser un commentaire">
+				<a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getPageLink('guestbook');?>
+#button-witness" title="Laisser un commentaire">
 					&rarr;<span> Laisser un commentaire</span>
 				</a>
 			</div>

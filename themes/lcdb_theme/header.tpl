@@ -120,6 +120,7 @@
 								{/foreach}
 								<li><a href="{$base_dir}index.php?controller=delivery">Livraison</a></li>
 								<li><a href="{$base_dir}index.php?controller=post">Presse</a></li>
+								<li><a href="{$base_dir}index.php?controller=guestbook">Livre d'or</a></li>
 								<li class="last"><a href="{$link->getCMSCategoryLink(7)}">Question fréquentes</a></li>
 							</ul>
 						</li>

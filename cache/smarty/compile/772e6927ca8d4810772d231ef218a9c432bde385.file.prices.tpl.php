@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-06 20:51:32
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-10 15:51:03
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/administration/themes/default/template/controllers/products/prices.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:5763694295187fbb4620923-95381483%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2102475938518cfb47ae5922-84700990%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '772e6927ca8d4810772d231ef218a9c432bde385' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/administration/themes/default/template/controllers/products/prices.tpl',
-      1 => 1361836056,
+      1 => 1368189219,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '5763694295187fbb4620923-95381483',
+  'nocache_hash' => '2102475938518cfb47ae5922-84700990',
   'function' => 
   array (
   ),
@@ -21,6 +21,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ecotax_tax_excl' => 0,
     'currency' => 0,
     'product' => 0,
+    'gap' => 0,
     'tax_exclude_taxe_option' => 0,
     'tax_rules_groups' => 0,
     'tax_rules_group' => 0,
@@ -46,9 +47,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_5187fbb4c9b865_80576166',
+  'unifunc' => 'content_518cfb4825d265_96964261',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5187fbb4c9b865_80576166')) {function content_5187fbb4c9b865_80576166($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_518cfb4825d265_96964261')) {function content_518cfb4825d265_96964261($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?>
 
 <script type="text/javascript">
@@ -192,6 +193,23 @@ $(document).ready(function () {
 </p>
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="col-left">
+			<?php echo $_smarty_tpl->getSubTemplate ("controllers/products/multishop/checkbox.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('field'=>"price",'type'=>"price"), 0);?>
+
+			<label><?php echo smartyTranslate(array('s'=>'Gap:'),$_smarty_tpl);?>
+</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<p class="preference_description" style="margin: 0; color: #585a69; font-size: 13px; line-height: 17px; font-style: normal; font-family: Arial;"><strong><?php ob_start();?><?php echo $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['toolsConvertPrice'][0][0]->toolsConvertPrice(array('price'=>$_smarty_tpl->tpl_vars['gap']->value),$_smarty_tpl);?>
+<?php $_tmp3=ob_get_clean();?><?php echo sprintf('%.2f',$_tmp3);?>
+ <?php echo $_smarty_tpl->tpl_vars['currency']->value->suffix;?>
+</strong> (<?php echo smartyTranslate(array('s'=>'Between the wholesale price and the retail price'),$_smarty_tpl);?>
+)</p>
+		</td>
+	</tr>
+	
 	<tr>
 		<td class="col-left">
 			<?php echo $_smarty_tpl->getSubTemplate ("controllers/products/multishop/checkbox.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('field'=>"id_tax_rules_group",'type'=>"default"), 0);?>

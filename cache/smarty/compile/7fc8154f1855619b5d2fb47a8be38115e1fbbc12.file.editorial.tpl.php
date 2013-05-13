@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-06 21:02:44
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-12 22:53:41
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/modules/editorial/editorial.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:3598031285187fe54de6145-34913838%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:173783332851900155c135c5-03322782%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '7fc8154f1855619b5d2fb47a8be38115e1fbbc12' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/modules/editorial/editorial.tpl',
-      1 => 1367266441,
+      1 => 1368368209,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '3598031285187fe54de6145-34913838',
+  'nocache_hash' => '173783332851900155c135c5-03322782',
   'function' => 
   array (
   ),
@@ -26,9 +26,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_5187fe54e4d111_33493941',
+  'unifunc' => 'content_51900155c884b3_62756762',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5187fe54e4d111_33493941')) {function content_5187fe54e4d111_33493941($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_51900155c884b3_62756762')) {function content_51900155c884b3_62756762($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+?>
 <div class="order-meat-message">
 	<div class="cow">
 		<span class="clip"></span>
@@ -63,7 +64,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		</div>
 	</div>
 	<div class="order-meat">
-		<a href="#" title="Commander nos viandes"><span></span>Commander nos viandes<span></span></a>
+		<a href="<?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['link']->value->getCategoryLink(3), 'htmlall', 'UTF-8');?>
+" title="Commander nos viandes"><span></span>Commander nos viandes<span></span></a>
 	</div>
 </div>
 <?php }} ?>

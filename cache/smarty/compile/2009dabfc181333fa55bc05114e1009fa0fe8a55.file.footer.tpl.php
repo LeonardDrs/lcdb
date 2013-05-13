@@ -1,29 +1,31 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-07 13:04:47
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-12 22:55:55
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:14557679625188dfcfc6feb8-66547712%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:428811984519001dbbb2185-62916214%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '2009dabfc181333fa55bc05114e1009fa0fe8a55' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/footer.tpl',
-      1 => 1364843001,
+      1 => 1368369988,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '14557679625188dfcfc6feb8-66547712',
+  'nocache_hash' => '428811984519001dbbb2185-62916214',
   'function' => 
   array (
   ),
   'variables' => 
   array (
     'content_only' => 0,
+    'link' => 0,
+    'HOOK_FOOTER' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_5188dfcfc88f81_30840083',
+  'unifunc' => 'content_519001dbbe5305_08414922',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5188dfcfc88f81_30840083')) {function content_5188dfcfc88f81_30840083($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_519001dbbe5305_08414922')) {function content_519001dbbe5305_08414922($_smarty_tpl) {?>
 
 	<?php if (!$_smarty_tpl->tpl_vars['content_only']->value){?>
 			<footer>
@@ -53,7 +55,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 								</a>
 							</li>
 							<li class="faq">
-								<a href="#" title="Consulter la foire aux questions">
+								<a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getCMSCategoryLink(7);?>
+" title="Consulter la foire aux questions">
 									<span class="illustration"></span>
 									<span class="push">Foire aux questions</span>
 									<span class="cta">découvrir</span>
@@ -72,18 +75,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 						</form>
 					</div>
 					<nav class="add-link">
-						<ul class="footer-link">
-							<li><a href="#" title="Espace Pro">Espace Pro</a></li>
-							<li><a href="#" title="Plan du site">Plan du site</a></li>
-							<li><a href="#" title="CGV">CGV</a></li>
-							<li><a href="#" title="Mentions légales">Mentions légales</a></li>
-							<li><a href="#" title="Partenaires">Partenaires</a></li>
-							<li><a href="#" title="Contact">Contact</a></li>
-						</ul>
-						<ul class="presse-fb">
-							<li class="presse"><a href="#" title="La presse parle de nous"><span></span>La presse parle de nous</a></li>
-							<li class="facebook"><a href="#" title="Aller sur notre page Facebook"><span></span>Suivez-nous sur Facebook</a></li>
-						</ul>
+						<?php echo $_smarty_tpl->tpl_vars['HOOK_FOOTER']->value;?>
+
 					</nav>
 					<div class="clearfix"></div>
 					<nav class="seo-link">

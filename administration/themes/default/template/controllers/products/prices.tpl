@@ -137,6 +137,17 @@ $(document).ready(function () {
 			<p class="preference_description">{l s='The pre-tax retail price to sell this product'}</p>
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="col-left">
+			{include file="controllers/products/multishop/checkbox.tpl" field="price" type="price"}
+			<label>{l s='Gap:'}</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<p class="preference_description" style="margin: 0; color: #585a69; font-size: 13px; line-height: 17px; font-style: normal; font-family: Arial;"><strong>{{toolsConvertPrice price=$gap}|string_format:'%.2f'} {$currency->suffix}</strong> ({l s='Between the wholesale price and the retail price'})</p>
+		</td>
+	</tr>
+	
 	<tr>
 		<td class="col-left">
 			{include file="controllers/products/multishop/checkbox.tpl" field="id_tax_rules_group" type="default"}

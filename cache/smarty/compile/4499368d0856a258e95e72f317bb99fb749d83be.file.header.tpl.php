@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-07 13:04:47
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-12 22:55:55
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:4451079145188dfcf854ee9-60368585%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:443897243519001db7b1e93-36400484%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '4499368d0856a258e95e72f317bb99fb749d83be' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/header.tpl',
-      1 => 1367264491,
+      1 => 1368368124,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4451079145188dfcf854ee9-60368585',
+  'nocache_hash' => '443897243519001db7b1e93-36400484',
   'function' => 
   array (
   ),
@@ -58,9 +58,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_5188dfcfb780b2_97485697',
+  'unifunc' => 'content_519001dbab68f1_17785452',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5188dfcfb780b2_97485697')) {function content_5188dfcfb780b2_97485697($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_519001dbab68f1_17785452')) {function content_519001dbab68f1_17785452($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 lt-ie6 " lang="en"> <![endif]-->
@@ -283,6 +283,8 @@ $_smarty_tpl->tpl_vars['page']->_loop = true;
 index.php?controller=delivery">Livraison</a></li>
 								<li><a href="<?php echo $_smarty_tpl->tpl_vars['base_dir']->value;?>
 index.php?controller=post">Presse</a></li>
+								<li><a href="<?php echo $_smarty_tpl->tpl_vars['base_dir']->value;?>
+index.php?controller=guestbook">Livre d'or</a></li>
 								<li class="last"><a href="<?php echo $_smarty_tpl->tpl_vars['link']->value->getCMSCategoryLink(7);?>
 ">Question fréquentes</a></li>
 							</ul>

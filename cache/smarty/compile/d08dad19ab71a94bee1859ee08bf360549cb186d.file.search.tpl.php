@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-04-30 18:12:18
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-12 16:09:18
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/search.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1475793021517fed622433c0-26571088%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2035530463518fa28e81d517-45148090%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd08dad19ab71a94bee1859ee08bf360549cb186d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/search.tpl',
-      1 => 1367338335,
+      1 => 1367338399,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1475793021517fed622433c0-26571088',
+  'nocache_hash' => '2035530463518fa28e81d517-45148090',
   'function' => 
   array (
   ),
@@ -26,9 +26,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_517fed623eab85_08989011',
+  'unifunc' => 'content_518fa28e9d0b37_16053903',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_517fed623eab85_08989011')) {function content_517fed623eab85_08989011($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_518fa28e9d0b37_16053903')) {function content_518fa28e9d0b37_16053903($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?>
 <?php $_smarty_tpl->_capture_stack[0][] = array('path', null, null); ob_start(); ?><?php echo smartyTranslate(array('s'=>'Search'),$_smarty_tpl);?>
 <?php list($_capture_buffer, $_capture_assign, $_capture_append) = array_pop($_smarty_tpl->_capture_stack[0]);

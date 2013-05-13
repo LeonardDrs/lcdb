@@ -21,7 +21,12 @@ class PostControllerCore extends FrontController
 	public function initContent()
 	{
 		parent::initContent();
-
+		$posts = Post::getPostPages($this->context->language->id);
+		
+		$this->context->smarty->assign(array(
+			'posts' => $posts
+		));
+		
 		$this->setTemplate(_PS_THEME_DIR_.'post.tpl');
 	}
 }

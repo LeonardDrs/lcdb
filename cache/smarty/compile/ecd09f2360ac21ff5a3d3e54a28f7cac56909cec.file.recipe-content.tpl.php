@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-04-30 18:09:40
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-12 22:55:49
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/themes/lcdb_theme/recipe-content.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1937878163517fecc46c06e6-46509235%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1715291216519001d5883296-40918737%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1937878163517fecc46c06e6-46509235',
+  'nocache_hash' => '1715291216519001d5883296-40918737',
   'function' => 
   array (
   ),
@@ -23,9 +23,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_517fecc479ea69_59648295',
+  'unifunc' => 'content_519001d5950777_56220547',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_517fecc479ea69_59648295')) {function content_517fecc479ea69_59648295($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_519001d5950777_56220547')) {function content_519001d5950777_56220547($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?>
 <?php if (!$_smarty_tpl->tpl_vars['recipe']->value->active){?>
 	<br />

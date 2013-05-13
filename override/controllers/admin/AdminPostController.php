@@ -13,7 +13,6 @@ class AdminPostControllerCore extends AdminController
 		$this->table = 'post';
 		$this->className = 'Post';
 		$this->lang = true;
-		$this->addRowAction('view');
 		$this->addRowAction('edit');
 		$this->addRowAction('delete');
 		$this->bulk_actions = array('delete' => array('text' => $this->l('Delete selected'), 'confirm' => $this->l('Delete selected items?')));
@@ -26,6 +25,7 @@ class AdminPostControllerCore extends AdminController
 			);
 
 		$this->_select = 'a.position ';
+		$this->fieldImageSettings = array('name' => 'image', 'dir' => 'po');
 
 		parent::__construct();
 		
@@ -34,13 +34,11 @@ class AdminPostControllerCore extends AdminController
 	public function renderForm()
 	{
 		$this->display = 'edit';
-		$this->toolbar_btn['save-and-preview'] = array(
-			'href' => '#',
-			'desc' => $this->l('Save and preview')
-		);
 		$this->initToolbar();
 		if (!$this->loadObject(true))
 			return;
+			
+		$test= "<p>pl</p>";
 
 		$this->fields_form = array(
 			'tinymce' => true,
@@ -58,6 +56,14 @@ class AdminPostControllerCore extends AdminController
 					'required' => true,
 					'class' => 'copy2friendlyUrl',
 					'size' => 50
+				),
+				array(
+					'type' => 'file',
+					'label' => $this->l('Image:'),
+					'name' => 'image',
+					'desc' => array(
+						$this->l("Upload article's cover")
+					)
 				),
 				array(
 					'type' => 'textarea',
@@ -111,6 +117,8 @@ class AdminPostControllerCore extends AdminController
 				'name' => 'checkBoxShopAsso',
 			);
 		}
+		
+		$image = '../img/'.$this->fieldImageSettings['dir'].'/'.(int)$obj->id.'.jpg';
 
 		$this->tpl_form_vars = array(
 			'active' => $this->object->active,
@@ -123,7 +131,7 @@ class AdminPostControllerCore extends AdminController
 	{
 		$this->toolbar_title = $this->l('Posts');
 		$this->toolbar_btn['new'] = array(
-			'href' => self::$currentIndex.'&amp;add'.$this->table./*'&amp;id_post_category='.(int)$this->id_post_category.*/'&amp;token='.$this->token,
+			'href' => self::$currentIndex.'&amp;add'.$this->table.'&amp;token='.$this->token,
 			'desc' => $this->l('Add new')
 		);
 
@@ -178,12 +186,11 @@ class AdminPostControllerCore extends AdminController
 				Configuration::updateValue('PS_CONDITIONS_POST_ID', 0);
 			}
 			$post = new Post((int)Tools::getValue('id_post'));
-	//		$post->cleanPositions($post->id_post_category);
 			if (!$post->delete())
 				$this->errors[] = Tools::displayError('An error occurred while deleting object.')
 					.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
 			else
-				Tools::redirectAdmin(self::$currentIndex./*'&id_post_category='.$post->id_post_category.*/'&conf=1&token='.Tools::getAdminTokenLite('AdminPostContent'));
+				Tools::redirectAdmin(self::$currentIndex.'&conf=1&token='.Tools::getAdminTokenLite('AdminPostContent'));
 		}/* Delete multiple objects */
 		elseif (Tools::getValue('submitDel'.$this->table))
 		{
@@ -196,9 +203,8 @@ class AdminPostControllerCore extends AdminController
 					$result = $post->deleteSelection(Tools::getValue($this->table.'Box'));
 					if ($result)
 					{
-					//	$post->cleanPositions((int)Tools::getValue('id_post_category'));
 						$token = Tools::getAdminTokenLite('AdminPostContent');
-						Tools::redirectAdmin(self::$currentIndex.'&conf=2&token='.$token/*.'&id_category='.(int)Tools::getValue('id_post_category')*/);
+						Tools::redirectAdmin(self::$currentIndex.'&conf=2&token='.$token);
 					}
 					$this->errors[] = Tools::displayError('An error occurred while deleting selection.');
 
@@ -209,7 +215,7 @@ class AdminPostControllerCore extends AdminController
 			else
 				$this->errors[] = Tools::displayError('You do not have permission to delete here.');
 		}
-		elseif (Tools::isSubmit('submitAddpost') || Tools::isSubmit('submitAddpostAndPreview'))
+		elseif (Tools::isSubmit('submitAddpost'))
 		{
 			parent::validateRules();
 			if (!count($this->errors))
@@ -218,11 +224,21 @@ class AdminPostControllerCore extends AdminController
 				{
 					$post = new Post();
 					$this->copyFromPost($post, 'post');
+					
 					if (!$post->add())
 						$this->errors[] = Tools::displayError('An error occurred while creating object.')
 							.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
 					else
 						$this->updateAssoShop($post->id);
+						
+					if (isset($_FILES['image']) && !$_FILES['image']['error'])
+					{
+						if ($_FILES['image']['error'] == UPLOAD_ERR_OK)
+							$this->copyNoPictureImage($post->id);
+						// class AdminTab deal with every $_FILES content, don't do that for no-picture
+						unset($_FILES['image']);
+						parent::postProcess();
+					}
 				}
 				else
 				{
@@ -230,37 +246,37 @@ class AdminPostControllerCore extends AdminController
 					$this->copyFromPost($post, 'post');
 					if (!$post->update())
 						$this->errors[] = Tools::displayError('An error occurred while updating object.')
-							.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
+						.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
 					else
 						$this->updateAssoShop($post->id);
+						
+						
+					if (!Validate::isLoadedObject($object = $this->loadObject()))
+						$this->errors[] = Tools::displayError('An error occurred while updating status for object.').' <b>'.$this->table.'</b> '.Tools::displayError('(cannot load object)');
+					if ((int)$object->id == (int)Configuration::get('PS_LANG_DEFAULT') && (int)$_POST['active'] != (int)$object->active)
+						$this->errors[] = Tools::displayError('You cannot change the status of the default language.');
+					else{
+						if (!empty($_FILES['image']['tmp_name']))
+						{
+							if ($_FILES['image']['error'] == UPLOAD_ERR_OK)
+								$this->copyNoPictureImage($post->id);
+							// class AdminTab deal with every $_FILES content, don't do that for no-picture
+							unset($_FILES['image']);
+							parent::postProcess();
+						}
+						else
+						{
+							$this->validateRules();
+							$this->errors[] = Tools::displayError('Image fields are required.');
+						}
+					}
+
+					$this->validateRules();
+					
 
 				}
-                if (Tools::isSubmit('submitAddpostAndPreview'))
-                {
-                    $alias = $this->getFieldValue($post, 'link_rewrite', $this->context->language->id);
-                    $preview_url = $this->context->link->getPostLink($post, $alias, $this->context->language->id);
-
-                    if (!$post->active)
-                    {
-                    	$admin_dir = dirname($_SERVER['PHP_SELF']);
-                        $admin_dir = substr($admin_dir, strrpos($admin_dir, '/') + 1);
-                    	
-                    	$params = http_build_query(array(
-                    		'adtoken' => Tools::getAdminTokenLite('AdminPostContent'),
-                    		'ad' => $admin_dir,
-                    		'id_employee' => (int)$this->context->employee->id)
-                    		);
-                    	if (Configuration::get('PS_REWRITING_SETTINGS'))
-                    		$params = '?'.$params;
-                    	else
-                    		$params = '&'.$params;
-                    	
-                    	$preview_url .= $post->active ? '' : $params;
-                    }
-                    Tools::redirectAdmin($preview_url);
-                }
-                else
-					Tools::redirectAdmin(self::$currentIndex./*'&id_post_category='.$post->id_post_category.*/'&conf=4&token='.Tools::getAdminTokenLite('AdminPostContent'));
+				Tools::redirectAdmin(self::$currentIndex.'&conf=4&token='.Tools::getAdminTokenLite('AdminPostContent'));
+					
 			}
 		}
 		elseif (Tools::getValue('position'))
@@ -273,7 +289,7 @@ class AdminPostControllerCore extends AdminController
 			elseif (!$object->updatePosition((int)Tools::getValue('way'), (int)Tools::getValue('position')))
 				$this->errors[] = Tools::displayError('Failed to update the position.');
 			else
-				Tools::redirectAdmin(self::$currentIndex.'&'.$this->table.'Orderby=position&'.$this->table.'Orderway=asc'./*'&conf=4'.(($id_category = (int)Tools::getValue('id_post_category')) ? ('&id_post_category='.$id_category) : '').*/'&token='.Tools::getAdminTokenLite('AdminPostContent'));
+				Tools::redirectAdmin(self::$currentIndex.'&'.$this->table.'Orderby=position&'.$this->table.'Orderway=asc'.'&token='.Tools::getAdminTokenLite('AdminPostContent'));
 		}
 		/* Change object statuts (active, inactive) */
 		elseif (Tools::isSubmit('statuspost') && Tools::isSubmit($this->identifier))
@@ -283,7 +299,7 @@ class AdminPostControllerCore extends AdminController
 				if (Validate::isLoadedObject($object = $this->loadObject()))
 				{
 					if ($object->toggleStatus())
-						Tools::redirectAdmin(self::$currentIndex./*'&conf=5'.((int)Tools::getValue('id_post_category') ? '&id_post_category='.(int)Tools::getValue('id_post_category') : '').*/'&token='.Tools::getValue('token'));
+						Tools::redirectAdmin(self::$currentIndex.'&token='.Tools::getValue('token'));
 					else
 						$this->errors[] = Tools::displayError('An error occurred while updating status.');
 				}
@@ -296,6 +312,30 @@ class AdminPostControllerCore extends AdminController
 		}
 		else
 			parent::postProcess(true);
+	}
+	
+	public function copyNoPictureImage($title)
+	{
+		if (isset($_FILES['image']) && $_FILES['image']['error'] === 0)
+			if ($error = ImageManager::validateUpload($_FILES['image'], Tools::getMaxUploadSize()))
+				$this->errors[] = $error;
+			else
+			{
+				if (!($tmp_name = tempnam(_PS_TMP_IMG_DIR_, 'PS')) || !move_uploaded_file($_FILES['image']['tmp_name'], $tmp_name))
+					return false;
+				if (!ImageManager::resize($tmp_name, _PS_IMG_DIR_.'po/'.$title.'.jpg'))
+					$this->errors[] = Tools::displayError('An error occurred while copying image to your product folder.');
+				else
+				{
+					$images_types = ImageType::getImagesTypes('products');
+					foreach ($images_types as $k => $image_type)
+					{
+						if (!ImageManager::resize($tmp_name, _PS_IMG_DIR_.'po/'.$title.'-default-'.stripslashes($image_type['name']).'.jpg', $image_type['width'], $image_type['height']))
+							$this->errors[] = Tools::displayError('An error occurred while resizing image to your product directory.');
+					}
+				}
+				unlink($tmp_name);
+			}
 	}
 }
 

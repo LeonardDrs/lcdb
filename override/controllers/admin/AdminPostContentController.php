@@ -15,16 +15,11 @@ class AdminPostContentControllerCore extends AdminController
 	{
 		/* Get current category */
 		$id_post_category = (int)Tools::getValue('id_post_category', Tools::getValue('id_post_category_parent', 1));
-/*		self::$category = new PostCategory($id_post_category);
-		if (!Validate::isLoadedObject(self::$category))
-			die('Category cannot be loaded');
-*/
 		$this->table = 'post';
 		$this->className = 'Post';
 		$this->bulk_actions = array('delete' => array('text' => $this->l('Delete selected'), 'confirm' => $this->l('Delete selected items?')));
-	//	$this->admin_post_categories = new AdminPostCategoriesController();
 		$this->admin_post = new AdminPostController();
-
+		$this->fieldImageSettings = array('name' => 'image', 'dir' => 'po');
 		parent::__construct();
 	}
 
