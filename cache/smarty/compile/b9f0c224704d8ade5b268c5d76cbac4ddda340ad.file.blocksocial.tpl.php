@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-12 22:55:55
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-15 16:45:33
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/modules/blocksocial/blocksocial.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:438179818519001db5ebdc4-08316380%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:99561347951939f8d9b2409-70260978%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '438179818519001db5ebdc4-08316380',
+  'nocache_hash' => '99561347951939f8d9b2409-70260978',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_519001db605050_76560731',
+  'unifunc' => 'content_51939f8d9cda69_39546223',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_519001db605050_76560731')) {function content_519001db605050_76560731($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_51939f8d9cda69_39546223')) {function content_51939f8d9cda69_39546223($_smarty_tpl) {?>
 <ul class="presse-fb">
 	<?php if ($_smarty_tpl->tpl_vars['twitter_url']->value!=''){?>
 		<li class="presse"><a href="#" title="La presse parle de nous"><span></span>La presse parle de nous</a></li>

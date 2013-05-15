@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-10 15:51:04
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-15 22:54:15
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/administration/themes/default/template/controllers/products/informations.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1396063042518cfb489f3e32-57539861%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3724831375193f5f79e4860-63744904%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '06e96801ff6d02db3e7a32bdd0799bcd1b35d349' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/administration/themes/default/template/controllers/products/informations.tpl',
-      1 => 1368191781,
+      1 => 1368651133,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1396063042518cfb489f3e32-57539861',
+  'nocache_hash' => '3724831375193f5f79e4860-63744904',
   'function' => 
   array (
   ),
@@ -40,9 +40,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_518cfb491039f0_88395099',
+  'unifunc' => 'content_5193f5f8174ce9_63384821',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_518cfb491039f0_88395099')) {function content_518cfb491039f0_88395099($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_5193f5f8174ce9_63384821')) {function content_5193f5f8174ce9_63384821($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?>
 <?php if ($_smarty_tpl->tpl_vars['check_product_association_ajax']->value){?>
 <?php $_smarty_tpl->tpl_vars['class_input_ajax'] = new Smarty_variable('check_product_name ', null, 0);?>
@@ -208,6 +208,32 @@ $_smarty_tpl->tpl_vars['language']->_loop = true;
 				<input size="55" maxlength="12" type="text" name="upc" value="<?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['product']->value->upc, 'html', 'UTF-8');?>
 " style="width: 130px; margin-right: 5px;" /> <span class="small"><?php echo smartyTranslate(array('s'=>'(US, Canada)'),$_smarty_tpl);?>
 </span>
+			</td>
+		</tr>
+		<tr>
+			<td class="col-left"><label><?php echo $_smarty_tpl->tpl_vars['bullet_common_field']->value;?>
+ <?php echo smartyTranslate(array('s'=>'Product type:'),$_smarty_tpl);?>
+</label></td>
+			<td style="padding-bottom:5px;">
+				<select name="product_type" id="product_type">
+					<option value="wtpork" <?php if ($_smarty_tpl->tpl_vars['product']->value->product_type=='wtpork'){?>selected="selected"<?php }?> ><?php echo smartyTranslate(array('s'=>'Without pork'),$_smarty_tpl);?>
+</option>
+					<option value="wtlamb" <?php if ($_smarty_tpl->tpl_vars['product']->value->product_type=='wtlamb'){?>selected="selected"<?php }?> ><?php echo smartyTranslate(array('s'=>'Without lamb'),$_smarty_tpl);?>
+</option>
+					<option value="bio" <?php if ($_smarty_tpl->tpl_vars['product']->value->product_type=='bio'){?>selected="selected"<?php }?> ><?php echo smartyTranslate(array('s'=>'100 bio'),$_smarty_tpl);?>
+</option>
+					<option value="cook" <?php if ($_smarty_tpl->tpl_vars['product']->value->product_type=='cook'){?>selected="selected"<?php }?>><?php echo smartyTranslate(array('s'=>'Easy cooking'),$_smarty_tpl);?>
+</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="col-left"><label><?php echo $_smarty_tpl->tpl_vars['bullet_common_field']->value;?>
+ <?php echo smartyTranslate(array('s'=>'serving:'),$_smarty_tpl);?>
+</label></td>
+			<td style="padding-bottom:5px;">
+				<input size="55" maxlength="12" type="text" name="serving" value="<?php echo smarty_modifier_htmlentitiesUTF8($_smarty_tpl->tpl_vars['product']->value->serving);?>
+" style="width: 130px; margin-right: 5px;" />
 			</td>
 		</tr>
 	</table>

@@ -5,6 +5,8 @@ class Product extends ProductCore
 	public $tricks;
 	public $breeder;
 	public $is_subscription;
+	public $product_type;
+	public $serving;
 	
 	public static $definition = array(
 		'table' => 'product',
@@ -30,6 +32,8 @@ class Product extends ProductCore
 			'cache_has_attachments' => 		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'is_virtual' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'is_subscription' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'product_type' => 				array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
+			'serving' => 					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 
 			/* Shop fields */
 			'id_category_default' => 		array('type' => self::TYPE_INT, 'shop' => true, 'validate' => 'isUnsignedId'),
@@ -68,8 +72,8 @@ class Product extends ProductCore
 			'name' => 						array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isCatalogName', 'required' => true, 'size' => 128),
 			'description' => 				array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString'),
 			'description_short' => 			array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString'),
-			'tricks' => 			array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString'),
-			'breeder' => 			array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString'),
+			'tricks' => 					array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString'),
+			'breeder' => 					array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString'),
 			'available_now' => 				array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 255),
 			'available_later' => 			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'IsGenericName', 'size' => 255),
 		),
