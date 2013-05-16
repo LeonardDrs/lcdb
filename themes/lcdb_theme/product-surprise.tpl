@@ -24,7 +24,7 @@
 	{/if}
 	
 	<div class="price-infos clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-		<img src="{$base_dir}themes/lcdb_theme/img/img_solo/colis-surprise.png" title="colis surprise"/>
+		<img src="{$base_dir}themes/lcdb_theme/img/asset/img_solo/colis-surprise.png" title="colis surprise"/>
 		
 		{if $product->description_short != null}	
 			<p class="colis-surprise-description">{$product->description_short}</p>
