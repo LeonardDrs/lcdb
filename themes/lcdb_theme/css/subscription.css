@@ -41,10 +41,18 @@
     margin-right: 10px;
 }
 
-#subscription .img-step-1 { background: url('../img/img_solo/abonnement-1.png') no-repeat; }
-#subscription .img-step-2 { background: url('../img/img_solo/abonnement-2.png') no-repeat; }
-#subscription .img-step-3 { background: url('../img/img_solo/abonnement-3.png') no-repeat; }
-#subscription .img-step-4 { background: url('../img/img_solo/abonnement-4.png') no-repeat; }
+#subscription .step {
+    margin: 15px 0;
+}
+
+.ie7 #subscription .step {
+    margin: 20px 0;
+}
+
+#subscription .img-step-1 { background: url('../img/asset/img_solo/abonnement-1.png') no-repeat; }
+#subscription .img-step-2 { background: url('../img/asset/img_solo/abonnement-2.png') no-repeat; }
+#subscription .img-step-3 { background: url('../img/asset/img_solo/abonnement-3.png') no-repeat; }
+#subscription .img-step-4 { background: url('../img/asset/img_solo/abonnement-4.png') no-repeat; }
 
 #subscription .step ul,
 #subscription .step .left-side,
@@ -56,7 +64,7 @@
 
 #subscription .step .frequence-list {
     width: 115px;
-    margin-left: 10px;
+    margin-left: 7px;
 }
 
 #subscription .step .left-side ul li {
@@ -149,29 +157,16 @@
 }
 
 #subscription #adress-submit {
-    border: 1px solid #b83129;
-    background: #ae2c25;
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2FlMmMyNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4YTE3MTIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(top,  #ae2c25 0%, #8a1712 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ae2c25), color-stop(100%,#8a1712));
-    background: -webkit-linear-gradient(top,  #ae2c25 0%,#8a1712 100%);
-    background: -o-linear-gradient(top,  #ae2c25 0%,#8a1712 100%);
-    background: -ms-linear-gradient(top,  #ae2c25 0%,#8a1712 100%);
-    background: linear-gradient(to bottom,  #ae2c25 0%,#8a1712 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ae2c25', endColorstr='#8a1712',GradientType=0 );
-    -webkit-box-shadow: inset 0 0 1px 1px #d44037;
-            box-shadow: inset 0 0 1px 1px #d44037;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
     padding: 8px 15px;
-    -webkit-border-radius: 4px;
-            border-radius: 4px;
-    font-family: 'MyriadWebPro-Semibold';
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
-    width: 106px !important;
     float: right;
     margin-right: 18px !important;
+    display: inline;
+}
+
+.ie7 #subscription #adress-submit {
+    padding: 8px 5px;
+    font-size: 11px;
+    display: inline;
 }
 
 #subscription #villes,
@@ -180,25 +175,31 @@
     color: #4d9810;
 }
 
+#subscription #cancel-address {
+    float: left;
+    line-height: 36px;
+    display: inline;
+}
+
 #subscription #step2 #saved-adresse,
 #subscription #step2 #form-adresse {
     margin-bottom: 20px;
 }
 
 #subscription #step2 a {
-    font-size: 12px;
+    font-size: 13px;
     font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
 }
 
 #subscription #villes-abonnees {
     display: none;
-    background: url('../img/img_solo/popin-overlay.png') repeat;
+    background: url('../img/asset/img_solo/popin-overlay.png') repeat;
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 1337;
+    z-index: 3337;
 }
 
 #subscription #villes-abonnees .popin {
@@ -208,11 +209,12 @@
     left: 50%;
     top: 50%;
     margin: -158px 0 0 -155px;
-    background: url('../img/textures/fond-papier-clair.jpg') repeat-y 0 0;
+    background: url('../img/asset/textures/fond-papier-clair.jpg') repeat-y 0 0;
     -moz-border-radius: 4px;
          border-radius: 4px;
     padding: 30px;
     border: 1px solid #bead9f;
+    -webkit-transform: translateZ(0);
 }
 
 #subscription #villes-abonnees .popin select {
@@ -226,23 +228,116 @@
     height: 16px;
     top: 6px;
     right: 6px;
-    background: url('../img/img_solo/popin-close.png') no-repeat;
+    background: url('../img/asset/img_solo/popin-close.png') no-repeat;
 }
-#subscription #step3 .frequence-list span {
+
+#subscription #step3 .radio { padding-left: 8px; }
+#subscription .radio input { width: 13px; height: 13px; }
+#subscription #step3 #days-choice {
     float: left;
+    padding-right: 4px;
+    width: 191px;
 }
-#subscription #step3 .frequence-list span.pronom {
+#subscription #step3 #days-choice div {
+    float: right;
+}
+#subscription #step3 #days-choice div.pronom {
     line-height: 27px;
 }
-#subscription #step3 .sbHolder {
+#subscription #step3 #day-number {
+    display: none;
+}
+#subscription #step3 #day-number .sbHolder {
     float: left;
     position: relative;
-    width: 87px;
+    width: 65px;
     margin-left: 5px;
 }
-#subscription #step3 .sbOptions,
-#subscription #step3 .sbSelector {
-    width: 87px;
+.ie9 #subscription #step3 #day-number .sbHolder { margin-left: 3px; }
+#subscription #step3 #day-number .sbOptions,
+#subscription #step3 #day-number .sbSelector {
+    width: 65px;
+}
+
+#subscription #step3 #day-name .sbHolder {
+    float: left;
+    position: relative;
+    width: 98px;
+    margin-left: 5px;
+}
+#subscription #step3 #day-name .sbOptions,
+#subscription #step3 #day-name .sbSelector {
+    width: 98px;
+}
+
+#subscription #step3 #bi-mensuelle-phrase,
+#subscription #step3 #mensuelle-phrase { display: none; width: 100%; text-align: right; }
+
+
+#subscription #step3 .left-side {
+    min-height: 140px;
+    height: auto !important; /* ie */ 
+    height: 140px; /* ie */
+}
+
+#subscription #step3 .right-side p {
+    margin-bottom: 0;
+}
+
+#subscription .comment {
+    font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
+}
+
+#subscription #step3 #creneau {
+    float: none;
+    margin-top: 15px;
+}
+
+#subscription #step3 #creneau li {
+    margin-bottom: 15px;
+}
+
+#subscription #step3 #creneau #error {
+    color: #ae2b25;
+}
+
+#subscription #step3 #creneau .sbHolder li,
+#subscription #step3 #creneau li + li + li + li { margin-bottom: 0; }
+
+#subscription #step3 #creneau li p {
+    font: 14px 'MyriadWebPro-Italic', Arial, sans-serif;
+    line-height: 24px;
+    color: #4D9810;
+}
+
+#subscription #step3 #creneau li p img {    
+    vertical-align: bottom;
+    margin-left: 10px;
+}
+
+#subscription #step3 #creneau label {
+    width: 70px;
+    display: block;
+    float: left;
+    line-height: 23px;
+}
+
+#subscription #step3 #creneau li div + label,
+#subscription #step3 #creneau li select + label { text-align: center; }
+
+#subscription #step3 #creneau .sbHolder {
+    float: left;
+    position: relative;
+    width: 82px;
+    margin-left: 5px;
+}
+#subscription #step3 #creneau .sbOptions,
+#subscription #step3 #creneau .sbSelector {
+    width: 82px;
+}
+
+#subscription #step3 .step3-tel {
+    margin-top: 20px;
 }
 
 #subscription #step4 ul {
@@ -265,21 +360,4 @@
     display: block;
     margin: 35px auto;
     padding: 10px 20px 10px 20px;
-    color: white;
-    font-family: 'MyriadWebPro-Semibold', Arial, sans-serif;
-    border: 1px solid #d44137;
-    background: #b02c25;
-    background: -moz-linear-gradient(top,  #e7665f 0%, #871711 62%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7665f), color-stop(62%,#871711));
-    background: -webkit-linear-gradient(top,  #e7665f 0%,#871711 62%);
-    background: -o-linear-gradient(top,  #e7665f 0%,#871711 62%);
-    background: -ms-linear-gradient(top,  #e7665f 0%,#871711 62%);
-    background: linear-gradient(to bottom,  #e7665f 0%,#871711 62%);
-    -webkit-border-radius: 5px;
-       -moz-border-radius: 5px;
-            border-radius: 5px;
-    -webkit-box-shadow: 3px 3px 5px 0px #8f8f8f;        
-       -moz-box-shadow: 3px 3px 5px 0px #8f8f8f;
-         -o-box-shadow: 3px 3px 5px 0px #8f8f8f;
-            box-shadow: 3px 3px 5px 0px #8f8f8f;
 }

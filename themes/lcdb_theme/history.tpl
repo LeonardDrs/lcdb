@@ -38,7 +38,7 @@
 							</ul>
 						</div>
 						<hr />
-						<a href="javascript:showOrder(1, {$orders[0].id_order|intval}, '{$link->getPageLink('order-detail', true)}');" title="Voir le détail">&rarr; Voir le détail</a>
+						<a href="javascript:showOrder(1, {$orders[0].id_order|intval}, '{$link->getPageLink('order-detail', true)}');" title="Voir le détail">&rarr;&nbsp;<span>Voir le détail</span></a>
 					</div>
 					<div class="right-side">
 						<h3>Prochaine commande</h3>
@@ -59,8 +59,8 @@
 							</ul>
 						</div>
 						<hr />
-						<a href="#" title="Voir le détail">&rarr; Voir le détail</a>
-						<a href="#" title="Télécharger la facture">&rarr; Télécharger la facture</a>
+						<a href="#" title="Voir le détail">&rarr;&nbsp;<span>Voir le détail</span></a>
+						<a href="#" title="Télécharger la facture">&rarr;&nbsp;<span>Télécharger la facture</span></a>
 					</div>
 				</div>
 				<hr />

@@ -25,16 +25,12 @@ class Category extends CategoryCore
 			GROUP BY c.`id_category`
 			ORDER BY `level_depth` ASC, category_shop.`position` ASC
 		');
-		
-		if($result[0]['level_depth'] != $depth){
 			
-			foreach ($result as &$row)
-			{
-				$row['subcats'] = $this->getSubCategoriesByDepth($row['id_category'], $depth, $id_lang, $active);
-				
-			}
+		foreach ($result as &$row)
+		{
+			$row['subcats'] = $this->getSubCategoriesByDepth($row['id_category'], $depth, $id_lang, $active);
 		}
-		
+
 		return $result;
 	}
 }

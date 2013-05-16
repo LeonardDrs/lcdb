@@ -5,7 +5,7 @@
 	<input type="hidden" name="orderway" value="desc" />
 	<button type="submit" name="submit">OK</button>
 </form>
-<nav class="secondary-menu small-bloc">
+<nav class="secondary-menu small-bloc" id="account-left-col">
 	<ul>
 		<li class="secondary-menu-item first item-active"><a href="#" title="Mon compte">mon compte</a>
 			<ul class="submenu">
