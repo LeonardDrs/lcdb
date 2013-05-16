@@ -4,8 +4,8 @@ $(document).ready(function(){
 	Cufon.replace('.global .footer-top ul li > p.push');
 	Cufon.replace('.guestbook .green-button');
 
-	if($("#country").length > 0){
-		drop_down_list_without_submit($("#country"));
+	if($("#id_country").length > 0){
+		drop_down_list_without_submit($("#id_country"));
 	}
 	if($("#subject").length > 0){
 		drop_down_list_without_submit($("#subject"));
@@ -256,7 +256,7 @@ $(document).ready(function(){
 			}
 			if(isRequiredEmpty || isEmptyPhone || isBadFormat){
 				html = "<div>"+html+"</div>";
-				$("#my-account .address .warning").html(html);
+				$("#subscription .address .warning").html(html);
 			}
 		});
 	}
