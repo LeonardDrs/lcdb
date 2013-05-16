@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2013-05-15 16:45:33
+<?php /* Smarty version Smarty-3.1.8, created on 2013-05-16 12:41:43
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/modules/editorial/editorial.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:106819089651939f8d8c3196-55548285%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:11183206645194b7e7861546-63832006%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '106819089651939f8d8c3196-55548285',
+  'nocache_hash' => '11183206645194b7e7861546-63832006',
   'function' => 
   array (
   ),
@@ -26,9 +26,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.8',
-  'unifunc' => 'content_51939f8d93b846_89456260',
+  'unifunc' => 'content_5194b7e78dba74_31067227',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51939f8d93b846_89456260')) {function content_51939f8d93b846_89456260($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
+<?php if ($_valid && !is_callable('content_5194b7e78dba74_31067227')) {function content_5194b7e78dba74_31067227($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_escape')) include '/Applications/XAMPP/xamppfiles/htdocs/project/lcdb/tools/smarty/plugins/modifier.escape.php';
 ?>
 <div class="order-meat-message">
 	<div class="cow">
