@@ -47,16 +47,6 @@
 		{/foreach}
 		{/if}
 
-		<!-- Plugin -->
-		<script type="text/javascript" src="js/plugins/jquery.placeholder.min.js"></script>
-		<script type="text/javascript" src="js/plugins/modernizr-2.6.2.min.js"></script>
-		<script type="text/javascript" src="js/plugins/cufon.js"></script>
-		<script type="text/javascript" src="js/plugins/font-cufon.js"></script>
-		<!-- Fichier perso -->
-		<link rel="stylesheet" href="css/lib/normalize.css"/>
-		<script src="js/main.js"></script>
-		<script src="js/googleAnalytics.js"></script>
-
 		{$HOOK_HEADER}
 	</head>
 	

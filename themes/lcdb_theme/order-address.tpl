@@ -123,6 +123,78 @@
 
 //]]>
 </script>
+{literal}
+        <script type="text/javascript">
+            var img_folder = '',// php relative path to -> /img/asset/
+                relays     = [
+                                {
+                                    'nom'       : 'Diététique DP',
+                                    'adresse'   : ['210 bis Boulevard Pereire', '75017 Paris'],
+                                    'telephone' : '01 45 74 75 51',
+                                    'mention'   : 'Retrait des Colis 12h à 18h',
+                                    'lat'       : '48.8796788',
+                                    'lon'       : '2.2871024999999463'
+
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                }/*,
+                                    PHP -> suite points relai
+                                */
+                            ],
+                zipCodes   = { // codes postaux proche et grande banlieue
+                                'proche' : ['93','94','92000','92100','92110','92120','92130','92140','92150','92160','92170','92190','92200','92210','92220','92230','92240','92250','92260','92270','92290','92300','92310','92320','92330','92340','92350','92360','92370'],
+                                'grande' : ['77','78','91','95']
+                            };
+        </script>
+        {/literal}
+
+
 
 {capture name=path}{l s='Addresses'}{/capture}
 {assign var='current_step' value='address'}
