@@ -44,7 +44,9 @@ class AdminGroupsController extends AdminGroupsControllerCore
 				'title' => $this->l('Groupment'),
 				'width' => 25,
 				'align' => 'center',
-				'type' => 'bool'
+				'type' => 'bool',
+				'callback' => 'printGroupmentIcon',
+				'havingFilter' => true
 			),
 			'show_prices' => array(
 				'title' => $this->l('Show prices'),
@@ -174,6 +176,14 @@ class AdminGroupsController extends AdminGroupsControllerCore
 		
 		return parent::renderForm() ;
 
+	}
+	
+	public static function printGroupmentIcon($id_group, $tr)
+	{
+		$group = new Group($tr['id_group']);
+		if (!Validate::isLoadedObject($group))
+			return;
+		return ($group->is_group ? '<img src="../img/admin/enabled.gif" />' : '<img src="../img/admin/disabled.gif" />');
 	}
 }
 

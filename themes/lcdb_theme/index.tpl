@@ -10,21 +10,22 @@
 				<li class="livraison">Votre <span class="color">livraison</span><span class="illustration"></span></li>
 			</ul>
 			<div class="clearfix"></div>
-			<a href="#" title="En savoir plus sur notre démarche">
+			<a href="{$link->getCMSLink(13)}" title="En savoir plus sur notre démarche">
 				&rarr;<span> En savoir plus sur notre démarche</span>
 			</a>
 		</div>
 		<div class="entries-and-blog">
 			<div class="entries">
 				<h2>Livre d'or</h2>
-				<p><span>&laquo;</span> Les suprêmes étaient excellents. Je vous remercie de votre 
-				extrême attention aux gens et à ce que vous faites, que vous faites fort
-				bien, c'est assez rare donc je vous le dis et vous en remercie. <span>&raquo;</span></p>
-				<p class="signature">Joëlle B., Fabrègues, Hérault</p>
-				<a href="#" title="Voir tous les commentaires">
+				{foreach from=$messages item=content}
+					<p><span>&laquo;</span>{$content.message}<span>&raquo;</span></p>
+					<p class="signature">{$content.firstname} {$content.lastname}, {$content.city}</p>
+					{break}
+				{/foreach}
+				<a href="{$link->getPageLink('guestbook')}" title="Voir tous les commentaires">
 					&rarr;<span> Voir tous les commentaires</span>
 				</a>
-				<a href="#" title="Laisser un commentaire">
+				<a href="{$link->getPageLink('guestbook')}#button-witness" title="Laisser un commentaire">
 					&rarr;<span> Laisser un commentaire</span>
 				</a>
 			</div>

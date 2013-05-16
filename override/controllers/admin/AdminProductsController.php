@@ -34,7 +34,6 @@ class AdminProductsController extends AdminProductsControllerCore
 
 		// Accessories block
 		$accessories = Product::getAccessoriesLight($this->context->language->id, $product->id);
-
 		if ($post_accessories = Tools::getValue('inputAccessories'))
 		{
 			$post_accessories_tab = explode('-', Tools::getValue('inputAccessories'));
@@ -45,13 +44,12 @@ class AdminProductsController extends AdminProductsControllerCore
 		$data->assign('accessories', $accessories);
 		
 		// recipe block
-		$recipes = Product::getAccessoriesLight($this->context->language->id, $product->id);
-
+		$recipes = Product::getRecipesLight($this->context->language->id, $product->id);
 		if ($post_recipes = Tools::getValue('inputRecipes'))
 		{
 			$post_recipes_tab = explode('-', Tools::getValue('inputRecipes'));
 			foreach ($post_recipes_tab as $recipe_id)
-				if (!$this->haveThisAccessory($recipe_id, $recipes) && $recipe = Product::getAccessoryById($recipe_id))
+				if (!$this->haveThisRecipe($recipe_id, $recipes) && $recipe = Product::getRecipeById($recipe_id))
 					$recipes[] = $recipe;
 		}
 		$data->assign('recipes', $recipes);
@@ -210,5 +208,91 @@ class AdminProductsController extends AdminProductsControllerCore
 		$this->addJqueryPlugin(array('autocomplete', 'fancybox', 'typewatch'));
 		return $parent;
 	}
+	
+	public function initFormPrices($obj)
+	{
+		$data = $this->createTemplate($this->tpl_form);
+		$product = $obj;
+		if ($obj->id)
+		{
+			$shops = Shop::getShops();
+			$countries = Country::getCountries($this->context->language->id);
+			$groups = Group::getGroups($this->context->language->id);
+			$currencies = Currency::getCurrencies();
+			$attributes = $obj->getAttributesGroups((int)$this->context->language->id);
+			$combinations = array();
+			foreach ($attributes as $attribute)
+			{
+				$combinations[$attribute['id_product_attribute']]['id_product_attribute'] = $attribute['id_product_attribute'];
+				if (!isset($combinations[$attribute['id_product_attribute']]['attributes']))
+					$combinations[$attribute['id_product_attribute']]['attributes'] = '';
+				$combinations[$attribute['id_product_attribute']]['attributes'] .= $attribute['attribute_name'].' - ';
+
+				$combinations[$attribute['id_product_attribute']]['price'] = Tools::displayPrice(
+					Tools::convertPrice(
+						Product::getPriceStatic((int)$obj->id, false, $attribute['id_product_attribute']),
+						$this->context->currency
+					), $this->context->currency
+				);
+			}
+			foreach ($combinations as &$combination)
+				$combination['attributes'] = rtrim($combination['attributes'], ' - ');
+			$data->assign('specificPriceModificationForm', $this->_displaySpecificPriceModificationForm(
+				$this->context->currency, $shops, $currencies, $countries, $groups)
+			);
+
+			$data->assign('ecotax_tax_excl', $obj->ecotax);
+			$this->_applyTaxToEcotax($obj);
+
+			$data->assign(array(
+				'shops' => $shops,
+				'admin_one_shop' => count($this->context->employee->getAssociatedShops()) == 1,
+				'currencies' => $currencies,
+				'countries' => $countries,
+				'groups' => $groups,
+				'combinations' => $combinations,
+				'product' => $product,
+				'multi_shop' => Shop::isFeatureActive(),
+				'link' => new Link()
+			));
+		}
+		else
+			$this->displayWarning($this->l('You must save this product before adding specific prices'));
+
+		// prices part
+		$data->assign(array(
+			'link' => $this->context->link,
+			'currency' => $currency = $this->context->currency,
+			'tax_rules_groups' => TaxRulesGroup::getTaxRulesGroups(true),
+			'taxesRatesByGroup' => TaxRulesGroup::getAssociatedTaxRatesByIdCountry($this->context->country->id),
+			'ecotaxTaxRate' => Tax::getProductEcotaxRate(),
+			'tax_exclude_taxe_option' => Tax::excludeTaxeOption(),
+			'ps_use_ecotax' => Configuration::get('PS_USE_ECOTAX'),
+			'ecotax_tax_excl' => 0
+		));
+
+		$product->price = Tools::convertPrice($product->price, $this->context->currency, true, $this->context);
+		if ($product->unit_price_ratio != 0)
+			$data->assign('unit_price', Tools::ps_round($product->price / $product->unit_price_ratio, 2));
+		else
+			$data->assign('unit_price', 0);
+		$data->assign('ps_tax', Configuration::get('PS_TAX'));
+
+		$data->assign('country_display_tax_label', $this->context->country->display_tax_label);
+		$data->assign(array(
+			'currency', $this->context->currency,
+			'product' => $product,
+			'token' => $this->token
+		));
+		
+		// display gap
+		$gap = $product->price - $product->wholesale_price ;
+		$data->assign(array(
+			'gap' => $gap
+		));
+
+		$this->tpl_form_vars['custom_form'] = $data->fetch();
+	}
+
 }
 

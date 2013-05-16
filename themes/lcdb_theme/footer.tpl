@@ -28,7 +28,7 @@
 								</a>
 							</li>
 							<li class="faq">
-								<a href="#" title="Consulter la foire aux questions">
+								<a href="{$link->getCMSCategoryLink(7)}" title="Consulter la foire aux questions">
 									<span class="illustration"></span>
 									<span class="push">Foire aux questions</span>
 									<span class="cta">découvrir</span>
@@ -47,18 +47,7 @@
 						</form>
 					</div>
 					<nav class="add-link">
-						<ul class="footer-link">
-							<li><a href="#" title="Espace Pro">Espace Pro</a></li>
-							<li><a href="#" title="Plan du site">Plan du site</a></li>
-							<li><a href="#" title="CGV">CGV</a></li>
-							<li><a href="#" title="Mentions légales">Mentions légales</a></li>
-							<li><a href="#" title="Partenaires">Partenaires</a></li>
-							<li><a href="#" title="Contact">Contact</a></li>
-						</ul>
-						<ul class="presse-fb">
-							<li class="presse"><a href="#" title="La presse parle de nous"><span></span>La presse parle de nous</a></li>
-							<li class="facebook"><a href="#" title="Aller sur notre page Facebook"><span></span>Suivez-nous sur Facebook</a></li>
-						</ul>
+						{$HOOK_FOOTER}
 					</nav>
 					<div class="clearfix"></div>
 					<nav class="seo-link">

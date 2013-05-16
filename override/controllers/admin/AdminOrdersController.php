@@ -52,14 +52,38 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		return $res;
 	}
 	
-	public function initContent()
+	public function renderList()
 	{
+		if (!($this->fields_list && is_array($this->fields_list)))
+			return false;
+		$this->getList($this->context->language->id);
+		
+		// Empty list is ok
+		if (!is_array($this->_list))
+			return false;
+
+		$helper = new HelperList();
+
+		$this->setHelperDisplay($helper);
+		$helper->tpl_vars = $this->tpl_list_vars;
+		$helper->tpl_delete_link_vars = $this->tpl_delete_link_vars;
+
+		// For compatibility reasons, we have to check standard actions in class attributes
+		foreach ($this->actions_available as $action)
+		{
+			if (!in_array($action, $this->actions) && isset($this->$action) && $this->$action)
+				$this->actions[] = $action;
+		}
+
+		$list = $helper->generateList($this->_list, $this->fields_list);
 		
 		if($_GET['export']==true){
-			echo 'oui';
+			echo "<pre>";
+			print_r($this->_list);
+			echo "</pre>";
 		}
 		
-		parent::initContent();
+		return $list;
 	}
 }
 

@@ -143,6 +143,23 @@
 				<input size="55" maxlength="12" type="text" name="upc" value="{$product->upc|escape:html:'UTF-8'}" style="width: 130px; margin-right: 5px;" /> <span class="small">{l s='(US, Canada)'}</span>
 			</td>
 		</tr>
+		<tr>
+			<td class="col-left"><label>{$bullet_common_field} {l s='Product type:'}</label></td>
+			<td style="padding-bottom:5px;">
+				<select name="product_type" id="product_type">
+					<option value="wtpork" {if $product->product_type == 'wtpork'}selected="selected"{/if} >{l s='Without pork'}</option>
+					<option value="wtlamb" {if $product->product_type == 'wtlamb'}selected="selected"{/if} >{l s='Without lamb'}</option>
+					<option value="bio" {if $product->product_type == 'bio'}selected="selected"{/if} >{l s='100 bio'}</option>
+					<option value="cook" {if $product->product_type == 'cook'}selected="selected"{/if}>{l s='Easy cooking'}</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="col-left"><label>{$bullet_common_field} {l s='serving:'}</label></td>
+			<td style="padding-bottom:5px;">
+				<input size="55" maxlength="12" type="text" name="serving" value="{$product->serving|htmlentitiesUTF8}" style="width: 130px; margin-right: 5px;" />
+			</td>
+		</tr>
 	</table>
 	{* status informations *}
 	<table cellpadding="5" style="width: 40%; float: left; margin-left: 10px;">
