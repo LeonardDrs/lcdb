@@ -1,0 +1,455 @@
+<!Doctype html>
+<!--[if IE 7]> <html class="ie7"> <![endif]-->
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+    <head>
+        <!--[if IE]>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+        <![endif]-->
+        <!--[if gte IE 9]
+        <style type="text/css">
+        .gradient { filter: none; }
+        </style>
+        <![endif]-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="description" content="Les Colis du Boucher est une boutique en ligne qui est spécialisée dans la vente de viande bio et de viande Label Rouge livrée à votre domicile." />
+        <meta name="viewport" content="width=device-width"/>
+        
+        <meta property="og:title" content="Les Colis du Boucher, la livraison de viande Label Rouge et bio à domicile" />
+        <meta property="og:image" content="http://www.lescolisduboucher.com/img/asset/facebook/logo_fb.png" />
+        <meta property="og:type" content="Website" />
+        <meta property="og:description" content="Les Colis du Boucher est une boutique en ligne qui est spécialisée dans la vente de viande bio et de viande Label Rouge livrée à votre domicile." />
+        <meta property="og:url" content="http://www.lescolisduboucher.com" />
+        <meta property="og:site_name" content="Les Colis du Boucher" />
+        
+        <title>Les Colis du Boucher, la livraison de viande Label Rouge et bio à domicile</title>
+        <!-- Plugin -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/plugins/glDatePicker.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.selectbox-0.2.min.js"></script>
+        <script type="text/javascript" src="js/plugins/custom_checkbox_and_radio.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.placeholder.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.scroll.min.js"></script>
+        <script type="text/javascript" src="js/plugins/modernizr-2.6.2.min.js"></script>
+        <script type="text/javascript" src="js/plugins/cufon.js"></script>
+        <script type="text/javascript" src="js/plugins/font-cufon.js"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAp628M3yIsqoKh5YQ2TEtzTLGvTSi0iHI&sensor=true"></script>
+        <script type="text/javascript" src="js/plugins/infobox_packed.js" ></script>
+        <!-- Fichier perso -->
+        <link rel="stylesheet" href="css/lib/normalize.css"/>
+        <link rel="stylesheet" href="css/global.css"/>
+        <link rel="stylesheet" href="css/checkout.css"/>
+        <script src="js/main.js"></script>
+        <script src="js/relay.js"></script>
+        <script src="js/checkout.js"></script>
+        <script src="js/googleAnalytics.js"></script>
+        <script type="text/javascript">
+            var img_folder = '',// php relative path to -> /img/asset/
+                relays     = [
+                                {
+                                    'nom'       : 'Diététique DP',
+                                    'adresse'   : ['210 bis Boulevard Pereire', '75017 Paris'],
+                                    'telephone' : '01 45 74 75 51',
+                                    'mention'   : 'Retrait des Colis 12h à 18h',
+                                    'lat'       : '48.8796788',
+                                    'lon'       : '2.2871024999999463'
+
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                },
+                                {
+                                    'nom'       : 'Bio Prestige',
+                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
+                                    'telephone' : '01 45 22 53 52',
+                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
+                                    'lat'       : '48.8817472',
+                                    'lon'       : '2.317602899999997'
+                                }/*,
+                                    PHP -> suite points relai
+                                */
+                            ],
+                zipCodes   = { // codes postaux proche et grande banlieue
+                                'proche' : ['93','94','92000','92100','92110','92120','92130','92140','92150','92160','92170','92190','92200','92210','92220','92230','92240','92250','92260','92270','92290','92300','92310','92320','92330','92340','92350','92360','92370'],
+                                'grande' : ['77','78','91','95']
+                            };
+        </script>
+    </head>
+    <body id="checkout">
+        <div id="page">
+            <span class="ombre"></span>
+            <header>
+                <div class="link-logo">
+                    <span class="logo"></span>
+                    <a href="accueil.html" title="Les Colis du Boucher - Accueil">
+                        <h1>La meilleure viande bio et label rouge livrée chez vous !</h1>
+                    </a>
+                </div>
+                <div class="register-basket">
+                    <div id="connection-register">
+                        <a href="#" title="se connecter">Connexion</a> / <a href="#" title="s'inscrire">Inscription</a>
+                    </div>
+                    <div id="basket">
+                        <span class="illustration"></span>
+                        <p>Panier (<span class="price">52</span> €)</p>
+                    </div>
+                </div>
+                <nav>
+                    <span></span>
+                    <ul>
+                        <li class="produits"><a href="#" title="Nos produits">Nos produits</a>
+                            <ul>
+                                <li class="first"><a href="#" title="Produits à la carte">Produits à la carte</a></li>
+                                <li><a href="#" title="Colis surprise">Colis surprise</a></li>
+                                <li><a href="#" title="Promotions">Promotions</a></li>
+                                <li><a href="#" title="Offres spéciales">Offres spéciales</a></li>
+                                <li class="last"><a href="#" title="Colis cadeau">Colis cadeau</a></li>
+                            </ul>
+                        </li>
+                        <li class="demarche"><a href="#" title="Notre démarche">Notre démarche</a>
+                            <ul>
+                                <li class="first"><a href="#" title="Notre circuit court">Notre circuit court</a></li>
+                                <li><a href="#" title="Nos éleveurs">Nos éleveurs</a></li>
+                                <li><a href="#" title="Préparation de la viande">Préparation des viandes</a></li>
+                                <li class="last"><a href="#" title="Viandes labellisées">Viandes labellisées</a></li>
+                            </ul>
+                        </li>
+                        <li class="recettes"><a href="#" title="Recettes">Recettes</a>
+                            <ul>
+                                <li class="first"><a href="#" title="Boeuf">Boeuf</a></li>
+                                <li><a href="#" title="Veau">Veau</a></li>
+                                <li><a href="#" title="Agneau">Agneau</a></li>
+                                <li><a href="#" title="Porc">Porc</a></li>
+                                <li><a href="#" title="Volaille">Volaille</a></li>
+                                <li><a href="#" title="Lapin">Lapin</a></li>
+                                <li class="last"><a href="#" title="Autres">Autres</a></li>
+                            </ul>
+                        </li>
+                        <li class="center"></li>
+                        <li class="village"><a href="#" title="Le village">Le village</a>
+                            <ul>
+                                <li class="first"><a href="#" title="Témoignages">Témoignages</a></li>
+                                <li><a href="#" title="Blog">Blog</a></li>
+                                <li class="last"><a href="#" title="Parrainage">Parrainage</a></li>
+                            </ul>
+                        </li>
+                        <li class="infos"><a href="#" title="Infos pratiques">Infos pratiques</a>
+                            <ul>
+                                <li class="first"><a href="#" title="Conservation et cuisson">Conservation et cuisson</a></li>
+                                <li><a href="#" title="Livraison">Livraison</a></li>
+                                <li><a href="#" title="Paiement">Paiement</a></li>
+                                <li class="last"><a href="#" title="Questions fréquentes">Questions fréquentes</a></li>
+                            </ul>
+                        </li>
+                        <li class="contact"><a href="#" title="contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="breadcrumb"></div>
+            </header>
+            <div id="columns" class="content clearfix">
+                <div class="bloc-checkout">
+                    <div id="breadcrumb-checkout">
+                        <ol>
+                            <li class="first identification">
+                                <a href="#" title="Identification">Identification</a>
+                                <span class="right-triangle"></span>
+                            </li>
+                            <li class="item-active adresse-livraison">
+                                <a href="#" title="Adresse de livraison">Adresse de livraison</a>
+                                <span class="right-triangle"></span>
+                            </li>
+                            <li class="date-livraison">
+                                <a href="#" title="Date de livraison">Date de livraison</a>
+                                <span class="right-triangle"></span>
+                            </li>
+                            <li class="last paiement">
+                                <a href="#" title="Paiement">Paiement</a>
+                            </li>
+                        </ol>
+                    </div>
+                    <div id="content-wrapper" class="clearfix">
+                        <div class="bloc content-address-invoice">
+                            <h2>Adresse de facturation</h2>
+                            <select>
+                                <option>Adresse Principale</option>
+                                <option>Adresse Secondaire</option>
+                            </select>
+                            <ul id="saved-address-invoice">
+                                <li>Pierre DURAN</li>
+                                <li>3, rue du chêne</li>
+                                <li>BAT A, appt 23, code : 4738</li>
+                                <li>75003</li>
+                                <li>Paris</li>
+                                <li>0616186327</li>
+                            </ul>
+                            <div id="form-address-invoice" class="hidden">
+                                <label for="nom-invoice">Nom</label>
+                                <input type="text" id="nom-invoice" value="DURAND"/>
+                                <label for="prenom-invoice">Prénom</label>
+                                <input type="text" id="prenom-invoice" value="Pierre"/>
+                                <label for="adresse-1-invoice">Adresse</label>
+                                <input type="text" id="adresse-1-invoice" value="3, rue du chêne"/>
+                                <label for="adresse-2-invoice">Adresse compl&eacute;mentaire</label>
+                                <input type="text" id="adresse-2-invoice" value="BAT A, appt 23, code : 4738"/>
+                                <label for="code-postal-invoice">Code Postal</label>
+                                <input type="text" id="code-postal-invoice" value="75003"/>
+                                <label for="ville-invoice">Ville</label>
+                                <input type="text" id="ville-invoice" value="Paris"/>
+                                <label for="telephone-invoice">T&eacute;l&eacute;phone</label>
+                                <input type="text" id="telephone-invoice" value="0616186327"/>
+                                <div class="submit-wrapper clearfix">
+                                    <a href="#" title="annuler" id="cancel-address-invoice" class="hidden">Annuler</a>
+                                    <input type="submit" class="red-button gradient" value="ENREGISTRER" id="adress-submit-invoice" />
+                                </div>
+                            </div>
+                            <a href="#" title="modifier votre adresse de livraison" id="modify-address-invoice">&rarr;&nbsp;<span>Modifier cette adresse</span></a>
+                        </div>
+                        <div class="bloc content-address-delivery">
+                            <h2>Adresse de livraison</h2>
+                            <div id="delivery-address">
+                                <select>
+                                    <option>Adresse Principale</option>
+                                    <option>Adresse Secondaire</option>
+                                </select>
+                                <ul id="saved-address-delivery">
+                                    <li>Pierre DURAN</li>
+                                    <li>3, rue du chêne</li>
+                                    <li>BAT A, appt 23, code : 4738</li>
+                                    <li><span class="postal-code check">75120</span></li>
+                                    <li>Paris</li>
+                                    <li>0616186327</li>
+                                </ul>
+                                <div id="form-address-delivery" class="hidden">
+                                    <label for="nom">Nom</label>
+                                    <input type="text" id="nom" value="DURAND"/>
+                                    <label for="prenom">Prénom</label>
+                                    <input type="text" id="prenom" value="Pierre"/>
+                                    <label for="adresse-1">Adresse</label>
+                                    <input type="text" id="adresse-1" value="3, rue du chêne"/>
+                                    <label for="adresse-2">Adresse compl&eacute;mentaire</label>
+                                    <input type="text" id="adresse-2" value="BAT A, appt 23, code : 4738"/>
+                                    <label for="code-postal">Code Postal</label>
+                                    <input type="text" id="code-postal" value="75003"/>
+                                    <label for="ville">Ville</label>
+                                    <input type="text" id="ville" value="Paris"/>
+                                    <label for="telephone">T&eacute;l&eacute;phone</label>
+                                    <input type="text" id="telephone" value="0616186327"/>
+                                    <div class="submit-wrapper clearfix">
+                                        <a href="#" title="annuler" id="cancel-address-delivery" class="hidden">Annuler</a>
+                                        <input type="submit" class="red-button gradient" value="ENREGISTRER" id="address-submit-delivery" />
+                                    </div>
+                                </div>
+                                <div id="form-add-address-delivery" class="hidden">
+                                    <label for="new-title">Libellé de l'adresse</label>
+                                    <input type="text" id="new-title" value="" />
+                                    <label for="new-company">Raison sociale (optionnel)</label>
+                                    <input type="text" id="new-company"/>
+                                    <label for="new-address-1">Adresse</label>
+                                    <input type="text" id="new-address-1"/>
+                                    <label for="new-address-2">Adresse compl&eacute;mentaire</label>
+                                    <input type="text" id="new-address-2"/>
+                                    <label for="new-code-postal">Code Postal</label>
+                                    <input type="text" id="new-code-postal"/>
+                                    <label for="new-ville">Ville</label>
+                                    <input type="text" id="new-ville"/>
+                                    <label for="new-telephone">T&eacute;l&eacute;phone</label>
+                                    <input type="text" id="new-telephone"/>
+                                    <div class="submit-wrapper clearfix">
+                                        <a href="#" title="annuler" id="cancel-add-address-delivery" class="hidden">Annuler</a>
+                                        <input type="submit" class="red-button gradient" value="ENREGISTRER" id="add-address-submit-delivery" />
+                                    </div>
+                                </div>
+                                <div><a href="#" title="modifier votre adresse de livraison" id="modify-address-delivery">&rarr;&nbsp;<span>Modifier cette adresse</span></a></div>
+                                <div><a href="#" title="ajouter une nouvelle adresse" id="add-address-delivery">&rarr;&nbsp;<span>Ajouter une nouvelle adresse</span></a></div>
+                            </div>
+                            <div id="delivery-relay" class="hidden">
+                                <p>Adresse Point Relais</p>
+                                <ul id="saved-address-relay">
+                                    <li>Bio Prestige</li>
+                                    <li>3, rue du chêne</li>
+                                    <li><span class="postal-code">75003</span> Paris</li>
+                                </ul>
+                                <div><a href="#" title="afficher la carte des points relais" id="show-map">&rarr;&nbsp;<span>afficher la carte des points relais</span></a></div>
+                                <div id="relays">
+                                    <div class="popin">
+                                        <a href="#" title="Fermer" class="popin-close"></a>
+                                        <p class="popin-title">Choisissez votre point relais</p>
+                                        <div class="clearfix content-wrapper">
+                                            <div id="left-side">
+                                                <ul id="relay-list"></ul>
+                                            </div>
+                                            <div id="right-side">
+                                                <div id="map"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bloc content-delivery-mode">
+                            <h2>Modes de livraison</h2>
+                            <ul>
+                                <li id="delivery-home-li">
+                                    <p>
+                                        <label class="radio" for="home-office"><input type="radio" name="delivery" id="home-office" checked/><span class="bold">Livraison à domicile ou au bureau</span> <span class="delivery-cost"></span></label>
+                                    </p>
+                                    <p class="description">En choisissant ce mode de livraison, vous pourrez nous indiquer à la prochaine étape le créneau horaire durant lequel vous souhaitez être livré.</p>
+                                </li>
+                                <li id="delivery-relay-li">
+                                    <p>
+                                        <label class="radio" for="relay"><input type="radio" name="delivery" id="relay" /><span class="bold">Livraison en point relais</span> <span class="delivery-cost"></span></label>
+                                    </p>
+                                    <p class="description">Avec la livraison en Point Relais vous avez l'avantage de disposer d'horaires beaucoup plus souples. Vous récupérez votre Colis quand cela vous arrange dans la journée, chez l'un de vos commerçants de proximité (presse, fleuriste, pressing...) du réseau Point Relais des Colis du Boucher.</p>
+                                </li>
+                                <li id="delivery-frozen-li">
+                                    <p>
+                                        <label class="radio" for="frozen"><input type="radio" name="delivery" id="frozen" /><span class="bold">Transport en colis réfrigéré</span> <span class="delivery-cost"></span></label>
+                                    </p>
+                                    <p class="description">Avec la livraison en Point Relais vous avez l'avantage de disposer d'horaires beaucoup plus souples. Vous récupérez votre Colis quand cela vous arrange dans la journée, chez l'un de vos commerçants de proximité (presse, fleuriste, pressing...) du réseau Point Relais des Colis du Boucher.</p>
+                                </li>
+                            </ul>
+                            <div id="colis-cadeau-wrapper">
+                                <hr class="dashed" />
+                                <label for="colis-cadeau" id="colis-cadeau-toggle" class="checkbox"><input type="checkbox" id="colis-cadeau"/> Je souhaite que ma commande soit envoyée par <a href="#">colis cadeau</a> <span class="price">+ <span id="sup">1,60</span> &euro;</span></label>
+                                <textarea placeholder="Saisissez le message qui sera joint au cadeau" id="colis-cadeau-message" class="hidden" disabled="disabled"></textarea>
+                            </div>
+                            <hr class="dashed" />
+                            <p id="total-price">Le montant TTC de votre commande est de <span class="price"><span data-price="67" id="final-price">67</span> &euro;</span></p>
+                        </div>
+                        <div id="error-price">
+                            <p><span class="bold">Minimum de commande non atteint.</span> Nous vous invitons &agrave; continuer vos achats.<br />Pour une livraison dans le <span id="error-postal"></span>, le montant de votre commande doit &ecirc;tre au minimum de <span id="error-minimum-price"></span> &euro;.<br />Il est actuellement de <span id="error-current-price"></span>&euro;.</p>
+                        </div>
+                    </div>
+                    <div id="continue-shopping">
+                        <input type="submit" value="valider" id="submit-address" class="disabled-button gradient" disabled />
+                        <a href="#" title="Continuer mes achats">&rarr;&nbsp;<span>Continuer mes achats</span></a>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div class="footer-top">
+                    <nav class="more-information">
+                        <ul>
+                            <li class="livraison">
+                                <a href="#" title="En savoir plus sur la livraison réfrigérée">
+                                    <span class="illustration"></span>
+                                    <span class="push">Livraison réfrigérée</span>
+                                    <span class="cta">découvrir</span>
+                                </a>
+                            </li>
+                            <li class="paiement">
+                                <a href="#" title="En savoir plus sur le paiement sécurisé">
+                                    <span class="illustration"></span>
+                                    <span class="push">Paiement sécurisé</span>
+                                    <span class="cta">découvrir</span>
+                                </a>
+                            </li>
+                            <li class="sav">
+                                <a href="#" title="En savoir plus sur le SAV">
+                                    <span class="illustration"></span>
+                                    <span class="push">Service après-vente</span>
+                                    <span class="cta">découvrir</span>
+                                </a>
+                            </li>
+                            <li class="faq">
+                                <a href="#" title="Consulter la foire aux questions">
+                                    <span class="illustration"></span>
+                                    <span class="push">Foire aux questions</span>
+                                    <span class="cta">découvrir</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer-bottom">
+                    <div class="newsletter">
+                        <p>Pour recevoir encore plus d'offres spéciales,
+                        anecdotes et conseils, inscrivez-vous à la newsletter!</p>
+                        <form id="form-newsletter" method="get">
+                            <input id="email" type="text" maxlength="100" placeholder="votre mail ici" name="email">
+                            <button type="submit" name="submit">S'inscrire</button>
+                        </form>
+                    </div>
+                    <nav class="add-link">
+                        <ul class="footer-link">
+                            <li><a href="#" title="Espace Pro">Espace Pro</a></li>
+                            <li><a href="#" title="Plan du site">Plan du site</a></li>
+                            <li><a href="#" title="CGV">CGV</a></li>
+                            <li><a href="#" title="Mentions légales">Mentions légales</a></li>
+                            <li><a href="#" title="Partenaires">Partenaires</a></li>
+                            <li><a href="#" title="Contact">Contact</a></li>
+                        </ul>
+                        <ul class="presse-fb">
+                            <li class="presse"><a href="#" title="La presse parle de nous"><span></span>La presse parle de nous</a></li>
+                            <li class="facebook"><a href="#" title="Aller sur notre page Facebook"><span></span>Suivez-nous sur Facebook</a></li>
+                        </ul>
+                    </nav>
+                    <div class="clearfix"></div>
+                    <nav class="seo-link">
+                        <ul>
+                            <li><a href="#" title="Colis viande label rouge">Colis viande label rouge</a></li>
+                            <li><a href="#" title="Colis viande label Bio">Colis viande label Bio</a></li>
+                            <li><a href="#" title="Colis viande de boeuf">Colis viande de boeuf</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#" title="Achat de viande bovine">Achat de viande bovine</a></li>
+                            <li><a href="#" title="Achat de viande en direct">Achat de viande en direct</a></li>
+                            <li><a href="#" title="Achat de viande de boeuf">Achat de viande de boeuf</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#" title="Viande bio">Viande bio</a></li>
+                            <li><a href="#" title="Viande label rouge">Viande label rouge</a></li>
+                            <li><a href="#" title="Viande livraison à domicile">Viande livraison à domicile</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#" title="Poulets label rouge">Poulets label rouge</a></li>
+                            <li><a href="#" title="Agneau label rouge">Agneau label rouge</a></li>
+                            <li><a href="#" title="Boeuf label rouge">Boeuf label rouge</a></li>
+                        </ul>
+                    </nav>
+                    <p class="copyright"><span>&copy;</span> 2012 - Les Colis du Boucher - Tous droits réservés</p>
+                    <div class="spe-clearfix-ie7"></div>
+                </div>
+            </footer>
+            <span class="shadow-bottom"></span>
+        </div>
+    </body>
+</html>

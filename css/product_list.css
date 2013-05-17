@@ -1,0 +1,411 @@
+/* ************************************************************************************************
+		PAGE CATALOGUE (Liste des produits)
+************************************************************************************************ */
+#center_column.page-list-product .big-bloc{
+	padding-left:0px;
+	padding-right:0px;
+}
+/* Titre */
+#center_column .title_list_product p,
+#center_column .title_list_product h1{
+	margin:0;
+	padding:0;
+}
+#center_column .title_list_product{
+	padding-bottom: 5px;
+	border-bottom: 1px solid #342110;
+	margin: 0px 24px 0px 24px;
+}
+#center_column .title_list_product span{
+	display: block;
+	margin: 0px auto 5px auto;
+}
+#center_column .title_list_product #big_pork{
+	background: url("../img/asset/img_solo/big_pork.png") no-repeat;
+    height: 55px;
+    width: 95px;
+}
+#center_column .title_list_product #big_fish{
+	background: url("../img/asset/img_solo/big_fish.png") no-repeat;
+    height: 38px;
+    width: 68px;
+	margin: 10px auto 20px auto;
+}
+#center_column .title_list_product h1{
+	font-family:'MyriadWebPro', Arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 16px;
+	text-align:center;
+	text-decoration: none;
+}
+#center_column.page-list-product-fish h1{
+	color:#358eda;
+}
+#center_column .title_list_product p{
+	text-align:center;
+	font-family: 'MyriadWebPro-Italic';
+	margin-top: 1px;
+}
+#center_column.page-list-product-fish .title_list_product{
+	padding-bottom: 40px;
+}
+
+/* Tri */
+#center_column .block-sort{
+	margin: 10px 24px 30px 24px;
+}
+#center_column.page-list-product-fish .block-sort{
+	padding-bottom: 10px;
+	border-bottom: 1px solid #342110;
+	margin-bottom: 14px;
+}
+#center_column .block-sort form label,
+#center_column .block-sort form .sbHolder{
+	float:left;
+}
+#center_column .block-sort form:after{
+	content:"";
+	display:block;
+	visibility:hidden;
+	clear:both;
+}
+.ie7 #center_column .block-sort form{
+	overflow: auto;
+}
+#center_column .block-sort form label{
+	margin-right: 10px;
+	padding-top: 6px;
+}
+#center_column select{
+	font-family: 'MyriadWebPro-Italic';
+	padding: 3px;
+	width: 184px;
+}
+/* Liste des produits */
+.list-product{
+	clear:both;
+}
+.list-product p, .list-product h3, .list-product h2{
+	padding: 0;
+	margin:0;
+}
+.list-product .category{
+	margin-top: 70px;
+}
+.list-product .category:first-child{
+	margin-top: 0px;
+}
+.list-product .category-title{
+	padding-bottom: 12px;
+	border-bottom: 1px solid #342110;
+	margin: 0px 24px 0px 24px;
+}
+.list-product .category-title h2{
+	margin-top: 10px;
+	color: #4E9912;
+	font-family: 'MyriadWebPro-Bold';
+	font-size: 18px;
+	text-align: center;
+}
+.list-product .category-title span{
+	display: block;
+	margin: auto;
+}
+.list-product .category-title #big_stove{
+	background: url('../img/asset/img_solo/gros_a_griller.png') no-repeat 0 0;
+	width: 75px;
+	height: 39px;
+}
+.list-product .category-title #pot{
+	background: url('../img/asset/img_solo/a_mijoter.png') no-repeat 0 0;
+	width: 62px;
+	height: 43px;
+}
+.list-product .category-title #oven{
+	background: url('../img/asset/img_solo/four.png') no-repeat 0 0;
+	width: 62px;
+	height: 48px;
+}
+.list-product .block-product{
+	padding: 10px 0px 14px 0px;
+	border-bottom: 1px solid #342110;
+}
+.list-product .block-product:first-child{
+	padding-top: 0px;
+}
+.list-product .block-product .identification-description,
+.list-product .block-product .detail{
+	float: left;
+	padding-top: 9px;
+}
+.list-product .block-product .infos,
+.list-product .block-product .action-product{
+	padding: 0px 9px 0px 9px;
+}
+.list-product .block-product .infos:after{
+	content:"";
+	display:block;
+	visibility:hidden;
+	clear:both;
+}
+.ie7 .list-product .block-product .infos{
+	overflow: auto;
+}
+.list-product .block-product .identification-description{
+	width:324px;
+	height: 90px;
+}
+.list-product .block-product .identification{
+	margin-bottom: 10px;
+}
+.list-product .block-product .identification h3{
+	font-size: 14px;
+}
+.list-product .block-product .identification p{
+	font-size: 13px;
+	font-family: 'MyriadWebPro-Italic';
+	height: 30px;
+}
+.list-product .block-product .identification-description .label-rouge{
+	background: url('../img/asset/img_solo/petit_label_rouge.png') no-repeat left 2px;
+	padding-left: 45px;
+}
+.list-product .block-product .identification-description .label-bio{
+	background: url('../img/asset/img_solo/petit_label_bio.png') no-repeat top left;
+	padding-left: 35px;
+}
+.list-product .block-product .identification-description p.warning{
+	background:none;
+	border:none;
+	color: #d44137;
+	font-size: 13px;
+}
+.list-product .block-product .detail{
+	width: 50px;
+	margin-left: 7px;
+}
+.list-product .block-product .detail span{
+	display:block;
+	font-size: 16px;
+	font-family: 'MyriadWebPro-Italic';
+}
+.list-product .block-product .detail span{
+	background: url('../img/asset/img_solo/jours.png') no-repeat left 2px;
+	padding: 5px 0px 5px 23px;
+}
+.list-product .block-product .detail span:first-child{
+	background: url('../img/asset/img_solo/silhouette.png') no-repeat 3px 3px;
+	padding-left: 26px;
+}
+.list-product .block-product .price{
+	float:right;
+	width:112px;
+	padding-top: 9px;
+}
+.list-product .block-product .price:after{
+	content:"";
+	display: block;
+	visibility:hidden;
+	clear: both;
+}
+.ie7 .list-product .block-product .price{
+	overflow: auto;
+}
+.list-product .block-product .reduction{
+	padding-top: 2px;
+}
+.list-product .block-product .price p.reduction_rate{
+	padding: 2px 2px 1px 2px;
+	background-color: white;
+	border: 1px solid #4E9912;
+	display:block;
+	text-align:center;
+	width:42px;
+	margin: 0px auto 0px auto;
+	color: #4d9810;
+	font-family: 'MyriadWebPro-Bold';
+}
+.page-list-product-fish .list-product .block-product .price p.reduction_rate{
+	color: #358eda;
+}
+.list-product .block-product .price p{
+	text-align:center;
+}
+.list-product .block-product .price .selling_price p{
+	color: #4E9912;
+}
+.page-list-product-fish .list-product .block-product .price .selling_price p{
+	color: #358eda;
+}
+.list-product .block-product .price p.price-piece{
+	font-size: 28px;
+	font-family: 'MyriadWebPro-Bold';
+}
+.list-product .block-product .price p.price-kg{
+	font-size: 14px;
+	color:#342110;
+}
+.list-product .block-product .reduction .full_price,
+.list-product .block-product .reduction .selling_price{
+	float: left;
+	padding-top: 4px;
+}
+.list-product .block-product .reduction .full_price{
+	margin-right: 10px;
+}
+.list-product .block-product .reduction .full_price p{
+	text-decoration:line-through;
+	color: #4E9912;
+}
+.page-list-product-fish .list-product .block-product .reduction .full_price p{
+	color: #358eda;
+}
+.list-product .block-product .reduction .full_price p span{
+	color: #ab9583;
+}
+.list-product .block-product .reduction p.price-piece{
+	font-size: 22px;
+}
+.list-product .block-product .reduction p.price-kg{
+	font-size: 11px;
+}
+.list-product .block-product .action-product{
+	clear:both;
+}
+.ie7 .list-product .block-product .action-product{
+	overflow: auto;
+}
+.list-product .block-product .action-product:after{
+	content: "";
+	display: block;
+	visibility: hidden;
+	clear: both;
+}
+.list-product .block-product .action-product > a{
+	float:left;
+	padding-top: 13px;
+}
+.list-product .block-product .action-product form{
+	float:right;
+	width:375px;
+	text-align:right;
+}
+.list-product .block-product .action-product form:after{
+	content:"";
+	display: block;
+	visibility: hidden;
+	clear: both;
+}
+.ie7 .list-product .block-product .action-product form{
+	overflow: auto;
+	width:385px;
+}
+.list-product .block-product .action-product a{
+	color: #4E9912;
+	font-family: 'MyriadWebPro-Italic';
+	text-decoration:none;
+}
+.list-product .block-product .action-product a:hover{
+	text-decoration:underline;
+}
+.page-list-product-fish .list-product .block-product .action-product a{
+	color: #358eda;
+}
+.list-product .block-product .action-product .form-panier .green-button{
+	padding: 0px;
+	margin-left: 2px;
+	font-size: 10px;
+	font-family: 'MyriadWebPro', Arial, sans-serif;
+	vertical-align: bottom;
+	width: 105px;
+	height: 26px;
+}
+.ie7 .list-product .block-product .action-product .form-panier .green-button{
+	border: 1px solid #5eb11a;
+	padding: 5px 0px 6px 0px;
+	width: 112px;
+	margin-left: 0px;
+	background: #5eb11a;
+}
+.list-product .block-product .action-product .form-panier .green-button:hover{
+	border: 1px solid #71c41e;
+	background: #1d600a;
+	background: -moz-linear-gradient(top,  #5bab19 0%, #1d600a 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5bab19), color-stop(100%,#1d600a));
+	background: -webkit-linear-gradient(top,  #5bab19 0%,#1d600a 100%);
+	background: -o-linear-gradient(top,  #5bab19 0%,#1d600a 100%);
+	background: -ms-linear-gradient(top,  #5bab19 0%,#1d600a 100%);
+	background: linear-gradient(to bottom,  #5bab19 0%,#1d600a 100%);
+	cursor: pointer;
+}
+#center_column .list-product .block-product .action-product .form-panier label{
+	float: left;
+	padding-top: 12px;
+}
+.list-product .block-product .action-product .sbHolder{
+	float: left;
+	margin: 0px 5px 0px 5px;
+}
+.list-product .block-product .action-product .sbOptions,
+.list-product .block-product .action-product .sbHolder,
+.list-product .block-product .action-product .sbSelector{
+	width: 155px;
+}
+.list-product .block-product .action-product .sbHolder,
+.list-product .block-product .action-product .sbSelector{
+	height: 24px;
+}
+.list-product .block-product .action-product .sbSelector{
+	line-height: 27px;
+}
+.list-product .block-product .action-product .sbHolder a{
+	float: none;
+	color: #342110;
+	text-decoration: none;
+	text-align:left;
+}
+.list-product .block-product .action-product .sbToggle{
+	width: 25px;
+	background-position: 8px 10px;
+	height: 24px;
+}
+#center_column .list-product .block-product .action-product .form-panier select{
+	margin-right: 10px;
+	width: 150px;
+}
+.list-product .block-product .action-product .form-panier  .moreless{
+	font-size: 18px;
+	width: 16px;
+	vertical-align: bottom;
+	height: 25px;
+	margin-top: 0px;
+}
+.list-product .block-product .action-product .form-panier input{
+	padding:0;
+	vertical-align: bottom;
+}
+.ie7 .list-product .block-product .action-product .form-panier input{
+	width: 30px;
+}
+.list-product .more-product{
+	background: url('../img/asset/img_solo/question.png') no-repeat left top;
+	padding: 10px 0px 10px 60px;
+	margin: 50px 0px 30px 20px;	
+}
+.list-product .more-product p.blod{
+	font-family: 'MyriadWebPro-Bold';
+}
+.list-product .more-product p a{
+	color: #4D9810;
+	text-decoration: none;
+}
+.list-product .more-product p a:hover{
+	text-decoration: underline;
+}
+.list-product .more-product p{
+	font-family: 'MyriadWebPro-Italic';
+}
+
+
+
+

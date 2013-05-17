@@ -1,0 +1,199 @@
+#my-cart #center_column {
+    width: 712px;
+}
+
+#my-cart .cart-title h1 {
+    margin-right: 10px;
+    padding-left: 30px;
+    float: left;
+    background: url('../img/asset/img_solo/panier.png') no-repeat;
+    font: 16px/24px 'MyriadWebPro-bold', Arial, sans-serif;
+    color: #342110;
+}
+
+#my-cart .cart-title hr {
+    width: 80%;
+    float: left;
+    margin-top: 13px;
+}
+
+#my-cart #continue-shopping {
+    float: left;
+    line-height: 30px !important;
+}
+
+#my-cart #validate-cart {
+    font-size: 13px;
+    float: right;
+}
+
+#my-cart .form-panier {
+    width: 100%;
+    margin: 40px 0 25px;
+    border: none;
+    border-collapse:collapse;
+}
+
+#my-cart .form-panier th {
+    border-left: 1px solid #c4b5aa;
+}
+
+#my-cart .form-panier th { text-align: center; padding: 5px; }
+
+#my-cart .form-panier tr th,
+#my-cart .form-panier tr.last td {
+    border-bottom: 1px solid #c4b5aa;
+}
+
+#my-cart .form-panier td {
+    border-left: 1px solid #c4b5aa;
+    text-align: center;
+    padding: 5px;
+}
+
+#my-cart .form-panier td.first {
+    text-align: left;
+    padding: 10px;
+}
+
+#my-cart .form-panier tfoot td { border: none; height: 30px; }
+#my-cart .form-panier tfoot td.first { border-left: 1px solid #c4b5aa; }
+#my-cart .form-panier tfoot td + td { text-align: right; font: 16px 'MyriadWebPro-bold', Arial, sans-serif; }
+#my-cart .form-panier tfoot td + td + td { text-align: center; color: #d44137; }
+
+#my-cart .form-panier tbody tr td + td { font: 16px 'MyriadWebPro-bold', Arial, sans-serif;}
+#my-cart .form-panier tbody tr td + td + td { font: 20px 'MyriadWebPro-regular', Arial, sans-serif; }
+#my-cart .form-panier tbody tr td + td + td + td { font: 16px 'MyriadWebPro-bold', Arial, sans-serif; color: #4D9810; }
+#my-cart .form-panier tbody tr td + td + td + td + td a { font: 14px 'MyriadWebPro-italic', Arial, sans-serif; color: #4D9810; }
+
+#my-cart .form-panier td .label-rouge {
+    background: url('../img/asset/img_solo/petit_label_rouge.png') no-repeat 9px;
+    padding: 8px 8px 8px 54px;
+}
+
+#my-cart .form-panier td .product-title {
+    font: 15px 'MyriadWebPro-bold', Arial, sans-serif;
+}
+
+#my-cart .form-panier td .product-details {
+    font: 13px 'MyriadWebPro-italic', Arial, sans-serif;
+}
+
+#my-cart .form-panier td .product-rare,
+#my-cart .form-panier td .product-availability {
+    font: 13px 'MyriadWebPro-regular', Arial, sans-serif;
+    color: #ae2b25;
+}
+
+#my-cart #continue-shopping {
+    color: #4d9810;
+    font: 16px 'MyriadWebPro-italic', Arial, sans-serif;
+}
+
+#my-cart #enter-postal-code {
+    text-align: center;
+}
+#my-cart #postal-code {
+    width: 64px;
+    height: 20px;
+    padding: 0;
+    padding-left: 5px;
+    text-align: center;
+}
+
+.ie7 #my-cart #postal-code {
+    vertical-align: middle;
+}
+
+#my-cart #enter-postal-code button{
+    background-color: #e0ceba;
+    border: 1px solid #fff;
+    color: #342110;
+    font-size: 13px;
+    margin-left: 2px;
+    height: 22px;
+    width: 24px;
+    filter: chroma(color=#000000);
+    vertical-align: bottom;
+}
+#my-cart #enter-postal-code button:hover{
+    border: 1px solid #79532F;
+    background-color: #342110;
+    color: #C1B9A9;
+    cursor: pointer;
+}
+
+.ie7 #my-cart #enter-postal-code button{
+    height: 24px;
+    width: 24px;
+}
+
+#my-cart #continue-shopping span {
+    font-weight: bold;
+}
+
+#my-cart .cart-minimum {
+    border: 1px solid #c4b5aa;
+    width: 94%;
+    position: relative;
+    left: 6%;
+    font-size: 13px;
+}
+
+#my-cart .cart-minimum .free-delivery,
+#my-cart .cart-minimum thead th { font: 14px 'MyriadWebPro-bold', Arial, sans-serif; color: #a5211f; }
+
+#my-cart .cart-minimum th,
+#my-cart .cart-minimum td {
+    border: 1px solid #c4b5aa;
+    text-align: center;
+    min-height: 35px;
+    height: auto !important; /* ie */ 
+    height: 35px; /* ie */ 
+    width: 33%;
+    padding: 6px 0;
+    font-weight: normal;
+}
+
+#my-cart .cart-minimum.col4 th,
+#my-cart .cart-minimum.col4 td {
+    width: 25%;
+    padding: 6px 0;
+}
+
+#my-cart .cart-minimum tr.first th {
+    background-color: #c4d7aa;
+}
+
+#my-cart #delivery-more-infos { text-align: right; margin-top: 5px; }
+
+#my-cart #delivery-more-infos a {
+    font: 14px 'MyriadWebPro-italic', Arial, sans-serif;
+    color: #4d9810;
+    
+}
+
+#my-cart #delivery-more-infos a:hover span {
+    text-decoration: underline;
+}
+
+#my-cart #minimum-unreached {
+    color: #a5211f;
+    margin: 15px 0;
+    text-align: center;
+    margin: 30px 0;
+}
+
+#my-cart #minimum-unreached a {
+    color: #a5211f;
+    text-decoration: underline;
+}
+
+#my-cart #page-buttons {
+    margin-top: 40px;
+}
+
+#my-cart .form-panier .quantity { height: 32px; line-height: 32px; }
+#my-cart .form-panier .minus { margin-left: 4px; }
+#my-cart .form-panier button,
+#my-cart .form-panier input { vertical-align: middle; float: left; }

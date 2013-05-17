@@ -1,0 +1,144 @@
+#contact  fieldset {
+		padding:0 0 15px 0;
+		border:1px solid #ccc;
+		background:#f8f8f8
+	}
+#contact  h3 {
+	margin:0 0 15px 0;
+	padding:8px;
+	font-size:14px;
+	color:#fff;
+	text-transform:uppercase;
+	background:url(../img/bg_form_h3.png) repeat-x 0 0 #989898
+}
+#contact #center_column p {margin:0; padding:0 0 10px 0;}
+#contact #center_column p.desc_contact { text-align: center; padding-left: 10px; padding-right: 10px; }
+
+#contact p.text label,
+#contact p.select label,
+#contact p.select span,
+#contact p.textarea label {
+	display:inline-block;
+	padding:6px 15px;
+	width:150px;/* 180 */
+	font-size:12px;
+	text-align:right
+}
+#contact p.textarea label {vertical-align:top}
+#contact p.text input,
+#contact p.select input {
+	padding:0 5px;
+	height:22px;
+	width:260px;/* 270 */
+	border:1px solid #ccc;
+	font-size: 12px;
+	color:#666
+}
+#contact p.select select {
+	margin-right:10px;
+	border:1px solid #ccc;
+	font-size: 12px;
+	color:#666
+}
+#contact p.textarea textarea {
+	height:80px;
+	width:270px;
+	border:1px solid #ccc;
+	font-size: 12px;
+	color:#666
+}
+#contact p.submit input {margin-left:185px;}
+
+/* ------------- Ajout ------------*/
+#static .contact label,
+#static .contact p{
+	font-size: 14px;
+}
+#static .contact .hat{
+	margin: 50px 0px 50px 0px;
+}
+#static .contact p.faq{
+	padding-left: 25px;
+	background: url('../img/asset/img_solo/green-faq.png') no-repeat 0 0;
+}
+#static .contact form{
+	padding-left: 52px;
+}
+#static .contact p.mail{
+	background: url('../img/asset/img_solo/green-mail.png') no-repeat 17px top;
+	padding-left: 50px;
+	margin-bottom: 30px;
+}
+#static .contact p.phone{
+	background: url('../img/asset/img_solo/green-phone.png') no-repeat 23px top;
+	padding: 5px 0px 5px 50px;
+}
+#static .contact h2{
+	font-size: 16px;
+}
+#static span.grey{
+	display: block;
+	color: #939190;
+}
+#static form label{
+	display:block;
+}
+#static form input,
+#static form select{
+	width: 298px;
+	margin-bottom: 20px;
+}
+#static form textarea{
+	padding: 3px;
+	resize: none;
+	border: 1px solid #BCB3A9;
+	height: 148px;
+	margin-bottom: 20px;
+	width: 456px;
+}
+#static form .select{
+	margin-bottom: 20px;
+}
+#static form .sbHolder{
+	font-family: 'MyriadWebPro-Italic';
+	height: 23px;
+}
+#static form .sbSelector{
+	line-height: 26px;
+	height: 23px;
+}
+#static form .sbToggle{
+	height: 23px;
+	background-position: 10px 9px;
+}
+#static form .sbToggleOpen{
+	background-position: 10px -23px;
+}
+#static form .sbHolder,
+#static form .sbSelector,
+#static form .sbOptions{
+	width: 304px;
+}
+#static form > .action{
+	width: 100%;
+	border: none;
+	display: block;
+	padding: 0px 0px 30px 0px;
+}
+#static form > .action button{
+	padding: 8px 25px 8px 25px;
+	width: 194px;
+	display: block;
+}
+.ie7 static form > .action button{
+	width:220px;
+}
+#static form:after{
+	content:"";
+	display:block;
+	visibility: hidden;
+	clear: both;
+}
+.ie7 #static form{
+	overflow: auto;
+}

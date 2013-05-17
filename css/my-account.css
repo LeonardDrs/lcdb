@@ -1,0 +1,952 @@
+#my-account #center_column {
+    width:712px;
+    margin: 0 24px 0 12px;
+}
+
+#my-account #center_column .step .left-side {
+    border-right: 1px solid #6E503B;
+    margin-right: 20px;
+}
+
+#my-account #left_column .secondary-menu .secondary-menu-item {
+    text-align: left;
+}
+
+#my-account #left_column .secondary-menu .secondary-menu-item a {
+    padding-left: 5px;
+}
+
+#my-account #left_column .submenu-item {
+    padding-left: 19px;
+}
+
+
+/* ************************************************************************************************
+        PAGE abonnement
+************************************************************************************************ */
+#my-account #center_column h2.green-title {
+    margin-bottom: 0;
+    line-height: 22px;
+    font-weight: normal;
+}
+#my-account #abonnement-box {
+    float: left;
+    margin: 0 30px 10px 30px;
+}
+#my-account .img-step {
+    display: block;
+    width: 22px;
+    height: 22px;
+    float: left;
+    margin-right: 10px;
+}
+
+#my-account .step {
+    margin: 15px 0;
+}
+
+.ie7 #my-account .step {
+    margin: 20px 0;
+}
+
+#my-account .img-step-1 { background: url('../img/asset/img_solo/abonnement-1.png') no-repeat; }
+#my-account .img-step-2 { background: url('../img/asset/img_solo/abonnement-2.png') no-repeat; }
+#my-account .img-step-3 { background: url('../img/asset/img_solo/abonnement-3.png') no-repeat; }
+#my-account .img-step-4 { background: url('../img/asset/img_solo/abonnement-4.png') no-repeat; }
+
+#my-account .step ul,
+#my-account .step .left-side,
+#my-account .step .right-side,
+#my-account .step .left-side p,
+#my-account .step .left-side ul {
+    float: left;
+}
+
+#my-account .step .frequence-list {
+    width: 115px;
+    margin-left: 7px;
+}
+
+#my-account .step .left-side ul li {
+    margin-bottom: 5px;
+}
+
+#my-account .step .left-side {
+    width: 195px;
+}
+
+#my-account #center_column .step .left-side.last-step {
+    width: auto;
+    border: none;
+    margin-right: 0;
+}
+
+#my-account .step .colis-label {
+    margin-right: 20px;
+}
+
+#my-account .step .notes {
+    margin: 20px 0;
+    font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-size: 12px;
+}
+
+#my-account #step1 .right-side ul,
+#my-account #step1 .right-side select,
+#my-account #step1 .right-side label,
+#my-account #step1 .right-side p {
+    float: left;
+}
+
+#my-account #step1 .right-side {
+    width: 445px;
+}
+.ie7 #my-account #step1 .right-side,
+.ie7 #my-account #step1 .left-side {
+    height: 102px;
+}
+
+#my-account #step1 .right-side label {
+    width: 135px;
+    margin-right: 20px;
+}
+
+#my-account #step1 .sbHolder{
+    float: left;
+    position: relative;
+    width: 60px;
+}
+#my-account #step1 .sbOptions,
+#my-account #step1 .sbSelector{
+    width: 60px;
+}
+
+#my-account #step1 .right-side p {
+    margin-top: 20px;
+    line-height: 30px;
+}
+
+#my-account #step1 .right-side p .price {
+    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+    color: #4d9810;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+#my-account #step2 .left-side {
+    min-height: 116px;
+    margin-bottom: 20px;
+}
+
+#my-account #step2 .right-side {
+    width: 446px;
+}
+
+#my-account #step2 .left-side ul li {
+    margin-bottom: 0px;
+}
+
+#my-account #step2 #form-adresse label,
+#my-account #step2 #form-adresse input {
+    display: block;
+}
+
+#my-account #step2 #form-adresse input {
+    margin: 2px 0 10px 0;
+    width: 170px;
+}
+
+#my-account #adress-submit {
+    padding: 8px 15px;
+    float: right;
+    margin-right: 18px !important;
+    display: inline;
+}
+
+.ie7 #my-account #adress-submit {
+    padding: 8px 5px;
+    font-size: 11px;
+    display: inline;
+}
+
+#my-account #villes,
+#my-account #modify-address,
+#my-account #cancel-address {
+    color: #4d9810;
+}
+
+#my-account #cancel-address {
+    float: left;
+    line-height: 36px;
+    display: inline;
+}
+
+#my-account #step2 #saved-adresse,
+#my-account #step2 #form-adresse {
+    margin-bottom: 20px;
+}
+
+#my-account #step2 a {
+    font-size: 13px;
+    font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
+}
+
+#my-account #villes-abonnees {
+    display: none;
+    background: url('../img/asset/img_solo/popin-overlay.png') repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3337;
+}
+
+#my-account #villes-abonnees .popin {
+    position: fixed;
+    width: 286px;
+    height: 280px;
+    left: 50%;
+    top: 50%;
+    margin: -158px 0 0 -155px;
+    background: url('../img/asset/textures/fond-papier-clair.jpg') repeat-y 0 0;
+    -moz-border-radius: 4px;
+         border-radius: 4px;
+    padding: 30px;
+    border: 1px solid #bead9f;
+    -webkit-transform: translateZ(0);
+}
+
+#my-account #villes-abonnees .popin select {
+    width: 286px;
+    font-size: 16px;
+}
+
+#my-account #villes-abonnees .popin .popin-close {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 6px;
+    right: 6px;
+    background: url('../img/asset/img_solo/popin-close.png') no-repeat;
+}
+
+#my-account #step3 .radio { padding-left: 8px; }
+#my-account .radio input { width: 13px; height: 13px; }
+#my-account #step3 #days-choice {
+    float: left;
+    padding-right: 4px;
+    width: 191px;
+}
+#my-account #step3 #days-choice div {
+    float: right;
+}
+#my-account #step3 #days-choice div.pronom {
+    line-height: 27px;
+}
+#my-account #step3 #day-number {
+    display: none;
+}
+#my-account #step3 #day-number .sbHolder {
+    float: left;
+    position: relative;
+    width: 65px;
+    margin-left: 5px;
+}
+.ie9 #my-account #step3 #day-number .sbHolder { margin-left: 3px; }
+#my-account #step3 #day-number .sbOptions,
+#my-account #step3 #day-number .sbSelector {
+    width: 65px;
+}
+
+#my-account #step3 #day-name .sbHolder {
+    float: left;
+    position: relative;
+    width: 98px;
+    margin-left: 5px;
+}
+#my-account #step3 #day-name .sbOptions,
+#my-account #step3 #day-name .sbSelector {
+    width: 98px;
+}
+
+#my-account #step3 #bi-mensuelle-phrase,
+#my-account #step3 #mensuelle-phrase { display: none; width: 100%; text-align: right; }
+
+
+#my-account #step3 .left-side {
+    min-height: 140px;
+    height: auto !important; /* ie */ 
+    height: 140px; /* ie */
+}
+
+#my-account #step3 .right-side p {
+    margin-bottom: 0;
+}
+
+#my-account .comment {
+    font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
+}
+
+#my-account #step3 #creneau {
+    float: none;
+    margin-top: 15px;
+}
+
+#my-account #step3 #creneau li {
+    margin-bottom: 15px;
+}
+
+#my-account #step3 #creneau #error {
+    color: #ae2b25;
+}
+
+#my-account #step3 #creneau .sbHolder li,
+#my-account #step3 #creneau li + li + li + li { margin-bottom: 0; }
+
+#my-account #step3 #creneau li p {
+    font: 14px 'MyriadWebPro-Italic', Arial, sans-serif;
+    line-height: 24px;
+    color: #4D9810;
+}
+
+#my-account #step3 #creneau li p img {    
+    vertical-align: bottom;
+    margin-left: 10px;
+}
+
+#my-account #step3 #creneau label {
+    width: 70px;
+    display: block;
+    float: left;
+    line-height: 23px;
+}
+
+#my-account #step3 #creneau li div + label,
+#my-account #step3 #creneau li select + label { text-align: center; }
+
+#my-account #step3 #creneau .sbHolder {
+    float: left;
+    position: relative;
+    width: 82px;
+    margin-left: 5px;
+}
+#my-account #step3 #creneau .sbOptions,
+#my-account #step3 #creneau .sbSelector {
+    width: 82px;
+}
+
+#my-account #step3 .step3-tel {
+    margin-top: 20px;
+}
+
+#my-account #step4 ul {
+    width: 565px;
+    margin-left: 15px;
+}
+
+#my-account #step4 input {
+    float: left;
+}
+
+#my-account #step4 label {
+    float: left;
+    max-width: 535px;
+    width: 535px;
+}
+
+#my-account #abonnement-submit {
+    width: 200px;
+    display: block;
+    margin: 35px auto;
+    padding: 10px 20px 10px 20px;
+}
+
+/* ************************************************************************************************
+        PAGE mon compte
+************************************************************************************************ */
+#my-account hr.mon-compte {
+    margin-top: 80px;
+}
+#my-account p.text-compte {
+    margin-bottom: 9px;
+}
+
+/* ************************************************************************************************
+        PAGE mes commandes
+************************************************************************************************ */
+#my-account #empty-command {
+    line-height: 24px;
+    margin-top: 80px;
+}
+#my-account #empty-command span.img-warning {
+    float: left;
+    width: 29px;
+    height: 24px;
+    background: url('../img/asset/img_solo/warning.png') no-repeat;
+    margin-right: 15px;
+}
+#my-account #mes-commandes .left-side,
+#my-account #mes-commandes .right-side {
+    float: left;
+    width: 45%;
+    display: inline; /* ie */
+}
+#my-account #mes-commandes .left-side { margin-right: 10%; }
+
+#my-account #mes-commandes h3 { 
+    font-size: 14px;
+    padding: 15px 0 0;
+}
+
+#my-account #mes-commandes p {
+    margin-bottom: 8px;
+}
+#my-account #mes-commandes p .bold {
+    margin-left: 10px;
+}
+#my-account #mes-commandes .commande-adresse p,
+#my-account #mes-commandes .commande-adresse ul {
+    float: left;
+}
+#my-account #mes-commandes .commande-adresse p {
+    width: 130px;
+}
+#my-account #mes-commandes .right-side a,
+#my-account #mes-commandes .left-side a {
+    color: #4d9810;
+    display: block;
+    font-family: Arial, sans-serif;
+}
+#my-account #mes-commandes .right-side a span,
+#my-account #mes-commandes .left-side a span{
+    font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
+}
+#my-account #mes-commandes .right-side a:hover span,
+#my-account #mes-commandes .left-side a:hover span{
+    text-decoration: underline;
+}
+#my-account #commande-detail {
+    padding: 20px 128px 10px;
+}
+#my-account #commande-detail h3 {
+    font-size: 14px;
+
+}
+#my-account #commande-detail h4 {
+    font-size: 15px;
+    color: #4d9810;
+    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+}
+#my-account #commande-detail h4.detail-title {
+    margin-top: 40px;
+}
+#my-account #commande-detail h5 {
+    font-size: 14px;
+    color: #342110;
+    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+}
+#my-account #commande-detail #facture-detail-table {
+    width: 100%;
+    margin-bottom: 13px;
+}
+#my-account #commande-detail #facture-detail-table tbody {
+    border-top: 1px solid #8A7260;
+    border-bottom: 1px solid #8A7260;
+}
+#my-account #commande-detail #facture-detail-table tbody tr.first {
+    border-bottom: 1px solid #8A7260;
+}
+#my-account #commande-detail #facture-detail-table tbody td {
+    padding: 5px 0 5px 20px;
+    border-bottom: 1px solid #8A7260;
+    border-top: 1px solid #8A7260;
+}
+#my-account #commande-detail #facture-detail-table tbody td.first {
+    border-right: 1px solid #8A7260;
+    padding: 5px 0;
+}
+#my-account #commande-detail h5,
+#my-account #commande-detail ul,
+#my-account #commande-detail p {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+#my-account #detail-commande-table {
+    width: 100%;
+    margin-top: 30px;
+}
+#my-account #detail-commande-table td,
+#my-account #detail-commande-table th {
+    border: 1px solid #C8C2B9;
+    text-align: center;
+}
+#my-account #detail-commande-table th {
+    width: 60px;
+    font: 13px 'MyriadWebPro-Italic', Arial, sans-serif;
+    color: #fff;
+    background: #70ac3e;
+}
+#my-account #detail-commande-table th.qte {
+    width: 40px;
+}
+#my-account #detail-commande-table th.first {
+    border-top: none;
+    width: 226px;
+    background: none;
+}
+#my-account #detail-commande-table td.first,
+#my-account #detail-commande-table th.first {
+    border-left: none;
+}
+#my-account #detail-commande-table td.label-rouge {
+    background: url('../img/asset/img_solo/petit_label_rouge.png') no-repeat 9px;
+    padding: 8px 8px 8px 54px;
+    text-align: left;
+    font: 13px 'MyriadWebPro-Bold', Arial, sans-serif;
+}
+#my-account #detail-commande-table tr {
+    height: 36px;
+}
+#my-account #detail-commande-table thead tr {
+    height: 31px;
+}
+#my-account #commande-detail #total {
+    padding: 30px 0 0px 30px;
+}
+#my-account #commande-detail #total p {
+    margin-bottom: 5px;
+}
+#my-account #commande-detail #total p.total {
+    margin-top: 15px;
+}
+#my-account #commande-detail #total span.title {
+    width: 220px;
+    display: block;
+    float: left;
+}
+
+
+/* ----------------- SCROLL TABLE ----------------- */
+
+/* define height and width of scrollable area. Add 16px to width for scrollbar          */
+#my-account div.tableContainer {
+    clear: both;
+    height: 285px;
+    width: 406px;
+    overflow: auto;
+}
+
+/* Reset overflow value to hidden for all non-IE browsers. */
+html>body#my-account div.tableContainer {
+    overflow: hidden;
+    width: 406px;
+}
+
+/* define width of table. Add 16px to width for scrollbar.           */
+/* All other non-IE browsers.                                        */
+html>body#my-account div.tableContainer table {
+    width: 406px;
+}
+
+html.ie7 body#my-account div.tableContainer,
+html.ie8 body#my-account div.tableContainer,
+html.ie9 body#my-account div.tableContainer {
+    overflow-y: auto;
+}
+
+/* define width of table. IE browsers only                 */
+html.ie7 body#my-account div.tableContainer table,
+html.ie8 body#my-account div.tableContainer table,
+html.ie9 body#my-account div.tableContainer table {
+    float: left;
+    width: 390px;
+}
+
+
+
+/* set table header to a fixed position. WinIE 6.x only                                       */
+/* In WinIE 6.x, any element with a position property set to relative and is a child of       */
+/* an element that has an overflow property set, the relative value translates into fixed.    */
+/* Ex: parent element DIV with a class of tableContainer has an overflow property set to auto */
+#my-account thead.fixedHeader tr {
+    position: relative;
+}
+
+.ie7 #my-account thead.fixedHeader tr,
+.ie8 #my-account thead.fixedHeader tr {
+    position: static;
+}
+
+/* set THEAD element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+html>body#my-account thead.fixedHeader tr {
+    display: block;
+}
+
+/* define the table content to be scrollable                                              */
+/* set TBODY element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+/* induced side effect is that child TDs no longer accept width: auto                     */
+html>body#my-account tbody.scrollContent {
+    display: block;
+    height: 190px;
+    overflow: auto;
+    width: 100%;
+}
+
+/* define width of TH elements: 1st, 2nd, and 3rd respectively.          */
+/* Add 16px to last TH for scrollbar padding. All other non-IE browsers. */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
+html>body#my-account thead.fixedHeader th {
+    width: 226px;
+}
+
+html>body#my-account thead.fixedHeader th + th {
+    width: 61px;
+}
+
+html>body#my-account thead.fixedHeader th + th + th {
+    width: 41px;
+}
+
+html>body#my-account thead.fixedHeader th + th + th + th {
+    width: 61px;
+}
+
+/* define width of TD elements: 1st, 2nd, and 3rd respectively.          */
+/* All other non-IE browsers.                                            */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
+html>body#my-account tbody.scrollContent td {
+    width: 164px;
+}
+
+html>body#my-account tbody.scrollContent td + td {
+    width: 60px;
+}
+
+html>body#my-account tbody.scrollContent td + td + td {
+    width: 40px;
+}
+
+html>body#my-account tbody.scrollContent td + td + td + td {
+    width: 60px;
+}
+
+
+
+
+/* ************************************************************************************************
+        Page mes informations
+************************************************************************************************ */
+
+/*asterisque en rouge*/
+.asterisque_rouge{color:#ae2b25;}
+
+/*labels du formulaire*/
+.labels_infos{margin-top:20px; margin-bottom:5px;}
+
+/*espace entre les radios boutons*/
+.label_radio {margin-left:20px;}
+
+/*input text*/
+.mes_informations input[type=text], .mes_informations input[type=password]{width:295px;}
+
+/*label en italique*/
+.label_italique{font-size:80%;font-style:italic;}
+
+/*bouton submit*/
+#informations_submit {margin-left:230px; margin-top:15px;}
+
+
+/* ************************************************************************************************
+        Page parrainage
+************************************************************************************************ */
+
+
+/*boutons top*/
+.menu_parrainage{margin-top:30px; margin-bottom:30px;}
+.menu_parrainage li{display:inline-block; zoom:1; *display:inline; border:1px solid #8f8a84; padding:5px; width:150px; text-align:center; margin:0px; color:#b1a9a1; cursor:pointer;}
+.menu_parrainage #first_li {background:#4d9810; color:#ffffff;}
+.menu_parrainage #second_li {border-left:none; border-right:none;}
+
+
+
+/*onglets*/
+.parrainage_bloc_first_li, .parrainage_bloc_second_li, .parrainage_bloc_third_li{position:absolute; width:678px;}
+.parrainage_bloc_second_li, .parrainage_bloc_third_li{display:none;}
+
+/*labels du formulaire*/
+.labels_parrainage{margin-top:20px; margin-bottom:5px;}
+
+/*input text*/
+#bloc_nom input[type=text], #bloc_prenom input[type=text], #bloc_mail input[type=text]{width:100%;}
+
+/*bloc nom*/
+#bloc_nom{width:160px;margin-right:30px; float:left;}
+
+/*bloc prénom*/
+#bloc_prenom{width:160px;margin-right:30px;float:left;}
+
+/*bloc e-mail*/
+#bloc_mail{width:260px;float:left;}
+
+/*bloc de texte inférieur*/
+.clear_both{clear:both;padding-top:30px;}
+.lien_vert a{color: #4D9810; line-height:18px;}
+.lien_vert a:hover{text-decoration:none;color: #4D9810;border-bottom: 1px solid #4D9810;}
+.lien_vert a:active{text-decoration:none;color: #4D9810;}
+
+/*bouton submit*/
+#parrainage_submit {margin-left:235px; margin-top:15px;}
+
+
+/*tableau*/
+#table_relancer_amis, #table_amis_parraines{width:100%;table-layout:fixed;}
+#table_relancer_amis tr, #table_amis_parraines tr{height:45px;}
+#table_relancer_amis th, #table_amis_parraines th{font-weight:bold;}
+#table_relancer_amis td, #table_amis_parraines td{border-top:1px solid #8f8a84 ;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+
+/*largeur des colonnes*/
+#table_relancer_amis .first_row{width:40px;}
+#table_relancer_amis .second_row{width:130px;}
+#table_relancer_amis .third_row{width:130px;}
+#table_relancer_amis .fourth_row{width:220px;}
+#table_relancer_amis .last_row{width:130px;}
+
+/*largeur des colonnes*/
+#table_amis_parraines .first_row{width:100px;}
+#table_amis_parraines .second_row{width:100px;}
+#table_amis_parraines .third_row{width:160px;}
+#table_amis_parraines .fourth_row{width:90px;}
+#table_amis_parraines .last_row{width:190px;}
+
+
+#relancer_amis_submit {margin-left:255px; margin-top:15px;}
+/* ************************************************************************************************
+        PAGE mes adresses - Formulaire
+************************************************************************************************ */
+/*--- FORMULAIRE ---*/
+#my-account .address h1{
+	margin-bottom: 0px;
+}
+#my-account .address .big-bloc > p{
+	margin-top: 4px;
+	margin-bottom: 15px;
+}
+#my-account .address p.information{
+	border-bottom: 1px solid #342110;
+	padding-bottom: 5px;
+}
+#my-account .address .big-bloc > p.information{
+	margin-bottom: 40px;
+}
+#my-account .address span.asterisque{
+	color: #ae2b25;
+}
+#my-account .address .big-bloc form > div{
+	float: right;
+	width: 306px;
+}
+#my-account .address form label{
+	display:block;
+}
+#my-account .address form label[for="address_title"]{
+	position: absolute;
+}
+#my-account .address form input,
+#my-account .address form select,
+#my-account .address form textarea{
+	width: 298px;
+	margin-bottom: 20px;
+}
+#my-account .address form input#address_title{
+	margin-top: 16px;
+}
+#my-account .address form input#mobile{
+	margin-bottom: 14px;
+}
+#my-account .address form textarea{
+	padding: 3px;
+	resize: none;
+	border: 1px solid #BCB3A9;
+	height: 70px;
+}
+#my-account .address form .select{
+	margin-bottom: 20px;
+}
+#my-account .address form .select label{
+	display:inline-block;
+	vertical-align: top;
+	padding: 5px 3px 0px 0px;
+}
+#my-account .address form .sbHolder{
+	font-family: 'MyriadWebPro';
+	display: inline-block;
+}
+#my-account .address form .sbHolder,
+#my-account .address form .sbSelector,
+#my-account .address form .sbOptions{
+	width: 95px;
+}
+#my-account .address form input:focus,
+#my-account .address form textarea:focus{
+	outline: none;
+	border: 1px solid #BA884F; 
+}
+#my-account .address .big-bloc form > div:first-child{
+	float: left;
+}
+#my-account .address .big-bloc form > div + div{
+	border-bottom: 1px solid #342110;
+}
+#my-account .address .big-bloc form > .action{
+	clear: both;
+	width: 100%;
+	float: none;
+	border: none;
+	display: block;
+	padding-top: 25px;
+}
+#my-account .address .big-bloc form > .action button{
+	padding: 8px 25px 8px 25px;
+	width: 194px;
+	margin: auto;
+	display: block;
+}
+.ie7 #my-account .address .big-bloc form > .action button{
+	width:220px;
+}
+#my-account .address .big-bloc form:after{
+	content:"";
+	display:block;
+	visibility: hidden;
+	clear: both;
+}
+.ie7 #my-account .address .big-bloc form{
+	overflow: auto;
+}
+#my-account .address .warning{
+	border: none;
+	background: none;
+	margin:0;
+	padding:0;
+}
+#my-account .address .warning > div{
+	margin: 50px 0px 50px 0px;
+	background: url('../img/asset/img_solo/warning.png') no-repeat 0 center;
+	padding-left: 40px;
+}
+#my-account .address .warning > div p{
+	margin:0;
+	color: #ae2b25;
+}
+/* PAGE mes adresses - Liste */
+#my-account #center_column.address .big-bloc{
+	padding: 20px;
+}
+#my-account .address #address-list{
+	border-top: 1px solid #342110;
+}
+#my-account .address .details-address{
+	width: 238px;
+	float: left;
+	padding-right:93px;
+	margin: 25px 0px 10px 0px;
+}
+#my-account .address .details-address > p{
+	margin-bottom: 0px;
+}
+#my-account .address #address-list:after{
+	display: block;
+	content: "";
+	visibility: hidden;
+	clear: both;
+}
+.ie7 #my-account .address #address-list{
+	overflow: auto;
+}
+#my-account .address .details-address p.information{
+	font-family: 'MyriadWebPro-Bold';
+	margin-bottom: 8px;
+}
+#my-account .address .action-link a{
+	color: #4D9810;
+	display: block;
+	font-family: 'MyriadWebPro-Italic';
+}
+#my-account .address .action-link {
+	border-top: 1px solid #342110;
+	padding-top:8px;
+	margin-top:8px;
+}
+#my-account .address .action-link a span{
+	margin-right: 10px;
+}
+#my-account .address .action{
+	margin-top: 15px;
+	clear: both;
+}
+#my-account .address .action button{
+	width: 192px;
+	display: block;
+	margin:auto;
+}
+/* ************************************************************************************************
+        PAGE mes réductions
+************************************************************************************************ */
+#my-account .reduction h1{
+	margin-bottom: 0px;
+}
+#my-account .reduction .big-bloc > p{
+	margin-top: 4px;
+	margin-bottom: 30px;
+}
+#my-account .reduction #bloc-reduction p.information {
+    border-bottom: 1px solid #342110;
+    padding-bottom: 5px;
+	margin-bottom: 25px;
+}
+#my-account .reduction #bloc-reduction p{
+	margin: 0;
+	line-height: 1.2em;
+}
+#my-account .reduction #bloc-reduction > div{
+	margin-bottom: 10px;
+}
+#my-account .reduction #bloc-reduction > div p.code{
+	width: 170px;
+	text-align: center;
+	border-right: 1px solid #342110;
+	display: inline-block;
+	vertical-align: top;
+}
+#my-account .reduction #bloc-reduction div p span{
+	color: #4d9810;
+}
+#my-account .reduction #bloc-reduction div div{
+	display: inline-block; 
+	width: 468px;
+	margin-left: 10px;
+}
+.ie7 #my-account .reduction #bloc-reduction div div,
+.ie7 #my-account .reduction #bloc-reduction > div p.code{
+	display: inline;
+	zoom: 1;
+}
+#my-account .reduction #get-reduction{
+	margin-top: 25px;
+}
+#my-account .reduction #get-reduction p{
+	margin: 0;
+}
+#my-account .reduction #bloc-reduction.no-code p{
+	line-height: 105px;
+	min-height: 105px;
+	display: inline-block;
+}
+#my-account .reduction #bloc-reduction.no-code p span{
+	vertical-align: middle;
+	display: inline-block;
+	margin-bottom: 25px;
+}

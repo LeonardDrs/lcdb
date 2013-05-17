@@ -1,0 +1,246 @@
+/* CMS pages ****************************************************************************** */
+#cms #center_column ul,
+#cms #center_column ol,
+#cms #center_column dl { margin-left:25px; margin-bottom:20px }
+
+#cms #center_column li { margin-bottom:5px }
+
+
+/* ************************************************************************************************
+        Page presse
+************************************************************************************************ */
+
+.presse .big-bloc {width:680px;margin-left:102px;}
+
+.article_presse{width:100%; height:145px;clear:both;margin-top:40px;}
+.article_presse img{width:190px; height:120px;float:left;}
+.article_presse .texte_presse{width:470px; height:100%; float:right;}
+
+.texte_presse span{font-weight:bold;}
+.texte_presse p {padding-top:10px; margin-bottom:5px; height:85px; text-align:justify; line-height:17px; overflow:hidden; text-overflow: ellipsis; }
+.texte_presse a {color: #4D9810; line-height:18px;}
+.texte_presse a:hover{text-decoration:none;color: #4D9810; border-bottom: 1px solid #4D9810;}
+.texte_presse a:active{text-decoration:none;color: #4D9810;}
+
+
+/* ************************************************************************************************
+        Page FAQ
+************************************************************************************************ */
+
+.italique{font-style:italic;}
+
+.lien_vert a{color: #4D9810; line-height:18px;}
+.lien_vert a:hover{text-decoration:none;color: #4D9810;border-bottom: 1px solid #4D9810;}
+.lien_vert a:active{text-decoration:none;color: #4D9810;}
+
+.titre_vert{color: #4D9810;font-weight:bold;margin-top:30px; margin-bottom:10px; font-size:16px;}
+
+.liste_FAQ li a{text-decoration:underline; cursor:pointer; margin:5px 0 5px 10px;}
+.liste_FAQ li a:hover {color:#a99f95;}
+
+.liste_FAQ div{display:none;margin-left:10px;padding:15px 0 15px 0;text-align:justify;}
+
+
+/* ************************************************************************************************
+        Page Livraison
+************************************************************************************************ */
+
+/*Bloc du dessus*/
+.bloc_sup_livraison{margin-top:30px;}
+
+.bloc_sup_livraison img{float:left;width:125px;}
+
+.bloc_sup_livraison .bloc_droite{float:right; width:400px; margin-right:130px; border-bottom:1px solid #a1988f;}
+
+.bloc_sup_livraison form{margin-left:95px;}
+.bloc_sup_livraison #code_postal {margin-left:5px;text-align:center; width:80px;}
+#bouton_carre{margin-left:5px; height:26px; background-color:#E0CEBA; border: 1px solid #FFFFFF; color: #342110; font-size: 13px; padding-right:5px;}
+#bouton_carre:hover {border: 1px solid #79532F; background-color: #342110; color: #C1B9A9;}
+
+/*Bloc du dessous*/
+.bloc_inf_livraison{clear:both;padding-top:30px;}
+
+/*tableau tarifs*/
+.tarifs_livraison{width:100%; border:1px solid #beb6ac;}
+.tarifs_livraison th,.tarifs_livraison td{text-align:center;padding:6px 0 6px 0;}
+.tarifs_livraison th {}
+.tarifs_livraison td{border:1px solid #beb6ac;}
+.tarifs_livraison .fond_vert{background-color: rgb(196, 217, 172); background-color: rgba(77, 152, 16, 0.3);}
+
+.rouge{font-weight:bold; color:#a32519;}
+
+.titre_vert_2{color: #4D9810;font-weight:bold;margin-top:50px; margin-bottom:10px; font-size:16px;}
+
+
+/*popin points relais*/
+
+.presse #relays {
+    display: none;
+    background: url('../img/asset/img_solo/popin-overlay.png') repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3337;
+    cursor: pointer;
+}
+
+.presse #relays .popin {
+    position: fixed;
+    width: 889px;
+    height: 436px;
+    left: 50%;
+    top: 50%;
+    margin: -233px 0 0 -456px;
+    background: url('../img/asset/textures/fond-papier-clair.jpg') repeat-y 0 0;
+    -moz-border-radius: 4px;
+         border-radius: 4px;
+    padding: 15px;
+    border: 1px solid #bead9f;
+    cursor: default;
+    text-align: left;
+    -webkit-transform: translateZ(0);/* force repaint */
+       -moz-transform: translateZ(0);/* force repaint */
+            transform: translateZ(0);/* force repaint */
+}
+
+.presse #relays .popin .popin-title {
+	font: 20px 'MyriadWebPro-Bold', Arial, sans-serif;
+}
+
+.presse #relays .popin .content-wrapper {
+	border: 2px solid #EDE3D7;
+}
+
+.presse #relays .popin .popin-close {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 6px;
+    right: 6px;
+    background: url('../img/asset/img_solo/popin-close.png') no-repeat;
+}
+
+.presse #relays #left-side,
+.presse #relays #right-side {
+	float: left;
+}
+
+.presse #relays #map {
+	width: 617px;
+	height: 370px;
+	border: 9px solid #fdfbf9;
+}
+
+#map .infoBox {
+	background: #fff;
+	border: 1px solid #EDE3D7;
+	width: 180px;
+	height: auto;
+	padding: 10px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,.5);
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,.5);
+	-o-box-shadow: 0px 3px 5px 0px rgba(0,0,0,.5);
+	box-shadow: 0px 3px 5px 0px rgba(0,0,0,.5);
+}
+
+#map .infoBox p,
+#map .infoBox h3 { margin-bottom: 0; padding: 0; }
+
+.presse #relay-list {
+	width: 250px;
+	max-height: 378px;
+	height: auto !important; /* ie */ 
+  	height: 378px; /* ie */ 
+	background-color: rgba(255,255,255,.6);
+	padding: 5px 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: relative; /* ie */ 
+}
+
+.ie7 .presse #relay-list,
+.ie8 .presse #relay-list {
+	background: url('../img/asset/textures/fond-blanc-ie.png') repeat;
+}
+
+.presse #relay-list li {
+    position: relative;
+    margin: 5px 0;
+}
+
+.presse #relay-list li.first { margin-top: 0; }
+.presse #relay-list li.last { margin-bottom: 0; }
+
+.presse #relay-list li div { height: 25px; }
+
+.presse #relay-list h3,
+.presse #relay-list p {
+	margin-bottom: 5px;
+	padding: 0 0 0 30px;
+}
+
+.presse #relay-list li span {
+	background-image: url('../img/asset/markers.png');
+	position: absolute;
+	top: 0;
+	left: 5px;
+	width: 20px;
+	height: 34px;
+}
+
+
+
+
+
+.presse #relay-list li hr {
+	width: 210px;
+	border-top: 1px solid #E6D7C7;
+}
+
+#map .infoBox .relay-mention,
+.presse #relay-list li .relay-mention {
+    color: #4d9810;
+    font: 14px 'MyriadWebPro-Italic', Arial, sans-serif;
+    margin-bottom: 10px;
+}
+
+.presse #relay-list li div{
+	height:0px;
+}
+
+#map .infoBox .relay-mention { margin-bottom: 0; }
+
+.marker1 { background-position: 0 0; } 
+.marker2 { background-position: 0 -35px; } 
+.marker3 { background-position: 0 -70px; } 
+.marker4 { background-position: 0 -105px; } 
+.marker5 { background-position: 0 -140px; } 
+.marker6 { background-position: 0 -175px; } 
+.marker7 { background-position: 0 -210px; } 
+.marker8 { background-position: 0 -245px; } 
+.marker9 { background-position: 0 -280px; } 
+.marker10 { background-position: 0 -315px; } 
+.marker11 { background-position: 0 -350px; } 
+.marker12 { background-position: 0 -385px; } 
+.marker13 { background-position: 0 -420px; } 
+.marker14 { background-position: 0 -455px; } 
+.marker15 { background-position: 0 -490px; } 
+.marker16 { background-position: 0 -525px; } 
+.marker17 { background-position: 0 -560px; } 
+.marker18 { background-position: 0 -595px; } 
+.marker19 { background-position: 0 -630px; } 
+.marker20 { background-position: 0 -665px; } 
+.marker21 { background-position: 0 -700px; } 
+.marker22 { background-position: 0 -735px; } 
+.marker23 { background-position: 0 -770px; } 
+.marker24 { background-position: 0 -805px; } 
+.marker25 { background-position: 0 -840px; } 
+.marker26 { background-position: 0 -875px; }
+
+
+.presse .green-button{display:none;}
