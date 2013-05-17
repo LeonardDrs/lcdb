@@ -374,10 +374,12 @@ class RecipeCategoryCore extends ObjectModel
 		GROUP BY c.`id_recipe_category`
 		ORDER BY `name` ASC');
 		
-		if($result[0]['level_depth'] != $depth){
-			foreach ($result as &$row)
-			{
-				$row['subcats'] = $this->getSubCategoriesByDepth($row['id_recipe_category'], $depth, $id_lang, $active);
+		if(isset($result[0])){
+			if($result[0]['level_depth'] != $depth){
+				foreach ($result as &$row)
+				{
+					$row['subcats'] = $this->getSubCategoriesByDepth($row['id_recipe_category'], $depth, $id_lang, $active);
+				}
 			}
 		}
 		
