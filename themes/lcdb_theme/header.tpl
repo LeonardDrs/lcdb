@@ -6,6 +6,11 @@
 <!--[if gt IE 8]> <html lang="fr" class="no-js ie9" lang="en"> <![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang_iso}">
 	<head>
+		<!--[if gte IE 9]
+        <style type="text/css">
+        .gradient { filter: none; }
+        </style>
+        <![endif]-->
 		<title>{$meta_title|escape:'htmlall':'UTF-8'}</title>
 {if isset($meta_description) AND $meta_description}
 		<meta name="description" content="{$meta_description|escape:html:'UTF-8'}" />

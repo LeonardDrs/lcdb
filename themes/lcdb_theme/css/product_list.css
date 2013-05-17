@@ -53,6 +53,8 @@
 /* Tri */
 #center_column .block-sort{
 	margin: 10px 24px 30px 24px;
+}
+#center_column.page-list-product-fish .block-sort{
 	padding-bottom: 10px;
 	border-bottom: 1px solid #342110;
 	margin-bottom: 14px;
@@ -72,7 +74,7 @@
 }
 #center_column .block-sort form label{
 	margin-right: 10px;
-	padding-top: 8px;
+	padding-top: 6px;
 }
 #center_column select{
 	font-family: 'MyriadWebPro-Italic';
@@ -178,9 +180,6 @@
 	color: #d44137;
 	font-size: 13px;
 }
-.page-list-product-fish .list-product .block-product .identification-description p.warning{
-	color: #358eda;
-}
 .list-product .block-product .detail{
 	width: 50px;
 	margin-left: 7px;
@@ -284,10 +283,12 @@
 }
 .list-product .block-product .action-product > a{
 	float:left;
-	padding-top: 14px;
+	padding-top: 13px;
 }
 .list-product .block-product .action-product form{
 	float:right;
+	width:375px;
+	text-align:right;
 }
 .list-product .block-product .action-product form:after{
 	content:"";
@@ -297,48 +298,76 @@
 }
 .ie7 .list-product .block-product .action-product form{
 	overflow: auto;
+	width:385px;
 }
 .list-product .block-product .action-product a{
 	color: #4E9912;
 	font-family: 'MyriadWebPro-Italic';
 	text-decoration:none;
 }
+.list-product .block-product .action-product a:hover{
+	text-decoration:underline;
+}
 .page-list-product-fish .list-product .block-product .action-product a{
 	color: #358eda;
 }
-.list-product .block-product .action-product .form-panier .ajout-panier{
-	padding: 4px 10px 4px 10px;
+.list-product .block-product .action-product .form-panier .green-button{
+	padding: 0px;
 	margin-left: 2px;
-	font-size: 11px;
+	font-size: 10px;
 	font-family: 'MyriadWebPro', Arial, sans-serif;
+	vertical-align: bottom;
+	width: 105px;
+	height: 26px;
 }
-.ie7 .list-product .block-product .action-product .form-panier .ajout-panier{
-	border-width: 0px;
-	padding: 6px 0px 4px 0px;
-	width: 120px;
+.ie7 .list-product .block-product .action-product .form-panier .green-button{
+	border: 1px solid #5eb11a;
+	padding: 5px 0px 6px 0px;
+	width: 112px;
 	margin-left: 0px;
+	background: #5eb11a;
+}
+.list-product .block-product .action-product .form-panier .green-button:hover{
+	border: 1px solid #71c41e;
+	background: #1d600a;
+	background: -moz-linear-gradient(top,  #5bab19 0%, #1d600a 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5bab19), color-stop(100%,#1d600a));
+	background: -webkit-linear-gradient(top,  #5bab19 0%,#1d600a 100%);
+	background: -o-linear-gradient(top,  #5bab19 0%,#1d600a 100%);
+	background: -ms-linear-gradient(top,  #5bab19 0%,#1d600a 100%);
+	background: linear-gradient(to bottom,  #5bab19 0%,#1d600a 100%);
+	cursor: pointer;
 }
 #center_column .list-product .block-product .action-product .form-panier label{
 	float: left;
-	padding-top: 14px;
+	padding-top: 12px;
 }
 .list-product .block-product .action-product .sbHolder{
 	float: left;
 	margin: 0px 5px 0px 5px;
-	margin-top: 3px;
 }
 .list-product .block-product .action-product .sbOptions,
 .list-product .block-product .action-product .sbHolder,
 .list-product .block-product .action-product .sbSelector{
 	width: 155px;
 }
+.list-product .block-product .action-product .sbHolder,
+.list-product .block-product .action-product .sbSelector{
+	height: 24px;
+}
+.list-product .block-product .action-product .sbSelector{
+	line-height: 27px;
+}
 .list-product .block-product .action-product .sbHolder a{
 	float: none;
 	color: #342110;
+	text-decoration: none;
+	text-align:left;
 }
 .list-product .block-product .action-product .sbToggle{
 	width: 25px;
-	background-position: 8px 11px;
+	background-position: 8px 10px;
+	height: 24px;
 }
 #center_column .list-product .block-product .action-product .form-panier select{
 	margin-right: 10px;
@@ -346,10 +375,14 @@
 }
 .list-product .block-product .action-product .form-panier  .moreless{
 	font-size: 18px;
-	width: 18px;
+	width: 16px;
+	vertical-align: bottom;
+	height: 25px;
+	margin-top: 0px;
 }
 .list-product .block-product .action-product .form-panier input{
 	padding:0;
+	vertical-align: bottom;
 }
 .ie7 .list-product .block-product .action-product .form-panier input{
 	width: 30px;
@@ -364,12 +397,11 @@
 }
 .list-product .more-product p a{
 	color: #4D9810;
+	text-decoration: none;
+}
+.list-product .more-product p a:hover{
 	text-decoration: underline;
 }
 .list-product .more-product p{
 	font-family: 'MyriadWebPro-Italic';
 }
-
-
-
-
