@@ -417,7 +417,7 @@ span.exclusive_mini, span.exclusive_small, span.exclusive, span.exclusive_large,
 	border-radius: 3px !important;
 	font-weight:bold;
 	color:#000;
-	background:url(../img/bg_bt.gif) repeat-x 0 0 #f4b61b;
+	background:url(../img/asset/bg_bt.gif) repeat-x 0 0 #f4b61b;
 	cursor: pointer;
 }
 *:first-child+html input.button_mini, *:first-child+html input.button_small, *:first-child+html input.button, *:first-child+html input.button_large,
@@ -447,12 +447,12 @@ a.exclusive_mini:active, a.exclusive_small:active, a.exclusive:active, a.exclusi
 input.button_disabled, input.exclusive_disabled, span.exclusive {
 	border:1px solid #ccc;
 	color:#999;
-	background:url(../img/bg_bt_2.gif) repeat-x 0 0 #CCCCCC;
+	background:url(../img/asset/bg_bt_2.gif) repeat-x 0 0 #CCCCCC;
 	cursor:default;
 }
 input.button_large, input.button_large_disabled, input.exclusive_large, input.exclusive_large_disabled, a.button_large, a.exclusive_large, span.button_large, span.exclusive_large, span.exclusive_large_disabled {
 	/*width: 180px;
-	background-image: url('../img/button-large.png')*/
+	background-image: url('../img/asset/button-large.png')*/
 }
 
 /* form **************************************************************************************** */
@@ -490,7 +490,7 @@ table.table_block th {
 	 font-weight:bold;
 	text-transform:uppercase;
 	text-shadow:0 1px 0 #000;
-	background:url(../img/bg_table_th.png) repeat-x 0 0 #999
+	background:url(../img/asset/bg_table_th.png) repeat-x 0 0 #999
 }
 table.std tr.alternate_item,
 table.table_block tr.alternate_item {background-color: #f3f3f3}
@@ -575,7 +575,7 @@ ul.footer_links li .icon {
 	border:none;
 	color:#fff;
 	text-shadow:0 1px 0 #000;
-	background:url(../img/bg_bt_compare.gif) repeat-x 0 0 #111;
+	background:url(../img/asset/bg_bt_compare.gif) repeat-x 0 0 #111;
 }
 
 .sortPagiBar .nbrItemPage {margin-left:40px;}
@@ -649,22 +649,22 @@ ul.step li {
 	width:151px;
 	text-align:center;
 	text-transform:uppercase;
-	background:url(../img/step_standard.gif) no-repeat center bottom transparent
+	background:url(../img/asset/step_standard.gif) no-repeat center bottom transparent
 }
 ul.step li a, ul.step li.step_current span, ul.step li.step_current_end span {
 	display:inline-block;
 	padding:8px 10px 12px;
 	color:#000;
-	background:url(../img/step_current_span.gif) no-repeat center bottom transparent
+	background:url(../img/asset/step_current_span.gif) no-repeat center bottom transparent
 }
 ul.step li.step_current {
 	font-weight:bold;
-	background:url(../img/step_current.gif) no-repeat center bottom transparent
+	background:url(../img/asset/step_current.gif) no-repeat center bottom transparent
 }
 
 ul.step li.step_current_end {
 	font-weight:bold;
-	background:url(../img/step_end_current.gif) no-repeat center bottom transparent
+	background:url(../img/asset/step_end_current.gif) no-repeat center bottom transparent
 }
 ul.step li.step_todo span {
 	display:inline-block;
@@ -675,9 +675,9 @@ ul.step li.step_todo span {
 }
 ul.step li.step_done {
 	font-weight:bold;
-	background:url(../img/step_done.gif) no-repeat center bottom transparent
+	background:url(../img/asset/step_done.gif) no-repeat center bottom transparent
 }
-/*ul.step li#step_end {background:url(../img/step_end.gif) no-repeat center bottom transparent}*/
+/*ul.step li#step_end {background:url(../img/asset/step_end.gif) no-repeat center bottom transparent}*/
 
 /* module productcomments ********************************************************************** */
 .rating {
@@ -703,8 +703,8 @@ ul.step li.step_done {
 	text-indent: -999em;
 	cursor: pointer
 }
-.cancel, .cancel a { background: url(../../../modules/productcomments/img/delete.gif) no-repeat 0 -16px !important }
-.star, .star a { background: url(../../../modules/productcomments/img/star.gif) no-repeat 0 0 }
+.cancel, .cancel a { background: url(../../../modules/productcommen../img/asset/delete.gif) no-repeat 0 -16px !important }
+.star, .star a { background: url(../../../modules/productcommen../img/asset/star.gif) no-repeat 0 0 }
 .cancel a, .star a {
 	display: block;
 	width: 100%;
@@ -2070,19 +2070,19 @@ html body .place-order-button:hover,
 	height: 54px;
 }
 .ribbon-votre-panier{
-	background: url('../img/img_solo/votre-panier.png') no-repeat;
+	background: url('../img/asset/img_solo/votre-panier.png') no-repeat;
 }
 .ribbon-frais-livraison{
-	background: url('../img/img_solo/frais-livraison.png') no-repeat;
+	background: url('../img/asset/img_solo/frais-livraison.png') no-repeat;
 }
 .ribbon-mot-boucher{
-	background: url('../img/img_solo/mot-boucher.png') no-repeat;
+	background: url('../img/asset/img_solo/mot-boucher.png') no-repeat;
 }
 .ribbon-temoignage{
-	background: url('../img/img_solo/temoignage.png') no-repeat;
+	background: url('../img/asset/img_solo/temoignage.png') no-repeat;
 }
 .frais-livraison .img-livraison{
-	background: url('../img/img_solo/livraison.png') no-repeat;
+	background: url('../img/asset/img_solo/livraison.png') no-repeat;
 	display: block;
 	width: 59px;
 	height: 24px;
@@ -2316,31 +2316,31 @@ nav.secondary-menu{
 	margin-right: 10px;
 }
 .submenu .img-boeuf{
-	background: url('../img/img_solo/boeuf.png') no-repeat;
+	background: url('../img/asset/img_solo/boeuf.png') no-repeat;
 }
 .submenu .img-veau{
-	background: url('../img/img_solo/veau.png') no-repeat;
+	background: url('../img/asset/img_solo/veau.png') no-repeat;
 }
 .submenu .img-agneau{
-	background: url('../img/img_solo/agneau.png') no-repeat;
+	background: url('../img/asset/img_solo/agneau.png') no-repeat;
 }
 .submenu .img-porc{
-	background: url('../img/img_solo/porc.png') no-repeat;
+	background: url('../img/asset/img_solo/porc.png') no-repeat;
 }
 .submenu .img-poulet{
-	background: url('../img/img_solo/poulet.png') no-repeat;
+	background: url('../img/asset/img_solo/poulet.png') no-repeat;
 }
 .submenu .img-volailles{
-	background: url('../img/img_solo/volailles.png') no-repeat;
+	background: url('../img/asset/img_solo/volailles.png') no-repeat;
 }
 .submenu .img-lapin{
-	background: url('../img/img_solo/lapin.png') no-repeat;
+	background: url('../img/asset/img_solo/lapin.png') no-repeat;
 }
 .submenu .img-poisson{
-	background: url('../img/img_solo/poisson.png') no-repeat;
+	background: url('../img/asset/img_solo/poisson.png') no-repeat;
 }
 .submenu .img-epicerie{
-	background: url('../img/img_solo/epicerie.png') no-repeat;
+	background: url('../img/asset/img_solo/epicerie.png') no-repeat;
 }
 
 /* ************************************************************************************************
@@ -2350,7 +2350,7 @@ nav.secondary-menu{
 	display: block;
 	width: 96px;
 	height:56px;
-	background: url('../img/img_solo/big_cow.png') no-repeat;
+	background: url('../img/asset/img_solo/big_cow.png') no-repeat;
 }
 /* ************************************************************************************************
 		PRODUCT PAGE
@@ -2377,7 +2377,7 @@ ul.idTabs li {
 }
 .idTabs .selected {
 	color:#000;
-	background: url(../img/bg_li_idTabs.png) repeat-x 0 0
+	background: url(../img/asset/bg_li_idTabs.png) repeat-x 0 0
 }
 
 #more_info_sheets {padding-top:10px}
@@ -2750,7 +2750,7 @@ ul.idTabs li {
     left: 50%;
     top: 50%;
     margin: -233px 0 0 -456px;
-    background: url('../img//textures/fond-papier-clair.jpg') repeat-y 0 0;
+    background: url('../img/asset//textures/fond-papier-clair.jpg') repeat-y 0 0;
     -moz-border-radius: 4px;
          border-radius: 4px;
     padding: 15px;
@@ -2773,7 +2773,7 @@ ul.idTabs li {
 }
 
 #order .content-address-delivery #delivery-relay #relay-list li {
-    background: url('../img//markers.png') no-repeat top left;
+    background: url('../img/asset//markers.png') no-repeat top left;
 }
 
 
@@ -3434,7 +3434,7 @@ ul.idTabs li {
 	padding-left: 20px;
 }
 #order .content-payment .bloc #bloc-reduction h2{
-	background: url('../img/img_solo/reduction.png') no-repeat 7px 3px;
+	background: url('../img/asset/img_solo/reduction.png') no-repeat 7px 3px;
 	padding-left: 24px;
 }
 #order .content-payment .bloc #bloc-reduction #form-reduc input{
@@ -4461,7 +4461,7 @@ margin: 0 24px 0 12px;
 #module-referralprogram-referralprogram-program form p.see_email {
 	padding-left:10px;
 	color: #0088cc;
-	background:url(../img/arrow_right_1.png) no-repeat 0 4px;
+	background:url(../img/asset/arrow_right_1.png) no-repeat 0 4px;
 }
 #module-referralprogram-referralprogram-program form p.see_email a {
 	color: #0088cc;
