@@ -128,6 +128,8 @@ class AdminCarriersCEControllerCore extends AdminController
 				'submit' => array()
 			)
 		);
+		
+		$this->_filter = 'AND type_carrier = 1';
 
 		parent::__construct();
 	}

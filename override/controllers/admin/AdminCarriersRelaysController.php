@@ -39,19 +39,6 @@ class AdminCarriersRelaysControllerCore extends AdminController
 				'title' => $this->l('Name'),
 				'width' => 'auto'
 			),
-			'image' => array(
-				'title' => $this->l('Logo'),
-				'align' => 'center',
-				'image' => 's',
-				'orderby' => false,
-				'search' => false,
-				'width' => 120
-			),
-			'delay' => array(
-				'title' => $this->l('Delay'),
-				'width' => 300,
-				'orderby' => false
-			),
 			'active' => array(
 				'title' => $this->l('Status'),
 				'align' => 'center',
@@ -128,6 +115,8 @@ class AdminCarriersRelaysControllerCore extends AdminController
 				'submit' => array()
 			)
 		);
+		
+		$this->_filter = 'AND type_carrier = 2';
 
 		parent::__construct();
 	}
