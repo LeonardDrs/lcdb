@@ -27,6 +27,9 @@ class CarrierRelayCore extends ObjectModel
 
  	/** @var string Name */
 	public $name;
+	
+	/** @var boolean carrier type */
+	public $type_carrier = 2;
 
  	/** @var string URL with a '@' for */
 	public $url;
@@ -94,6 +97,7 @@ class CarrierRelayCore extends ObjectModel
 			/* Classic fields */
 			'id_reference' => 			array('type' => self::TYPE_INT),
 			'name' => 					array('type' => self::TYPE_STRING, 'validate' => 'isCarrierName', 'required' => true, 'size' => 64),
+			'type_carrier' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isUnsignedInt'),
 			'active' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool', 'required' => true),
 			'is_free' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'url' => 					array('type' => self::TYPE_STRING, 'validate' => 'isAbsoluteUrl'),
