@@ -7,7 +7,7 @@
 			<h1>Abonnez-vous !</h1>
 			<p>Simplifiez-vous la vie avec nos divers abonnements.</p>
 			<div class="clearfix">
-				<img src="{$base_dir}themes/lcdb_theme/img/img_solo/abonnement-box.png" alt="abonnement colis du boucher" title="abonnement colis du boucher" id="abonnement-box" />
+				<img src="{$base_dir}themes/lcdb_theme/img/asset/img_solo/abonnement-box.png" alt="abonnement colis du boucher" title="abonnement colis du boucher" id="abonnement-box" />
 				<p class="justified">Plus besoin de penser à passer commande, courir au supermarché ou sortir un plat surgelé (sic)…En vous abonnant vous décidez de recevoir régulièrement chez vous les meilleures viandes d’Auvergne, Bio ou Label Rouge. Parmi tous nos différents abonnements, vous pourrez opter pour du sur-mesure !</p>
 			</div>
 			<hr />
@@ -264,7 +264,7 @@
 									</select>
 									<label>(facultatif)</label>
 								</li>
-								<li><p>Votre boucher est plutôt du matin <img src="img/img_solo/smiley.png" title=":)" alt="smiley content" /></p></li>
+								<li><p>Votre boucher est plutôt du matin <img src="{$base_dir}themes/lcdb_theme/img/asset/img_solo/smiley.png" title=":)" alt="smiley content" /></p></li>
 							</ul>
 						</div>
 					</div>
