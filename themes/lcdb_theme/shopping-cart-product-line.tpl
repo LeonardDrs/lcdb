@@ -23,15 +23,45 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<tr id="product_{$product.id_product}_{$product.id_product_attribute}_0_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="{if isset($productLast) && $productLast && (!isset($ignoreProductLast) || !$ignoreProductLast)}last_item{elseif isset($productFirst) && $productFirst}first_item{/if} {if isset($customizedDatas.$productId.$productAttributeId) AND $quantityDisplayed == 0}alternate_item{/if} cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}">
-	<td class="cart_product">
-		<a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute)|escape:'htmlall':'UTF-8'}"><img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'small_default')}" alt="{$product.name|escape:'htmlall':'UTF-8'}" {if isset($smallSize)}width="{$smallSize.width}" height="{$smallSize.height}" {/if} /></a>
+<tr class="first">
+	<td class="first">
+		<div class="label-rouge">
+			<span class="product-title">Gite (idéal en Tartare ou Haché)</span>
+			<br/>
+			<span class="product-details">2 pièces de 160 - 180g</span>
+		</div>
+		<span class="product-rare">Produit rare : indisponibilité à prévoir.</span>
+		<br/>
+		<span class="product-availability">Livrable jusqu'au 30/05/2013</span>
 	</td>
-	<td class="cart_description">
+	<td><span class="product-unit-price">5</span> &euro;</td>
+	<td>
+		<button type="button" name="minus" class="moreless minus">-</button>
+		<input class="quantity" type="text" maxlength="2" value="1" name="quantity" disabled>
+		<button type="button" name="plus" class="moreless plus">+</button>
+	</td>
+	<td><span class="product-total-price">5</span> &euro;</td>
+	<td><a href="#" title="supprimer">supprimer</a></td>
+</tr>
+
+<tr id="product_{$product.id_product}_{$product.id_product_attribute}_0_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="{if isset($productLast) && $productLast && (!isset($ignoreProductLast) || !$ignoreProductLast)}last_item{elseif isset($productFirst) && $productFirst}first_item{/if} {if isset($customizedDatas.$productId.$productAttributeId) AND $quantityDisplayed == 0}alternate_item{/if} cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}">
+	<td class="cart_product first">
+		<a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute)|escape:'htmlall':'UTF-8'}"><img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'small_default')}" alt="{$product.name|escape:'htmlall':'UTF-8'}" {if isset($smallSize)}width="{$smallSize.width}" height="{$smallSize.height}" {/if} /></a>
+
 		<p class="s_title_block"><a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute)|escape:'htmlall':'UTF-8'}">{$product.name|escape:'htmlall':'UTF-8'}</a></p>
 		{if isset($product.attributes) && $product.attributes}<a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute)|escape:'htmlall':'UTF-8'}">{$product.attributes|escape:'htmlall':'UTF-8'}</a>{/if}
+
+		<a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute)|escape:'htmlall':'UTF-8'}">
+			<div class="label-rouge">
+				<span class="product-title">Gite (idéal en Tartare ou Haché)</span>
+				<br/>
+				<span class="product-details">2 pièces de 160 - 180g</span>
+			</div>
+			<span class="product-rare">Produit rare : indisponibilité à prévoir.</span>
+			<br/>
+			<span class="product-availability">Livrable jusqu'au 30/05/2013</span>
+		</a>
 	</td>
-	<td class="cart_ref">{if $product.reference}{$product.reference|escape:'htmlall':'UTF-8'}{else}--{/if}</td>
 	<td class="cart_unit">
 		<span class="price" id="product_price_{$product.id_product}_{$product.id_product_attribute}_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}">
 			{if !empty($product.gift)}

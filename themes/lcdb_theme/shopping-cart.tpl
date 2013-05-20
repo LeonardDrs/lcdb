@@ -1,16 +1,102 @@
 {capture name=path}{l s='Your shopping cart'}{/capture}
-{assign var='current_step' value='summary'}
-
 <div id="columns" class="content clearfix">
+	<div id="left_column">
+		{include file="$tpl_dir./category-leftcol.tpl"}
+	</div>
+	 <div id="center_column">
+		<div class="big-bloc">
+			<div class="clearfix cart-title">
+				<h1>Mon panier</h1>
+				<hr class="dashed" />
+			</div>
+				{if isset($account_created)}
+					<p class="success">
+						{l s='Your account has been created.'}
+					</p>
+				{/if}
+				{include file="$tpl_dir./errors.tpl"}
+
+				{if isset($empty)}
+					<p class="warning">{l s='Your shopping cart is empty.'}</p>
+				{elseif $PS_CATALOG_MODE}
+					<p class="warning">{l s='This store has not accepted your new order.'}</p>
+				{else}
+					<script type="text/javascript">
+					// <![CDATA[
+					var currencySign = '{$currencySign|html_entity_decode:2:"UTF-8"}';
+					var currencyRate = '{$currencyRate|floatval}';
+					var currencyFormat = '{$currencyFormat|intval}';
+					var currencyBlank = '{$currencyBlank|intval}';
+					var txtProduct = "{l s='product' js=1}";
+					var txtProducts = "{l s='products' js=1}";
+					var deliveryAddress = {$cart->id_address_delivery|intval};
+					// ]]>
+					</script>
+					<p style="display:none" id="emptyCartWarning" class="warning">{l s='Your shopping cart is empty.'}</p>
+				{/if}
+			<table class="form-panier">
+				<thead>
+					<tr>
+						<th>Produit</th>
+						<th>Prix unitaire</th>
+						<th>Quantité</th>
+						<th>Prix Total TTC</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{foreach $products as $product}
+						{assign var='productId' value=$product.id_product}
+						{assign var='productAttributeId' value=$product.id_product_attribute}
+						{assign var='quantityDisplayed' value=0}
+						{assign var='odd' value=$product@iteration%2}
+						{assign var='ignoreProductLast' value=isset($customizedDatas.$productId.$productAttributeId) || count($gift_products)}
+						<!-- {* Display the product line *} -->
+						{include file="./shopping-cart-product-line.tpl" productLast=$product@last productFirst=$product@first}
+					{/foreach}
+					{assign var='last_was_odd' value=$product@iteration%2}
+					{foreach $gift_products as $product}
+						{assign var='productId' value=$product.id_product}
+						{assign var='productAttributeId' value=$product.id_product_attribute}
+						{assign var='quantityDisplayed' value=0}
+						{assign var='odd' value=($product@iteration+$last_was_odd)%2}
+						{assign var='ignoreProductLast' value=isset($customizedDatas.$productId.$productAttributeId)}
+						{assign var='cannotModify' value=1}
+						{* Display the gift product line *}
+						{include file="./shopping-cart-product-line.tpl" productLast=$product@last productFirst=$product@first}
+					{/foreach}
+				</tbody>
+				{if $priceDisplay}
+					<tfoot>
+						<tr>
+							<td class="first"></td>
+							<td colspan="2">{if $display_tax_label}{l s='Total products (tax excl.):'}{else}{l s='Total products:'}{/if}</td>
+							<td><span id="subtotal">{displayPrice price=$total_products}</span></td>
+						</tr>
+					</tfoot>
+				{else}
+					<tfoot>
+						<tr>
+							<td class="first"></td>
+							<td colspan="2">{if $display_tax_label}{l s='Total products (tax incl.):'}{else}{l s='Total products:'}{/if}</td>
+							<td><span id="subtotal">{displayPrice price=$total_products_wt}</span></td>
+						</tr>
+					</tfoot>
+				{/if}
+			</table>
+			<p id="enter-postal-code" class="red">Pour connaître vos conditions de livraison, merci d'indiquer votre code postal : <input id="postal-code" type="text" placeholder="00000" name="postal-code">
+			<button type="submit" name="submit">OK</button></p>
+			<div class="clearfix" id="page-buttons">
+				<a href="#" title="Continuer mes achats" id="continue-shopping">&rarr;&nbsp;<span>Continuer mes achats</span></a>
+				<button type="button" name="submit" id="validate-cart" class="disabled-button gradient" disabled="disabled">Valider mon panier</button>
+			</div>
+		</div>
+	</div><!-- / #center_column -->
 	<div class="bloc-checkout">
-			{include file="./order-steps.tpl"}
 		<div class="content-checkout">
 			<h1>{l s='Shopping cart summary'}</h1>
 			<div>
-				
-				
-				
-				
+
 				{if isset($account_created)}
 					<p class="success">
 						{l s='Your account has been created.'}

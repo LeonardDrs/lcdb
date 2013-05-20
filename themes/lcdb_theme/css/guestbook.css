@@ -14,7 +14,7 @@
 }
 .ie7 .bloc,
 .ie8 .bloc{
-	background: url('../img/asset/textures/fond_blanc_ie.png') repeat;
+	background: url('../img/textures/fond_blanc_ie.png') repeat;
 }
 #guestbook .bloc{
 	width: 666px;
@@ -98,6 +98,6 @@
 	margin: 20px 0px 20px 0px;
 }
 #guestbook .guestbook .comment p.message-success{
-	background: url('../img/asset/img_solo/check.png') no-repeat 0 0;
+	background: url('../img/img_solo/check.png') no-repeat 0 0;
 	padding: 18px 0px 10px 40px;
 }

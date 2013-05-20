@@ -30,8 +30,7 @@ class Category extends CategoryCore
 			
 			foreach ($result as &$row)
 			{
-				$row['subcats'] = $this->getSubCategoriesByDepth($row['id_category'], $depth, $id_lang, $active);
-				
+				$row['subcats'] = Category::getSubCategoriesByDepth($row['id_category'], $depth, $id_lang, $active);
 			}
 		}
 		

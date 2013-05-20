@@ -116,6 +116,26 @@ class OrderControllerCore extends ParentOrderController
 			die(Tools::jsonEncode($return));
 		}
 
+		if (Tools::getValue('ajax') && Tools::getValue('method') == 'getCarrier')
+		{
+			// Change virtualy the currents delivery options
+			// $delivery_option = $this->context->cart->getDeliveryOption();
+			// $delivery_option[(int)Tools::getValue('id_address')] = Tools::getValue('id_delivery_option');
+			// $this->context->cart->setDeliveryOption($delivery_option);
+			// $this->context->cart->save();
+			$return = array(
+				'content' => Hook::exec(
+					'displayCarrierList',
+					array(
+						'address' => new Address((int)Tools::getValue('id_address'))
+					)
+				)
+			);
+
+			$return = $this->getCarrier();
+			die(Tools::jsonEncode($return));
+		}
+
 		if ($this->nbProducts)
 			$this->context->smarty->assign('virtual_cart', $isVirtualCart);
 
@@ -377,6 +397,11 @@ class OrderControllerCore extends ParentOrderController
 		$this->context->cart->checkedTOS = '1';
 
 		parent::_assignPayment();
+	}
+
+	protected function getCarrier()
+	{
+		
 	}
 }
 

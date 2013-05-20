@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     $('#modify-address-invoice').click(function(){
         $('.content-address-invoice select').selectbox('disable');
-        $('#saved-address-invoice').fadeOut('fast', function(){
+        $('#address_invoice').fadeOut('fast', function(){
             $('#form-address-invoice').fadeIn('fast');
         });
         $('#modify-address-invoice').fadeOut('fast', function(){
@@ -15,7 +15,7 @@ $(document).ready(function(){
     $('#cancel-address-invoice').click(function(){
         $('.content-address-invoice select').selectbox('enable');
         $('#form-address-invoice').fadeOut('fast', function(){
-            $('#saved-address-invoice').fadeIn('fast');
+            $('#address_invoice').fadeIn('fast');
         });
         $('#cancel-address-invoice').fadeOut('fast', function(){
             $('#modify-address-invoice').fadeIn('fast');
@@ -30,7 +30,7 @@ $(document).ready(function(){
 
     $('#modify-address-delivery').click(function(){
         $('.content-address-delivery select').selectbox('disable');
-        $('#saved-address-delivery').fadeOut('fast', function(){
+        $('#address_delivery').fadeOut('fast', function(){
             $('#form-address-delivery').fadeIn('fast');
         });
         $('#modify-address-delivery').fadeOut('fast', function(){
@@ -42,7 +42,7 @@ $(document).ready(function(){
     $('#cancel-address-delivery').click(function(){
         $('.content-address-delivery select').selectbox('enable');
         $('#form-address-delivery:visible').fadeOut('fast', function(){
-            $('#saved-address-delivery').fadeIn('fast');
+            $('#address_delivery').fadeIn('fast');
         });
         $('#cancel-address-delivery').fadeOut('fast', function(){
             $('#modify-address-delivery').fadeIn('fast');
@@ -53,7 +53,7 @@ $(document).ready(function(){
     $('#cancel-add-address-delivery').click(function(){
         $('.content-address-delivery select').selectbox('enable');
         $('#form-add-address-delivery:visible').fadeOut('fast', function(){
-            $('#saved-address-delivery').fadeIn('fast');
+            $('#address_delivery').fadeIn('fast');
             $('#delivery-address .sbHolder').fadeIn('fast');
         });
         $('#cancel-add-address-delivery').fadeOut('fast', function(){
@@ -72,7 +72,7 @@ $(document).ready(function(){
     $('#add-address-delivery').click(function(){
         $('.content-address-delivery select').selectbox('disable');
         $('#delivery-address .sbHolder').fadeOut('fast');
-        $('#saved-address-delivery').fadeOut('fast', function(){
+        $('#address_delivery').fadeOut('fast', function(){
             $('#form-add-address-delivery').fadeIn('fast', function(){
                 $('#new-title').focus();
             });
@@ -175,11 +175,10 @@ $(document).ready(function(){
     });
 
     function checkInformations() {
-        var postalCode = $('.postal-code.check').text();
+        var postalCode = $('#address_delivery .address_postcode').text();
             
         $('#colis-cadeau-wrapper').hide();
         $('#colis-cadeau-message').attr('disabled', 'disabled');
-
 
 
         if (postalCode.substring(0,2) === "75") {

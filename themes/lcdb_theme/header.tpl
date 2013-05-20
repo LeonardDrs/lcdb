@@ -18,7 +18,7 @@
 		<meta name="generator" content="PrestaShop" />
 		<meta name="robots" content="{if isset($nobots)}no{/if}index,{if isset($nofollow) && $nofollow}no{/if}follow" />
 		<meta property="og:title" content="Les Colis du Boucher, la livraison de viande Label Rouge et bio à domicile" />
-		<meta property="og:image" content="http://www.lescolisduboucher.com/img/asset/facebook/logo_fb.png" />
+		<meta property="og:image" content="http://www.lescolisduboucher.com/img/facebook/logo_fb.png" />
 		<meta property="og:type" content="Website" />
 		<meta property="og:description" content="Les Colis du Boucher est une boutique en ligne qui est spécialisée dans la vente de viande bio et de viande Label Rouge livrée à votre domicile." />
 		<meta property="og:url" content="http://www.lescolisduboucher.com" />

@@ -264,7 +264,7 @@
 									</select>
 									<label>(facultatif)</label>
 								</li>
-								<li><p>Votre boucher est plutôt du matin <img src="img/asset/img_solo/smiley.png" title=":)" alt="smiley content" /></p></li>
+								<li><p>Votre boucher est plutôt du matin <img src="img/img_solo/smiley.png" title=":)" alt="smiley content" /></p></li>
 							</ul>
 						</div>
 					</div>

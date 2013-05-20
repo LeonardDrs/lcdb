@@ -100,8 +100,8 @@ $(document).ready(function(){
 	if ($('.scrollbar').length > 0) {
 		$('.scrollbar').scrollbar();
 	}
-	if($("#checkout #form-reduc").length > 0){
-		$("#checkout #form-reduc").submit(function(event){
+	if($("#order #form-reduc").length > 0){
+		$("#order #form-reduc").submit(function(event){
 			event.preventDefault();
 			var code = $("#reduction").val();
 			var reduc = "8,56";

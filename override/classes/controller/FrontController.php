@@ -31,20 +31,20 @@ class FrontController extends FrontControllerCore
 		}
 		$this->addCSS(_THEME_CSS_DIR_.'global.css', 'all');
 		$this->addjquery();
+		$this->addJquery('1.9.0');
 		$this->addjqueryPlugin('easing');
 		// Theme lcdb
-		$this->addJS(_THEME_JS_DIR_.'main.js');
-		$this->addJS(_THEME_JS_DIR_.'googleAnalytics.js');
 		$this->addCSS(_THEME_CSS_DIR_.'lib/normalize.css');
+		$this->addJS(_THEME_JS_DIR_.'plugins/glDatePicker.js');
 		$this->addJS(_THEME_JS_DIR_.'plugins/cufon.js');
 		$this->addJS(_THEME_JS_DIR_.'plugins/font-cufon.js');
 		$this->addJS(_THEME_JS_DIR_.'plugins/jquery.placeholder.min.js');
 		$this->addJS(_THEME_JS_DIR_.'plugins/modernizr-2.6.2.min.js');
 		$this->addJS(_THEME_JS_DIR_.'plugins/custom_checkbox_and_radio.js');
-		$this->addJS(_THEME_JS_DIR_.'plugins/glDatePicker.js');
-		$this->addJS(_THEME_JS_DIR_.'plugins/infobox_packed.js');
 		$this->addJS(_THEME_JS_DIR_.'plugins/jquery.scroll.min.js');
 		$this->addJS(_THEME_JS_DIR_.'plugins/jquery.selectbox-0.2.min.js');
+		$this->addJS(_THEME_JS_DIR_.'main.js');
+		$this->addJS(_THEME_JS_DIR_.'googleAnalytics.js');
 
 		if (Tools::isSubmit('live_edit') && Tools::getValue('ad') && Tools::getAdminToken('AdminModulesPositions'.(int)Tab::getIdFromClassName('AdminModulesPositions').(int)Tools::getValue('id_employee')))
 		{

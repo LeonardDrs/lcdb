@@ -37,7 +37,7 @@
   	font-size: 14px;
 }
 #authentication .bloc.content-register h2{
-	background: url('../img/asset/img_solo/checkout-first-command.png') no-repeat 0 0;
+	background: url('../img/img_solo/checkout-first-command.png') no-repeat 0 0;
 	padding-left: 40px;
 	margin-bottom: 70px;
 }
@@ -57,7 +57,7 @@
   	font-size: 14px;
 }
 #authentication .content-login h2{
-	background: url('../img/asset/img_solo/checkout-login.png') no-repeat 0 0;
+	background: url('../img/img_solo/checkout-login.png') no-repeat 0 0;
 	padding-left: 24px;
 }
 #authentication .content-register .red-button{
@@ -102,7 +102,7 @@
 	padding: 0 0 10px 40px;
 	line-height: 30px;
 	border-bottom: 1px dashed #342110;
-	background: url('../img/asset/img_solo/checkout-first-command.png') no-repeat 0 0;
+	background: url('../img/img_solo/checkout-first-command.png') no-repeat 0 0;
 }
 
 #authentication .content-register-form .required { color: #bd544f; }
