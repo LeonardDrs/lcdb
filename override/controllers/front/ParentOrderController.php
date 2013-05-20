@@ -11,7 +11,7 @@ class ParentOrderController extends ParentOrderControllerCore
 			$this->addCSS(_THEME_CSS_DIR_.'addresses.css');
 			$this->addCSS(_THEME_CSS_DIR_.'checkout.css');
 			// Adding JS files
-			$this->addJS('http://maps.googleapis.com/maps/api/js?key=AIzaSyAp628M3yIsqoKh5YQ2TEtzTLGvTSi0iHI&amp;sensor=true');
+			$this->addJS('http://maps.googleapis.com/maps/api/js?key=AIzaSyDvWSB_8JhCl-0moGJVn2iMPt8-9xlP2r8&amp;sensor=true');
 			$this->addJS(_THEME_JS_DIR_.'plugins/infobox_packed.js');
 			$this->addJS(_THEME_JS_DIR_.'tools.js');
 			$this->addJS(_THEME_JS_DIR_.'relay.js');
