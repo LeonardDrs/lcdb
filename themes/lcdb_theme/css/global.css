@@ -2158,13 +2158,13 @@ html body .place-order-button:hover,
 	color: #ab9583;
 	height: 32px;
 	width: 15px;
-	margin-top: 1px;
 	text-align: center;
 }
-.form-panier .moreless:hover{
+.form-panier .moreless:not(.nov):hover{
 	background-color: #ab9482;
 	color: #342110;
 	cursor: pointer;
+	text-decoration: none;
 }
 .frais-livraison p,
 .mot-boucher p,
