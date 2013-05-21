@@ -91,11 +91,15 @@ class OrderController extends OrderControllerCore
 		{
 			case -1;
 				$this->context->smarty->assign('empty', 1);
+				$left_col = Category::getSubCategoriesByDepth(2, 4, $this->context->language->id);
+				$this->context->smarty->assign('left_col', $left_col);
+				$this->addCSS(_THEME_CSS_DIR_.'cart.css');
 				$this->setTemplate(_PS_THEME_DIR_.'shopping-cart.tpl');
 			break;
 
 			case 1:
 				$this->_assignAddress();
+				$this->_assignCarrier();
 				$this->processAddressFormat();
 				if (Tools::getValue('multi-shipping') == 1)
 				{
@@ -105,12 +109,14 @@ class OrderController extends OrderControllerCore
 				}
 				else
 					$this->setTemplate(_PS_THEME_DIR_.'order-address.tpl');
+					$this->addJS(_THEME_JS_DIR_.'checkout.js');
 			break;
 
 			case 2:
 				if (Tools::isSubmit('processAddress'))
 					$this->processAddress();
 				$this->autoStep();
+				$this->processCarrier();
 				$this->_assignCarrier();
 				$this->setTemplate(_PS_THEME_DIR_.'order-date-delivery.tpl');
 			break;
@@ -151,6 +157,9 @@ class OrderController extends OrderControllerCore
 
 			default:
 				$this->_assignSummaryInformations();
+				$left_col = Category::getSubCategoriesByDepth(2, 4, $this->context->language->id);
+				$this->context->smarty->assign('left_col', $left_col);
+				$this->addCSS(_THEME_CSS_DIR_.'cart.css');
 				$this->setTemplate(_PS_THEME_DIR_.'shopping-cart.tpl');
 			break;
 		}

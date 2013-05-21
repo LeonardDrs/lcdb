@@ -294,7 +294,7 @@
 					if(userList) {
 						var newList = [];
 						$.each(userList, function(i, v) {
-							if(v >= min && v <= max && newList._indexOf(v) < 0) {
+							if(v >= min && v <= max && newList.indexOf(v) < 0) {
 								newList.push(v);
 							}
 						});
@@ -419,9 +419,9 @@
 						var dateYear = dateVal.year;
 
 						// Find the month first
-						if(selectableMonths._indexOf(dateMonth) != -1) {
+						if(selectableMonths.indexOf(dateMonth) != -1) {
 							// If year is in our collection, break...
-							if(selectableYears._indexOf(dateYear) != -1) {
+							if(selectableYears.indexOf(dateYear) != -1) {
 								break;
 							}
 							else {
@@ -611,9 +611,9 @@
 								});
 							}
 							
-							if(selectableYears._indexOf(cellDateVal.year) < 0 || 
-								selectableMonths._indexOf(cellDateVal.month) < 0 || 
-								selectableDOW._indexOf(cellDateVal.day) < 0){
+							if(selectableYears.indexOf(cellDateVal.year) < 0 || 
+								selectableMonths.indexOf(cellDateVal.month) < 0 || 
+								selectableDOW.indexOf(cellDateVal.day) < 0){
 								isSelectable = false;
 							}
 							
@@ -766,7 +766,7 @@
 
 				// Populate month select
 				$.each(monthNames, function(i, v) {
-					if(options.allowMonthSelect && selectableMonths._indexOf(i) != -1) {
+					if(options.allowMonthSelect && selectableMonths.indexOf(i) != -1) {
 						var o = $('<option/>').html(v).attr('value', i);
 						if(i == firstDateMonth) { o.attr('selected', 'selected');}
 						monthSelect.append(o);
@@ -847,7 +847,7 @@
 			};
 		};
 
-		Array.prototype._indexOf = function(value) {
+		Array.prototype.indexOf = function(value) {
 			return $.inArray(value, this);
 		}
 	})();

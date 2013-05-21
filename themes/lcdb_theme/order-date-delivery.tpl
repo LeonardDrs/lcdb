@@ -1,4 +1,7 @@
 <div id="columns" class="content clearfix">
+<pre>
+	{$cart|print_r}
+</pre>
 	<div class="bloc-checkout">
 			{include file="./order-steps.tpl"}
 		<div class="content-checkout">
