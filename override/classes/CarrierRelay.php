@@ -435,6 +435,16 @@ class CarrierRelayCore extends ObjectModel
 
 		return $carriers;
 	}
+	
+	public function getOrders()
+	{
+		$result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+			SELECT * FROM `'._DB_PREFIX_.'orders` o
+			');
+		
+		return $result;
+	}
+	
 
 	public static function getDeliveredCountries($id_lang, $active_countries = false, $active_carriers = false, $contain_states = null)
 	{

@@ -7,10 +7,11 @@ class AdminCarriersRelaysControllerCore extends AdminController
 	public function __construct()
 	{
 		$this->table = 'carrier';
-		$this->className = 'Carrier';
+		$this->className = 'CarrierRelay';
 		$this->lang = false;
 		$this->deleted = true;
-
+		
+		$this->addRowAction('view');
 		$this->addRowAction('edit');
 		$this->addRowAction('delete');
 
@@ -156,6 +157,46 @@ class AdminCarriersRelaysControllerCore extends AdminController
 
 		return parent::renderList();
 	}
+	
+	public function renderView()
+	{
+		$this->context = Context::getContext();
+		if (!($carrier = $this->loadObject(true)))
+			return;
+			
+		$this->tpl_view_vars = array(
+			'carrier' => $carrier,
+			'language' => $this->context->language,
+			'OrderList' => $this->renderOrdersList($carrier)
+		);
+
+		return parent::renderView();
+	}
+	
+	protected function renderOrdersList($carrier)
+	{
+			
+		$order_fields_display = array(
+		'id_order' => array(
+			'title' => $this->l('ID'),
+			'align' => 'center',
+			'width' => 25
+		));
+
+		$order_list = $carrier->getOrders();
+
+		$helper = new HelperList();
+		$helper->currentIndex = Context::getContext()->link->getAdminLink('AdminOrders', false);
+		$helper->token = Tools::getAdminTokenLite('AdminOrders');
+		$helper->shopLinkType = '';
+		$helper->table = 'order';
+		$helper->identifier = 'id_order';
+		$helper->actions = array('edit', 'view');
+		$helper->show_toolbar = false;
+		
+		return $helper->generateList($order_list, $order_fields_display);
+	}
+	
 
 	public function renderForm()
 	{
