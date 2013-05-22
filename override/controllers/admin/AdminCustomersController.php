@@ -69,11 +69,25 @@ class AdminCustomersController extends AdminCustomersControllerCore
 				'title' => $this->l('E-mail address'),
 				'width' => 140,
 			),
-			'age' => array(
-				'title' => $this->l('Age'),
-				'width' => 20,
-				'search' => false,
-				'align' => 'center'
+			'email' => array(
+				'title' => $this->l('Status'),
+				'width' => 140,
+			),
+			'email' => array(
+				'title' => $this->l('Subscription'),
+				'width' => 140,
+			),
+			'email' => array(
+				'title' => $this->l('Group'),
+				'width' => 140,
+			),
+			'email' => array(
+				'title' => $this->l('ZIP Code'),
+				'width' => 140,
+			),
+			'email' => array(
+				'title' => $this->l('memo'),
+				'width' => 140,
 			),
 			'active' => array(
 				'title' => $this->l('Enabled'),
@@ -83,22 +97,6 @@ class AdminCustomersController extends AdminCustomersControllerCore
 				'type' => 'bool',
 				'orderby' => false,
 				'filter_key' => 'a!active',
-			),
-			'newsletter' => array(
-				'title' => $this->l('News.'),
-				'width' => 70,
-				'align' => 'center',
-				'type' => 'bool',
-				'callback' => 'printNewsIcon',
-				'orderby' => false
-			),
-			'godfather' => array(
-				'title' => $this->l('Godfather'),
-				'width' => 70,
-				'align' => 'center',
-				'type' => 'bool',
-				'callback' => 'printOptinIcon',
-				'orderby' => false
 			),
 			'date_add' => array(
 				'title' => $this->l('Registration'),

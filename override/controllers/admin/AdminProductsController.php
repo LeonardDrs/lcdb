@@ -3,6 +3,93 @@
 class AdminProductsController extends AdminProductsControllerCore
 {
 	
+	public function __construct()
+	{
+
+		parent::__construct();
+			
+		$this->fields_list = array();
+		$this->fields_list['id_product'] = array(
+			'title' => $this->l('ID'),
+			'align' => 'center',
+			'width' => 20
+		);
+		$this->fields_list['name'] = array(
+			'title' => $this->l('Name'),
+			'filter_key' => 'b!name',
+			'width' => 120
+		);
+		$this->fields_list['name_category'] = array(
+			'title' => $this->l('Category'),
+			'width' => 120,
+			'filter_key' => 'cl!name',
+		);
+		$this->fields_list['champ0'] = array(
+			'title' => $this->l('Labels '),
+			'width' => 120,
+			'filter_key' => 'cl!name',
+		);
+		$this->fields_list['champ1'] = array(
+			'title' => $this->l('Nombre de pièces '),
+			'width' => 90,
+			'filter_key' => 'cl!name',
+		);
+		$this->fields_list['champ2'] = array(
+			'title' => $this->l('Poids d achat '),
+			'width' => 90,
+			'filter_key' => 'cl!name',
+		);
+		$this->fields_list['champ3'] = array(
+			'title' => $this->l('Poids cible '),
+			'width' => 90,
+			'filter_key' => 'cl!name',
+		);
+		$this->fields_list['champ4'] = array(
+			'title' => $this->l('Poids '),
+			'width' => 90,
+			'filter_key' => 'cl!name',
+		);
+		$this->fields_list['champ5'] = array(
+			'title' => $this->l('Prix au kilo '),
+			'width' => 90,
+			'filter_key' => 'cl!name',
+		);
+		$this->fields_list['champ6'] = array(
+			'title' => $this->l('Prix d achat '),
+			'width' => 90,
+			'filter_key' => 'cl!name',
+		);
+		$this->fields_list['champ7'] = array(
+			'title' => $this->l('prix HT'),
+			'width' => 90,
+			'type' => 'price',
+			'align' => 'right',
+			'filter_key' => 'a!price'
+		);
+		$this->fields_list['price'] = array(
+			'title' => $this->l('prix au kilo'),
+			'width' => 90,
+			'type' => 'price',
+			'align' => 'right',
+			'filter_key' => 'a!price'
+		);
+		$this->fields_list['price_final'] = array(
+			'title' => $this->l('Final price'),
+			'width' => 90,
+			'type' => 'price',
+			'align' => 'right',
+			'havingFilter' => true,
+			'orderby' => false
+		);
+		if ((int)Tools::getValue('id_category'))
+			$this->fields_list['position'] = array(
+				'title' => $this->l('Position'),
+				'width' => 70,
+				'filter_key' => 'cp!position',
+				'align' => 'center',
+				'position' => 'position'
+			);
+	}
 	
 	public function initFormAssociations($obj)
 	{

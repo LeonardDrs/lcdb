@@ -425,11 +425,17 @@
 				</form>
 			</fieldset>
 			<br />
+			
 
 			<!-- Shipping block -->
 			{if !$order->isVirtual()}
 				<fieldset>
 					<legend><img src="../img/admin/delivery.gif" /> {l s='Shipping'}</legend>
+					
+					Afficher l'adresse de livraison <br />
+					Afficher la date de livraison <br />
+					Afficher la possibilité de changer de transporteur <br />
+					Afficher la possibilité de changer d'adresse et de date de livraison <br /><br />
 
 					<div class="clear" style="float: left; margin-right: 10px;">
 						<span>{l s='Recycled packaging:'}</span>
@@ -459,14 +465,6 @@
 					{if $carrierModuleCall}
 						{$carrierModuleCall}
 					{/if}
-				</fieldset>
-				<br />
-
-				<!-- order complete -->
-				<fieldset>
-					<legend><img src="../img/admin/delivery.gif" /> {l s='order complete'}</legend>
-					<a href="http://localhost/project/lcdb/index.php?controller=order&step=3&recover_cart=10&token_cart=b0d7774a9844e3b5c6b541e793212d41" class="button">{l s='Send email to customer to pay the command'}</a>
-					<a href="http://localhost/project/lcdb/index.php?controller=order&step=3&recover_cart=10&token_cart=b0d7774a9844e3b5c6b541e793212d41" class="button">{l s='Display last step of order'}</a>
 				</fieldset>
 				<br />
 				
