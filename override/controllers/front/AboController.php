@@ -15,6 +15,16 @@ class AboControllerCore extends FrontController
 		// exit;
 	}
 	
+	public function setMedia()
+	{
+		parent::setMedia();
+
+	//	if ($this->assignCase == 1)
+			$this->addJS(_THEME_JS_DIR_.'abo.js');
+
+		$this->addCSS(_THEME_CSS_DIR_.'abo.css');
+	}
+	
 	public function displayContent()
 	{
 		parent::displayContent();
