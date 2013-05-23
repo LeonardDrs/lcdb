@@ -12,6 +12,20 @@ margin: 0 24px 0 12px;
 	margin-bottom: 40px;
 }
 
+#addresses .address h1{
+	margin-bottom: 0px;
+}
+#addresses .address .big-bloc > p{
+	margin-top: 4px;
+	margin-bottom: 15px;
+}
+#addresses .address p.information{
+	border-bottom: 1px solid #342110;
+	padding-bottom: 5px;
+}
+#addresses .address .big-bloc > p.information{
+	margin-bottom: 40px;
+}
 /* PAGE mes adresses - Liste */
 #addresses #center_column.address .big-bloc{
 	padding: 20px;
@@ -59,7 +73,7 @@ margin: 0 24px 0 12px;
 	clear: both;
 }
 #addresses .address .action a{
-	width: 192px;
+	width: 155px;
 	display: block;
 	margin:auto;
 	text-align: center;

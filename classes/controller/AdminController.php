@@ -1459,7 +1459,7 @@ class AdminControllerCore extends Controller
 		if (!($this->fields_list && is_array($this->fields_list)))
 			return false;
 		$this->getList($this->context->language->id);
-
+		
 		// Empty list is ok
 		if (!is_array($this->_list))
 			return false;
@@ -1478,7 +1478,7 @@ class AdminControllerCore extends Controller
 		}
 
 		$list = $helper->generateList($this->_list, $this->fields_list);
-
+		
 		return $list;
 	}
 

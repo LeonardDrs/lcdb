@@ -6,6 +6,11 @@
 <!--[if gt IE 8]> <html lang="fr" class="no-js ie9" lang="en"> <![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang_iso}">
 	<head>
+		<!--[if gte IE 9]
+        <style type="text/css">
+        .gradient { filter: none; }
+        </style>
+        <![endif]-->
 		<title>{$meta_title|escape:'htmlall':'UTF-8'}</title>
 {if isset($meta_description) AND $meta_description}
 		<meta name="description" content="{$meta_description|escape:html:'UTF-8'}" />
@@ -18,7 +23,7 @@
 		<meta name="generator" content="PrestaShop" />
 		<meta name="robots" content="{if isset($nobots)}no{/if}index,{if isset($nofollow) && $nofollow}no{/if}follow" />
 		<meta property="og:title" content="Les Colis du Boucher, la livraison de viande Label Rouge et bio à domicile" />
-		<meta property="og:image" content="http://www.lescolisduboucher.com/img/asset/facebook/logo_fb.png" />
+		<meta property="og:image" content="http://www.lescolisduboucher.com/img/facebook/logo_fb.png" />
 		<meta property="og:type" content="Website" />
 		<meta property="og:description" content="Les Colis du Boucher est une boutique en ligne qui est spécialisée dans la vente de viande bio et de viande Label Rouge livrée à votre domicile." />
 		<meta property="og:url" content="http://www.lescolisduboucher.com" />
@@ -46,16 +51,6 @@
 		<script type="text/javascript" src="{$js_uri}"></script>
 		{/foreach}
 		{/if}
-
-		<!-- Plugin -->
-		<script type="text/javascript" src="js/plugins/jquery.placeholder.min.js"></script>
-		<script type="text/javascript" src="js/plugins/modernizr-2.6.2.min.js"></script>
-		<script type="text/javascript" src="js/plugins/cufon.js"></script>
-		<script type="text/javascript" src="js/plugins/font-cufon.js"></script>
-		<!-- Fichier perso -->
-		<link rel="stylesheet" href="css/lib/normalize.css"/>
-		<script src="js/main.js"></script>
-		<script src="js/googleAnalytics.js"></script>
 
 		{$HOOK_HEADER}
 	</head>
@@ -120,6 +115,7 @@
 								{/foreach}
 								<li><a href="{$base_dir}index.php?controller=delivery">Livraison</a></li>
 								<li><a href="{$base_dir}index.php?controller=post">Presse</a></li>
+								<li><a href="{$base_dir}index.php?controller=guestbook">Livre d'or</a></li>
 								<li class="last"><a href="{$link->getCMSCategoryLink(7)}">Question fréquentes</a></li>
 							</ul>
 						</li>

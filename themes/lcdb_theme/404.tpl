@@ -1,27 +1,11 @@
 
 <div id="columns" class="content clearfix">
-	<div id="left_column">
-		{include file="./account-left-col.tpl"}
-	</div><!-- / #left_column -->
-	<div id="center_column">
-		<div class="big-bloc">
-			<h1>{l s='Page not available'}</h1>
-			<p>
-				{l s='We\'re sorry, but the Web address you entered is no longer available'}
-			</p>
-
-			<h3>{l s='To find a product, please type its name in the field below'}</h3>
-			<form action="{$link->getPageLink('search')}" method="post" class="std">
-				<fieldset>
-					<p>
-						<label for="search">{l s='Search our product catalog:'}</label>
-						<input id="search_query" name="search_query" type="text" />
-						<input type="submit" name="Submit" value="OK" class="button_small" />
-					</p>
-				</fieldset>
-			</form>
-
-			<p><a href="{$base_dir}" title="{l s='Home'}"><img src="{$img_dir}icon/home.gif" alt="{l s='Home'}" class="icon" /> {l s='Home'}</a></p>
+	<div class="bloc">
+		<h1 class="bold green">404 - Cette page n'est pas disponible</h1>
+		<p>Nous sommes désolés, il semble y avoir un problème avec cette page.</p>
+		<div class="action">
+			<a href="accueil.html" title="Retourner à la page d'accueil" class="green"><span>&rarr;</span> Retourner à la page d'accueil</a>
+			<a href="catalogue_boeuf_label_bio.html" title="Continuer vos achats" class="green"><span>&rarr;</span> Continuer vos achats</a>
 		</div>
-	</div><!-- / #center_column -->
-</div><!-- / .content -->
+	</div>
+</div>

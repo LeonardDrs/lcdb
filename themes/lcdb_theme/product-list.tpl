@@ -49,7 +49,7 @@
 					<input type="hidden" name="product-name" value="Titre produit en taille 15 = 43 caractères" />
 					<input type="hidden" name="product-price" value="8" />
 					
-					<button class="ajout-panier" name="submit" type="submit">Ajouter au panier</button>
+					<button class="green-button gradient" name="submit" type="submit">Ajouter au panier</button>
 					<!-- {if ($product.id_product_attribute == 0 || (isset($add_prod_display) && ($add_prod_display == 1))) && $product.available_for_order && !isset($restricted_country_mode) && $product.minimal_quantity <= 1 && $product.customizable != 2 && !$PS_CATALOG_MODE}
 											{if ($product.allow_oosp || $product.quantity > 0)}
 												{if isset($static_token)}

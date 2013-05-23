@@ -39,7 +39,7 @@
 					</p>
 					<input type="text" name="lastname" id="lastname" value="{$smarty.post.lastname}" />
 					<p class="select">
-						<label>{l s='Date of Birth'}</label>
+						<p>{l s='Date of Birth'}</p>
 						<select name="days" id="days">
 							<option value="">-</option>
 							{foreach from=$days item=v}
@@ -90,13 +90,13 @@
 					</p>
 					<input type="password" name="confirmation" id="confirmation" />
 					{if $newsletter}
-						<p class="checkbox">
+						<p class="checkbox labels_infos">
 							<input type="checkbox" id="newsletter" name="newsletter" value="1" {if isset($smarty.post.newsletter) && $smarty.post.newsletter == 1} checked="checked"{/if} />
 							<label for="newsletter">{l s='Sign up for our newsletter'}</label>
 						</p>
 						<p class="labels_infos">J'accepte de recevoir par e-mail des offres, anecdotes<br>de la part des Colis du Boucher (<span class="asterisque_rouge">*</span>)<br/><span class="label_italique">Les informations vous concernant ne seront jamais vendues,<br>louées ou cédées à des tiers</span></p>
-						<label class="checkbox" for="newsletter_oui"><input type="checkbox" id="newsletter_oui" />Oui</label>
-						<label class="checkbox label_radio" for="newsletter_non"><input type="checkbox" id="newsletter_non" />Non</label>
+						<label class="radio" for="newsletter_oui"><input type="radio" name="newsletter" id="newsletter_oui" />Oui</label>
+						<label class="radio label_radio" for="newsletter_non"><input type="radio" name="newsletter" id="newsletter_non" />Non</label>
 					{/if}
 					<br/><br/>
 					<hr />

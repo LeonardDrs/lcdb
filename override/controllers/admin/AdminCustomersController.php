@@ -69,11 +69,25 @@ class AdminCustomersController extends AdminCustomersControllerCore
 				'title' => $this->l('E-mail address'),
 				'width' => 140,
 			),
-			'age' => array(
-				'title' => $this->l('Age'),
-				'width' => 20,
-				'search' => false,
-				'align' => 'center'
+			'email' => array(
+				'title' => $this->l('Group'),
+				'width' => 140,
+			),
+			'email' => array(
+				'title' => $this->l('Subscription'),
+				'width' => 140,
+			),
+			'email' => array(
+				'title' => $this->l('Commandes Faites'),
+				'width' => 140,
+			),
+			'email' => array(
+				'title' => $this->l('Commandes à venir'),
+				'width' => 140,
+			),
+			'email' => array(
+				'title' => $this->l('memo'),
+				'width' => 140,
 			),
 			'active' => array(
 				'title' => $this->l('Enabled'),
@@ -83,22 +97,6 @@ class AdminCustomersController extends AdminCustomersControllerCore
 				'type' => 'bool',
 				'orderby' => false,
 				'filter_key' => 'a!active',
-			),
-			'newsletter' => array(
-				'title' => $this->l('News.'),
-				'width' => 70,
-				'align' => 'center',
-				'type' => 'bool',
-				'callback' => 'printNewsIcon',
-				'orderby' => false
-			),
-			'godfather' => array(
-				'title' => $this->l('Godfather'),
-				'width' => 70,
-				'align' => 'center',
-				'type' => 'bool',
-				'callback' => 'printOptinIcon',
-				'orderby' => false
 			),
 			'date_add' => array(
 				'title' => $this->l('Registration'),
@@ -119,10 +117,6 @@ class AdminCustomersController extends AdminCustomersControllerCore
 	
 	public function initContent()
 	{
-		
-		if($_GET['export']==true){
-			echo 'oui';
-		}
 		
 		if ($this->action == 'select_delete')
 			$this->context->smarty->assign(array(
@@ -153,6 +147,104 @@ class AdminCustomersController extends AdminCustomersControllerCore
 				'desc' => $this->l('Export')
 			);
 		}
+	}
+	
+	public function renderList()
+	{
+		if (!($this->fields_list && is_array($this->fields_list)))
+			return false;
+		$this->getList($this->context->language->id);
+		
+		// Empty list is ok
+		if (!is_array($this->_list))
+			return false;
+
+		$helper = new HelperList();
+
+		$this->setHelperDisplay($helper);
+		$helper->tpl_vars = $this->tpl_list_vars;
+		$helper->tpl_delete_link_vars = $this->tpl_delete_link_vars;
+
+		// For compatibility reasons, we have to check standard actions in class attributes
+		foreach ($this->actions_available as $action)
+		{
+			if (!in_array($action, $this->actions) && isset($this->$action) && $this->$action)
+				$this->actions[] = $action;
+		}
+
+		$list = $helper->generateList($this->_list, $this->fields_list);
+		
+		if($_GET['export']==true){
+			echo "<pre>";
+				print_r($this->_list);
+			echo "</pre>";
+			
+			// define('CSV_SEPERATOR',';');
+			// define('CSV_PATH','\\');
+			// define('CSV_FILENAME','results.csv');
+			// 
+			// $records = array (array('aaa','bbb','ccc','dddd'), 
+			// 	array('123','456','789'),
+			// 	array('"test1"', '"test2"', '"test3"')
+			// 	);
+			// 
+			// $fileName = $_SERVER['DOCUMENT_ROOT'] . CSV_PATH . CSV_FILENAME;                 
+			// $this->WriteCsv($fileName,';',$records);                 
+			// 
+			// echo '<a href="' . CSV_PATH . CSV_FILENAME . '" target="_blanc">CSV File</a>';
+		}
+		
+		return $list;
+	}
+	
+
+	function fputcsv(&$handle, $fields = array(), $delimiter = ';', $enclosure = '"') 
+	{
+		$str = '';
+		$escape_char = '\\';
+		foreach ($fields as $value) 
+		{
+			if (strpos($value, $delimiter) !== false ||
+				strpos($value, $enclosure) !== false ||
+				strpos($value, "\n") !== false ||
+				strpos($value, "\r") !== false ||
+				strpos($value, "\t") !== false ||
+				strpos($value, ' ') !== false) 
+			{
+				$str2 = $enclosure;
+				$escaped = 0;
+				$len = strlen($value);
+				for ($i=0;$i<$len;$i++) 
+				{
+					if ($value[$i] == $escape_char) 
+						$escaped = 1;
+					else if (!$escaped && $value[$i] == $enclosure) 
+						$str2 .= $enclosure;
+					else 
+						$escaped = 0;
+					$str2 .= $value[$i];
+				}
+				$str2 .= $enclosure;
+				$str .= $str2.$delimiter;
+			} 
+			else 
+				$str .= $value.$delimiter;
+		}
+		$str = substr($str,0,-1);
+		$str .= "\n";
+		return fwrite($handle, $str);
+	}
+
+	function WriteCsv($fileName, $delimiter = ';', $records)
+	{
+
+		$result = array();
+		foreach($records as $key => $value)
+			$results[] = implode($delimiter, $value);
+		$fp = fopen($fileName, 'w');
+		foreach ($results as $result) 
+			$this->fputcsv($fp, split($delimiter, $result));
+		fclose($fp);
 	}
 
 }

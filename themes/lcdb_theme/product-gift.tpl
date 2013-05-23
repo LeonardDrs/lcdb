@@ -23,7 +23,7 @@
 	</div>
 	{/if}
 	<hr />
-	<div class="price-infos" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+	<div class="price-infos clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 		<img src="{$base_dir}themes/lcdb_theme/img/img_solo/colis-cadeau.png" title="colis cadeau"/>
 		<div class="add-to-basket-form">
 			<div class="price-details">
@@ -54,12 +54,12 @@
 				<input class="quantity" type="text" maxlength="2" value="0" name="qty" id="quantity_wanted" disabled>
 				<button type="button" name="plus" class="moreless plus">+</button>
 				<!-- button -->
-				<button type="submit" name="submit" class="ajout-panier">ajouter au panier</button>
+				<button type="submit" name="submit" class="ajout-panier green-button gradient">ajouter au panier</button>
 			</form>
 		</div><!-- / .add-to-basket-form -->
 	</div><!-- / .price-infos -->
 	<hr />
-	<div class="misc-infos">
+	<div class="misc-infos clearfix">
 		<p class="portions"><span class="img-portions"></span> 10 à 12 <span class="colis-portions">portions</span></p>
 		<p class="jours"><span class="img-jours"></span> 7 à 14 <span class="colis-jours">jours</span></p>
 	</div>

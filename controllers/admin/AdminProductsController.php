@@ -2341,6 +2341,7 @@ class AdminProductsControllerCore extends AdminController
 											'unit_price_ratio',
 											'ecotax',
 											'active',
+											'is_subscription',
 											'available_for_order',
 											'available_date',
 											'show_price',
@@ -3335,7 +3336,7 @@ class AdminProductsControllerCore extends AdminController
 		// specific / detailled information
 		array_push($product_props,
 		// physical product
-		'width', 'height', 'weight', 'active',
+		'width', 'height', 'weight', 'active', 'is_subscription',
 		// virtual product
 		'is_virtual', 'cache_default_attribute',
 		// customization

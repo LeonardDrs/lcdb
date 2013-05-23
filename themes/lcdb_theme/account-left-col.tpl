@@ -5,7 +5,7 @@
 	<input type="hidden" name="orderway" value="desc" />
 	<button type="submit" name="submit">OK</button>
 </form>
-<nav class="secondary-menu small-bloc">
+<nav class="secondary-menu small-bloc" id="account-left-col">
 	<ul>
 		<li class="secondary-menu-item first item-active"><a href="#" title="Mon compte">mon compte</a>
 			<ul class="submenu">
@@ -13,7 +13,7 @@
 					<a href="{$link->getPageLink('history', true)}" title="{l s='Orders'}">Mes commandes</a>
 				</li>
 				<li class="submenu-item">
-					<a href="#" title="Mon abonnement">Mon abonnement</a>
+					<a href="{$link->getPageLink('subscription')}" title="Mon abonnement">Mon abonnement</a>
 				</li>
 				<li class="submenu-item">
 					<a href="{$link->getPageLink('identity', true)}" title="{l s='Information'}">Mes informations</a>
