@@ -28,15 +28,6 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'title' => $this->l('Customer'),
 			'havingFilter' => true,
 		),
-		'total_paid_tax_incl' => array(
-			'title' => $this->l('Total'),
-			'width' => 70,
-			'align' => 'right',
-			'prefix' => '<b>',
-			'suffix' => '</b>',
-			'type' => 'price',
-			'currency' => true
-		),
 		'payment' => array(
 			'title' => $this->l('Payment'),
 			'width' => 100
@@ -51,14 +42,18 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'filter_type' => 'int'
 		),
 		'new' => array(
-			'title' => $this->l('Delivery method'),
+			'title' => $this->l('Arrondissement / Ville'),
 			'align' => 'center',
-			'width' => 65
+			'width' => 100
 		),
-		'valid' => array(
-			'title' => $this->l('Valid'),
-			'align' => 'center',
-			'width' => 65
+		'total_paid_tax_incl' => array(
+			'title' => $this->l('Total'),
+			'width' => 70,
+			'align' => 'right',
+			'prefix' => '<b>',
+			'suffix' => '</b>',
+			'type' => 'price',
+			'currency' => true
 		),
 		'date_asdd' => array(
 			'title' => $this->l('Date delivery'),

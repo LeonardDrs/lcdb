@@ -34,37 +34,10 @@ class AdminProductsController extends AdminProductsControllerCore
 			'width' => 90,
 			'filter_key' => 'cl!name',
 		);
-		$this->fields_list['champ2'] = array(
-			'title' => $this->l('Poids d achat '),
-			'width' => 90,
-			'filter_key' => 'cl!name',
-		);
 		$this->fields_list['champ3'] = array(
 			'title' => $this->l('Poids cible '),
 			'width' => 90,
 			'filter_key' => 'cl!name',
-		);
-		$this->fields_list['champ4'] = array(
-			'title' => $this->l('Poids '),
-			'width' => 90,
-			'filter_key' => 'cl!name',
-		);
-		$this->fields_list['champ5'] = array(
-			'title' => $this->l('Prix au kilo '),
-			'width' => 90,
-			'filter_key' => 'cl!name',
-		);
-		$this->fields_list['champ6'] = array(
-			'title' => $this->l('Prix d achat '),
-			'width' => 90,
-			'filter_key' => 'cl!name',
-		);
-		$this->fields_list['champ7'] = array(
-			'title' => $this->l('prix HT'),
-			'width' => 90,
-			'type' => 'price',
-			'align' => 'right',
-			'filter_key' => 'a!price'
 		);
 		$this->fields_list['price'] = array(
 			'title' => $this->l('prix au kilo'),
