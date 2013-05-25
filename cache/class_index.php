@@ -1,6 +1,6 @@
 <?php return array (
   'AboController' => '',
-  'AboControllerCore' => 'controllers/front/AboController.php',
+  'AboControllerCore' => 'override/controllers/front/AboController.php',
   'AbstractLogger' => 'override/classes/log/AbstractLogger.php',
   'AbstractLoggerCore' => 'classes/log/AbstractLogger.php',
   'Address' => 'override/classes/Address.php',

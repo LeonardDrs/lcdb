@@ -25,7 +25,7 @@
 					<a href="{$link->getPageLink('discount', true)}" title="{l s='Vouchers'}">Mes r&eacute;ductions</a>
 				</li>
 				<li class="submenu-item">
-					<a href="#" title="Parainnage">Parainnage</a>
+					<a href="`{$base_dir}?fc=module&module=referralprogram&controller=program" title="Parainnage">Parainnage</a>
 				</li>
 			</ul>
 		</li>

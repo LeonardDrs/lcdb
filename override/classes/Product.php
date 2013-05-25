@@ -4,7 +4,7 @@ class Product extends ProductCore
 {
 	public $tricks;
 	public $breeder;
-	public $is_subscription;
+	public $abo;
 	public $product_type;
 	public $serving;
 	
@@ -29,9 +29,9 @@ class Product extends ProductCore
 			'ean13' => 						array('type' => self::TYPE_STRING, 'validate' => 'isEan13', 'size' => 13),
 			'upc' => 						array('type' => self::TYPE_STRING, 'validate' => 'isUpc', 'size' => 12),
 			'cache_is_pack' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
-			'cache_has_attachments' => 		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'cache_has_attachments' =>		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'is_virtual' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
-			'is_subscription' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'abo' =>						array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'product_type' => 				array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 			'serving' => 					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 

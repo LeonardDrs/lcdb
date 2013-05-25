@@ -105,7 +105,7 @@
 							<ul>
 								<li class="first"><a href="#" title="Témoignages">Témoignages</a></li>
 								<li><a href="#" title="Blog">Blog</a></li>
-								<li class="last"><a href="#" title="Parrainage">Parrainage</a></li>
+								<li class="last"><a href="{$base_dir}?fc=module&module=referralprogram&controller=program" title="Parrainage">Parrainage</a></li>
 							</ul>
 						</li>
 						<li class="infos"><a href="#" title="Infos pratiques">Infos pratiques</a>

@@ -70,7 +70,7 @@ class AdminCustomersController extends AdminCustomersControllerCore
 				'width' => 140,
 			),
 			'email' => array(
-				'title' => $this->l('Status'),
+				'title' => $this->l('Group'),
 				'width' => 140,
 			),
 			'email' => array(
@@ -78,11 +78,11 @@ class AdminCustomersController extends AdminCustomersControllerCore
 				'width' => 140,
 			),
 			'email' => array(
-				'title' => $this->l('Group'),
+				'title' => $this->l('Commandes Faites'),
 				'width' => 140,
 			),
 			'email' => array(
-				'title' => $this->l('ZIP Code'),
+				'title' => $this->l('Commandes à venir'),
 				'width' => 140,
 			),
 			'email' => array(
