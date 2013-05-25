@@ -147,8 +147,6 @@
   'AdminRecipeControllerCore' => 'override/controllers/admin/AdminRecipeController.php',
   'AdminReferrersController' => 'override/controllers/admin/AdminReferrersController.php',
   'AdminReferrersControllerCore' => 'controllers/admin/AdminReferrersController.php',
-  'AdminReportingController' => '',
-  'AdminReportingControllerCore' => 'override/controllers/admin/AdminReportingController.php',
   'AdminRequestSqlController' => 'override/controllers/admin/AdminRequestSqlController.php',
   'AdminRequestSqlControllerCore' => 'controllers/admin/AdminRequestSqlController.php',
   'AdminReturnController' => 'override/controllers/admin/AdminReturnController.php',
@@ -679,4 +677,5 @@
   'WebserviceSpecificManagementSearchCore' => 'classes/webservice/WebserviceSpecificManagementSearch.php',
   'Zone' => 'override/classes/Zone.php',
   'ZoneCore' => 'classes/Zone.php',
+  'ZoneCustom' => 'override/classes/ZoneCustom.php',
 ); ?>
