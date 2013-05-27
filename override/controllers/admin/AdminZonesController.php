@@ -209,6 +209,14 @@ class AdminZonesController extends AdminZonesControllerCore
 
 			$cal .= '</div>';
 
+			if ($currentZone == 9) {
+				$this->addColumnZoneProche($cal);
+			}
+			if ($currentZone == 10) {
+				$this->addColumnZoneGrande($cal);
+			}
+
+
 			$cheat = str_replace('<input type="hidden" name="replacement_cheat" id="replacement_cheat" value="" />', $cal, $form);
 			return $cheat;
 		}
@@ -283,6 +291,34 @@ class AdminZonesController extends AdminZonesControllerCore
 		return $html;
 	}
 
+	public function addColumnZoneProche(&$str) {
+		$procheFields = ZoneCustom::getListProche();
+		$html = '<div id="cp-zone-list">
+		<label>Code postaux</label>
+		<table>
+			<tr><th>Code postal</th><th>Minimum de commande</th><th>Livraison offerte</th></tr>';
+		foreach ($procheFields as $key => $value) {
+			$html.= '<tr><td><input type="text" name="cp[]" value="'.$value['cp'].'"></td><td><input type="text" name="minimum[]" value="'.$value['minimum'].'"></td><td><input type="text" name="free_shipping[]" value="'.$value['free_shipping'].'"></td></tr>';
+		}
+		$html.= '<tr><td><input type="text" name="cp[]" value=""></td><td><input type="text" name="minimum[]" value=""></td><td><input type="text" name="free_shipping[]" value=""></td></tr>';
+		$html .= '</table></div>';
+		$str .= $html;
+	}
+
+	public function addColumnZoneGrande(&$str) {
+		$grandeFields = ZoneCustom::getListGrande();
+		$html = '<div id="cp-zone-list">
+		<label>Code postaux</label>
+		<table>
+			<tr><th>Code postal</th></tr>';
+		foreach ($grandeFields as $key => $value) {
+			$html.= '<tr><td><input type="text" name="cp[]" value="'.$value['cp'].'"></td></tr>';
+		}
+		$html.= '<tr><td><input type="text" name="cp[]" value=""></td></tr>';
+		$html .= '</table></div>';
+		$str .= $html;
+	}
+
 	public function setMedia()
 	{
 		$this->addCSS(_PS_CSS_DIR_.'admin.css', 'all');
@@ -314,6 +350,140 @@ class AdminZonesController extends AdminZonesControllerCore
 
 		// Execute Hook AdminController SetMedia
 		Hook::exec('actionAdminControllerSetMedia', array());
+	}
+
+	public function addCustomBddProche() {
+		$cps = Tools::getValue('cp');
+		$minim = Tools::getValue('minimum');
+		$freeShip = Tools::getValue('free_shipping');
+		$sql = 'INSERT INTO `'._DB_PREFIX_.'zone_proche` (`cp`, `minimum`, `free_shipping`) VALUES';
+		// var_dump($cps);
+		foreach ($cps as $key => $value) {
+			if (!empty($value)) {
+				$sql .= '('.$cps[$key].', '.$minim[$key].', '.$freeShip[$key].')';
+				if (isset($cps[$key+1]) and $cps[$key+1]) {
+					$sql .= ', ';
+				}
+			}
+		}
+		Db::getInstance()->execute('TRUNCATE `'._DB_PREFIX_.'zone_proche`');
+		Db::getInstance()->execute($sql);
+	}
+
+	public function addCustomBddGrande() {
+		$cps = Tools::getValue('cp');
+		$minim = Tools::getValue('minimum');
+		$freeShip = Tools::getValue('free_shipping');
+		$sql = 'INSERT INTO `'._DB_PREFIX_.'zone_grande` (`cp`) VALUES';
+		// var_dump($cps);
+		foreach ($cps as $key => $value) {
+			if (!empty($value)) {
+				$sql .= '('.$cps[$key].')';
+				if (isset($cps[$key+1]) and $cps[$key+1]) {
+					$sql .= ', ';
+				}
+			}
+		}
+		Db::getInstance()->execute('TRUNCATE `'._DB_PREFIX_.'zone_grande`');
+		Db::getInstance()->execute($sql);
+	}
+
+	public function processUpdate()
+	{
+		/* Checking fields validity */
+		$this->validateRules();
+
+		if (empty($this->errors))
+		{
+			$id = (int)Tools::getValue($this->identifier);
+
+			/* Custom Insert Bdd */
+			if ($id == 9) {
+				$this->addCustomBddProche();
+			}
+			if ($id == 10) {
+				$this->addCustomBddGrande();
+			}
+			/* /Custom Insert Bdd */
+
+			/* Object update */
+			if (isset($id) && !empty($id))
+			{
+				$object = new $this->className($id);
+				if (Validate::isLoadedObject($object))
+				{
+					/* Specific to objects which must not be deleted */
+					if ($this->deleted && $this->beforeDelete($object))
+					{
+						// Create new one with old objet values
+						$object_new = $object->duplicateObject();
+						if (Validate::isLoadedObject($object_new))
+						{
+							// Update old object to deleted
+							$object->deleted = 1;
+							$object->update();
+
+							// Update new object with post values
+							$this->copyFromPost($object_new, $this->table);
+							$result = $object_new->update();
+							if (Validate::isLoadedObject($object_new))
+								$this->afterDelete($object_new, $object->id);
+						}
+					}
+					else
+					{
+						$this->copyFromPost($object, $this->table);
+						$result = $object->update();
+						$this->afterUpdate($object);
+					}
+
+					if ($object->id)
+						$this->updateAssoShop($object->id);
+
+					if (!$result)
+					{
+						$this->errors[] = Tools::displayError('An error occurred while updating object.').
+							' <b>'.$this->table.'</b> ('.Db::getInstance()->getMsgError().')';
+					}
+					elseif ($this->postImage($object->id) && !count($this->errors) && $this->_redirect)
+					{
+						$parent_id = (int)Tools::getValue('id_parent', 1);
+						// Specific back redirect
+						if ($back = Tools::getValue('back'))
+							$this->redirect_after = urldecode($back).'&conf=4';
+						// Specific scene feature
+						// @todo change stay_here submit name (not clear for redirect to scene ... )
+						if (Tools::getValue('stay_here') == 'on' || Tools::getValue('stay_here') == 'true' || Tools::getValue('stay_here') == '1')
+							$this->redirect_after = self::$currentIndex.'&'.$this->identifier.'='.$object->id.'&conf=4&updatescene&token='.$this->token;
+						// Save and stay on same form
+						// @todo on the to following if, we may prefer to avoid override redirect_after previous value
+						if (Tools::isSubmit('submitAdd'.$this->table.'AndStay'))
+							$this->redirect_after = self::$currentIndex.'&'.$this->identifier.'='.$object->id.'&conf=4&update'.$this->table.'&token='.$this->token;
+						// Save and back to parent
+						if (Tools::isSubmit('submitAdd'.$this->table.'AndBackToParent'))
+							$this->redirect_after = self::$currentIndex.'&'.$this->identifier.'='.$parent_id.'&conf=4&token='.$this->token;
+
+						// Default behavior (save and back)
+						if (empty($this->redirect_after))
+							$this->redirect_after = self::$currentIndex.($parent_id ? '&'.$this->identifier.'='.$object->id : '').'&conf=4&token='.$this->token;
+					}
+				}
+				else
+					$this->errors[] = Tools::displayError('An error occurred while updating object.').
+						' <b>'.$this->table.'</b> '.Tools::displayError('(cannot load object)');
+			}
+		}
+		$this->errors = array_unique($this->errors);
+		if (!empty($this->errors))
+		{
+			// if we have errors, we stay on the form instead of going back to the list
+			$this->display = 'edit';
+			return false;
+		}
+
+		if (isset($object))
+			return $object;
+		return;
 	}
 }
 

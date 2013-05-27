@@ -472,7 +472,7 @@ $(document).ready(function(){
 	
 	/* Animation du sous-menu contenant les différentes catégories de recettes (Boeuf, Veau, Agneau, ...) */
 	function submenu(){
-		var submenu = $('.secondary-menu-item ul.submenu');
+		var submenu = $('#category-leftcol .secondary-menu-item ul.submenu');
 		submenu.children("li").each(function(){
 			$(this).children('a').click(function(event){
 				event.preventDefault();

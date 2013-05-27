@@ -209,9 +209,9 @@
 				<div class="bloc content-address-invoice">
 					<h2>Adresse de facturation</h2>
 					<select name="id_address_invoice" id="id_address_invoice" class="address_select" onchange="updateAddressesDisplay();{if $opc}updateAddressSelection();{/if}">
-						{section loop=$addresses step=-1 name=address}
-							<option value="{$addresses[address].id_address|intval}" {if $addresses[address].id_address == $cart->id_address_invoice && $cart->id_address_delivery != $cart->id_address_invoice}selected="selected"{/if}>{$addresses[address].alias|escape:'htmlall':'UTF-8'}</option>
-						{/section}
+						{foreach from=$addresses key=k item=address}
+							<option value="{$address.id_address|intval}" {if $address.id_address == $cart->id_address_delivery}selected="selected"{/if}>{$address.alias|escape:'htmlall':'UTF-8'}</option>
+						{/foreach}
 					</select>
 					<ul id="address_invoice">
 						<li>Pierre DURAN</li>
@@ -248,9 +248,9 @@
 					<h2>Adresse de livraison</h2>
 					<div id="delivery-address">
 						<select name="id_address_delivery" id="id_address_delivery" class="address_select" onchange="updateAddressesDisplay();{if $opc}updateAddressSelection();{/if}">
-							{section loop=$addresses step=-1 name=address}
-								<option value="{$addresses[address].id_address|intval}" {if $addresses[address].id_address == $cart->id_address_invoice && $cart->id_address_delivery != $cart->id_address_invoice}selected="selected"{/if}>{$addresses[address].alias|escape:'htmlall':'UTF-8'}</option>
-							{/section}
+							{foreach from=$addresses key=k item=address}
+								<option value="{$address.id_address|intval}" {if $address.id_address == $cart->id_address_delivery}selected="selected"{/if}>{$address.alias|escape:'htmlall':'UTF-8'}</option>
+							{/foreach}
 						</select>
 						<ul id="address_delivery">
 							<li>Pierre DURAN</li>

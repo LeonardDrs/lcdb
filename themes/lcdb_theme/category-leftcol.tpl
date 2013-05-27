@@ -7,7 +7,7 @@
 	<button type="submit" name="submit">OK</button>
 </form>
 <nav class="secondary-menu small-bloc">
-	<ul>
+	<ul id="category-leftcol">
 		{foreach from=$left_col item=maincat name=foo}
 			<li class="secondary-menu-item item-active {if $smarty.foreach.foo.first}first {/if}{if $smarty.foreach.foo.last}last {/if}">
 				<a href="{$link->getCategoryLink($maincat.id_category, $maincat.link_rewrite)|escape:'htmlall':'UTF-8'}" title="{$maincat.name}">{$maincat.name}</a>
