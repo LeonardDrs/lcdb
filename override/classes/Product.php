@@ -5,8 +5,12 @@ class Product extends ProductCore
 	public $tricks;
 	public $breeder;
 	public $abo;
+	public $unusual_product;
 	public $product_type;
 	public $serving;
+	public $id_lcdb_import;
+	public $date_start;
+	public $date_end;
 	
 	public static $definition = array(
 		'table' => 'product',
@@ -32,8 +36,10 @@ class Product extends ProductCore
 			'cache_has_attachments' =>		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'is_virtual' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'abo' =>						array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'unusual_product' =>			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'product_type' => 				array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 			'serving' => 					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
+			'id_lcdb_import' => 			array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
 
 			/* Shop fields */
 			'id_category_default' => 		array('type' => self::TYPE_INT, 'shop' => true, 'validate' => 'isUnsignedId'),
@@ -61,6 +67,8 @@ class Product extends ProductCore
 			'visibility' => 				array('type' => self::TYPE_STRING, 'shop' => true, 'validate' => 'isProductVisibility', 'values' => array('both', 'catalog', 'search', 'none'), 'default' => 'both'),
 			'cache_default_attribute' => 	array('type' => self::TYPE_INT, 'shop' => true),
 			'advanced_stock_management' => 	array('type' => self::TYPE_BOOL, 'shop' => true, 'validate' => 'isBool'),
+	//		'date_start' => 				array('type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDateFormat'),
+	//		'date_end' => 					array('type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDateFormat'),
 			'date_add' => 					array('type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDateFormat'),
 			'date_upd' => 					array('type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDateFormat'),
 

@@ -7,6 +7,19 @@ class AdminProductsController extends AdminProductsControllerCore
 	{
 
 		parent::__construct();
+		
+		if ($this->context->shop->getContext() != Shop::CONTEXT_GROUP){
+			$this->available_tabs = array_merge(array(
+				'Informations' => 0,
+				'Pack' => 7,
+				'Prices' => 1,
+				'Quantities' => 6,
+				'Seo' => 2,
+				'Associations' => 3,
+				'Shipping' => 4,
+				'Features' => 10,
+			));
+		}
 			
 		$this->fields_list = array();
 		$this->fields_list['id_product'] = array(
