@@ -40,6 +40,8 @@ class Product extends ProductCore
 			'product_type' => 				array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 			'serving' => 					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 			'id_lcdb_import' => 			array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
+			'date_start' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
+			'date_end' => 					array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
 
 			/* Shop fields */
 			'id_category_default' => 		array('type' => self::TYPE_INT, 'shop' => true, 'validate' => 'isUnsignedId'),
@@ -67,8 +69,6 @@ class Product extends ProductCore
 			'visibility' => 				array('type' => self::TYPE_STRING, 'shop' => true, 'validate' => 'isProductVisibility', 'values' => array('both', 'catalog', 'search', 'none'), 'default' => 'both'),
 			'cache_default_attribute' => 	array('type' => self::TYPE_INT, 'shop' => true),
 			'advanced_stock_management' => 	array('type' => self::TYPE_BOOL, 'shop' => true, 'validate' => 'isBool'),
-	//		'date_start' => 				array('type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDateFormat'),
-	//		'date_end' => 					array('type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDateFormat'),
 			'date_add' => 					array('type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDateFormat'),
 			'date_upd' => 					array('type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDateFormat'),
 
