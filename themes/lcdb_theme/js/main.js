@@ -13,6 +13,9 @@ $(document).ready(function(){
 	if ($("#sort").length > 0) {
 		drop_down_list_with_submit($("#sort"));
 	}
+	if ($("#selectPrductSort").length > 0) {
+		drop_down_list_with_submit($("#selectPrductSort"));
+	}
 	if ($('#nombre-portions').length > 0) {
 		drop_down_list_without_submit($('#nombre-portions'));
 		drop_down_list_without_submit($('#step3 select'));
