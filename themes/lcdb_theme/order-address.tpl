@@ -45,7 +45,7 @@
 
 	var addressMultishippingUrl = "{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{'&multi-shipping=1'|urlencode}{if $back}&mod={$back|urlencode}{/if}")}";
 	var addressUrl = "{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{if $back}&mod={$back}{/if}")}";
-
+	var orderUrl = "{$link->getPageLink('order', true, NULL)}";
 	var formatedAddressFieldsValuesList = new Array();
 
 	{foreach from=$formatedAddressFieldsValuesList key=id_address item=type}
@@ -73,6 +73,64 @@
 
 	}
 
+function updateAddressSelection()
+{
+	var idAddress_delivery = ($('#id_address_delivery').length === 1 ? $('#id_address_delivery').val() : $('#id_address_delivery').val());
+	var idAddress_invoice = ($('#id_address_invoice').length === 1 ? $('#id_address_invoice').val() : ($('#addressesAreEquals:checked').length === 1 ? idAddress_delivery : ($('#id_address_invoice').length === 1 ? $('#id_address_invoice').val() : idAddress_delivery)));
+
+	$('#opc_account-overlay').fadeIn('slow');
+	$('#opc_delivery_methods-overlay').fadeIn('slow');
+	$('#opc_payment_methods-overlay').fadeIn('slow');
+	$.ajax({
+		type: 'POST',
+		url: orderUrl,
+		async: true,
+		cache: false,
+		dataType : "json",
+		data: 'ajax=true&method=updateAddressesSelected&id_address_delivery=' + idAddress_delivery + '&id_address_invoice=' + idAddress_delivery + '&token=' + static_token,
+		success: function(jsonData)
+		{
+			if (jsonData.hasError)
+			{
+				var errors = '';
+				for(var error in jsonData.errors)
+					//IE6 bug fix
+					if(error !== 'indexOf')
+						errors += jsonData.errors[error] + "\n";
+				alert(errors);
+			}
+			else
+			{
+				// Update global var deliveryAddress
+				deliveryAddress = idAddress_delivery;
+
+				updateCarrierList(jsonData.carrier_data);
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			if (textStatus !== 'abort')
+				// alert("TECHNICAL ERROR: unable to save adresses \n\nDetails:\nError thrown: " + XMLHttpRequest + "\n" + 'Text status: ' + textStatus);
+			// console.log(XMLHttpRequest.responseText);
+			// console.log(XMLHttpRequest);
+			$('#opc_account-overlay').fadeOut('slow');
+			$('#opc_delivery_methods-overlay').fadeOut('slow');
+			$('#opc_payment_methods-overlay').fadeOut('slow');
+		}
+	});
+}
+
+	function updateCarrierList(json)
+	{
+		var html = json.carrier_block;
+		
+		// @todo  check with theme 1.4
+		//if ($('#HOOK_EXTRACARRIER').length == 0 && json.HOOK_EXTRACARRIER !== null && json.HOOK_EXTRACARRIER != undefined)
+		//	html += json.HOOK_EXTRACARRIER;
+		
+		$('#carrier_area').replaceWith(html);
+		/* update hooks for carrier module */
+		$('#HOOK_BEFORECARRIER').html(json.HOOK_BEFORECARRIER);
+	}
 
 	function buildAddressBlock(id_address, address_type, dest_comp)
 	{
@@ -204,11 +262,10 @@
 		{include file="./order-steps.tpl"}
 		{include file="$tpl_dir./errors.tpl"}
 		<form action="{$link->getPageLink($back_order_page, true)}" method="post">
-			
 			<div id="content-wrapper" class="clearfix">
 				<div class="bloc content-address-invoice">
 					<h2>Adresse de facturation</h2>
-					<select name="id_address_invoice" id="id_address_invoice" class="address_select" onchange="updateAddressesDisplay();{if $opc}updateAddressSelection();{/if}">
+					<select name="id_address_invoice" id="id_address_invoice" class="address_select">
 						{foreach from=$addresses key=k item=address}
 							<option value="{$address.id_address|intval}" {if $address.id_address == $cart->id_address_delivery}selected="selected"{/if}>{$address.alias|escape:'htmlall':'UTF-8'}</option>
 						{/foreach}
@@ -247,7 +304,7 @@
 				<div class="bloc content-address-delivery">
 					<h2>Adresse de livraison</h2>
 					<div id="delivery-address">
-						<select name="id_address_delivery" id="id_address_delivery" class="address_select" onchange="updateAddressesDisplay();{if $opc}updateAddressSelection();{/if}">
+						<select name="id_address_delivery" id="id_address_delivery" class="address_select" onchange="updateAddressSelection();">
 							{foreach from=$addresses key=k item=address}
 								<option value="{$address.id_address|intval}" {if $address.id_address == $cart->id_address_delivery}selected="selected"{/if}>{$address.alias|escape:'htmlall':'UTF-8'}</option>
 							{/foreach}
@@ -369,7 +426,7 @@
 				<a href="#" title="Continuer mes achats">&rarr;&nbsp;<span>Continuer mes achats</span></a>
 			</div>
 
-
+<div id="carrier_area">
 <div class="delivery_options_address">
 	{if isset($delivery_option_list)}
 		{foreach $delivery_option_list as $id_address => $option_list}
@@ -489,7 +546,7 @@
 	
 	</div>
 
-
+</div>
 
 
 

@@ -21,11 +21,14 @@ $(function() {
 			day = $this.parents('td').data('day'),
 			val = $this.siblings('.text').val();
 		if ($this.parents('td').hasClass('open')) {
+			if ( typeof array != "array") {
+				array = {};
+			}
 			if (!array[year]) {
-				array[year] = {}
+				array[year] = {};
 			};
-			if (!array[year][month]) {
-				array[year][month] = {}
+			if ( typeof array[year][month] == "undefined") {
+				array[year][month] = {};
 			};
 			array[year][month][day] = val;
 		} else {

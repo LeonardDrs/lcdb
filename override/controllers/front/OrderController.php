@@ -49,6 +49,121 @@ class OrderController extends OrderControllerCore
 			$this->context->smarty->assign('address_list', $this->context->customer->getAddresses($this->context->language->id));
 		else
 			$this->context->smarty->assign('address_list', array());
+
+
+		if ($this->context->cart->nbProducts())
+		{
+			if (Tools::getValue('ajax'))
+			{
+				if (Tools::getValue('method'))
+				{
+					switch (Tools::getValue('method'))
+					{
+						case 'updateMessage':
+							if (Tools::isSubmit('message'))
+							{
+								$txtMessage = urldecode(Tools::getValue('message'));
+								$this->_updateMessage($txtMessage);
+								if (count($this->errors))
+									die('{"hasError" : true, "errors" : ["'.implode('\',\'', $this->errors).'"]}');
+								die(true);
+							}
+							break;
+
+
+						case 'getCarrierList':
+							die(Tools::jsonEncode($this->_getCarrierList()));
+							break;
+
+						case 'updateAddressesSelected':
+							if ($this->context->customer->isLogged(true))
+							{
+								$address_delivery = new Address((int)(Tools::getValue('id_address_delivery')));
+								$this->context->smarty->assign('isVirtualCart', $this->context->cart->isVirtualCart());
+								$address_invoice = ((int)(Tools::getValue('id_address_delivery')) == (int)(Tools::getValue('id_address_invoice')) ? $address_delivery : new Address((int)(Tools::getValue('id_address_invoice'))));
+								if ($address_delivery->id_customer != $this->context->customer->id || $address_invoice->id_customer != $this->context->customer->id)
+									$this->errors[] = Tools::displayError('This address is not yours.');
+								elseif (!Address::isCountryActiveById((int)(Tools::getValue('id_address_delivery'))))
+									$this->errors[] = Tools::displayError('This address is not in a valid area.');
+								elseif (!Validate::isLoadedObject($address_delivery) || !Validate::isLoadedObject($address_invoice) || $address_invoice->deleted || $address_delivery->deleted)
+									$this->errors[] = Tools::displayError('This address is invalid.');
+								else
+								{
+									$this->context->cart->id_address_delivery = (int)(Tools::getValue('id_address_delivery'));
+									$this->context->cart->id_address_invoice = Tools::isSubmit('same') ? $this->context->cart->id_address_delivery : (int)(Tools::getValue('id_address_invoice'));
+									if (!$this->context->cart->update())
+										$this->errors[] = Tools::displayError('An error occurred while updating your cart.');
+
+									// Address has changed, so we check if the cart rules still apply
+									CartRule::autoRemoveFromCart($this->context);
+									CartRule::autoAddToCart($this->context);
+		
+									if (!$this->context->cart->isMultiAddressDelivery())
+										$this->context->cart->setNoMultishipping(); // As the cart is no multishipping, set each delivery address lines with the main delivery address
+
+									if (!count($this->errors))
+									{
+										$result = $this->_getCarrierList($address_delivery);
+										// Wrapping fees
+										$wrapping_fees = $this->context->cart->getGiftWrappingPrice(false);
+										$wrapping_fees_tax_inc = $wrapping_fees = $this->context->cart->getGiftWrappingPrice();
+										$result = array_merge($result, array(
+											'gift_price' => Tools::displayPrice(Tools::convertPrice(Product::getTaxCalculationMethod() == 1 ? $wrapping_fees : $wrapping_fees_tax_inc, new Currency((int)($this->context->cookie->id_currency)))),
+											'carrier_data' => $this->_getCarrierList($address_delivery))
+										);
+
+										die(Tools::jsonEncode($result));
+									}
+								}
+								if (count($this->errors))
+									die(Tools::jsonEncode(array(
+										'hasError' => true,
+										'errors' => $this->errors
+									)));
+							}
+							die(Tools::displayError());
+							break;
+
+						case 'multishipping':
+							$this->_assignSummaryInformations();
+							$this->context->smarty->assign('product_list', $this->context->cart->getProducts());
+							
+							if ($this->context->customer->id)
+								$this->context->smarty->assign('address_list', $this->context->customer->getAddresses($this->context->language->id));
+							else
+								$this->context->smarty->assign('address_list', array());
+							$this->setTemplate(_PS_THEME_DIR_.'order-address-multishipping-products.tpl');
+							$this->display();
+							die();
+							break;
+
+						case 'cartReload':
+							$this->_assignSummaryInformations();
+							if ($this->context->customer->id)
+								$this->context->smarty->assign('address_list', $this->context->customer->getAddresses($this->context->language->id));
+							else
+								$this->context->smarty->assign('address_list', array());
+							$this->context->smarty->assign('opc', true);
+							$this->setTemplate(_PS_THEME_DIR_.'shopping-cart.tpl');
+							$this->display();
+							die();
+							break;
+
+						case 'noMultiAddressDelivery':
+							$this->context->cart->setNoMultishipping();
+							die();
+							break;
+
+						default:
+							throw new PrestaShopException('Unknown method "'.Tools::getValue('method').'"');
+					}
+				}
+				else
+					throw new PrestaShopException('Method is not defined');
+			}
+		}
+		elseif (Tools::isSubmit('ajax'))
+			throw new PrestaShopException('Method is not defined');
 	}
 
 	public function postProcess()
@@ -171,6 +286,76 @@ class OrderController extends OrderControllerCore
 			'currencyBlank' => $this->context->currency->blank,
 		));
 	}
+	protected function _getCarrierList($address_delivery)
+	{
+		$cms = new CMS(Configuration::get('PS_CONDITIONS_CMS_ID'), $this->context->language->id);
+		$link_conditions = $this->context->link->getCMSLink($cms, $cms->link_rewrite, true);
+		if (!strpos($link_conditions, '?'))
+			$link_conditions .= '?content_only=1';
+		else
+			$link_conditions .= '&content_only=1';
+		
+		// If a rule offer free-shipping, force hidding shipping prices
+		$free_shipping = false;
+		foreach ($this->context->cart->getCartRules() as $rule)
+			if ($rule['free_shipping'])
+			{
+				$free_shipping = true;
+				break;
+			}
+		$carriers = $this->context->cart->simulateCarriersOutput();
+		$delivery_option = $this->context->cart->getDeliveryOption(null, false, false);
+
+		$wrapping_fees = $this->context->cart->getGiftWrappingPrice(false);
+		$wrapping_fees_tax_inc = $wrapping_fees = $this->context->cart->getGiftWrappingPrice();
+
+		$vars = array(
+			'free_shipping' => $free_shipping,
+			'checkedTOS' => (int)($this->context->cookie->checkedTOS),
+			'recyclablePackAllowed' => (int)(Configuration::get('PS_RECYCLABLE_PACK')),
+			'giftAllowed' => (int)(Configuration::get('PS_GIFT_WRAPPING')),
+			'cms_id' => (int)(Configuration::get('PS_CONDITIONS_CMS_ID')),
+			'conditions' => (int)(Configuration::get('PS_CONDITIONS')),
+			'link_conditions' => $link_conditions,
+			'recyclable' => (int)($this->context->cart->recyclable),
+			'gift_wrapping_price' => (float)$wrapping_fees,
+			'total_wrapping_cost' => Tools::convertPrice($wrapping_fees_tax_inc, $this->context->currency),
+			'total_wrapping_tax_exc_cost' => Tools::convertPrice($wrapping_fees, $this->context->currency),
+			'delivery_option_list' => $this->context->cart->getDeliveryOptionList(),
+			'carriers' => $carriers,
+			'checked' => $this->context->cart->simulateCarrierSelectedOutput(),
+			'delivery_option' => $delivery_option,
+			'address_collection' => $this->context->cart->getAddressCollection()
+		);
+		
+		Cart::addExtraCarriers($vars);
+		
+		$this->context->smarty->assign($vars);
+
+		if (!Address::isCountryActiveById((int)($this->context->cart->id_address_delivery)) && $this->context->cart->id_address_delivery != 0)
+			$this->errors[] = Tools::displayError('This address is not in a valid area.');
+		elseif ((!Validate::isLoadedObject($address_delivery) || $address_delivery->deleted) && $this->context->cart->id_address_delivery != 0)
+			$this->errors[] = Tools::displayError('This address is invalid.');
+		else
+		{
+			$result = array(
+				'HOOK_BEFORECARRIER' => Hook::exec('displayBeforeCarrier', array(
+					'carriers' => $carriers,
+					'delivery_option_list' => $this->context->cart->getDeliveryOptionList(),
+					'delivery_option' => $this->context->cart->getDeliveryOption(null, true)
+				)),
+				'carrier_block' => $this->context->smarty->fetch(_PS_THEME_DIR_.'order-carrier.tpl')
+			);
+			
+			Cart::addExtraCarriers($result);
+			return $result;
+		}
+		if (count($this->errors))
+			return array(
+				'hasError' => true,
+				'errors' => $this->errors,
+				'carrier_block' => $this->context->smarty->fetch(_PS_THEME_DIR_.'order-carrier.tpl')
+			);
+	}
 	
 }
-
