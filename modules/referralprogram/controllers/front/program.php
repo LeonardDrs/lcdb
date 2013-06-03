@@ -43,7 +43,9 @@ class ReferralprogramProgramModuleFrontController extends ModuleFrontController
 	public function setMedia()
 	{
 		parent::setMedia();
-		$this->addJqueryPlugin(array('thickbox', 'idTabs'));
+		//$this->addJqueryPlugin(array('thickbox', 'idTabs'));
+		$this->addCSS(_THEME_CSS_DIR_.'my-account.css');
+		$this->addJS(_THEME_JS_DIR_.'parrainage.js');
 	}
 
 	

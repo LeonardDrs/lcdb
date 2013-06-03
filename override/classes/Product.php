@@ -5,8 +5,12 @@ class Product extends ProductCore
 	public $tricks;
 	public $breeder;
 	public $abo;
+	public $unusual_product;
 	public $product_type;
 	public $serving;
+	public $id_lcdb_import;
+	public $date_start;
+	public $date_end;
 	
 	public static $definition = array(
 		'table' => 'product',
@@ -32,8 +36,12 @@ class Product extends ProductCore
 			'cache_has_attachments' =>		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'is_virtual' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'abo' =>						array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'unusual_product' =>			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'product_type' => 				array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 			'serving' => 					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
+			'id_lcdb_import' => 			array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
+			'date_start' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
+			'date_end' => 					array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
 
 			/* Shop fields */
 			'id_category_default' => 		array('type' => self::TYPE_INT, 'shop' => true, 'validate' => 'isUnsignedId'),

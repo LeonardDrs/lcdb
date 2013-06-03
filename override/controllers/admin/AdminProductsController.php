@@ -7,6 +7,30 @@ class AdminProductsController extends AdminProductsControllerCore
 	{
 
 		parent::__construct();
+		
+		if ($this->context->shop->getContext() != Shop::CONTEXT_GROUP){
+			$this->available_tabs = array_merge(array(
+				'Informations' => 0,
+				'Pack' => 7,
+				'Prices' => 1,
+				'Quantities' => 6,
+				'Seo' => 2,
+				'Associations' => 3,
+				'Shipping' => 4,
+				'Features' => 10,
+			));
+		}
+		
+		// $this->_select = '
+		// 		(SELECT  GROUP_CONCAT(distinct cl.name SEPARATOR " | ") FROM `'._DB_PREFIX_.'category_lang` cl WHERE cl.id_category = cp.id_category) AS categories
+		// 		';
+		
+		// $this->_select .= '
+		// 		(SELECT fvl.name FROM `'._DB_PREFIX_.'feature_value_lang` fvl WHERE fl.id_lang = 1 
+		// 		LEFT JOIN `'._DB_PREFIX_.'feature_product` fp ON (fvl.`id_feature_value` = fp.`id_feature_value` AND fp.id_feature = 1)
+		// 		) AS count
+		// 	';
+	
 			
 		$this->fields_list = array();
 		$this->fields_list['id_product'] = array(
@@ -25,29 +49,29 @@ class AdminProductsController extends AdminProductsControllerCore
 			'filter_key' => 'cl!name',
 		);
 		$this->fields_list['champ0'] = array(
-			'title' => $this->l('Labels '),
+			'title' => $this->l('Labels'),
 			'width' => 120,
 			'filter_key' => 'cl!name',
 		);
 		$this->fields_list['champ1'] = array(
-			'title' => $this->l('Nombre de pièces '),
+			'title' => $this->l('Count'),
 			'width' => 90,
 			'filter_key' => 'cl!name',
 		);
 		$this->fields_list['champ3'] = array(
-			'title' => $this->l('Poids cible '),
+			'title' => $this->l('Target weight'),
 			'width' => 90,
 			'filter_key' => 'cl!name',
 		);
-		$this->fields_list['price'] = array(
-			'title' => $this->l('prix au kilo'),
+		$this->fields_list['champ4'] = array(
+			'title' => $this->l('Price per kg'),
 			'width' => 90,
 			'type' => 'price',
 			'align' => 'right',
 			'filter_key' => 'a!price'
 		);
 		$this->fields_list['price_final'] = array(
-			'title' => $this->l('Final price'),
+			'title' => $this->l('Price'),
 			'width' => 90,
 			'type' => 'price',
 			'align' => 'right',
