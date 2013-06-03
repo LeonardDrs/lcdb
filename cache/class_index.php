@@ -147,6 +147,8 @@
   'AdminRecipeControllerCore' => 'override/controllers/admin/AdminRecipeController.php',
   'AdminReferrersController' => 'override/controllers/admin/AdminReferrersController.php',
   'AdminReferrersControllerCore' => 'controllers/admin/AdminReferrersController.php',
+  'AdminReportingController' => '',
+  'AdminReportingControllerCore' => 'override/controllers/admin/AdminReportingController.php',
   'AdminRequestSqlController' => 'override/controllers/admin/AdminRequestSqlController.php',
   'AdminRequestSqlControllerCore' => 'controllers/admin/AdminRequestSqlController.php',
   'AdminReturnController' => 'override/controllers/admin/AdminReturnController.php',
