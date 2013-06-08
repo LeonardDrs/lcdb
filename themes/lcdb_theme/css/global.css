@@ -2144,6 +2144,8 @@ html body .place-order-button:hover,
 	width: 24px;
 	text-align: center;
 	padding: 0 3px;
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
 }
 .form-panier .minus{
 	padding: 0 3px;
@@ -2155,9 +2157,10 @@ html body .place-order-button:hover,
 	background-color: #342110;
 	border: none;
 	font-size: 23px;
-	color: #ab9583;
+	color: #AB9583;
 	height: 32px;
 	width: 15px;
+	margin-top: 1px;
 	text-align: center;
 }
 .form-panier .moreless:not(.nov):hover{
@@ -2218,6 +2221,8 @@ html body .place-order-button:hover,
 	margin-left: 4px;
 	width: 130px;
 	font-family: 'MyriadWebPro-italic';
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
 }
 #form-search button{
 	background-color: #e0ceba;

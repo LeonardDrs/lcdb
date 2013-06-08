@@ -31,7 +31,7 @@
     margin-bottom: 4px;
 }
 
-#product .full-description {
+#product .full-description p {
     margin-bottom: 0;
     font: 13px 'MyriadWebPro-Italic', Arial, sans-serif;
 }

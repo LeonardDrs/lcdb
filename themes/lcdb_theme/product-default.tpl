@@ -49,14 +49,21 @@
 					<div class="label">
 					</div>
 					<div class="detailed-price">
-						<p class="price" itemprop="price">8 €</p>
+						<p class="price our_price_display" itemprop="price">
+						{if $priceDisplay >= 0 && $priceDisplay <= 2}
+							<span id="our_price_display">{convertPrice price=$productPrice}</span>
+							<!--{if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) OR !isset($display_tax_label))}
+								{if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}
+							{/if}-->
+						{/if}
+						</p>
 						<p class="price-kg">25,62€/kg</p>
 					</div>
 				</div>
 				<div>
 					<form class="form-panier clearfix" action="{$link->getPageLink('cart')}" method="post">
 						<button type="button" name="minus" class="moreless minus">-</button>
-						<input class="quantity" type="text" maxlength="2" value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product->minimal_quantity > 1}{$product->minimal_quantity}{else}1{/if}{/if}" id="quantity_wanted" name="qty" disabled>
+						<input class="quantity" type="text" maxlength="2" value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product->minimal_quantity > 1}{$product->minimal_quantity}{else}1{/if}{/if}" id="quantity_wanted" name="qty" disabled {if $product->minimal_quantity > 1}onkeyup="checkMinimalQuantity({$product->minimal_quantity});"{/if} />
 						<button type="button" name="plus" class="moreless plus">+</button>
 						<button type="submit" name="submit" class="ajout-panier green-button gradient">ajouter au panier</button>
 
@@ -66,12 +73,6 @@
 							<input type="hidden" name="id_product" value="{$product->id|intval}" id="product_page_product_id" />
 							<input type="hidden" name="add" value="1" />
 							<input type="hidden" name="id_product_attribute" id="idCombination" value="" />
-						</p>
-
-						<!-- quantity wanted -->
-						<p id="quantity_wanted_p"{if (!$allow_oosp && $product->quantity <= 0) OR $virtual OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
-							<label>{l s='Quantity:'}</label>
-							<input type="text" name="qty" id="quantity_wanted" class="text" value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product->minimal_quantity > 1}{$product->minimal_quantity}{else}1{/if}{/if}" size="2" maxlength="3" {if $product->minimal_quantity > 1}onkeyup="checkMinimalQuantity({$product->minimal_quantity});"{/if} />
 						</p>
 
 						<!-- availability -->
@@ -94,14 +95,7 @@
 								{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(true, $smarty.const.NULL)}
 							{/if}
 
-							<p class="our_price_display">
-							{if $priceDisplay >= 0 && $priceDisplay <= 2}
-								<span id="our_price_display">{convertPrice price=$productPrice}</span>
-								<!--{if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) OR !isset($display_tax_label))}
-									{if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}
-								{/if}-->
-							{/if}
-							</p>
+							
 
 							{if $priceDisplay == 2}
 								<br />
@@ -151,19 +145,13 @@
 						{if isset($HOOK_PRODUCT_FOOTER) && $HOOK_PRODUCT_FOOTER}{$HOOK_PRODUCT_FOOTER}{/if}
 
 					</form>
-					
-					
-					
-					
-					
-					
-					
+
 				</div>
 			</div><!-- / .add-to-basket-form -->
 		</div>
 		
 		<hr />
-		<div class="misc-infos">
+		<div class="misc-infos clearfix">
 			<p class="portions"><span class="img-portions"></span> 2 <span class="colis-portions">portions</span></p>
 			<p class="jours"><span class="img-jours"></span> 10 <span class="colis-jours">jours</span></p>
 			<p class="cuisson"><span class="img-cuisson"></span> <span class="mode-cuisson">à griller</span></p>
@@ -191,10 +179,10 @@
 				<h2><span class="img-idees-recettes"></span>Idées recettes</h2>
 				<ul>
 					<li itemscope itemtype="http://schema.org/Recipe">
-						<a href="#" title="voir la recette" class="recepe-link">voir la recette</a>
+						<a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
 						<h3 itemprop="name">Queue de Boeuf aux olives et jambon de pays</h3>
 						<p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_3">3/5</span></p>
-						<div class="recepe-details hidden">
+						<div class="recipe-details hidden">
 							<h4>Ingrédients :</h4>
 							<ul class="ingredients clearfix">
 								<li itemprop="ingredients">2 kg de queue de boeuf en tronçons</li>
@@ -218,10 +206,10 @@
 						<hr class="dashed" />
 					</li>
 					<li itemscope itemtype="http://schema.org/Recipe">
-						<a href="#" title="voir la recette" class="recepe-link">voir la recette</a>
+						<a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
 						<h3 itemprop="name">Queue de Boeuf aux olives et jambon de pays</h3>
 						<p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_0">0/5</span></p>
-						<div class="recepe-details hidden">
+						<div class="recipe-details hidden">
 							<h4>Ingrédients :</h4>
 							<ul class="ingredients clearfix">
 								<li itemprop="ingredients">2 kg de queue de boeuf en tronçons</li>
@@ -245,10 +233,10 @@
 						<hr class="dashed" />
 					</li>
 					<li itemscope itemtype="http://schema.org/Recipe">
-						<a href="#" title="voir la recette" class="recepe-link">voir la recette</a>
+						<a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
 						<h3 itemprop="name">Queue de Boeuf aux olives et jambon de pays</h3>
 						<p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_5">5/5</span></p>
-						<div class="recepe-details hidden">
+						<div class="recipe-details hidden">
 							<h4>Ingrédients :</h4>
 							<ul class="ingredients clearfix">
 								<li itemprop="ingredients">2 kg de queue de boeuf en tronçons</li>
