@@ -9,6 +9,7 @@ class PostCore extends ObjectModel
 	public $link;
 	public $position;
 	public $active;
+	public $id_lcdb_import;
 
 	/**
 	 * @see ObjectModel::$definition
@@ -20,6 +21,7 @@ class PostCore extends ObjectModel
 		'fields' => array(
 			'position' => 			array('type' => self::TYPE_INT),
 			'active' => 			array('type' => self::TYPE_BOOL),
+			'id_lcdb_import' => 	array('type' => self::TYPE_INT),
 			// Lang fields
 			'title' =>	array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 128),
 			'content' =>	array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString', 'size' => 3999999999999),

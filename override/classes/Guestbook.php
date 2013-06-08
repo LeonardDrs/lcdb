@@ -9,6 +9,7 @@ class Guestbook extends ObjectModel
 	public $city;
 	public $message;
 	public $active;
+	public $id_lcdb_import;
 
 	/**
 	 * @see ObjectModel::$definition
@@ -19,11 +20,12 @@ class Guestbook extends ObjectModel
 		'multilang' => true,
 		'fields' => array(
 			'active' => 			array('type' => self::TYPE_BOOL),
+			'id_lcdb_import' => 	array('type' => self::TYPE_INT),
 			'firstname' =>	array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'required' => true, 'size' => 100),
 			'lastname' =>	array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'required' => true, 'size' => 100),
-			'email' =>	array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'required' => true, 'size' => 100),
+			'email' =>	array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 100),
 			// Lang fields
-			'city' =>	array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 128),
+			'city' =>	array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 128),
 			'message' =>	array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isString', 'size' => 3999999999999),
 		),
 	);
