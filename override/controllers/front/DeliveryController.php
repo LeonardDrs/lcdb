@@ -25,5 +25,17 @@ class DeliveryControllerCore extends FrontController
 		$this->setTemplate(_PS_THEME_DIR_.'delivery.tpl');
 	}
 	
+	public function postProcess()
+	{
+		if (Tools::isSubmit('bouton_carre'))
+		{
+			// montant de la commande en fonction des tranches de prix 
+			// tranches de prix qu'on obtient en fonction de la zone 
+			// zone qu'on obtient à partir du code postal
+			// on affiche le creneau horaire de cette zone
+			
+			// a quelle endroit la zone est linké à un cp ? 
+		}
+	}
 }
 
