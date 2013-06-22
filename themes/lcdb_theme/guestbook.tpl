@@ -14,7 +14,7 @@
 					<p>{$comment.message}</p>
 					<span class="endquote">"</span>
 				</div>
-				<p class="name-witness italic">{$comment.firstname} {$comment.lastname}, {$comment.city}</p>
+				<p class="name-witness italic">{$comment.firstname} {$comment.lastname|upper|truncate:2:'.'}, {$comment.city}</p>
 			</div>
 		{/foreach}
 		
@@ -33,6 +33,7 @@
 				<li class="pager-last"><a href="#">&gt;</a></li>
 			</ul>
 		</div>
+
 		<div id="button-witness">
 			<a href="#" title="Laissez votre message" class="green-button gradient">Laissez votre message !</a>
 		</div>

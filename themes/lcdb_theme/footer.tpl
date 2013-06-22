@@ -3,7 +3,9 @@
 	{if !$content_only}
 			<footer>
 				<div class="footer-top">
-					<span class="separation"></span>
+					{if $page_name=="index"}
+						<span class="separation"></span>
+					{/if}
 					<nav class="more-information">
 						<ul>
 							<li class="livraison">

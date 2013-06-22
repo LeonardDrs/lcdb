@@ -71,7 +71,7 @@
 }
 #contact .warning > div{
 	margin: 50px 0px 50px 0px;
-	background: url('../img/img_solo/warning.png') no-repeat 0 center;
+	background: url('../img/asset/img_solo/warning.png') no-repeat 0 center;
 	padding-left: 40px;
 }
 #contact .warning > div p{
@@ -163,18 +163,18 @@
 }
 #contact .contact p.faq{
 	padding-left: 25px;
-	background: url('../img/img_solo/green-faq.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/green-faq.png') no-repeat 0 0;
 }
 #contact .contact form{
 	padding-left: 52px;
 }
 #contact .contact p.mail{
-	background: url('../img/img_solo/green-mail.png') no-repeat 17px top;
+	background: url('../img/asset/img_solo/green-mail.png') no-repeat 17px top;
 	padding-left: 50px;
 	margin-bottom: 30px;
 }
 #contact .contact p.phone{
-	background: url('../img/img_solo/green-phone.png') no-repeat 23px top;
+	background: url('../img/asset/img_solo/green-phone.png') no-repeat 23px top;
 	padding: 5px 0px 5px 50px;
 }
 #contact .contact h2{
@@ -206,6 +206,7 @@
 #contact form .sbHolder{
 	font-family: 'MyriadWebPro-Italic';
 	height: 23px;
+	outline: none;
 }
 #contact form .sbSelector{
 	line-height: 26px;

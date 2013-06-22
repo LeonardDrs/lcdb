@@ -98,6 +98,14 @@
 	margin: 20px 0px 20px 0px;
 }
 #guestbook .guestbook .comment p.message-success{
-	background: url('../img/img_solo/check.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/check.png') no-repeat 0 0;
 	padding: 18px 0px 10px 40px;
 }
+#guestbook input,
+#guestbook input:focus {
+	font-size: 13px;
+}
+
+#guestbook .warning { display: none; }
+#guestbook .warning p { margin-bottom: 10px; }
+#guestbook .warning p:last-child { margin-bottom: 0; }

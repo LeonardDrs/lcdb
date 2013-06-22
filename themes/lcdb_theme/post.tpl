@@ -1,4 +1,3 @@
-
 <div id="columns" class="content clearfix">
 	<div id="left_column">
 
@@ -10,7 +9,7 @@
 			<p class="italique">Ils parlent des "Colis du Boucher" !</p>
 			{foreach from=$posts item=post}
 				<div class="article_presse">
-					<img src="{$base_dir}img/po/{$post.id_post}-default-large_default.jpg" alt="{$post.title}">
+					<img src="{$img_dir}po/{$post.id_post}-default-large_default.jpg" alt="{$post.title}">
 					<div class="texte_presse">
 						<span>{$post.title}</span>
 						<div>{$post.content}</div>

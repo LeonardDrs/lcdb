@@ -48,7 +48,7 @@
 				{if (!isset($customerThread.id_order) || $customerThread.id_order > 0)}
 						<label for="id_order">{l s='Order Reference'}</label>
 						{if !isset($customerThread.id_order) && isset($isLogged) && $isLogged == 1}
-							<select name="id_order" >
+							<select name="id_order" class="subject">
 								<option value="0">{l s='-- Choose --'}</option>
 								{foreach from=$orderList item=order}
 									<option value="{$order.value|intval}" {if $order.selected|intval}selected="selected"{/if}>{$order.label|escape:'htmlall':'UTF-8'}</option>
@@ -71,7 +71,7 @@
 							{/if}
 						{/foreach}
 					{else}
-						<select id="id_contact" name="id_contact" onchange="showElemFromSelect('id_contact', 'desc_contact')">
+						<select id="id_contact"  class="subject" name="id_contact" onchange="showElemFromSelect('id_contact', 'desc_contact')">
 							<option value="0">{l s='-- Choose --'}</option>
 							{foreach from=$contacts item=contact}
 								<option value="{$contact.id_contact|intval}" {if isset($smarty.post.id_contact) && $smarty.post.id_contact == $contact.id_contact}selected="selected"{/if}>{$contact.name|escape:'htmlall':'UTF-8'}</option>

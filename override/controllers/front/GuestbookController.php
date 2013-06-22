@@ -8,7 +8,7 @@ class GuestbookControllerCore extends FrontController
 	{
 		parent::setMedia();
 
-		if ($this->assignCase == 1)
+		if (isset($this->assignCase) && $this->assignCase == 1)
 			$this->addJS(_THEME_JS_DIR_.'guestbook.js');
 
 		$this->addCSS(_THEME_CSS_DIR_.'guestbook.css');

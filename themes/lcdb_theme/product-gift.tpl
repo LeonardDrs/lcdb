@@ -24,7 +24,7 @@
 	{/if}
 	<hr />
 	<div class="price-infos clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-		<img src="{$base_dir}themes/lcdb_theme/img/img_solo/colis-cadeau.png" title="colis cadeau"/>
+		<img src="{$img_dir}asset/img_solo/colis-cadeau.png" title="colis cadeau"/>
 		<div class="add-to-basket-form">
 			<div class="price-details">
 				

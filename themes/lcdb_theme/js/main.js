@@ -7,8 +7,8 @@ $(document).ready(function(){
 	if($("#id_country").length > 0){
 		drop_down_list_without_submit($("#id_country"));
 	}
-	if($("#subject").length > 0){
-		drop_down_list_without_submit($("#subject"));
+	if($(".subject").length > 0){
+		drop_down_list_without_submit($(".subject"));
 	}
 	if ($("#sort").length > 0) {
 		drop_down_list_with_submit($("#sort"));
@@ -286,14 +286,15 @@ $(document).ready(function(){
 			}
 			if(isRequiredEmpty || isInvalidEmail){
 				html = "<div>"+html+"</div>";
-				$("#static .warning").html(html);
+				$("#static .warning").html(html).fadeIn();
+				$("#guestbook .warning").html(html).fadeIn();
 			}else if($('#form-witness').length > 0){
-				e.preventDefault();
+				//e.preventDefault();
 				var message_success = '<div class="success"><p class="italic green message-success">Message envoyé !</p>';
 				message_success += '<p class="thanks">Merci.</p>';
 				message_success += '<p>Votre commentaire est soumis à approbation.</p>'
 				message_success += '<p>Il peut y avoir un délais entre votre validation et son apparition sur le site.</p></div>';
-				$("#static .guestbook #temoignage").html(message_success);
+				$("#guestbook #temoignage").html(message_success);
 			}
 		});
 	}

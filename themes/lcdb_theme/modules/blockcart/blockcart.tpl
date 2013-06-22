@@ -40,6 +40,35 @@ var delete_txt = '{l s='Delete' mod='blockcart' js=1}';
 		<!-- block list of products -->
 		<div id="cart_block_list" class="{if isset($colapseExpandStatus) && $colapseExpandStatus eq 'expanded' || !$ajax_allowed || !isset($colapseExpandStatus)}expanded{else}collapsed{/if}">
 		{if $products}
+			<table>
+			    <thead>
+			        <tr>
+			            <th>Qt&eacute;</th>
+			            <th>Produit</th>
+			            <th>&euro;</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <tr>
+			            <td>10</td>
+			            <td>Pavé (Rumstea...</td>
+			            <td>90</td>
+			        </tr>
+			        <tr>
+			            <td>1</td>
+			            <td>Steak de boeuf...</td>
+			            <td>15</td>
+			        </tr>
+			        <tr>
+			            <td>3</td>
+			            <td>Cuisses de pou...</td>
+			            <td>45</td>
+			        </tr>
+			    </tbody>
+			    <tfoot>
+			        <tr><td colspan="3">Sous total : <span class="basket-bold">150 &euro;</span></td></tr>
+			    </tfoot>
+			</table>
 			<dl class="products">
 			{foreach from=$products item='product' name='myLoop'}
 				{assign var='productId' value=$product.id_product}
@@ -138,6 +167,8 @@ var delete_txt = '{l s='Delete' mod='blockcart' js=1}';
 				{/if}
 			{/if}
 			<p id="cart-buttons">
+				<div class="empty-link"><a href="#" title="Vider le panier" class="empty-basket">Vider le panier</a></div>
+				<div class="basket-links"><a href="#" title="Passer ma commande" class="place-order-button red-button gradient">Passer ma commande</a></div>
 				{if $order_process == 'order'}<a href="{$link->getPageLink("$order_process", true)}" class="button_small" title="{l s='View my shopping cart' mod='blockcart'}" rel="nofollow">{l s='Cart' mod='blockcart'}</a>{/if}
 				<a href="{$link->getPageLink("$order_process", true)}" id="button_order_cart" class="exclusive{if $order_process == 'order-opc'}_large{/if}" title="{l s='Check out' mod='blockcart'}" rel="nofollow"><span></span>{l s='Check out' mod='blockcart'}</a>
 			</p>

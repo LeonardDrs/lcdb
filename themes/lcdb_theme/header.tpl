@@ -29,8 +29,8 @@
 		<meta property="og:url" content="http://www.lescolisduboucher.com" />
 		<meta property="og:site_name" content="Les Colis du Boucher" />
 		
-		<link rel="icon" type="image/vnd.microsoft.icon" href="{$favicon_url}?{$img_update_time}" />
-		<link rel="shortcut icon" type="image/x-icon" href="{$favicon_url}?{$img_update_time}" />
+		<link rel="icon" type="image/vnd.microsoft.icon" href="{$img_dir}favicon.ico?{$img_update_time}" />
+		<link rel="shortcut icon" type="image/x-icon" href="{$img_dir}favicon.ico?{$img_update_time}" />
 		<script type="text/javascript">
 			var baseDir = '{$content_dir}';
 			var baseUri = '{$base_uri}';

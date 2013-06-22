@@ -1070,7 +1070,7 @@ header #basket p {
 }
 header #basket span.illustration{
 	position: absolute;
-	background: url('../img/asset/sprite_accueil.png') -192px -160px no-repeat;
+	background: url('../img/asset/sprite_accueil.png') -198px -160px no-repeat;
 	display: block;
 	width: 23px;
 	height: 24px;
@@ -1232,6 +1232,9 @@ header #basket span.illustration{
 	color: #342110;
 	text-decoration: none;
 	font-size: 15px;
+}
+.breadcrumb .navigation-pipe:not(:first-of-type) {
+	margin: 0 5px;
 }
 
 /* ************************************************************************************************
@@ -1439,6 +1442,9 @@ header #basket span.illustration{
 	width: 181px;
 	color: #342110;
 	position: absolute;
+}
+#page .footer-bottom .newsletter form input:focus{
+	font-size: 16px;
 }
 #page .footer-bottom .newsletter form input.stateClick{
 	border: 2px solid #ba884f;
@@ -4487,4 +4493,52 @@ margin: 0 24px 0 12px;
 }
 #account-left-col .submenu-item {
     padding-left: 19px;
+}
+
+
+/* ************************************************************************************************
+		PAGER
+************************************************************************************************ */
+div.pager{
+	text-align:center;
+	margin: 50px 0px 50px 0px;
+}
+div.pager ul li{
+	display: inline;
+	margin-left: 5px;
+	color: #342110;
+	padding:0;
+}
+div.pager ul li:first-child{
+	margin:0px;
+}
+div.pager ul li:first-child + li{
+	margin-left:0px;
+}
+div.pager ul li a{
+	color: #342110;
+	text-decoration:underline;
+	outline: none;
+}
+div.pager ul li a:hover{
+	color: #ab9482;
+}
+div.pager .pager-last a,
+div.pager .pager-first a{
+	width: 15px;
+	padding: 5px 0px 5px 0px;
+	background-color: #342110;
+	color: #ab9482;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 16px;
+	font-family: 'MyriadWebPro-Bold';
+}
+div.pager .pager-last a:hover,
+div.pager .pager-first a:hover{
+	background-color: #ab9482;
+	color: #342110;
+}
+div.pager .pager-last{
+	margin-left: 2px;
 }
