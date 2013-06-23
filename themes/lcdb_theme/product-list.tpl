@@ -6,7 +6,7 @@
 				<div class="identification-description">
 					<div class="identification label-bio label">
 						<h3 itemprop="name">{$product.name|escape:'htmlall':'UTF-8'|truncate:35:'...'}</h3>
-						<p itemprop="description">{$product.description_short|strip_tags:'UTF-8'|truncate:360:'...'}</p>
+						<p itemprop="description">{$product.description_short|strip_tags:'UTF-8'|truncate:100:'...'}</p>
 					</div>
 					<p class="warning" itemscope itemtype="http://schema.org/Offer">
 						Plus que 5 produits restants. Livrable jusqu'au <span itemprop="availabilityEnds">30/04/2013</span>
@@ -41,7 +41,7 @@
 			</div>
 			<div class="action-product">
 				<a href="{$product.link|escape:'htmlall':'UTF-8'}" class="Voir ce produit">{l s='View the product'}</a>
-				<form class="form-panier" method="get">
+				<form class="form-panier" method="get" action="{$link->getPageLink('cart',false, NULL, "add&amp;id_product={$product.id_product|intval}", false)}" >
 					<button class="moreless minus" name="minus" type="button">-</button>
 					<input class="quantity" type="text" disabled="" name="quantity" value="0" maxlength="2">
 					<button class="moreless plus" name="plus" type="button">+</button>

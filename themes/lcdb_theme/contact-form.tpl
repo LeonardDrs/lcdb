@@ -8,7 +8,7 @@
 		{if isset($confirmation)}
 			<p>{l s='Your message has been successfully sent to our team.'}</p>
 			<ul class="footer_links">
-				<li><a href="{$base_dir}"><img class="icon" alt="" src="{$img_dir}icon/home.gif"/></a><a href="{$base_dir}">{l s='Home'}</a></li>
+				<li><a href="{$base_dir}">{l s='Home'}</a></li>
 			</ul>
 		{elseif isset($alreadySent)}
 			<p>{l s='Your message has already been sent.'}</p>

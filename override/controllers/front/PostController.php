@@ -8,9 +8,7 @@ class PostControllerCore extends FrontController
 	{
 		parent::setMedia();
 
-		if ($this->assignCase == 1)
-			$this->addJS(_THEME_JS_DIR_.'post.js');
-
+		$this->addJS(_THEME_JS_DIR_.'post.js');
 		$this->addCSS(_THEME_CSS_DIR_.'post.css');
 	}
 

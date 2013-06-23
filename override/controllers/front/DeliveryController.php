@@ -8,9 +8,7 @@ class DeliveryControllerCore extends FrontController
 	{
 		parent::setMedia();
 
-		if ($this->assignCase == 1)
-			$this->addJS(_THEME_JS_DIR_.'delivery.js');
-
+		$this->addJS(_THEME_JS_DIR_.'delivery.js');
 		$this->addCSS(_THEME_CSS_DIR_.'delivery.css');
 	}
 

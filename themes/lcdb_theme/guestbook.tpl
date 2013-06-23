@@ -4,19 +4,21 @@
 		<h1 class="green">Livre d'or ! Merci !</h1>
 		<p class="legend italic">N'hésitez pas à nous <a id="put-witness" href="#button-witness" title="laisser votre avis" class="green">laisser votre avis !</a></p>
 		{include file="$tpl_dir./errors.tpl"}
-		{if $confirmation == "true"}
+		{if isset($confirmation)}
 			<p>Merci, votre commentaire à bien été envoyé. Il sera publié après modération !</p>
 		{/if}
-		{foreach from=$messages item=comment}
-			<div class="person-witness">
-				<div class="witness">
-					<span class="startquote">"</span>
-					<p>{$comment.message}</p>
-					<span class="endquote">"</span>
+		{if isset($messages)}
+			{foreach from=$messages item=comment}
+				<div class="person-witness">
+					<div class="witness">
+						<span class="startquote">"</span>
+						<p>{$comment.message}</p>
+						<span class="endquote">"</span>
+					</div>
+					<p class="name-witness italic">{$comment.firstname} {$comment.lastname|upper|truncate:2:'.'}, {$comment.city}</p>
 				</div>
-				<p class="name-witness italic">{$comment.firstname} {$comment.lastname|upper|truncate:2:'.'}, {$comment.city}</p>
-			</div>
-		{/foreach}
+			{/foreach}
+		{/if}
 		
 		<div class="pager">
 			<ul>

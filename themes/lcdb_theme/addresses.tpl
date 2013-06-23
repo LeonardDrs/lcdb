@@ -92,8 +92,8 @@
 								</p>
 							{/foreach}
 							<div class="action-link">
-								<a href="#" href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}")}" title="Modifier cette adresse"><span>&rarr;</span>Modifier cette adresse</a>
-								<a href="#" href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}&delete")}" onclick="return confirm('{l s='Are you sure?' js=1}');" title="Supprimer"><span>&rarr;</span>Supprimer</a>
+								<a href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}")}" title="Modifier cette adresse"><span>&rarr;</span>Modifier cette adresse</a>
+								<a href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}&delete")}" onclick="return confirm('{l s='Are you sure?' js=1}');" title="Supprimer"><span>&rarr;</span>Supprimer</a>
 							</div>
 						</div>
 					{/foreach}
