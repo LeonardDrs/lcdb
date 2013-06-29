@@ -12,9 +12,7 @@
 		</p>
 	</div>
 {/if}
-<div class="rte{if $content_only} content_only{/if}">
-	{$recipe->content}
-</div>
+
 <div id="center_column" class="recipe_card">
 	<div class="backlink">
 		<a href="javascript:history.back()" title="retourner à la liste des recettes">
