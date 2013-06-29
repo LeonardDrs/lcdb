@@ -21,18 +21,26 @@
 					{$cms->content}
 				</div>
 			{elseif isset($cms_category)}
+				
 				<div class="block-cms">
 					<h1><a href="{if $cms_category->id eq 1}{$base_dir}{else}{$link->getCMSCategoryLink($cms_category->id, $cms_category->link_rewrite)}{/if}">{$cms_category->name|escape:'htmlall':'UTF-8'}</a></h1>
 					{$cms_category->description}
 					{if isset($sub_category) & !empty($sub_category)}	
 						<p class="title_block">{l s='List of sub categories in %s:' sprintf=$cms_category->name}</p>
-						<ul class="bullet">
+						<div>
 							{foreach from=$sub_category item=subcategory}
-								<li>
-									<a href="{$link->getCMSCategoryLink($subcategory.id_cms_category, $subcategory.link_rewrite)|escape:'htmlall':'UTF-8'}">{$subcategory.name|escape:'htmlall':'UTF-8'}</a>
-								</li>
+								{if isset($subcategory.childrens)}	
+									<div>
+										<h2>{$subcategory.name|escape:'htmlall':'UTF-8'}</h2>
+										<ul>
+											{foreach from=$subcategory.childrens item=page}
+												<li><a href="{$link->getCMSLink($page.id_cms, $page.link_rewrite)|escape:'htmlall':'UTF-8'}">{$page.meta_title}</a></li>
+											{/foreach}
+										</ul>								
+									</div>
+								{/if}
 							{/foreach}
-						</ul>
+						</div>
 					{/if}
 					{if isset($cms_pages) & !empty($cms_pages)}
 					<p class="title_block">{l s='List of pages in %s:' sprintf=$cms_category->name}</p>

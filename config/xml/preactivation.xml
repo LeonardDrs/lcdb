@@ -28,11 +28,12 @@
 	<logo><![CDATA[http://api.prestashop.com/partner/premium/images/ogone.png]]></logo>
 	<labels>
 		<label iso="en"><![CDATA[Choose the appropriate payment method for your business]]></label>
-		<label iso="de"><![CDATA[Anpassbare Zalhungslösungen in Abhängigkeit von Ihren Geschäftsaktivitäten]]></label>
-		<label iso="fr"><![CDATA[Choisissez des moyens de paiement adaptés à votre activité]]></label>
+		<label iso="de"><![CDATA[Anpassbare Zalhungslosungen in Abhangigkeit von Ihren Geschaftsaktivitaten]]></label>
+		<label iso="fr"><![CDATA[Choisissez des moyens de paiement adaptes a votre activite]]></label>
 	</labels>
 	<descriptions>
 		<description iso="de"><![CDATA[]]></description>
 	</descriptions>
 </partner>
+
 </partners>
