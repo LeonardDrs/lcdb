@@ -174,25 +174,25 @@ class AdminCustomersController extends AdminCustomersControllerCore
 
 		$list = $helper->generateList($this->_list, $this->fields_list);
 		
-		if($_GET['export']==true){
-			echo "<pre>";
-				print_r($this->_list);
-			echo "</pre>";
-			
-			// define('CSV_SEPERATOR',';');
-			// define('CSV_PATH','\\');
-			// define('CSV_FILENAME','results.csv');
-			// 
-			// $records = array (array('aaa','bbb','ccc','dddd'), 
-			// 	array('123','456','789'),
-			// 	array('"test1"', '"test2"', '"test3"')
-			// 	);
-			// 
-			// $fileName = $_SERVER['DOCUMENT_ROOT'] . CSV_PATH . CSV_FILENAME;                 
-			// $this->WriteCsv($fileName,';',$records);                 
-			// 
-			// echo '<a href="' . CSV_PATH . CSV_FILENAME . '" target="_blanc">CSV File</a>';
-		}
+		// if($_GET['export']==true){
+		// 	echo "<pre>";
+		// 		print_r($this->_list);
+		// 	echo "</pre>";
+		// 	
+		// 	// define('CSV_SEPERATOR',';');
+		// 	// define('CSV_PATH','\\');
+		// 	// define('CSV_FILENAME','results.csv');
+		// 	// 
+		// 	// $records = array (array('aaa','bbb','ccc','dddd'), 
+		// 	// 	array('123','456','789'),
+		// 	// 	array('"test1"', '"test2"', '"test3"')
+		// 	// 	);
+		// 	// 
+		// 	// $fileName = $_SERVER['DOCUMENT_ROOT'] . CSV_PATH . CSV_FILENAME;                 
+		// 	// $this->WriteCsv($fileName,';',$records);                 
+		// 	// 
+		// 	// echo '<a href="' . CSV_PATH . CSV_FILENAME . '" target="_blanc">CSV File</a>';
+		// }
 		
 		return $list;
 	}

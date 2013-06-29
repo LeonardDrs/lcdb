@@ -156,11 +156,11 @@ class AdminOrdersController extends AdminOrdersControllerCore
 
 		$list = $helper->generateList($this->_list, $this->fields_list);
 		
-		if($_GET['export']==true){
-			echo "<pre>";
-			print_r($this->_list);
-			echo "</pre>";
-		}
+		// if($_GET['export']==true){
+		// 	echo "<pre>";
+		// 	print_r($this->_list);
+		// 	echo "</pre>";
+		// }
 		
 		return $list;
 	}
