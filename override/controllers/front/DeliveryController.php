@@ -12,10 +12,6 @@ class DeliveryControllerCore extends FrontController
 		$this->addCSS(_THEME_CSS_DIR_.'delivery.css');
 	}
 
-	/**
-	 * Assign template vars related to page content
-	 * @see FrontController::initContent()
-	 */
 	public function initContent()
 	{
 		parent::initContent();
@@ -32,7 +28,16 @@ class DeliveryControllerCore extends FrontController
 			// zone qu'on obtient à partir du code postal
 			// on affiche le creneau horaire de cette zone
 			
-			// a quelle endroit la zone est linké à un cp ? 
+			// a quelle endroit la zone est linké à un cp ?
+			
+			$delivery = array();
+			$delivery['id'] = "1";
+			$delivery['minimum'] = "65€";
+			$delivery['value'] = array("65€ à 100€", "100€ à 190€", "Supérieur à 190€");
+			$delivery['shipping'] = array("20€", "14€", "Offerts");
+			$delivery['time'] = "Entre 8h et 15h le mercredi et le vendredi";
+			
+			$this->context->smarty->assign('delivery', $delivery);
 		}
 	}
 }
