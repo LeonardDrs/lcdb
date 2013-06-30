@@ -17,40 +17,28 @@
 			<div class="block-sort">
 				{include file="./product-sort.tpl"}
 			</div>
+			
 			<div class="list-product">
-				<div class="grill category">
-					<div class="category-title">
-						<span id="big_stove"></span>
-						<h2>Les viande de Boeuf à griller</h2>
+				
+				{foreach $subcategories as $subcat}
+					<div class="grill category">
+						<div class="category-title">
+							<span id="big_stove"></span>
+							<h2>Les viande de Boeuf {$subcat.name}</h2>
+						</div>
+						{if $products}
+							{include file="./product-list.tpl" products=$subcat.products}
+						{/if}
 					</div>
-					{if $products}
-						{include file="./product-list.tpl" products=$products}
-					{/if}
-				</div>
-				<div class="simmer category">
-					<div class="category-title">
-						<span id="pot"></span>
-						<h2>Les viande de Boeuf à mijoter</h2>
-					</div>
-					{if $products}
-						{include file="./product-list.tpl" products=$products}
-					{/if}
-				</div>
-				<div class="roast category">
-					<div class="category-title">
-						<span id="oven"></span>
-						<h2>Les viande de Boeuf à rôtir</h2>
-					</div>
-					{if $products}
-						{include file="./product-list.tpl" products=$products}
-					{/if}
-				</div>
+				{/foreach}
+				
 				<div class="more-product">
 					<p class="blod">Vous chercher un produit particulier que nous ne proposons pas ?</p>
 					<p>
-						<a href="#" title="Contactez-nous !">Contactez-nous !</a>
+						<a href="{$link->getPageLink('contact', true)}" title="Contactez-nous !">Contactez-nous !</a>
 						Nos éleveurs ont sûrement ce dont vous avez besoin.
 					</p>
 				</div>
+				
 			</div>
 		</div>

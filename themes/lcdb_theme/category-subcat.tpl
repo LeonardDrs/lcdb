@@ -25,7 +25,7 @@
 				<div class="more-product">
 					<p class="blod">Vous chercher un produit particulier que nous ne proposons pas ?</p>
 					<p>
-						<a href="#" title="Contactez-nous !">Contactez-nous !</a>
+						<a href="{$link->getPageLink('contact', true)}" title="Contactez-nous !">Contactez-nous !</a>
 						Nos éleveurs ont sûrement ce dont vous avez besoin.
 					</p>
 				</div>

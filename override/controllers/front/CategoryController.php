@@ -39,5 +39,17 @@ class CategoryController extends CategoryControllerCore
 		$this->context->smarty->assign('left_col', $left_col);
 		
 	}
+	
+		protected function assignSubcategories()
+	{
+		if ($subCategories = $this->category->getFullSubCategories($this->context->language->id))
+		{
+			$this->context->smarty->assign(array(
+				'subcategories' => $subCategories,
+				'subcategories_nb_total' => count($subCategories),
+				'subcategories_nb_half' => ceil(count($subCategories) / 2)
+			));
+		}
+	}
 }
 
