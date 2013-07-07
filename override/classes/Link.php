@@ -61,5 +61,28 @@ class Link extends LinkCore
 		return $url.Dispatcher::getInstance()->createUrl('recipe_rule', $id_lang, $params, $this->allow);
 	}
 	
+	public function getGuestbookLink($guestbook, $alias = null, $ssl = false, $id_lang = null)
+	{
+		$base = (($ssl && $this->ssl_enable) ? _PS_BASE_URL_SSL_ : _PS_BASE_URL_);
+		
+		if (!$id_lang)
+			$id_lang = Context::getContext()->language->id;
+		$url = $base.__PS_BASE_URI__.$this->getLangLink($id_lang);
+
+		if (!is_object($guestbook))
+			$guestbook = new Guestbook($guestbook, $id_lang);
+
+		// Set available keywords
+		$params = array();
+		$params['id'] = $guestbook->id;
+		$params['rewrite'] = (!$alias) ? (is_array($guestbook->link_rewrite) ? $guestbook->link_rewrite[(int)$id_lang] : $guestbook->link_rewrite) : $alias;
+
+		if (isset($guestbook->meta_title) && !empty($guestbook->meta_title))
+			$params['meta_title'] = is_array($guestbook->meta_title) ? Tools::str2url($guestbook->meta_title[(int)$id_lang]) : Tools::str2url($guestbook->meta_title);
+		else
+			$params['meta_title'] = '';
+		return $url.Dispatcher::getInstance()->createUrl('guestbook_rule', $id_lang, $params, $this->allow);
+	}
+	
 }
 

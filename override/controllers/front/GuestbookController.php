@@ -22,10 +22,14 @@ class GuestbookControllerCore extends FrontController
 	{
 		parent::initContent();
 		
+		$result = Supplier::getSuppliers(true, $this->context->language->id, true);
+		$nbMessages = count($result);
+		$this->pagination($nbMessages);
 		$messages = Guestbook::getGuestbookPages($this->context->language->id);
 		
 		$this->context->smarty->assign(array(
-			'messages' => $messages
+			'guestbook' => $messages,
+			'nbProducts' => $nbMessages
 		));
 		
 		$this->setTemplate(_PS_THEME_DIR_.'guestbook.tpl');

@@ -3,31 +3,32 @@
 class AboControllerCore extends FrontController
 {
 	
+	public $php_self = 'abo';
+	
 	public function __construct(){	
+		
 		parent::__construct();
-		if($_SERVER["REQUEST_METHOD"] == "POST"){
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+		{
 			$this->postAction();
 		}
 		
-		// echo "<pre>";
-		// $product = new Product(1);
-		// print_r($product);
-		// exit;
 	}
 	
 	public function setMedia()
 	{
 		parent::setMedia();
 
-	//	if ($this->assignCase == 1)
-			$this->addJS(_THEME_JS_DIR_.'abo.js');
-
+		$this->addJS(_THEME_JS_DIR_.'abo.js');
 		$this->addCSS(_THEME_CSS_DIR_.'abo.css');
 	}
 	
 	public function displayContent()
 	{
 		parent::displayContent();
+		
+		// liste des elements que l'on récupère dynamiquement
+		
 		self::$smarty->display(_PS_THEME_DIR_.'abo.tpl');
 	}
 	
@@ -35,6 +36,10 @@ class AboControllerCore extends FrontController
 	
 		global $cookie;
 		$var = $_POST;
+		
+		echo "<pre>";
+			print_r($var);
+		echo "</pre>";
 		
 		try {
 			

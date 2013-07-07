@@ -7,8 +7,8 @@
 		{if isset($confirmation)}
 			<p>Merci, votre commentaire à bien été envoyé. Il sera publié après modération !</p>
 		{/if}
-		{if isset($messages)}
-			{foreach from=$messages item=comment}
+		{if isset($guestbook)}
+			{foreach from=$guestbook item=comment}
 				<div class="person-witness">
 					<div class="witness">
 						<span class="startquote">"</span>
@@ -20,21 +20,7 @@
 			{/foreach}
 		{/if}
 		
-		<div class="pager">
-			<ul>
-				<li class="pager-first"><a href="#">&lt;</a></li>
-				<li class="pager-previous"><a href="#">Page précédente</a></li>
-				<li class="page-current">1</li>
-				<li class="pager-item"><a href="#">2</a></li>
-				<li class="pager-item"><a href="#">3</a></li>
-				<li class="pager-item"><a href="#">4</a></li>
-				<li class="pager-item"><a href="#">5</a></li>
-				<li class="pager-ellipsis">...</li>
-				<li class="pager-item"><a href="#">10</a></li>
-				<li class="pager-next"><a href="#">Page suivante</a></li>
-				<li class="pager-last"><a href="#">&gt;</a></li>
-			</ul>
-		</div>
+		{include file="$tpl_dir./pagination.tpl"}
 
 		<div id="button-witness">
 			<a href="#" title="Laissez votre message" class="green-button gradient">Laissez votre message !</a>
