@@ -12,7 +12,7 @@
 		<nav class="secondary-menu small-bloc">
 			<ul>
 				<li class="secondary-menu-item item-active first">
-					<a href="javascript:voi(0);" title="Produits à la carte">Produits à la carte</a>
+					<a href="javascript:voi(0);" title="Produits à la carte">Recettes</a>
 					<ul class="submenu">
 						{foreach from=$left_col item=maincat name=foo}
 							<li class="submenu-item item-active {if $smarty.foreach.foo.first}first {/if}{if $smarty.foreach.foo.last}last {/if}">
