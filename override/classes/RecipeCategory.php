@@ -114,6 +114,7 @@ class RecipeCategoryCore extends ObjectModel
 				$this->name[$k] = '0'.$value;
 		return parent::update($null_values);
 	}
+	
 
 	/**
 	  * Recursive scan of subcategories
@@ -378,7 +379,7 @@ class RecipeCategoryCore extends ObjectModel
 			if($result[0]['level_depth'] != $depth){
 				foreach ($result as &$row)
 				{
-					$row['subcats'] = $this->getSubCategoriesByDepth($row['id_recipe_category'], $depth, $id_lang, $active);
+					$row['subcats'] = RecipeCategory::getSubCategoriesByDepth($row['id_recipe_category'], $depth, $id_lang, $active);
 				}
 			}
 		}

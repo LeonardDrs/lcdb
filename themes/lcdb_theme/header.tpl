@@ -96,7 +96,14 @@
 						<li class="recettes"><a href="#" title="Recettes">Recettes</a>
 							<ul>
 								{foreach from=$menu_recipe item=cat name=foo}
-									<li class="{if $smarty.foreach.foo.first}first {/if}{if $smarty.foreach.foo.last}last {/if}"><a href="{$link->getRecipeCategoryLink($cat.id_recipe_category, false)|escape:'htmlall':'UTF-8'}" title="Veau">{$cat.name}</a></li>
+									
+									{if isset($cat.subcats[0].id_recipe_category)}
+										{$id_cat_url = $cat.subcats[0].id_recipe_category}
+									{else}
+										{$id_cat_url = $cat.id_recipe_category}
+									{/if}
+									
+									<li class="{if $smarty.foreach.foo.first}first {/if}{if $smarty.foreach.foo.last}last {/if}"><a href="{$link->getRecipeCategoryLink($id_cat_url, false)|escape:'htmlall':'UTF-8'}" title="Veau">{$cat.name}</a></li>
 								{/foreach}
 							</ul>
 						</li>
@@ -126,4 +133,5 @@
 					{include file="$tpl_dir./breadcrumb.tpl"}
 				{/if}
 			</header>
+
 	{/if}

@@ -51,12 +51,11 @@ $(function(){ldelim}
 	<div id="center_column" class="address">
 		<div class="big-bloc">
 			<h1>Mes adresses</h1>
-			{include file="$tpl_dir./errors.tpl"}
 			<p>Pour ajouter une adresse, veuillez remplir le formulaire ci-dessous.</p>
+			{include file="$tpl_dir./errors.tpl"}
 			<p class="information">Les champs suivis d'un astérisque (<span class="asterisque">*</span>) sont obligatoires.</p>
 			<div class="warning"></div>
-			
-			<form action="{$link->getPageLink('address', true)}" method="post" name="form-adress" id="form-adress">
+			<form action="{$link->getPageLink('address', true)}" method="post">
 				<div>
 					{assign var="stateExist" value="false"}
 					{foreach from=$ordered_adr_fields item=field_name}
