@@ -1,7 +1,7 @@
 
 <div id="center_column">
 	<div class="title clearfix">
-		<span id="big_cow"></span><h1>{$recipe_category->name|escape:'htmlall':'UTF-8'}</h1><span id="stove"></span>
+		<span class="category" id="big_{$parent_recipe_category->name|lower}"></span><h1>{$recipe_category->name|escape:'htmlall':'UTF-8'}</h1><span class="cuisson" id="{$recipe_category->link_rewrite}"></span>
 	</div>
 	<table>
 		<thead>

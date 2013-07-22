@@ -88,6 +88,7 @@ class RecipeControllerCore extends FrontController
 		else if ($this->assignCase == 2)
 		{
 			$this->context->smarty->assign(array(
+				'parent_recipe_category' => new RecipeCategory($this->recipe_category->id_parent, $this->context->language->id),
 				'recipe_category' => $this->recipe_category,
 				'sub_category' => $this->recipe_category->getSubCategories($this->context->language->id),
 				'recipe_pages' => Recipe::getRecipePages($this->context->language->id, (int)($this->recipe_category->id) ),

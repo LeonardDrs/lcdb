@@ -361,7 +361,7 @@ class RecipeCategoryCore extends ObjectModel
 		return $result;
 	}
 	
-	public function getSubCategoriesByDepth($id_cat, $depth, $id_lang, $active = true)
+	public static function getSubCategoriesByDepth($id_cat, $depth, $id_lang, $active = true)
 	{
 	 	if (!Validate::isBool($active))
 	 		die(Tools::displayError());

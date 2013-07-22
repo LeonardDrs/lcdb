@@ -61,6 +61,7 @@
 #contact form input:focus,
 #contact form textarea:focus{
 	outline: none;
+	font-size: 16px;
 	border: 1px solid #BA884F; 
 }
 #contact .warning{

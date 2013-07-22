@@ -17,6 +17,9 @@
 	margin: 0;
 	float: left;
 }
+.ie7 #recipe #center_column h1{
+	padding: 12px 0px 12px 20px;
+}
 #recipe #center_column #difficulte{
 	background: url('../img/asset/img_solo/difficulte.png') no-repeat;
 	padding-left: 24px;
@@ -57,16 +60,36 @@
 /* ************************************************************************************************
 		PAGE LISTE RECETTES
 ************************************************************************************************ */
-#recipe #center_column .title span#big_cow{
+#recipe #center_column .title span.category{
 	float: left;
+	display: block;
+	width: 96px;
+	height: 56px;
 }
-#recipe #center_column .title span#stove{
-	background: url('../img/asset/img_solo/a_griller.png') no-repeat top center;
+#recipe #center_column .title span#big_agneau { background: url('../img/asset/img_solo/big_agneau.png') no-repeat; }
+#recipe #center_column .title span#big_boeuf { background: url('../img/asset/img_solo/big_boeuf.png') no-repeat; }
+#recipe #center_column .title span#big_caille { background: url('../img/asset/img_solo/big_caille.png') no-repeat; }
+#recipe #center_column .title span#big_canard { background: url('../img/asset/img_solo/big_canard.png') no-repeat; }
+#recipe #center_column .title span#big_coquelet { background: url('../img/asset/img_solo/big_coquelet.png') no-repeat; }
+#recipe #center_column .title span#big_dinde { background: url('../img/asset/img_solo/big_dinde.png') no-repeat; }
+#recipe #center_column .title span#big_panier { background: url('../img/asset/img_solo/big_panier.png') no-repeat; }
+#recipe #center_column .title span#big_lapin { background: url('../img/asset/img_solo/big_lapin.png') no-repeat; }
+#recipe #center_column .title span#big_pintade { background: url('../img/asset/img_solo/big_pintade.png') no-repeat; }
+#recipe #center_column .title span#big_poisson { background: url('../img/asset/img_solo/big_poisson.png') no-repeat; }
+#recipe #center_column .title span#big_porc { background: url('../img/asset/img_solo/big_porc.png') no-repeat; }
+#recipe #center_column .title span#big_poulet { background: url('../img/asset/img_solo/big_poulet.png') no-repeat; }
+#recipe #center_column .title span#big_veau { background: url('../img/asset/img_solo/big_veau.png') no-repeat; }
+
+#recipe #center_column .title span.cuisson {
 	width: 46px;
 	height: 25px;
 	float: left;
 	margin: 7px 0px 0px 20px;
 }
+
+#recipe #center_column .title span#a-griller{ background: url('../img/asset/img_solo/a_griller.png') no-repeat top center; }
+#recipe #center_column .title span#a-rotir{ background: url('../img/asset/img_solo/a_rotir.png') no-repeat top center; }
+#recipe #center_column .title span#a-mijoter{ background: url('../img/asset/img_solo/a_mijoter.png') no-repeat top center; }
 #recipe #center_column table{
 	width: 700px;
 }

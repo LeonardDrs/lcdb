@@ -1445,6 +1445,8 @@ header #basket span.illustration{
 }
 #page .footer-bottom .newsletter form input:focus{
 	font-size: 16px;
+	padding: 7px;
+	border: 1px solid #BA884F;
 }
 #page .footer-bottom .newsletter form input.stateClick{
 	border: 2px solid #ba884f;
