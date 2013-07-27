@@ -184,7 +184,6 @@ class Importlcdb extends Module
 					
 					$product = new Product();
 					$product->id_lcdb_import = $row->idproduit;
-					$product->name = Importlcdb::createMultiLangField($row->libelle);
 					
 					$link_rewrite = Tools::link_rewrite($row->libelle);
 					$valid_link = Validate::isLinkRewrite($link_rewrite);
@@ -194,57 +193,49 @@ class Importlcdb extends Module
 							$link_rewrite
 						);
 					
+					$product->name = Importlcdb::createMultiLangField($row->libelle);
 					$product->link_rewrite = Importlcdb::createMultiLangField($link_rewrite);
 					
-					
 					$product->id_shop_default = 1;
-				//	$product->category[] = array(8);
-				//	$product->id_category_default = 8;
-
-					echo "nom ".$product->name;
-					echo "<br/>";
-					echo "link  ".$product->link_rewrite;
-					echo "<br/>";
-
-					// sélectionner la catégorie qui correspond
-					// vérifier si elle existe
-					// si non, on l'ajoute
-					// et ensuite on associe
-				//	$product->addToCategories(array(8));
-				//	$product->id_category_default = 8;
-
-					// prix kg
-					// tva
-
-					// conditionnement
-					// personnes
-					// frais
-					// bio ? 
-					// label rouge ?
-					// poids
-
-				//	$product->price = $row->prix;
+					$product->id_category_default = 14;
+					
+					if($row->cible == "pro"){
+						$product->addToCategories(array(14, 6)); // ug
+					}else{
+						$product->addToCategories(array(14));
+					}
+					
+					$product->price = $row->prix;
+					$getPrice = (int)$row->prix;
+					$getPriceKg = (int)$row->prixkg;
+					$product->unit_price_ratio = $getPrice/$getPriceKg; //bug
+					$product->unity = "kg";
+					
+					// type (épicerie, volaille...)
+					
+					// conditionnement : $row->conditionnement
+					// personnes : $row->pers
+					// frais :  $row->frais
+					// bio ? : $row->bio (oui)
+					// label rouge ? : $row->labelrouge (oui)
+					if($row->bio == "oui"){
+					
+					}elseif($row->labelrouge == "oui"){
+					
+					}
+					// poids : $row->poids
+					
+					// add feature
+					//$product->addFeaturesCustomToDB(777, $lang, $cust);
+					// associe feature to product
+					//$product->addFeaturesToDB("", 777);
+					
+					$product->date_start = date("Y-m-d H:i:s");
+					$product->date_end = $row->datelimite;
+					
 					if($row->etat == "off"){
 						$product->active = 0;
 					}
-
-					// cible
-					// associer au groupe
-					// vérifier si la value existe
-					// si oui on associe, si non on insère
-					// mettre les caractéristiques
-
-					// creer un nouveau champ début de l'offre // fin de l'offre 
-					// début de l'offre = now 
-					// date limite
-					
-					
-					
-					
-					
-					
-					
-					
 					
 					$res = false;
 					$field_error = $product->validateFields(UNFRIENDLY_ERROR, true);
@@ -264,7 +255,6 @@ class Importlcdb extends Module
 					}else{
 						echo "<br/><br/>error<br/><br/>";
 					}
-
 
 					if (!$res)
 					{
