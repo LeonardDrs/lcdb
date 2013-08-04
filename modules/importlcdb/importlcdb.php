@@ -230,6 +230,39 @@ class Importlcdb extends Module
 					// associe feature to product
 					//$product->addFeaturesToDB("", 777);
 					
+					
+//					
+//					if (isset($product->id_category))
+//						$product->updateCategories(array_map('intval', $product->id_category));
+//	
+//					// Features import
+//					$features = get_object_vars($product);
+//	
+//					if (isset($features['features']) && !empty($features['features']))
+//						foreach (explode($this->multiple_value_separator, $features['features']) as $single_feature)
+//						{
+//							$tab_feature = explode(':', $single_feature);
+//							$feature_name = trim($tab_feature[0]);
+//							$feature_value = trim($tab_feature[1]);
+//							$position = isset($tab_feature[2]) ? $tab_feature[2]: false;
+
+//							$id_feature = Feature::addFeatureImport($feature_name, $position);
+//							$id_feature_value = FeatureValue::addFeatureValueImport($id_feature, $feature_value);
+//							Product::addFeatureProductImport($product->id, $id_feature, $id_feature_value);
+//						}
+//					// clean feature positions to avoid conflict
+//					Feature::cleanPositions();
+//						
+						
+						
+					
+					
+					
+					
+					
+					
+					
+					
 					$product->date_start = date("Y-m-d H:i:s");
 					$product->date_end = $row->datelimite;
 					
