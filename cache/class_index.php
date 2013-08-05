@@ -610,8 +610,6 @@
   'StoreCore' => 'classes/Store.php',
   'StoresController' => 'override/controllers/front/StoresController.php',
   'StoresControllerCore' => 'controllers/front/StoresController.php',
-  'SubscriptionController' => '',
-  'SubscriptionControllerCore' => 'override/controllers/front/SubscriptionController.php',
   'Supplier' => 'override/classes/Supplier.php',
   'SupplierController' => 'override/controllers/front/SupplierController.php',
   'SupplierControllerCore' => 'controllers/front/SupplierController.php',

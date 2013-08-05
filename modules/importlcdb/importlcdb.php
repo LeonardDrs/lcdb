@@ -199,16 +199,14 @@ class Importlcdb extends Module
 					$product->id_shop_default = 1;
 					$product->id_category_default = 14;
 					
-					if($row->cible == "pro"){
-						$product->addToCategories(array(14, 6)); // ug
-					}else{
-						$product->addToCategories(array(14));
-					}
+					// if($row->cible == "pro"){
+					// 	$product->addToCategories(array(14, 6)); // ug
+					// }else{
+					// 	$product->addToCategories(array(14));
+					// }
 					
 					$product->price = $row->prix;
-					$getPrice = (int)$row->prix;
-					$getPriceKg = (int)$row->prixkg;
-					$product->unit_price_ratio = $getPrice/$getPriceKg; //bug
+					$product->unit_price = $row->prixkg;
 					$product->unity = "kg";
 					
 					// type (épicerie, volaille...)
@@ -223,6 +221,7 @@ class Importlcdb extends Module
 					}elseif($row->labelrouge == "oui"){
 					
 					}
+
 					// poids : $row->poids
 					
 					// add feature
@@ -230,10 +229,11 @@ class Importlcdb extends Module
 					// associe feature to product
 					//$product->addFeaturesToDB("", 777);
 					
+					//if (isset($product->id_category))
+					//	$product->updateCategories(array_map('intval', $product->id_category));
 					
 //					
-//					if (isset($product->id_category))
-//						$product->updateCategories(array_map('intval', $product->id_category));
+//					
 //	
 //					// Features import
 //					$features = get_object_vars($product);
@@ -254,15 +254,6 @@ class Importlcdb extends Module
 //					Feature::cleanPositions();
 //						
 						
-						
-					
-					
-					
-					
-					
-					
-					
-					
 					$product->date_start = date("Y-m-d H:i:s");
 					$product->date_end = $row->datelimite;
 					
@@ -302,6 +293,8 @@ class Importlcdb extends Module
 					}
 
 				}
+
+				die();
 			}
 
 		}
