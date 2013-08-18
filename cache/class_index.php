@@ -81,6 +81,8 @@
   'AdminImagesControllerCore' => 'controllers/admin/AdminImagesController.php',
   'AdminImportController' => 'override/controllers/admin/AdminImportController.php',
   'AdminImportControllerCore' => 'controllers/admin/AdminImportController.php',
+  'AdminImportLcdbController' => '',
+  'AdminImportLcdbControllerCore' => 'override/controllers/admin/AdminImportLcdbController.php',
   'AdminInformationController' => 'override/controllers/admin/AdminInformationController.php',
   'AdminInformationControllerCore' => 'controllers/admin/AdminInformationController.php',
   'AdminInvoicesController' => 'override/controllers/admin/AdminInvoicesController.php',

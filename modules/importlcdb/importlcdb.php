@@ -169,132 +169,127 @@ class Importlcdb extends Module
 			echo "<br/>";
 
 			if($row->libelle == null){
-				echo "Erreur : Nom vide !";
-				echo "<br/>";
+				$row->libelle = "Nom manquant !";
+			}
+
+			$sql = 'SELECT p.id_product
+					FROM '._DB_PREFIX_.'product p
+					WHERE p.id_lcdb_import = '.(int)$row->idproduit;
+
+			$result = Db::getInstance()->getValue($sql);
+
+			if($result !=null){
+				echo 'le produit existe <br/>';
 			}else{
-				$sql = 'SELECT p.id_product
-						FROM '._DB_PREFIX_.'product p
-						WHERE p.id_lcdb_import = '.(int)$row->idproduit;
+				
+				$product = new Product();
+				$product->id_lcdb_import = $row->idproduit;
+				
+				$link_rewrite = Tools::link_rewrite($row->libelle);
+				$valid_link = Validate::isLinkRewrite($link_rewrite);
+				if (!$valid_link)
+					$this->warnings[] = sprintf(
+						Tools::displayError('Rewrite link for %1$s was re-written.'),
+						$link_rewrite
+					);
+				
+				$product->name = Importlcdb::createMultiLangField($row->libelle);
+				$product->link_rewrite = Importlcdb::createMultiLangField($link_rewrite);
+				
+				$product->id_shop_default = 1;
+				
+				$product->price = $row->prix;
+				$product->unit_price = $row->prixkg;
+				$product->unity = "kg";
+					
+				$product->date_start = date("Y-m-d H:i:s");
+				$product->date_end = $row->datelimite;
+				
+				if($row->etat == "off"){
+					$product->active = 0;
+				}
+				
+				$res = false;
+				$field_error = $product->validateFields(UNFRIENDLY_ERROR, true);
+				$lang_field_error = $product->validateFieldsLang(UNFRIENDLY_ERROR, true);
 
-				$result = Db::getInstance()->getValue($sql);
-
-				if($result !=null){
-					echo 'le produit existe <br/>';
-				}else{
-					
-					$product = new Product();
-					$product->id_lcdb_import = $row->idproduit;
-					
-					$link_rewrite = Tools::link_rewrite($row->libelle);
-					$valid_link = Validate::isLinkRewrite($link_rewrite);
-					if (!$valid_link)
-						$this->warnings[] = sprintf(
-							Tools::displayError('Rewrite link for %1$s was re-written.'),
-							$link_rewrite
-						);
-					
-					$product->name = Importlcdb::createMultiLangField($row->libelle);
-					$product->link_rewrite = Importlcdb::createMultiLangField($link_rewrite);
-					
-					$product->id_shop_default = 1;
-					$product->id_category_default = 14;
-					
-					// if($row->cible == "pro"){
-					// 	$product->addToCategories(array(14, 6)); // ug
-					// }else{
-					// 	$product->addToCategories(array(14));
-					// }
-					
-					$product->price = $row->prix;
-					$product->unit_price = $row->prixkg;
-					$product->unity = "kg";
-					
-					// type (épicerie, volaille...)
-					
-					// conditionnement : $row->conditionnement
-					// personnes : $row->pers
-					// frais :  $row->frais
-					// bio ? : $row->bio (oui)
-					// label rouge ? : $row->labelrouge (oui)
-					if($row->bio == "oui"){
-					
-					}elseif($row->labelrouge == "oui"){
-					
-					}
-
-					// poids : $row->poids
-					
-					// add feature
-					//$product->addFeaturesCustomToDB(777, $lang, $cust);
-					// associe feature to product
-					//$product->addFeaturesToDB("", 777);
-					
-					//if (isset($product->id_category))
-					//	$product->updateCategories(array_map('intval', $product->id_category));
-					
-//					
-//					
-//	
-//					// Features import
-//					$features = get_object_vars($product);
-//	
-//					if (isset($features['features']) && !empty($features['features']))
-//						foreach (explode($this->multiple_value_separator, $features['features']) as $single_feature)
-//						{
-//							$tab_feature = explode(':', $single_feature);
-//							$feature_name = trim($tab_feature[0]);
-//							$feature_value = trim($tab_feature[1]);
-//							$position = isset($tab_feature[2]) ? $tab_feature[2]: false;
-
-//							$id_feature = Feature::addFeatureImport($feature_name, $position);
-//							$id_feature_value = FeatureValue::addFeatureValueImport($id_feature, $feature_value);
-//							Product::addFeatureProductImport($product->id, $id_feature, $id_feature_value);
-//						}
-//					// clean feature positions to avoid conflict
-//					Feature::cleanPositions();
-//						
-						
-					$product->date_start = date("Y-m-d H:i:s");
-					$product->date_end = $row->datelimite;
-					
-					if($row->etat == "off"){
-						$product->active = 0;
-					}
-					
-					$res = false;
-					$field_error = $product->validateFields(UNFRIENDLY_ERROR, true);
-					$lang_field_error = $product->validateFieldsLang(UNFRIENDLY_ERROR, true);
-
-					if ($field_error === true && $lang_field_error === true)
-					{
-
-						// If no id_product or update failed
-						if (!$res)
-						{
-							if (isset($product->date_add) && $product->date_add != '')
-								$res = $product->add(false);
-							else
-								$res = $product->add();
-						}
-					}else{
-						echo "<br/><br/>error<br/><br/>";
-					}
+				if ($field_error === true && $lang_field_error === true)
+				{
 
 					if (!$res)
 					{
-						$this->errors[] = sprintf(
-							Tools::displayError('product cannot be saved')
-						);
-						$this->errors[] = ($field_error !== true ? $field_error : '').($lang_field_error !== true ? $lang_field_error : '').
-							Db::getInstance()->getMsgError();
+						if (isset($product->date_add) && $product->date_add != '')
+							$res = $product->add(false);
+						else
+							$res = $product->add();
 
-					}else{
-						echo "Produit enregistré <br/>";
+						if($row->cible == "pro"){
+							$product->addToCategories(array(14, 6)); // ug
+						}else{
+							$product->addToCategories(array(14));
+						}
+
+						$product->id_category_default = 14;
+
+						// conditionnement 
+						if(isset($row->conditionnement) && ($row->conditionnement != "")){
+							// $id_feature = Feature::addFeatureImport($feature_name, $position);
+							$id_feature_value = FeatureValue::addFeatureValueImport(1, $row->conditionnement);
+							Product::addFeatureProductImport($product->id, 1, $id_feature_value);
+						}
+
+						// nombre de personnes
+						if(isset($row->pers) && ($row->pers != "")){
+							$id_feature_value = FeatureValue::addFeatureValueImport(2, $row->pers);
+							Product::addFeatureProductImport($product->id, 2, $id_feature_value);
+						}
+
+						// durée de conservation
+						if(isset($row->frais) && ($row->frais != "")){
+							$id_feature_value = FeatureValue::addFeatureValueImport(5, $row->frais);
+							Product::addFeatureProductImport($product->id, 5, $id_feature_value);
+						}
+
+						// poids 
+						if(isset($row->poids) && ($row->poids != "")){
+							$id_feature_value = FeatureValue::addFeatureValueImport(6, $row->poids);
+							Product::addFeatureProductImport($product->id, 6, $id_feature_value);
+						}
+
+						// label rouge
+						if($row->labelrouge == "oui"){
+							Product::addFeatureProductImport($product->id, 7, 8);
+						}else{
+							Product::addFeatureProductImport($product->id, 7, 9);
+						}
+
+						// bio
+						if($row->bio == "oui"){
+							Product::addFeatureProductImport($product->id, 8, 10);
+						}else{
+							Product::addFeatureProductImport($product->id, 8, 11);
+						}
+
+						Feature::cleanPositions();
+						$product->update();
+
 					}
-
+				}else{
+					echo "<br/><br/>error<br/><br/>";
 				}
 
-				die();
+				if (!$res)
+				{
+					$this->errors[] = sprintf(
+						Tools::displayError('product cannot be saved')
+					);
+					$this->errors[] = ($field_error !== true ? $field_error : '').($lang_field_error !== true ? $lang_field_error : '').
+						Db::getInstance()->getMsgError();
+
+				}else{
+					echo "Produit enregistré <br/>";
+				}
+
 			}
 
 		}
