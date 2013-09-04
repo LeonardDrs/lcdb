@@ -154,9 +154,14 @@ body.content_only {
     margin: 0 12px;
     font-size: 14px;
 }
-#columns .presse .big-bloc {
-	width:680px;
-	margin-left:102px;
+#center_column.single{
+	float: none;
+	width: auto;
+	margin: 0;
+}
+#columns .single .big-bloc {
+	width: 680px;
+	margin: 0 auto;
 }
 #right_column{
     float: left;

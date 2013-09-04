@@ -1,8 +1,5 @@
 <div id="columns" class="content clearfix">
-	<div id="left_column">
-
-	</div><!-- / #left_column -->
-	<div id="center_column" class="presse">
+	<div id="center_column" class="single">
 		
 		<div class="big-bloc">
 			<h1>Presse</h1>

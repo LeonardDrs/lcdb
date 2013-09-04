@@ -21,21 +21,21 @@
 				
 				<p>N'hésitez pas à modifier vos informations personnelles si celles-ci ont changé.</p>
 				<br>
-				<p>Les champs suivis d'un astérisque (<span class="asterisque_rouge">*</span>) sont obligatoires.</p>
+				<p>Les champs suivis d'un astérisque <span class="asterisque_rouge">*</span> sont obligatoires.</p>
 				<hr />
 				<form  action="{$link->getPageLink('identity', true)}" method="post" class="mes_informations">
-					<p class="labels_infos">Civilité (<span class="asterisque_rouge">*</span>)</p>
+					<p class="labels_infos">Civilité <span class="asterisque_rouge">*</span></p>
 					{foreach from=$genders key=k item=gender}
 						<label class="checkbox" for="id_gender{$gender->id}"><input type="radio" name="id_gender" id="id_gender{$gender->id}" value="{$gender->id|intval}" {if isset($smarty.post.id_gender) && $smarty.post.id_gender == $gender->id}checked="checked"{/if} />
 							{$gender->name}
 						</label>
 					{/foreach}
 					<p class="labels_infos">
-						<label for="prenom">Prénom (<span class="asterisque_rouge">*</span>)</label>
+						<label for="prenom">Prénom <span class="asterisque_rouge">*</span></label>
 					</p>
 					<input type="text" id="firstname" name="firstname" value="{$smarty.post.firstname}" />
 					<p class="labels_infos">
-						<label for="nom">Nom (<span class="asterisque_rouge">*</span>)</label>
+						<label for="nom">Nom <span class="asterisque_rouge">*</span></label>
 					</p>
 					<input type="text" name="lastname" id="lastname" value="{$smarty.post.lastname}" />
 					<p class="select">
@@ -74,23 +74,23 @@
 						</select>
 					</p>
 					<p class="labels_infos">
-						<label for="mail">E-mail (<span class="asterisque_rouge">*</span>)</label>
+						<label for="mail">E-mail <span class="asterisque_rouge">*</span></label>
 					</p>
 					<input type="text" name="email" id="email" value="{$smarty.post.email}" />
 					<p class="labels_infos">
-						<label for="old_password">Mot de passe actuel (<span class="asterisque_rouge">*</span>)</label>
+						<label for="old_password">Mot de passe actuel <span class="asterisque_rouge">*</span></label>
 					</p>
 					<input type="password" name="old_passwd" id="old_passwd" />
 					<p class="labels_infos">
-						<label for="new_password">Nouveau mot de passe (<span class="asterisque_rouge">*</span>)</label>
+						<label for="new_password">Nouveau mot de passe <span class="asterisque_rouge">*</span></label>
 					</p>
 					<input type="password" name="passwd" id="passwd" />
 					<p class="labels_infos">
-						<label for="confirm_password">Confirmation (<span class="asterisque_rouge">*</span>)</label>
+						<label for="confirm_password">Confirmation <span class="asterisque_rouge">*</span></label>
 					</p>
 					<input type="password" name="confirmation" id="confirmation" />
 					{if $newsletter}
-						<p class="labels_infos">J'accepte de recevoir par e-mail des offres, anecdotes<br>de la part des Colis du Boucher (<span class="asterisque_rouge">*</span>)<br/><span class="label_italique">Les informations vous concernant ne seront jamais vendues,<br>louées ou cédées à des tiers</span></p>
+						<p class="labels_infos">J'accepte de recevoir par e-mail des offres, anecdotes<br>de la part des Colis du Boucher <span class="asterisque_rouge">*</span><br/><span class="label_italique">Les informations vous concernant ne seront jamais vendues,<br>louées ou cédées à des tiers</span></p>
 						<label class="radio" for="newsletter_oui"><input type="radio" name="newsletter" id="newsletter_oui" value="1" {if isset($smarty.post.newsletter) && $smarty.post.newsletter == 1} checked="checked"{/if} />Oui</label>
 						<label class="radio label_radio" for="newsletter_non"><input type="radio" name="newsletter" id="newsletter_non" value="0" {if isset($smarty.post.newsletter) && $smarty.post.newsletter == 0} checked="checked"{/if} />Non</label>
 					{/if}
