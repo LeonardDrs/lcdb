@@ -1,6 +1,5 @@
 <div id="columns" class="content clearfix">
-	<div id="left_column"></div><!-- / #left_column -->
-	<div id="center_column" class="presse">
+	<div id="center_column" class="single">
 		<div class="big-bloc">
 			{if isset($cms) && !isset($cms_category)}
 				{if !$cms->active}

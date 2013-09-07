@@ -28,7 +28,7 @@
 							<p>Montant total : <span class="bold">{displayPrice price=$orders[0].total_paid currency=$orders[0].id_currency no_utf8=false convert=false}</span></p>
 							<p>Mode de règlement : <span class="bold">{$orders[0].payment|escape:'htmlall':'UTF-8'}</span></p>
 							<p>État du paiement : <span class="bold">{if isset($orders[0].order_state)}{$orders[0].order_state|escape:'htmlall':'UTF-8'}{/if}</span></p>
-							<div class="clearfix commande-adresse">
+							<!-- <div class="clearfix commande-adresse">
 								<p>Adresse de livraison :</p>
 								<ul>
 									<li>Jean-Baptiste Poquelin</li>
@@ -37,7 +37,7 @@
 									<li>69000 Lyon</li>
 									<li>0148354756</li>
 								</ul>
-							</div>
+							</div> -->
 							<hr />
 							<a href="javascript:showOrder(1, {$orders[0].id_order|intval}, '{$link->getPageLink('order-detail', true)}');" title="Voir le détail">
 								&rarr;&nbsp;<span>Voir le détail</span>
@@ -53,7 +53,7 @@
 							<p>Montant total : <span class="bold">82,25 &euro;</span></p>
 							<p>Mode de règlement : <span class="bold">Chèque</span></p>
 							<p>État du paiement : <span class="bold">En attente de paiement</span></p>
-							<div class="clearfix commande-adresse">
+							<!-- <div class="clearfix commande-adresse">
 								<p>Adresse de livraison :</p>
 								<ul>
 									<li>Jean-Baptiste Poquelin</li>
@@ -62,7 +62,7 @@
 									<li>69000 Lyon</li>
 									<li>0148354756</li>
 								</ul>
-							</div>
+							</div> -->
 							<hr />
 							<a href="#" title="Voir le détail">&rarr;&nbsp;<span>Voir le détail</span></a>
 							<a href="#" title="Télécharger la facture">&rarr;&nbsp;<span>Télécharger la facture</span></a>
