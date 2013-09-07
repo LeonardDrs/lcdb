@@ -57,7 +57,10 @@
 							{/if}-->
 						{/if}
 						</p>
-						<p class="price-kg">25,62€/kg</p>
+						{if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
+							 {math equation="pprice / punit_price"  pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
+							<p class="unit-price">{convertPrice price=$unit_price}/{$product->unity|escape:'htmlall':'UTF-8'}</p>
+						{/if}
 					</div>
 				</div>
 				<div>
@@ -133,11 +136,6 @@
 							</p>
 						{/if}
 
-						{if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
-							 {math equation="pprice / punit_price"  pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
-							<p class="unit-price"><span id="unit_price_display">{convertPrice price=$unit_price}</span> {l s='per'} {$product->unity|escape:'htmlall':'UTF-8'}</p>
-						{/if}
-
 						{/if}
 
 						{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
@@ -152,9 +150,17 @@
 		
 		<hr />
 		<div class="misc-infos clearfix">
-			<p class="portions"><span class="img-portions"></span> 2 <span class="colis-portions">portions</span></p>
-			<p class="jours"><span class="img-jours"></span> 10 <span class="colis-jours">jours</span></p>
-			<p class="cuisson"><span class="img-cuisson"></span> <span class="mode-cuisson">à griller</span></p>
+			{foreach from=$features item=feature}
+				{if $feature.id_feature == 2 }
+					<p class="portions"><span class="img-portions"></span> {$feature.value} <!-- <span class="colis-portions">portions</span>--></p>
+				{/if}
+				{if $feature.id_feature == 5 }
+					<p class="jours"><span class="img-jours"></span> {$feature.value} <!--<span class="colis-jours">jours</span>--></p>
+				{/if}
+				{if $feature.id_feature == 6 }
+					<p class="cuisson"><span class="img-cuisson"></span> <span class="mode-cuisson">à griller</span></p>
+				{/if}
+			{/foreach}
 		</div>
 		
 		{if isset($product->tricks)}
@@ -172,92 +178,30 @@
 				<div>{$product->breeder}</div>
 			</div>
 		{/if}
-		
-		{if isset($product->description_short)}
+
+		{if isset($recipes)}
 			<hr />
 			<div id="idees-recettes">
 				<h2><span class="img-idees-recettes"></span>Idées recettes</h2>
 				<ul>
-					<li itemscope itemtype="http://schema.org/Recipe">
-						<a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
-						<h3 itemprop="name">Queue de Boeuf aux olives et jambon de pays</h3>
-						<p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_3">3/5</span></p>
-						<div class="recipe-details hidden">
-							<h4>Ingrédients :</h4>
-							<ul class="ingredients clearfix">
-								<li itemprop="ingredients">2 kg de queue de boeuf en tronçons</li>
-								<li itemprop="ingredients">3 oignons</li>
-								<li itemprop="ingredients">2 gousses d’ail</li>
-								<li itemprop="ingredients">4 tomates</li>
-								<li itemprop="ingredients">100 g de jambon de pays</li>
-								<li itemprop="ingredients">50 cl de bouillon de pot-au-feu</li>
-								<li itemprop="ingredients">2 cuillières à soupe d’huile d’olive</li>
-								<li itemprop="ingredients">125 g d’olives noires</li>
-								<li itemprop="ingredients">1 feuille de laurier</li>
-								<li itemprop="ingredients">1 branche de thym</li>
-								<li itemprop="ingredients">Sel, poivre</li>
-							</ul>
-							<h4>Recette :</h4>
-							<ul class="recette">
-								<li itemprop="recipeInstructions">Plongez les tomates dans une casserole d’eau bouillante pendant 1min puis épluchez-les et concassez-les grossièrement. Hachez l’ail finement après l’avoir dégermé. découpez le jambon en fines lanières puis pelez et émincez les oignons.</li>
-								<li itemprop="recipeInstructions">Dans une cocotte, faites revenir les morceaux de viande et les oignions dans l’huile bien chaude. Ajoutez l’ail, les lamelles de kambon, les tomates, le laurier et le thym. Ajoutez le bouillon. Goûtez l’assaisonement si besoin.</li>
-							</ul>
-						</div>
-						<hr class="dashed" />
-					</li>
-					<li itemscope itemtype="http://schema.org/Recipe">
-						<a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
-						<h3 itemprop="name">Queue de Boeuf aux olives et jambon de pays</h3>
-						<p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_0">0/5</span></p>
-						<div class="recipe-details hidden">
-							<h4>Ingrédients :</h4>
-							<ul class="ingredients clearfix">
-								<li itemprop="ingredients">2 kg de queue de boeuf en tronçons</li>
-								<li itemprop="ingredients">3 oignons</li>
-								<li itemprop="ingredients">2 gousses d’ail</li>
-								<li itemprop="ingredients">4 tomates</li>
-								<li itemprop="ingredients">100 g de jambon de pays</li>
-								<li itemprop="ingredients">50 cl de bouillon de pot-au-feu</li>
-								<li itemprop="ingredients">2 cuillières à soupe d’huile d’olive</li>
-								<li itemprop="ingredients">125 g d’olives noires</li>
-								<li itemprop="ingredients">1 feuille de laurier</li>
-								<li itemprop="ingredients">1 branche de thym</li>
-								<li itemprop="ingredients">Sel, poivre</li>
-							</ul>
-							<h4>Recette :</h4>
-							<ul class="recette">
-								<li itemprop="recipeInstructions">Plongez les tomates dans une casserole d’eau bouillante pendant 1min puis épluchez-les et concassez-les grossièrement. Hachez l’ail finement après l’avoir dégermé. découpez le jambon en fines lanières puis pelez et émincez les oignons.</li>
-								<li itemprop="recipeInstructions">Dans une cocotte, faites revenir les morceaux de viande et les oignions dans l’huile bien chaude. Ajoutez l’ail, les lamelles de kambon, les tomates, le laurier et le thym. Ajoutez le bouillon. Goûtez l’assaisonement si besoin.</li>
-							</ul>
-						</div>
-						<hr class="dashed" />
-					</li>
-					<li itemscope itemtype="http://schema.org/Recipe">
-						<a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
-						<h3 itemprop="name">Queue de Boeuf aux olives et jambon de pays</h3>
-						<p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_5">5/5</span></p>
-						<div class="recipe-details hidden">
-							<h4>Ingrédients :</h4>
-							<ul class="ingredients clearfix">
-								<li itemprop="ingredients">2 kg de queue de boeuf en tronçons</li>
-								<li itemprop="ingredients">3 oignons</li>
-								<li itemprop="ingredients">2 gousses d’ail</li>
-								<li itemprop="ingredients">4 tomates</li>
-								<li itemprop="ingredients">100 g de jambon de pays</li>
-								<li itemprop="ingredients">50 cl de bouillon de pot-au-feu</li>
-								<li itemprop="ingredients">2 cuillières à soupe d’huile d’olive</li>
-								<li itemprop="ingredients">125 g d’olives noires</li>
-								<li itemprop="ingredients">1 feuille de laurier</li>
-								<li itemprop="ingredients">1 branche de thym</li>
-								<li itemprop="ingredients">Sel, poivre</li>
-							</ul>
-							<h4>Recette :</h4>
-							<ul class="recette">
-								<li itemprop="recipeInstructions">Plongez les tomates dans une casserole d’eau bouillante pendant 1min puis épluchez-les et concassez-les grossièrement. Hachez l’ail finement après l’avoir dégermé. découpez le jambon en fines lanières puis pelez et émincez les oignons.</li>
-								<li itemprop="recipeInstructions">Dans une cocotte, faites revenir les morceaux de viande et les oignions dans l’huile bien chaude. Ajoutez l’ail, les lamelles de kambon, les tomates, le laurier et le thym. Ajoutez le bouillon. Goûtez l’assaisonement si besoin.</li>
-							</ul>
-						</div>
-					</li>
+					{foreach from=$recipes item=recipe}
+						<li itemscope itemtype="http://schema.org/Recipe">
+							<a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
+							<h3 itemprop="name">{$recipe.title}</h3>
+							<p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_{$recipe.difficulty}">{$recipe.difficulty}/5</span></p>
+							<div class="recipe-details hidden">
+								<h4>Ingrédients :</h4>
+								<div class="ingredients clearfix">
+									{$recipe.ingredients_content}
+								</div>
+								<h4>Recette :</h4>
+								<div class="recette">
+									{$recipe.recipe_content}
+								</div>
+							</div>
+							<hr class="dashed" />
+						</li>
+					{/foreach}
 				</ul>
 			</div>
 		{/if}

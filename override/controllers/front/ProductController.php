@@ -10,6 +10,9 @@ class ProductController extends ProductControllerCore
 		$parent = new Category(3, $this->context->language->id);
 		$left_col = $parent->getSubCategoriesByDepth(2, 4, $this->context->language->id);
 		$this->context->smarty->assign('left_col', $left_col);
+
+		// get recipes
+		$this->context->smarty->assign('recipes', $this->product->getRecipes($this->context->language->id));
 		
 	}
 }
