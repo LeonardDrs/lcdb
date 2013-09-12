@@ -162,8 +162,8 @@ class OrderController extends OrderControllerCore
 					throw new PrestaShopException('Method is not defined');
 			}
 		}
-		elseif (Tools::isSubmit('ajax'))
-			throw new PrestaShopException('Method is not defined');
+		// elseif (Tools::isSubmit('ajax'))
+			// throw new PrestaShopException('Method is not defined');
 	}
 
 	public function postProcess()

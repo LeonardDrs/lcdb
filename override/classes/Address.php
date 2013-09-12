@@ -20,13 +20,13 @@ class Address extends AddressCore
 
 		// var_dump($cp);
 		if (substr($cp, 0, 2) == "75") {
-			self::$_idZones[$id_address] = 1;
+			self::$_idZones[$id_address] = 1; // Paris
 		} else if (ZoneCustom::isProche($cp)){
-			self::$_idZones[$id_address] = 9;
+			self::$_idZones[$id_address] = 9; // Proche banlieue
 		} else if (ZoneCustom::isGrande($cp)) {
-			self::$_idZones[$id_address] = 10;
+			self::$_idZones[$id_address] = 10; // Grande banlieue
 		} else {
-			self::$_idZones[$id_address] = 11;
+			self::$_idZones[$id_address] = 11; // Province
 		}
 
 		// self::$_idZones[$id_address] = (int)((int)$result['id_zone_state'] ? $result['id_zone_state'] : $result['id_zone']);
