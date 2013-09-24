@@ -40,17 +40,7 @@
 					</nav>
 				</div>
 				<div class="footer-bottom">
-					<div class="newsletter">
-						<p>Pour recevoir encore plus d'offres spéciales,
-						anecdotes et conseils, inscrivez-vous à la newsletter!</p>
-						<form id="form-newsletter" method="get">
-							<input id="email" type="text" maxlength="100" placeholder="votre mail ici" name="email">
-							<button type="submit" name="submit">S'inscrire</button>
-						</form>
-					</div>
-					<nav class="add-link">
-						{$HOOK_FOOTER}
-					</nav>
+					{$HOOK_FOOTER}
 					<div class="clearfix"></div>
 					<nav class="seo-link">
 						<ul>

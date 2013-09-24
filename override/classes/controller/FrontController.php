@@ -7,8 +7,8 @@ class FrontController extends FrontControllerCore
 		parent::init();
 		
 		$menu_cats = Category::getChildren(2, $this->context->language->id);
-		$menu_infos = CMS::getCMSPages($this->context->language->id, 6);
-		$menu_approach = CMS::getCMSPages($this->context->language->id, 5);
+		$menu_infos = CMS::getCMSPages($this->context->language->id, 3);
+		$menu_approach = CMS::getCMSPages($this->context->language->id, 2);
 		$menu_recipe = RecipeCategory::getSubCategoriesByDepth(1, 3, $this->context->language->id);
 		
 		$this->context->smarty->assign(array(
