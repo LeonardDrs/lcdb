@@ -151,19 +151,19 @@
 		<hr />
 		<div class="misc-infos clearfix">
 			{foreach from=$features item=feature}
-				{if $feature.id_feature == 2 }
-					<p class="portions"><span class="img-portions"></span> {$feature.value} <!-- <span class="colis-portions">portions</span>--></p>
+				{if $feature.id_feature == 7 }
+					<p class="portions"><span class="img-portions"></span> {$feature.value} <span class="colis-portions">portions</span></p>
 				{/if}
-				{if $feature.id_feature == 5 }
-					<p class="jours"><span class="img-jours"></span> {$feature.value} <!--<span class="colis-jours">jours</span>--></p>
+				{if $feature.id_feature == 8 }
+					<p class="jours"><span class="img-jours"></span> {$feature.value} <span class="colis-jours">jours</span></p>
 				{/if}
-				{if $feature.id_feature == 6 }
+				{if $feature.id_feature == 10 }
 					<p class="cuisson"><span class="img-cuisson"></span> <span class="mode-cuisson">à griller</span></p>
 				{/if}
 			{/foreach}
 		</div>
 		
-		{if isset($product->tricks)}
+		{if isset($product->tricks) && ($product->tricks != null)}
 			<hr />
 			<div id="trucs-et-astuces">
 				<h2><span class="img-trucs-astuces"></span>Trucs et astuces des Colis du Boucher</h2>
@@ -171,7 +171,7 @@
 			</div>
 		{/if}
 		
-		{if isset($product->breeder)}
+		{if isset($product->breeder) && ($product->breeder != null)}
 			<hr />
 			<div id="mot-eleveur">
 				<h2><span class="img-mot-eleveur"></span>Le mot de l'éleveur</h2>
@@ -179,7 +179,7 @@
 			</div>
 		{/if}
 
-		{if isset($recipes)}
+		{if isset($recipes) && ($recipes != null)}
 			<hr />
 			<div id="idees-recettes">
 				<h2><span class="img-idees-recettes"></span>Idées recettes</h2>
