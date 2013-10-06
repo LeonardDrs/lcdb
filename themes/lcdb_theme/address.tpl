@@ -99,7 +99,7 @@ $(function(){ldelim}
 					<label for="comment">Informations supplémentaires</label>
 					<textarea id="comment" name="other">{if isset($smarty.post.other)}{$smarty.post.other}{else}{if isset($address->other)}{$address->other}{/if}{/if}</textarea>
 					<label for="address_title">Donnez un titre à cette adresse pour la retrouver plus facilement <span class="asterisque">*</span></label>
-					<input type="text" id="address_title" name="alias" value="{if isset($smarty.post.alias)}{$smarty.post.alias}{else if isset($address->alias)}{$address->alias}{else if isset($select_address)}{l s='My address'}{/if}" required />
+					<input type="text" id="address_title" name="alias" value="{if isset($smarty.post.alias)}{$smarty.post.alias}{else if isset($address->alias)}{$address->alias}{/if}" required />
 					
 				</div>
 				<div>

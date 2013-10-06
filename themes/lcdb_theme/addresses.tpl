@@ -79,18 +79,18 @@
 				{if isset($multipleAddresses) && $multipleAddresses}
 					{assign var="adrs_style" value=$addresses_style}
 					{foreach from=$multipleAddresses item=address name=myLoop}
+
 						<div class="details-address">
 							<p class="information title">{$address.object.alias}</p>
-							{foreach from=$address.ordered name=adr_loop item=pattern}
-								{assign var=addressKey value=" "|explode:$pattern}
-								<p>
-									{foreach from=$addressKey item=key name="word_loop"}
-										<span{if isset($addresses_style[$key])} class="{$addresses_style[$key]}"{/if}>
-											{$address.formated[$key|replace:',':'']|escape:'htmlall':'UTF-8'}
-										</span>
-									{/foreach}
-								</p>
-							{/foreach}
+							<p>{$address.object.firstname} {$address.object.lastname}</p>
+							<p>{$address.object.company}</p>
+							<p>{$address.object.address1}</p>
+							<p>{$address.object.address2}</p>
+							<p>{$address.object.postcode} {$address.object.city}</p>
+							<p>{$address.object.country}</p>
+							<p>{$address.object.phone}</p>
+							<p>{$address.object.phone_mobile}</p>
+
 							<div class="action-link">
 								<a href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}")}" title="Modifier cette adresse"><span>&rarr;</span>Modifier cette adresse</a>
 								<a href="{$link->getPageLink('address', true, null, "id_address={$address.object.id|intval}&delete")}" onclick="return confirm('{l s='Are you sure?' js=1}');" title="Supprimer"><span>&rarr;</span>Supprimer</a>
