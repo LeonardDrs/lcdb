@@ -13,9 +13,6 @@
 					<a href="{$link->getPageLink('history', true)}" title="{l s='Orders'}">Mes commandes</a>
 				</li>
 				<li class="submenu-item">
-					<a href="{$link->getPageLink('abo')}" title="Mon abonnement">Mon abonnement</a>
-				</li>
-				<li class="submenu-item">
 					<a href="{$link->getPageLink('identity', true)}" title="{l s='Information'}">Mes informations</a>
 				</li>
 				<li class="submenu-item">
