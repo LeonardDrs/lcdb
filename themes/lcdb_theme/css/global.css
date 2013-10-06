@@ -4639,3 +4639,18 @@ div.pager .pager-last{
 #pagenotfound .bloc a span{
 	font-size: 20px;
 }
+
+#form_forgotpassword #email {
+	font-size: 13px;
+}
+
+#form_forgotpassword .text label {
+	margin-right: 5px;
+}
+#form_forgotpassword .text input {
+	margin: 5px;
+}
+#form_forgotpassword .text input#submit {
+	font-size: 12px;
+	padding: 4px 15px;
+}
