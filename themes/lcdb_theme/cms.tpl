@@ -19,7 +19,7 @@
 				<div class="rte{if $content_only} content_only{/if}">
 					{$cms->content}
 				</div>
-			{elseif isset($cms_category) && $cms_category->id eq 7}
+			{elseif isset($cms_category) && $cms_category->id eq 9}
 				<div class="block-cms">
 					<h1>{$cms_category->name|escape:'htmlall':'UTF-8'}</h1>
 					<p class="italique">
