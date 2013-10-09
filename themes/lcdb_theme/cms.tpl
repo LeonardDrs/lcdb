@@ -19,6 +19,44 @@
 				<div class="rte{if $content_only} content_only{/if}">
 					{$cms->content}
 				</div>
+			{elseif isset($cms_category) && $cms_category->id eq 9}
+				<div class="block-cms">
+					<h1>{$cms_category->name|escape:'htmlall':'UTF-8'}</h1>
+					<p class="italique">
+						{$cms_category->description} <span class="lien_vert"><a href="{$link->getPageLink('contact')|escape:'htmlall':'UTF-8'}" title="Page de contact">Contactez-nous.</a></span>
+					</p>
+					{if isset($sub_category) & !empty($sub_category)}
+					<div>
+						{foreach from=$sub_category item=subcategory}
+							{if isset($subcategory.childrens)}	
+								<div>
+									<h2 class="titre_vert">{$subcategory.name|escape:'htmlall':'UTF-8'}</h2>
+									<ul class="liste_FAQ">
+										{foreach from=$subcategory.childrens item=page}
+											<li>
+												<a href="#">{$page.meta_title}</a>
+												<div class="content rte{if $content_only} content_only{/if}">
+													{$page.content}
+												</div>
+											</li>
+										{/foreach}
+									</ul>								
+								</div>
+							{/if}
+						{/foreach}
+					</div>
+					{/if}
+					{if isset($cms_pages) & !empty($cms_pages)}
+					<p class="title_block">{l s='List of pages in %s:' sprintf=$cms_category->name}</p>
+						<ul class="bullet">
+							{foreach from=$cms_pages item=cmspages}
+								<li>
+									<a href="{$link->getCMSLink($cmspages.id_cms, $cmspages.link_rewrite)|escape:'htmlall':'UTF-8'}">{$cmspages.meta_title|escape:'htmlall':'UTF-8'}</a>
+								</li>
+							{/foreach}
+						</ul>
+					{/if}
+				</div>
 			{elseif isset($cms_category)}
 				
 				<div class="block-cms">

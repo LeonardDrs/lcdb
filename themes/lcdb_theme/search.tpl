@@ -2,11 +2,7 @@
 {capture name=path}{l s='Search'}{/capture}
 
 <div id="columns" class="content clearfix">
-	<div id="left_column">
-		
-	</div>
-	<div id="center_column" class="page-list-product">
-
+	<div id="center_column" class="single">
 		<div class="big-bloc">
 			<div class="title_list_product">
 				<h1>

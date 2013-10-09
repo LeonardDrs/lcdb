@@ -11,10 +11,14 @@ class CmsController extends CmsControllerCore
 		$this->context->smarty->assign('id_current_lang', $this->context->language->id);
 		$this->context->smarty->assign('home_title', $parent_cat->name);
 		$this->context->smarty->assign('cgv_id', Configuration::get('PS_CONDITIONS_CMS_ID'));
-		if (isset($this->cms->id_cms_category) && $this->cms->id_cms_category)
+		if (isset($this->cms->id_cms_category) && $this->cms->id_cms_category) {
 			$path = Tools::getFullPath($this->cms->id_cms_category, $this->cms->meta_title, 'CMS');
-		else if (isset($this->cms_category->meta_title))
+		} else if (isset($this->cms_category->meta_title)) {
+			if ($this->cms_category->id == 9) {
+				$this->addJS(_THEME_JS_DIR_.'faq.js');
+			}
 			$path = Tools::getFullPath(1, $this->cms_category->meta_title, 'CMS');
+		}
 		if ($this->assignCase == 1)
 		{
 			$this->context->smarty->assign(array(
