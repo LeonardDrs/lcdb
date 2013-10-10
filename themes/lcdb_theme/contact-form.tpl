@@ -19,7 +19,7 @@
 		
 			<p class="italic">Des questions ? Des remarques ? Contactez-nous ! Nous nous feront un plaisir de vous aider.</p>
 			<div class="hat">
-				<p class="faq">Mais avant cela, pensez à lire les <a href="#" title="questions fréquentes" class="green">questions fréquentes</a> ! Vous y trouverez toutes les réponses aux
+				<p class="faq">Mais avant cela, pensez à lire les <a href="{$link->getCMSCategoryLink(4)}" title="questions fréquentes" class="green">questions fréquentes</a> ! Vous y trouverez toutes les réponses aux
 				questions les plus fréquemment posées.</p>
 			</div>
 			<h2 class="bold">Vos questions restent sans réponses ?</h2>
@@ -43,22 +43,6 @@
 					<input type="text" id="email" name="from" value="{$customerThread.email|escape:'htmlall':'UTF-8'}" readonly="readonly" data-required="true" />
 				{else}
 					<input type="text" id="email" name="from" value="{$email|escape:'htmlall':'UTF-8'}" data-required="true" />
-				{/if}
-				
-				{if (!isset($customerThread.id_order) || $customerThread.id_order > 0)}
-						<label for="id_order">{l s='Order Reference'}</label>
-						{if !isset($customerThread.id_order) && isset($isLogged) && $isLogged == 1}
-							<select name="id_order" class="subject">
-								<option value="0">{l s='-- Choose --'}</option>
-								{foreach from=$orderList item=order}
-									<option value="{$order.value|intval}" {if $order.selected|intval}selected="selected"{/if}>{$order.label|escape:'htmlall':'UTF-8'}</option>
-								{/foreach}
-							</select>
-						{elseif !isset($customerThread.id_order) && !isset($isLogged)}
-							<input type="text" name="id_order" id="id_order" value="{if isset($customerThread.id_order) && $customerThread.id_order > 0}{$customerThread.id_order|intval}{else}{if isset($smarty.post.id_order)}{$smarty.post.id_order|intval}{/if}{/if}" />
-						{elseif $customerThread.id_order > 0}
-							<input type="text" name="id_order" id="id_order" value="{$customerThread.id_order|intval}" readonly="readonly" />
-						{/if}
 				{/if}
 				
 				<div class="select">

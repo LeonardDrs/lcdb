@@ -3,8 +3,7 @@
 {capture name=path}{l s='Search'}{/capture}
 
 <div id="columns" class="content clearfix">
-	<div id="left_column"></div><!-- / #left_column -->
-	<div id="center_column" class="presse">
+	<div id="center_column" class="single">
 		<div class="big-bloc">
 			
 			{capture name=path}<a href="{$link->getPageLink('authentication', true)}" title="{l s='Authentication'}" rel="nofollow">{l s='Authentication'}</a><span class="navigation-pipe">{$navigationPipe}</span>{l s='Forgot your password'}{/capture}
@@ -20,19 +19,15 @@
 			{else}
 			<p>{l s='Please enter the e-mail address used to register. We will send your new password to that address.'}</p>
 			<form action="{$request_uri|escape:'htmlall':'UTF-8'}" method="post" class="std" id="form_forgotpassword">
-				<fieldset>
-					<p class="text">
-						<label for="email">{l s='E-mail:'}</label>
-						<input type="text" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|escape:'htmlall':'UTF-8'|stripslashes}{/if}" />
-					</p>
-					<p class="submit">
-						<input type="submit" class="button" value="{l s='Retrieve Password'}" />
-					</p>
-				</fieldset>
+				<p class="text">
+					<label for="email">{l s='E-mail:'}</label>
+					<input type="text" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|escape:'htmlall':'UTF-8'|stripslashes}{/if}" />
+					<input type="submit" class="red-button gradient" value="{l s='Retrieve Password'}" id="submit" />
+				</p>
 			</form>
 			{/if}
 			<p class="clear">
-				<a href="{$link->getPageLink('authentication', true)}" title="{l s='Return to Login'}" rel="nofollow"><img src="{$img_dir}icon/my-account.gif" alt="{l s='Return to Login'}" class="icon" /></a><a href="{$link->getPageLink('authentication')}" title="{l s='Back to Login'}" rel="nofollow">{l s='Back to Login'}</a>
+				<a href="{$link->getPageLink('authentication')}" title="{l s='Back to Login'}" rel="nofollow" class="green">{l s='Back to Login'}</a>
 			</p>
 			
 		</div>
