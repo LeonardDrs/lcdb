@@ -19,18 +19,29 @@ class Address extends AddressCore
 		WHERE a.`id_address` = '.(int)$id_address);
 
 		// var_dump($cp);
-		if (substr($cp, 0, 2) == "75") {
-			self::$_idZones[$id_address] = 1; // Paris
-		} else if (ZoneCustom::isProche($cp)){
-			self::$_idZones[$id_address] = 9; // Proche banlieue
-		} else if (ZoneCustom::isGrande($cp)) {
-			self::$_idZones[$id_address] = 10; // Grande banlieue
-		} else {
-			self::$_idZones[$id_address] = 11; // Province
-		}
+		$_idZones[$id_address] = self::getZoneByZipCode($cp);
 
 		// self::$_idZones[$id_address] = (int)((int)$result['id_zone_state'] ? $result['id_zone_state'] : $result['id_zone']);
 		return self::$_idZones[$id_address];
+	}
+
+	public function getZoneByZipCode($cp)
+	{
+		if (substr($cp, 0, 2) == "75") {
+			// Paris
+			$idZone = 1;
+		} else if (ZoneCustom::isProche($cp)){
+			// Proche banlieue
+			$idZone = 9;
+		} else if (ZoneCustom::isGrande($cp)) {
+			// Grande banlieue
+			$idZone = 10;
+		} else {
+			// Province
+			$idZone = 11;
+		}
+
+		return $idZone;
 	}
 }
 
