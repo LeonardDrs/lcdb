@@ -17,7 +17,6 @@ class Address extends AddressCore
 		FROM `'._DB_PREFIX_.'address` a
 		WHERE a.`id_address` = '.(int)$id_address);
 
-<<<<<<< HEAD
 		return $this->getZoneByZip();
 	}
 
@@ -30,37 +29,18 @@ class Address extends AddressCore
 	public static function getZoneByZip($cp)
 	{
 
-=======
-		// var_dump($cp);
-		$_idZones[$id_address] = self::getZoneByZipCode($cp);
-
-		// self::$_idZones[$id_address] = (int)((int)$result['id_zone_state'] ? $result['id_zone_state'] : $result['id_zone']);
-		return self::$_idZones[$id_address];
-	}
-
-	public function getZoneByZipCode($cp)
-	{
->>>>>>> fe51d7c9275aaf5358093e3ddf4a336a54a43a25
 		if (substr($cp, 0, 2) == "75") {
-			// Paris
-			$idZone = 1;
+			self::$_idZones[$id_address] = 1; // Paris
 		} else if (ZoneCustom::isProche($cp)){
-			// Proche banlieue
-			$idZone = 9;
+			self::$_idZones[$id_address] = 9; // Proche banlieue
 		} else if (ZoneCustom::isGrande($cp)) {
-			// Grande banlieue
-			$idZone = 10;
+			self::$_idZones[$id_address] = 10; // Grande banlieue
 		} else {
-			// Province
-			$idZone = 11;
+			self::$_idZones[$id_address] = 11; // Province
 		}
 
-<<<<<<< HEAD
 		return self::$_idZones[$id_address];
 
-=======
-		return $idZone;
->>>>>>> fe51d7c9275aaf5358093e3ddf4a336a54a43a25
 	}
 }
 
