@@ -29,6 +29,19 @@ class DeliveryControllerCore extends FrontController
 			// on affiche le creneau horaire de cette zone
 			
 			// a quelle endroit la zone est linké à un cp ?
+
+			$zip = Tools::getValue("code_postal");
+
+			$address = new Address();
+			$result = $address->getZoneByZip($zip);
+
+			echo "<pre>";
+			print_r($result);
+			echo "</pre>";
+
+			// requete avec le zip code
+			// on remplis le tableau suivant les resultats
+			// si pas de resultat, on retourne 0
 			
 			$delivery = array();
 			$delivery['id'] = "1";

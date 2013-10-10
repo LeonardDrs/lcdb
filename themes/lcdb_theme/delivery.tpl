@@ -8,7 +8,10 @@
 				<div class="bloc_droite">
 					<p>Entrez <strong>le code postal de la ville où vous souhaiteriez vous faire livrer</strong> pour connaître les frais et le modes de livraison qui vous sont proposés</p>
 					<form method="post" action="{$base_dir}index.php?controller=delivery">
-						<p class="label_livraison"><label for="code_postal">Code Postal: </label> <input type="text" maxlength="5" id="code_postal" /><input id="bouton_carre" name="bouton_carre" type="submit" value="OK" /></p>
+						<p class="label_livraison"><label for="code_postal">Code Postal: </label> 
+							<input type="text" maxlength="5" id="code_postal" name="code_postal" value="" />
+							<input id="bouton_carre" name="bouton_carre" type="submit" value="OK" />
+						</p>
 					</form>
 				</div>
 			</div>
