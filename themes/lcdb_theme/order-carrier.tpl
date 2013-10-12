@@ -45,16 +45,16 @@
 {include file="$tpl_dir./errors.tpl"}
 <div class="bloc content-delivery-mode" id="carrier_area">
 		<div class="delivery_options_address bloc content-delivery-modee">
+			<h2>Modes de livraison</h2>
 			{if isset($delivery_option_list)}
 				{foreach $delivery_option_list as $id_address => $option_list}
-					{foreach $option_list as $key => $option}
-						<h2>Modes de livraison</h2>
-						<ul>
+					<ul>
+						{foreach $option_list as $key => $option}
 							<li id="delivery-home-li">
 								{if $option.unique_carrier}
 									{foreach $option.carrier_list as $carrier}
 										<p>
-											<label class="radio" for="home-office"><input type="radio" name="delivery" id="home-office" value="home" checked/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
+											<label class="radio" for="home-office"><input type="radio" name="delivery" id="home-office" value="{$carrier.instance->id}"/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
 											|	<span class="">
 												{if $option.total_price_with_tax && !$free_shipping}
 													{if $use_taxes == 1}
@@ -73,8 +73,8 @@
 									{/if}
 								{/if}
 							</li>
-						</ul>
-					{/foreach}
+						{/foreach}
+					</ul>
 					{foreachelse}
 						<p class="warning" id="noCarrierWarning">
 							{foreach $cart->getDeliveryAddressesWithoutCarriers(true) as $address}
@@ -103,5 +103,15 @@
 		</div>
 		<input type="hidden" class="hidden" name="step" value="2" />
 		<input type="hidden" name="back" value="{$back}" />
-	</div>
 </div>
+<script>
+	 $("html").addClass("has-js");
+
+    // First let's prepend icons (needed for effects)
+    $(".checkbox, .radio").prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
+
+    $(".checkbox, .radio").click(function(){
+        setupLabel();
+    });
+    setupLabel();
+</script>
