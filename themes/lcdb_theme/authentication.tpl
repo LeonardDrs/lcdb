@@ -46,10 +46,10 @@ $(function(){ldelim}
 
 
 {capture name=path}{l s='Login'}{/capture}
+{assign var='current_step' value='login'}
 
 <div id="columns" class="content clearfix">
 	<div class="bloc-checkout">
-		{include file="./order-steps.tpl"}
 		{include file="$tpl_dir./errors.tpl"}
 		
 		{assign var='stateExist' value=false}
@@ -118,38 +118,9 @@ $(function(){ldelim}
 				}
 				{/literal}
 			</script>
-		
-			<div class="clearfix">
-				<div class="bloc content-register">
-					<h2>Première commande chez les Colis du Boucher ?</h2>
-					<p>C'est le moment de <span class="bold">créer votre compte</span>.</p>
-					<p>Vous bénéficierez ainsi de tous les avantages du village et gagnerez du temps lors de vos prochaines commandes sur le site.</p>
-					<p>L'inscription est <span class="bold">simple, rapide et sans engagement de commande</span>.</p>
-					<div class="register-button">
-						<a href="{$link->getPageLink('authentication', true)}?create_account=true" class="red-button gradient">créer mon compte</a>
-					</div>  
-				</div>
-				<div class="bloc content-login">
-					<h2>Vous avez déja commandé ou disposez d’un compte ?</h2>
-					<form action="{$link->getPageLink('authentication', true)}" method="post" >
-						
-						<label for="mail-address">Adresse e-mail</label>
-						<input type="text" id="mail-address" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|stripslashes}{/if}" />
-						<label for="password">Mot de passe</label>
-						<input type="password" id="password" name="passwd" value="{if isset($smarty.post.passwd)}{$smarty.post.passwd|stripslashes}{/if}"/>
-						<a href="{$link->getPageLink('password')}" class="green-title" title="Mot de passe oublié ?">Mot de passe oublié ?</a>
-
-						<label class="checkbox" for="remember-me"><input type="checkbox" id="remember-me" name="remember-me" />Se souvenir de moi lors des prochaines visites</label>
-
-						<div class="login-button">
-							{if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'htmlall':'UTF-8'}" />{/if}
-							<input type="submit" name="SubmitLogin" class="red-button gradient" value="me connecter" />
-						</div>
-					</form>
-				</div>
-			</div>
 			
-			{if isset($inOrderProcess) && $inOrderProcess && $PS_GUEST_CHECKOUT_ENABLED}
+			{if isset($inOrderProcess) && $inOrderProcess}
+				{include file="./order-steps.tpl"}
 				<form action="{$link->getPageLink('authentication', true, NULL, "back=$back")}" method="post" id="new_account_form" class="std clearfix">
 					<fieldset>
 						<h3>{l s='Instant Checkout'}</h3>
@@ -309,6 +280,36 @@ $(function(){ldelim}
 						<input type="submit" class="exclusive" name="submitGuestAccount" id="submitGuestAccount" value="{l s='Continue'}">
 					</p>
 				</form>
+			{else}
+				<div class="clearfix">
+					<div class="bloc content-register">
+						<h2>Première commande chez les Colis du Boucher ?</h2>
+						<p>C'est le moment de <span class="bold">créer votre compte</span>.</p>
+						<p>Vous bénéficierez ainsi de tous les avantages du village et gagnerez du temps lors de vos prochaines commandes sur le site.</p>
+						<p>L'inscription est <span class="bold">simple, rapide et sans engagement de commande</span>.</p>
+						<div class="register-button">
+							<a href="{$link->getPageLink('authentication', true)}?create_account=true" class="red-button gradient">créer mon compte</a>
+						</div>  
+					</div>
+					<div class="bloc content-login">
+						<h2>Vous avez déja commandé ou disposez d’un compte ?</h2>
+						<form action="{$link->getPageLink('authentication', true)}" method="post" >
+							
+							<label for="mail-address">Adresse e-mail</label>
+							<input type="text" id="mail-address" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email|stripslashes}{/if}" />
+							<label for="password">Mot de passe</label>
+							<input type="password" id="password" name="passwd" value="{if isset($smarty.post.passwd)}{$smarty.post.passwd|stripslashes}{/if}"/>
+							<a href="{$link->getPageLink('password')}" class="green-title" title="Mot de passe oublié ?">Mot de passe oublié ?</a>
+
+							<label class="checkbox" for="remember-me"><input type="checkbox" id="remember-me" name="remember-me" />Se souvenir de moi lors des prochaines visites</label>
+
+							<div class="login-button">
+								{if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'htmlall':'UTF-8'}" />{/if}
+								<input type="submit" name="SubmitLogin" class="red-button gradient" value="me connecter" />
+							</div>
+						</form>
+					</div>
+				</div>
 			{/if}
 		{else}
 			
