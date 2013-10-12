@@ -47,7 +47,7 @@
 		</div>
 		
 	</div><!-- / .price-infos -->
-	
+
 	<div class="add-to-basket-form">
 		<form class="form-panier clearfix" action="{$link->getPageLink('cart')}" method="post">
 			<!-- hidden -->
@@ -89,3 +89,9 @@
 	<hr />
 	<p class="surprise-additional">Chaque semaine, une nouvelle surprise vous attends dans votre colis</p>
 </div><!-- / .colis -->
+
+
+	<pre>
+		{$product|print_r}
+	</pre>
+	

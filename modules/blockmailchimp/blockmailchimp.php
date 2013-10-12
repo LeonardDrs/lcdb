@@ -3,6 +3,10 @@
 if (!defined('_PS_VERSION_'))
 	exit;
 
+if (!class_exists('MCAPI')){
+	include_once(_PS_MODULE_DIR_.'blockmailchimp/api/mailchimp/MCAPI.class.php');
+}
+
 class BlockMailchimp extends Module
 {
 
@@ -41,27 +45,48 @@ class BlockMailchimp extends Module
 
 	private function _prepareHook($params)
 	{
-/*		if (Tools::isSubmit('submitNewsletter'))
+
+		if (Tools::isSubmit('submitNewsletter'))
 		{
-			$this->newsletterRegistration();
-			if ($this->error)
-			{
-				$this->smarty->assign(array('color' => 'red',
-						'msg' => $this->error,
-						'nw_value' => isset($_POST['email']) ? pSQL($_POST['email']) : false,
-						'nw_error' => true,
-						'action' => $_POST['action'])
-				);
+
+			// datas
+		    $apikey = '487a3033242f00767788293a1d0a6b1f-us7';
+		    $listId = 'fcb21548db';
+		    $apiUrl = 'http://api.mailchimp.com/1.3/';
+		    $merge_vars = null;
+
+			$api = new MCAPI($apikey);
+
+			if(!$email = Tools::getValue('emailNewsletter')){
+				$this->ajaxResponse(false, "Votre email est vide !");
 			}
-			else if ($this->valid)
-			{
-				$this->smarty->assign(array('color' => 'green',
-						'msg' => $this->valid,
-						'nw_error' => false)
-				);
+
+			$retval = $api->listSubscribe( $listId, $email, $merge_vars, $email_type='html', $double_optin=false, $update_existing=false, $replace_interests=true, $send_welcome=true );
+
+			if ($api->errorCode){
+				switch ($api->errorCode) {
+				    case 214:
+				    	$this->ajaxResponse(false, "Cet email est déjà enregistré dans notre base.");
+				        break;
+				    default:
+				    	$this->ajaxResponse(false, "Une erreur est survenue, veuillez réessayer. Merci de nous contacter si le problème persiste.");
+				}
+			} else {
+				$this->ajaxResponse(true);
 			}
+
 		}
-		$this->smarty->assign('this_path', $this->_path);*/
+
+	}
+
+	public function ajaxResponse($success = false, $message = null)
+	{
+		die( Tools::jsonEncode( array(
+			'newsletterRequest' => array(
+				"success" => $success,
+				"message" => $message
+			)
+		)));
 	}
 
 	public function hookDisplayFooter($params)

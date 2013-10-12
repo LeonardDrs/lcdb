@@ -23,28 +23,22 @@ class DeliveryControllerCore extends FrontController
 	{
 		if (Tools::isSubmit('bouton_carre'))
 		{
-			// montant de la commande en fonction des tranches de prix 
-			// tranches de prix qu'on obtient en fonction de la zone 
-			// zone qu'on obtient à partir du code postal
-			// on affiche le creneau horaire de cette zone
-			
-			// a quelle endroit la zone est linké à un cp ?
 
 			$zip = Tools::getValue("code_postal");
 
-			$address = new Address();
-			$result = $address->getZoneByZip($zip);
-
-			echo "<pre>";
-			print_r($result);
-			echo "</pre>";
+			if($zip != null){
+				$address = new Address();
+				$id_zone = $address->getZoneByZipCode($zip);
+			}else{
+				$id_zone = 0;
+			}
 
 			// requete avec le zip code
 			// on remplis le tableau suivant les resultats
 			// si pas de resultat, on retourne 0
 			
 			$delivery = array();
-			$delivery['id'] = "1";
+			$delivery['id'] = $id_zone;
 			$delivery['minimum'] = "65€";
 			$delivery['value'] = array("65€ à 100€", "100€ à 190€", "Supérieur à 190€");
 			$delivery['shipping'] = array("20€", "14€", "Offerts");
