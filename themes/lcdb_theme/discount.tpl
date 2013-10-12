@@ -12,7 +12,7 @@
 			<p>Vous trouverez ici tous vos codes de réductions.</p>
 			{if isset($cart_rules) && count($cart_rules) && $nb_cart_rules}
 				<div id="bloc-reduction">
-					<p class="information">Vous disposez actuellement de <span class="bold">{$cart_rules|count} bons de réduction</span></p>
+					<p class="information">Vous disposez actuellement de <span class="bold">{$cart_rules|count} bon(s) de réduction</span></p>
 					{foreach from=$cart_rules item=discountDetail name=myLoop}
 						<div>
 							<p class="bold code">
