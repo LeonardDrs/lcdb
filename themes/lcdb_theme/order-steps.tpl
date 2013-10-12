@@ -8,6 +8,10 @@
 	{assign var='multi_shipping' value='0'}
 {/if}
 
+current_step  : {$current_step = "login"}
+
+{$current_step}
+
 <div id="breadcrumb-checkout">
 	<ol>
 		<li class="first identification {if $current_step=='login'}step_current{else}{if $current_step=='payment' || $current_step=='shipping' || $current_step=='address'}step_done{else}step_todo{/if}{/if}">

@@ -2,7 +2,6 @@
 
 {capture name=path}<a href="{$link->getPageLink('my-account', true)}">{l s='My account'}</a><span class="navigation-pipe">{$navigationPipe}</span>{l s='Your personal information'}{/capture}
 
-
 <div id="columns" class="content clearfix">
 	<div id="left_column">
 		{include file="./account-left-col.tpl"}
@@ -92,7 +91,7 @@
 					{if $newsletter}
 						<p class="labels_infos">J'accepte de recevoir par e-mail des offres, anecdotes<br>de la part des Colis du Boucher <span class="asterisque_rouge">*</span><br/><span class="label_italique">Les informations vous concernant ne seront jamais vendues,<br>louées ou cédées à des tiers</span></p>
 						<label class="radio" for="newsletter_oui"><input type="radio" name="newsletter" id="newsletter_oui" value="1" {if isset($smarty.post.newsletter) && $smarty.post.newsletter == 1} checked="checked"{/if} />Oui</label>
-						<label class="radio label_radio" for="newsletter_non"><input type="radio" name="newsletter" id="newsletter_non" value="0" {if isset($smarty.post.newsletter) && $smarty.post.newsletter == 0} checked="checked"{/if} />Non</label>
+						<label class="radio label_radio" for="newsletter_non"><input type="radio" name="newsletter" id="newsletter_non" value="0" {if !isset($smarty.post.newsletter) || $smarty.post.newsletter == 0} checked="checked"{/if} />Non</label>
 					{/if}
 					<br/><br/>
 					<hr />

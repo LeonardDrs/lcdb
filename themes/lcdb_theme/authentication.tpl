@@ -126,16 +126,8 @@ $(function(){ldelim}
 					<p>Vous bénéficierez ainsi de tous les avantages du village et gagnerez du temps lors de vos prochaines commandes sur le site.</p>
 					<p>L'inscription est <span class="bold">simple, rapide et sans engagement de commande</span>.</p>
 					<div class="register-button">
-						<a href="#" class="red-button gradient">créer mon compte</a>
+						<a href="{$link->getPageLink('authentication', true)}?create_account=true" class="red-button gradient">créer mon compte</a>
 					</div>  
-					<form action="{$link->getPageLink('authentication', true)}" method="post" >
-						<fieldset>
-							<span><input type="text" id="email_create" name="email_create" value="{if isset($smarty.post.email_create)}{$smarty.post.email_create|stripslashes}{/if}" class="account_input" /></span>
-							{if isset($back)}<input type="hidden" class="hidden" name="back" value="{$back|escape:'htmlall':'UTF-8'}" />{/if}
-							<input type="submit" value="{l s='Create your account'}" />
-							<input type="hidden" class="hidden" name="SubmitCreate" value="{l s='Create your account'}" />
-						</fieldset>
-					</form>
 				</div>
 				<div class="bloc content-login">
 					<h2>Vous avez déja commandé ou disposez d’un compte ?</h2>
@@ -331,7 +323,7 @@ $(function(){ldelim}
 							<label>Civilité <span class="required">*</span></label>
 							{foreach from=$genders key=k item=gender}
 								<label class="radio" for="id_gender{$gender->id}">
-									<input type="radio" name="id_gender" id="id_gender{$gender->id}" {if isset($smarty.post.id_gender) && $smarty.post.id_gender == $gender->id}checked="checked"{/if} />
+									<input type="radio" name="id_gender" id="id_gender{$gender->id}" {if isset($smarty.post.id_gender) && $smarty.post.id_gender == $gender->id}checked="checked"{/if} value="{$gender->id}" />
 									{$gender->name}
 								</label>
 							{/foreach}
@@ -373,33 +365,39 @@ $(function(){ldelim}
 								{/foreach}
 							</select>
 							<label for="adresse">Adresse <span class="required">*</span></label>
-							<input type="text" id="adresse" name="adresse" />
+							<input type="text" id="adresse" name="adresse" value="{if isset($smarty.post.adresse)}{$smarty.post.adresse}{/if}" />
 							<label for="adresseplus">Complément d'adresse</label>
-							<input type="text" id="adresseplus" name="adresseplus" />
+							<input type="text" id="adresseplus" name="adresseplus" value="{if isset($smarty.post.adresseplus)}{$smarty.post.adresseplus}{/if}" />
 							<label for="codepostal">Code postal <span class="required">*</span></label>
-							<input type="text" id="codepostal" name="codepostal" />
+							<input type="text" id="codepostal" name="codepostal" value="{if isset($smarty.post.codepostal)}{$smarty.post.codepostal}{/if}" />
 							<label for="ville">Ville <span class="required">*</span></label>
-							<input type="text" id="ville" name="ville" />
+							<input type="text" id="ville" name="ville" value="{if isset($smarty.post.ville)}{$smarty.post.ville}{/if}"  />
 							<p>Veuillez saisir au moins un numéro de téléphone<span class="required">*</span></p>
 							<label for="telfixe">Téléphone fixe</label>
-							<input type="text" id="telfixe" name="telfixe" />
+							<input type="text" id="telfixe" name="telfixe" value="{if isset($smarty.post.telfixe)}{$smarty.post.telfixe}{/if}"  />
 							<label for="portable">Téléphone portable</label>
-							<input type="text" id="portable" name="portable" />
+							<input type="text" id="portable" name="portable" value="{if isset($smarty.post.portable)}{$smarty.post.portable}{/if}"  />
 						</div>
 						
 						<div class="right-side">
 							<label for="email">Adresse e-mail <span class="required">*</span></label>
-							<input type="text" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email}{/if}"id="email" name="email" />
+							<input type="text" id="email" name="email" value="{if isset($smarty.post.email)}{$smarty.post.email}{/if}" id="email" name="email" />
 							<label for="emailconf">Confirmez votre adresse e-mail <span class="required">*</span></label>
-							<input type="text" id="emailconf" name="emailconf" />
+							<input type="text" id="emailconf" name="emailconf" value="{if isset($smarty.post.emailconf)}{$smarty.post.emailconf}{/if}" />
 							<label for="password">Mot de passe <span class="required">*</span></label>
 							<input type="password" name="passwd" id="passwd" />
 							<label for="passwordconf">Confirmez votre mot de passe <span class="required">*</span></label>
 							<input type="password" id="passwordconf" name="passwordconf" />
 							
 							<label id="come-from-ce">Venez-vous de la part d'un comité d'entreprise/groupement ?</label>
-							<label class="radio" for="ce-oui" id="ce-more"><input type="radio" name="ce" id="ce-oui" />Oui</label>
-							<label class="radio" for="ce-non" id="ce-less"><input type="radio" name="ce" id="ce-non" />Non</label>
+							<label class="radio" for="ce-oui" id="ce-more">
+								<input type="radio" name="ce" id="ce-oui" value="1" {if isset($smarty.post.ce) && $smarty.post.ce == 1} checked="checked"{/if}/>
+								Oui
+							</label>
+							<label class="radio" for="ce-non" id="ce-less">
+								<input type="radio" name="ce" id="ce-non" value="0" {if isset($smarty.post.ce) && $smarty.post.ce == 1} checked="checked"{/if}/>
+								Non
+							</label>
 							<div id="from-ce">
 								<label for="entreprise">De quel entreprise/groupement ? <span class="required">*</span></label>
 								<select id="entreprise" name="entreprise" disabled>
@@ -411,18 +409,19 @@ $(function(){ldelim}
 							</div>
 							
 							<label for="parrain">Si vous avez été parrainé, veuillez saisir l'e-mail de votre parrain</label>
-							<input type="text" id="parrain" name="parrain" />
+							<input type="text" id="referralprogram" name="referralprogram" />
 							
 							{if $newsletter}
-								<p class="checkbox" >
-									<input type="checkbox" name="newsletter" id="newsletter" value="1" {if isset($smarty.post.newsletter) AND $smarty.post.newsletter == 1} checked="checked"{/if} />
-									<label for="newsletter">{l s='Sign up for our newsletter'}</label>
-								</p>
-								
 								<label>J'accepte de recevoir par e-mail des offres, anecdotes de la part des Colis du Boucher <span class="required">*</span></label>
 								<p class="annotation">Les informations vous concernant ne seront jamais vendues, louées ou cédées à des tiers.</p>
-								<label class="radio" for="newsletter-oui"><input type="radio" name="newsletter" id="newsletter-oui" checked />Oui</label>
-								<label class="radio" for="newsletter-non"><input type="radio" name="newsletter" id="newsletter-non" />Non</label>
+								<label class="radio" for="newsletter-oui">
+									<input type="radio" name="newsletter" id="newsletter-oui" value="1" {if isset($smarty.post.newsletter) && $smarty.post.newsletter == 1} checked="checked"{/if} />
+									Oui
+								</label>
+								<label class="radio" for="newsletter-non">
+									<input type="radio" name="newsletter" id="newsletter-non" value="0" {if isset($smarty.post.newsletter) && $smarty.post.newsletter == 0} checked="checked"{/if} />
+									Non
+								</label>
 							{/if}
 							
 							<label class="checkbox" for="cgu"><input type="checkbox" id="cgu" name="cgu" />J'accepte les <a href="#">conditions générales d'utilisation</a> des Colis du Boucher <span class="required">*</span></label>
@@ -544,9 +543,7 @@ $(function(){ldelim}
 								</p>
 							</fieldset>
 						{/if}
-						
-						{$HOOK_CREATE_ACCOUNT_FORM}
-						
+												
 					</form>
 					
 					<p class="required-fields"><span class="required">*</span> Champs obligatoires</p>
