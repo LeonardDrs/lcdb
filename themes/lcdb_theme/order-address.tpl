@@ -1,5 +1,38 @@
+{*
+* 2007-2012 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author PrestaShop SA <contact@prestashop.com>
+*  @copyright  2007-2012 PrestaShop SA
+*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*}
 
-{assign var="back_order_page" value="order.php"}
+{if $opc}
+	{assign var="back_order_page" value="order-opc.php"}
+{else}
+	{assign var="back_order_page" value="order.php"}
+{/if}
+
+{*
+** Retro compatibility for PrestaShop version < 1.4.2.5 with a recent theme
+** Syntax smarty for v2
+*}
 
 {* Will be deleted for 1.5 version and more *}
 {if !isset($formatedAddressFieldsValuesList)}
@@ -41,11 +74,10 @@
 	var txtProduct = "{l s='product' js=1}";
 	var txtProducts = "{l s='products' js=1}";
 	{/if}
-	var img_folder = '{$img_dir}';
-
+	
 	var addressMultishippingUrl = "{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{'&multi-shipping=1'|urlencode}{if $back}&mod={$back|urlencode}{/if}")}";
 	var addressUrl = "{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{if $back}&mod={$back}{/if}")}";
-	var orderUrl = "{$link->getPageLink('order', true, NULL)}";
+
 	var formatedAddressFieldsValuesList = new Array();
 
 	{foreach from=$formatedAddressFieldsValuesList key=id_address item=type}
@@ -73,68 +105,10 @@
 
 	}
 
-function updateAddressSelection()
-{
-	var idAddress_delivery = ($('#id_address_delivery').length === 1 ? $('#id_address_delivery').val() : $('#id_address_delivery').val());
-	var idAddress_invoice = ($('#id_address_invoice').length === 1 ? $('#id_address_invoice').val() : ($('#addressesAreEquals:checked').length === 1 ? idAddress_delivery : ($('#id_address_invoice').length === 1 ? $('#id_address_invoice').val() : idAddress_delivery)));
-
-	$('#opc_account-overlay').fadeIn('slow');
-	$('#opc_delivery_methods-overlay').fadeIn('slow');
-	$('#opc_payment_methods-overlay').fadeIn('slow');
-	$.ajax({
-		type: 'POST',
-		url: orderUrl,
-		async: true,
-		cache: false,
-		dataType : "json",
-		data: 'ajax=true&method=updateAddressesSelected&id_address_delivery=' + idAddress_delivery + '&id_address_invoice=' + idAddress_delivery + '&token=' + static_token,
-		success: function(jsonData)
-		{
-			if (jsonData.hasError)
-			{
-				var errors = '';
-				for(var error in jsonData.errors)
-					//IE6 bug fix
-					if(error !== 'indexOf')
-						errors += jsonData.errors[error] + "\n";
-				alert(errors);
-			}
-			else
-			{
-				// Update global var deliveryAddress
-				deliveryAddress = idAddress_delivery;
-
-				updateCarrierList(jsonData.carrier_data);
-			}
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			if (textStatus !== 'abort')
-				// alert("TECHNICAL ERROR: unable to save adresses \n\nDetails:\nError thrown: " + XMLHttpRequest + "\n" + 'Text status: ' + textStatus);
-			// console.log(XMLHttpRequest.responseText);
-			// console.log(XMLHttpRequest);
-			$('#opc_account-overlay').fadeOut('slow');
-			$('#opc_delivery_methods-overlay').fadeOut('slow');
-			$('#opc_payment_methods-overlay').fadeOut('slow');
-		}
-	});
-}
-
-	function updateCarrierList(json)
-	{
-		var html = json.carrier_block;
-		
-		// @todo  check with theme 1.4
-		//if ($('#HOOK_EXTRACARRIER').length == 0 && json.HOOK_EXTRACARRIER !== null && json.HOOK_EXTRACARRIER != undefined)
-		//	html += json.HOOK_EXTRACARRIER;
-		
-		$('#carrier_area').replaceWith(html);
-		/* update hooks for carrier module */
-		$('#HOOK_BEFORECARRIER').html(json.HOOK_BEFORECARRIER);
-	}
 
 	function buildAddressBlock(id_address, address_type, dest_comp)
 	{
-		// var adr_titles_vals = getAddressesTitles();
+		var adr_titles_vals = getAddressesTitles();
 		var li_content = formatedAddressFieldsValuesList[id_address]['formated_fields_values'];
 		var ordered_fields_name = ['title'];
 
@@ -143,7 +117,7 @@ function updateAddressSelection()
 
 		dest_comp.html('');
 
-		// li_content['title'] = adr_titles_vals[address_type];
+		li_content['title'] = adr_titles_vals[address_type];
 		li_content['update'] = '<a href="{$link->getPageLink('address', true, NULL, "id_address")}'+id_address+'&amp;back={$back_order_page}?step=1{if $back}&mod={$back}{/if}" title="{l s='Update' js=1}">&raquo; {l s='Update' js=1}</a>';
 
 		appendAddressList(dest_comp, li_content, ordered_fields_name);
@@ -182,318 +156,110 @@ function updateAddressSelection()
 
 //]]>
 </script>
-{literal}
-        <script type="text/javascript">
-            
-            var relays     = [
-                                {
-                                    'nom'       : 'Diététique DP',
-                                    'adresse'   : ['210 bis Boulevard Pereire', '75017 Paris'],
-                                    'telephone' : '01 45 74 75 51',
-                                    'mention'   : 'Retrait des Colis 12h à 18h',
-                                    'lat'       : '48.8796788',
-                                    'lon'       : '2.2871024999999463'
 
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                }/*,
-                                    PHP -> suite points relai
-                                */
-                            ],
-                zipCodes   = { // codes postaux proche et grande banlieue
-                                'proche' : ['93','94','92000','92100','92110','92120','92130','92140','92150','92160','92170','92190','92200','92210','92220','92230','92240','92250','92260','92270','92290','92300','92310','92320','92330','92340','92350','92360','92370'],
-                                'grande' : ['77','78','91','95']
-                            };
-        </script>
-        {/literal}
-
-
-
+{if !$opc}
 {capture name=path}{l s='Addresses'}{/capture}
-{assign var='current_step' value='address'}
-<div id="columns" class="content clearfix">
-	<div class="bloc-checkout">
-		{include file="./order-steps.tpl"}
-		{include file="$tpl_dir./errors.tpl"}
-		<form action="{$link->getPageLink($back_order_page, true)}" method="post">
-			<div id="content-wrapper" class="clearfix">
-				<div class="bloc content-address-invoice">
-					<h2>Adresse de facturation</h2>
-					<select name="id_address_invoice" id="id_address_invoice" class="address_select">
-						{foreach from=$addresses key=k item=address}
-							<option value="{$address.id_address|intval}" {if $address.id_address == $cart->id_address_delivery}selected="selected"{/if}>{$address.alias|escape:'htmlall':'UTF-8'}</option>
-						{/foreach}
-					</select>
-					<ul id="address_invoice">
-						<li>Pierre DURAN</li>
-						<li>3, rue du chêne</li>
-						<li>BAT A, appt 23, code : 4738</li>
-						<li>75003</li>
-						<li>Paris</li>
-						<li>0616186327</li>
-					</ul>
-					<div id="form-address-invoice" class="hidden">
-						<label for="nom-invoice">Nom</label>
-						<input type="text" id="nom-invoice" value="DURAND"/>
-						<label for="prenom-invoice">Prénom</label>
-						<input type="text" id="prenom-invoice" value="Pierre"/>
-						<label for="adresse-1-invoice">Adresse</label>
-						<input type="text" id="adresse-1-invoice" value="3, rue du chêne"/>
-						<label for="adresse-2-invoice">Adresse compl&eacute;mentaire</label>
-						<input type="text" id="adresse-2-invoice" value="BAT A, appt 23, code : 4738"/>
-						<label for="code-postal-invoice">Code Postal</label>
-						<input type="text" id="code-postal-invoice" value="75003"/>
-						<label for="ville-invoice">Ville</label>
-						<input type="text" id="ville-invoice" value="Paris"/>
-						<label for="telephone-invoice">T&eacute;l&eacute;phone</label>
-						<input type="text" id="telephone-invoice" value="0616186327"/>
-						<div class="submit-wrapper clearfix">
-							<a href="#" title="annuler" id="cancel-address-invoice" class="hidden">Annuler</a>
-							<input type="submit" class="red-button gradient" value="ENREGISTRER" id="adress-submit-invoice" />
-						</div>
-					</div>
-					<!-- <a href="#" title="annuler" id="cancel-address-invoice" class="hidden">Annuler</a> -->
-					<a href="#" title="modifier votre adresse de livraison" id="modify-address-invoice">&rarr;&nbsp;<span>Modifier cette adresse</span></a>
+{include file="$tpl_dir./breadcrumb.tpl"}
+{/if}
+
+{if !$opc}<h1>{l s='Addresses'}</h1>{else}<h2><span>1</span> {l s='Addresses'}</h2>{/if}
+
+{if !$opc}
+	{assign var='current_step' value='address'}
+	{include file="$tpl_dir./order-steps.tpl"}
+	{include file="$tpl_dir./errors.tpl"}
+	
+	{if !$multi_shipping && {Configuration::get('PS_ALLOW_MULTISHIPPING')} && !$cart->isVirtualCart()}
+		<div class="button_multishipping_mode" id="multishipping_mode_box">
+			<div class="title">{l s='Multi-shipping'}</div>
+			<div class="description">
+				<a href="{$link->getPageLink('order', true, NULL, 'step=1&multi-shipping=1')}"/>
+					{l s='Specify a delivery address for each product ordered.'}
+				</a>
+			</div>
+		</div>
+	{/if}
+<form action="{$link->getPageLink($back_order_page, true)}" method="post">
+{else}
+	{if {Configuration::get('PS_ALLOW_MULTISHIPPING')} && !$cart->isVirtualCart()}
+		<div class="address-form-multishipping">
+			<div class="button_multishipping_mode" id="multishipping_mode_box">
+				<div class="title">{l s='Multi-shipping'}</div>
+				<div class="description">
+					<input type="checkbox" id="multishipping_mode_checkbox" onchange="multishippingMode(this); return false;"/><label for="multishipping_mode_checkbox">{l s='I want to specify a delivery address for each product I order.'}</label>
 				</div>
-				<div class="bloc content-address-delivery">
-					<h2>Adresse de livraison</h2>
-					<div id="delivery-address">
-						<select name="id_address_delivery" id="id_address_delivery" class="address_select" onchange="updateAddressSelection();">
-							{foreach from=$addresses key=k item=address}
-								<option value="{$address.id_address|intval}" {if $address.id_address == $cart->id_address_delivery}selected="selected"{/if}>{$address.alias|escape:'htmlall':'UTF-8'}</option>
-							{/foreach}
-						</select>
-						<ul id="address_delivery">
-							<li>Pierre DURAN</li>
-							<li>3, rue du chêne</li>
-							<li>BAT A, appt 23, code : 4738</li>
-							<li><span class="postal-code check">75120</span></li>
-							<li>Paris</li>
-							<li>0616186327</li>
-						</ul>
-						<div id="form-address-delivery" class="hidden">
-							<label for="nom">Nom</label>
-							<input type="text" id="nom" value="DURAND"/>
-							<label for="prenom">Prénom</label>
-							<input type="text" id="prenom" value="Pierre"/>
-							<label for="adresse-1">Adresse</label>
-							<input type="text" id="adresse-1" value="3, rue du chêne"/>
-							<label for="adresse-2">Adresse compl&eacute;mentaire</label>
-							<input type="text" id="adresse-2" value="BAT A, appt 23, code : 4738"/>
-							<label for="code-postal">Code Postal</label>
-							<input type="text" id="code-postal" value="75003"/>
-							<label for="ville">Ville</label>
-							<input type="text" id="ville" value="Paris"/>
-							<label for="telephone">T&eacute;l&eacute;phone</label>
-							<input type="text" id="telephone" value="0616186327"/>
-							<div class="submit-wrapper clearfix">
-								<a href="#" title="annuler" id="cancel-address-delivery" class="hidden">Annuler</a>
-								<input type="submit" class="red-button gradient" value="ENREGISTRER" id="address-submit-delivery" />
-							</div>
-						</div>
-						<div id="form-add-address-delivery" class="hidden">
-							<label for="new-title">Libellé de l'adresse</label>
-							<input type="text" id="new-title" value="" />
-							<label for="new-company">Raison sociale (optionnel)</label>
-							<input type="text" id="new-company"/>
-							<label for="new-address-1">Adresse</label>
-							<input type="text" id="new-address-1"/>
-							<label for="new-address-2">Adresse compl&eacute;mentaire</label>
-							<input type="text" id="new-address-2"/>
-							<label for="new-code-postal">Code Postal</label>
-							<input type="text" id="new-code-postal"/>
-							<label for="new-ville">Ville</label>
-							<input type="text" id="new-ville"/>
-							<label for="new-telephone">T&eacute;l&eacute;phone</label>
-							<input type="text" id="new-telephone"/>
-							<div class="submit-wrapper clearfix">
-								<a href="#" title="annuler" id="cancel-add-address-delivery" class="hidden">Annuler</a>
-								<input type="submit" class="red-button gradient" value="ENREGISTRER" id="add-address-submit-delivery" />
-							</div>
-						</div>
-						<!-- <div><a href="#" title="annuler" id="cancel-address-delivery" class="hidden">Annuler</a></div> -->
-						<div><a href="#" title="modifier votre adresse de livraison" id="modify-address-delivery">&rarr;&nbsp;<span>Modifier cette adresse</span></a></div>
-						<div><a href="{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{if $back}&mod={$back}{/if}")}" title="ajouter une nouvelle adresse" id="add-address-delivery">&rarr;&nbsp;<span>Ajouter une nouvelle adresse</span></a></div>
-					</div>
-					<div id="delivery-relay" class="hidden">
-						<p>Adresse Point Relais</p>
-						<ul id="saved-address-relay">
-							<li>Bio Prestige</li>
-							<li>3, rue du chêne</li>
-							<li><span class="postal-code">75003</span> Paris</li>
-						</ul>
-						<div><a href="#" title="afficher la carte des points relais" id="show-map">&rarr;&nbsp;<span>afficher la carte des points relais</span></a></div>
-						<div id="relays">
-							<div class="popin">
-								<a href="#" title="Fermer" class="popin-close"></a>
-								<p class="popin-title">Choisissez votre point relais</p>
-								<div class="clearfix content-wrapper">
-									<div id="left-side">
-										<ul id="relay-list"></ul>
-									</div>
-									<div id="right-side">
-										<div id="map"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="bloc content-delivery-mode" id="carrier_area">
-					<div class="delivery_options_address bloc content-delivery-modee">
-						{if isset($delivery_option_list)}
-							{foreach $delivery_option_list as $id_address => $option_list}
-								{foreach $option_list as $key => $option}
-									<h2>Modes de livraison</h2>
-									<ul>
-										<li id="delivery-home-li">
-											{if $option.unique_carrier}
-												{foreach $option.carrier_list as $carrier}
-													<p>
-														<label class="radio" for="home-office"><input type="radio" name="delivery" id="home-office" value="home" checked/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
-														|	<span class="">
-															{if $option.total_price_with_tax && !$free_shipping}
-																{if $use_taxes == 1}
-																	{convertPrice price=$option.total_price_with_tax} {l s='(tax incl.)'}
-																{else}
-																	{convertPrice price=$option.total_price_without_tax} {l s='(tax excl.)'}
-																{/if}
-															{else}
-																{l s='Free!'}
-															{/if}
-														</span></label>
-													</p>
-												{/foreach}
-												{if isset($carrier.instance->delay[$cookie->id_lang])}
-													<p class="description delivery_option_delay">{$carrier.instance->delay[$cookie->id_lang]}</p>
-												{/if}
-											{/if}
-										</li>
-									</ul>
-								{/foreach}
-							{foreachelse}
-								<p class="warning" id="noCarrierWarning">
-									{foreach $cart->getDeliveryAddressesWithoutCarriers(true) as $address}
-										{if empty($address->alias)}
-											{l s='No carriers available.'}
-										{else}
-											{l s='No carriers available for the address "%s".' sprintf=$address->alias}
-										{/if}
-										{if !$address@last}
-										<br />
-										{/if}
-									{/foreach}
-								</p>
-							{/foreach}
-						{/if}
-					</div>
-					<div id="colis-cadeau-wrapper">
-						<hr class="dashed" />
-						<label for="colis-cadeau" id="colis-cadeau-toggle" class="checkbox"><input value="1" name="gift" type="checkbox" id="colis-cadeau"/> Je souhaite que ma commande soit envoyée par <a href="#">colis cadeau</a> <span class="price">+ <span id="sup">1,60</span> &euro;</span></label>
-						<textarea name="gift_message" placeholder="Saisissez le message qui sera joint au cadeau" id="gift_message">{$cart->gift_message|escape:'htmlall':'UTF-8'}</textarea>
-					</div>
-					<hr class="dashed" />
-					<p id="total-price">Le montant TTC de votre commande est de <span class="price"><span data-price="67" id="final-price">67</span> &euro;</span></p>
-					<div id="error-price">
-						<p><span class="bold">Minimum de commande non atteint.</span> Nous vous invitons &agrave; continuer vos achats.<br />Pour une livraison dans le <span id="error-postal"></span>, le montant de votre commande doit &ecirc;tre au minimum de <span id="error-minimum-price"></span> &euro;.<br />Il est actuellement de <span id="error-current-price"></span>&euro;.</p>
-					</div>
-					<input type="hidden" class="hidden" name="step" value="2" />
-					<input type="hidden" name="back" value="{$back}" />
+				<div class="description_off">
+					<a href="{$link->getPageLink('order-opc', true, NULL, 'ajax=1&multi-shipping=1&method=multishipping')}" id="link_multishipping_form" title="{l s='Choose the delivery addresses'}">
+						{l s='Specify a delivery address for each product.'}
+					</a>
 				</div>
 			</div>
-			<div id="continue-shopping">
-				<input type="submit" value="valider" id="submit-address" class="disabled-button gradient" disabled />
-				<a href="#" title="Continuer mes achats">&rarr;&nbsp;<span>Continuer mes achats</span></a>
-			</div>
-<!-- 
-<div id="carrier_area">
-	<div class="delivery_options_address bloc content-delivery-mode">
-		{if isset($delivery_option_list)}
-			{foreach $delivery_option_list as $id_address => $option_list}
-				{foreach $option_list as $key => $option}
-					<h2>Modes de livraison</h2>
-					<ul>
-						<li id="delivery-home-li">
-							{if $option.unique_carrier}
-								{foreach $option.carrier_list as $carrier}
-									<p>
-										<label class="radio" for="home-office"><input type="radio" name="delivery" id="home-office" value="home" checked/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
-										|	<span class="">
-											{if $option.total_price_with_tax && !$free_shipping}
-												{if $use_taxes == 1}
-													{convertPrice price=$option.total_price_with_tax} {l s='(tax incl.)'}
-												{else}
-													{convertPrice price=$option.total_price_without_tax} {l s='(tax excl.)'}
-												{/if}
-											{else}
-												{l s='Free!'}
-											{/if}
-										</span></label>
-									</p>
-								{/foreach}
-								{if isset($carrier.instance->delay[$cookie->id_lang])}
-									<p class="description delivery_option_delay">{$carrier.instance->delay[$cookie->id_lang]}</p>
-								{/if}
-							{/if}
-						</li>
-					</ul>
-				{/foreach}
+			<script type="text/javascript">
+				{if $is_multi_address_delivery}
+				var multishipping_mode = true;
+				{else}
+				var multishipping_mode = false;
+				{/if}
+				var open_multishipping_fancybox = {$open_multishipping_fancybox|intval};
+			</script>
+		</div>
+	{/if}
+<div id="opc_account" class="opc-main-block">
+	<div id="opc_account-overlay" class="opc-overlay" style="display: none;"></div>
+{/if}
+	<div class="addresses clearfix">
+		<p class="address_delivery select">
+			<label for="id_address_delivery">{if $cart->isVirtualCart()}{l s='Choose a billing address:'}{else}{l s='Choose a delivery address:'}{/if}</label>
+			<select name="id_address_delivery" id="id_address_delivery" class="address_select" onchange="updateAddressesDisplay();{if $opc}updateAddressSelection();{/if}">
+
+			{foreach from=$addresses key=k item=address}
+				<option value="{$address.id_address|intval}" {if $address.id_address == $cart->id_address_delivery}selected="selected"{/if}>{$address.alias|escape:'htmlall':'UTF-8'}</option>
 			{/foreach}
+			
+			</select>
+		</p>
+		<p class="checkbox addressesAreEquals" {if $cart->isVirtualCart()}style="display:none;"{/if}>
+			<input type="checkbox" name="same" id="addressesAreEquals" value="1" onclick="updateAddressesDisplay();{if $opc}updateAddressSelection();{/if}" {if $cart->id_address_invoice == $cart->id_address_delivery || $addresses|@count == 1}checked="checked"{/if} />
+			<label for="addressesAreEquals">{l s='Use the delivery address as the billing address.'}</label>
+		</p>
+
+		<p id="address_invoice_form" class="select" {if $cart->id_address_invoice == $cart->id_address_delivery}style="display: none;"{/if}>
+
+		{if $addresses|@count > 1}
+			<label for="id_address_invoice" class="strong">{l s='Choose a billing address:'}</label>
+			<select name="id_address_invoice" id="id_address_invoice" class="address_select" onchange="updateAddressesDisplay();{if $opc}updateAddressSelection();{/if}">
+			{section loop=$addresses step=-1 name=address}
+				<option value="{$addresses[address].id_address|intval}" {if $addresses[address].id_address == $cart->id_address_invoice && $cart->id_address_delivery != $cart->id_address_invoice}selected="selected"{/if}>{$addresses[address].alias|escape:'htmlall':'UTF-8'}</option>
+			{/section}
+			</select>
+			{else}
+				<a style="margin-left: 221px;" href="{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1&select_address=1{if $back}&mod={$back}{/if}")}" title="{l s='Add'}" class="button_large">{l s='Add a new address'}</a>
+			{/if}
+		</p>
+		<div class="clearfix">
+			<ul class="address item" id="address_delivery" {if $cart->isVirtualCart()}style="display:none;"{/if}>
+			</ul>
+			<ul class="address alternate_item {if $cart->isVirtualCart()}full_width{/if}" id="address_invoice">
+			</ul>
+		</div>
+		<p class="address_add submit">
+			<a href="{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{if $back}&mod={$back}{/if}")}" title="{l s='Add'}" class="button_large">{l s='Add a new address'}</a>
+		</p>
+		{if !$opc}
+		<div id="ordermsg" class="clearfix">
+			<p class="txt">{l s='If you would like to add a comment about your order, please write it below.'}</p>
+			<p class="textarea"><textarea cols="60" rows="3" name="message">{if isset($oldMessage)}{$oldMessage}{/if}</textarea></p>
+		</div>
 		{/if}
 	</div>
+{if !$opc}
+	<p class="cart_navigation submit">
+		<input type="hidden" class="hidden" name="step" value="2" />
+		<input type="hidden" name="back" value="{$back}" />
+		<a href="{$link->getPageLink($back_order_page, true, NULL, "step=0{if $back}&back={$back}{/if}")}" title="{l s='Previous'}" class="button">&laquo; {l s='Previous'}</a>
+		<input type="submit" name="processAddress" value="{l s='Next'} &raquo;" class="exclusive" />
+	</p>
+</form>
+{else}
 </div>
- -->
-
-
-
-
-
-		</form>
-	</div>
-</div>
+{/if}
