@@ -20,17 +20,13 @@
 				<hr />
 
 				{foreach from=$orders item=order}
-					{if ($order.id_order_state == 5) && !isset($last_delivered_order) }
+					{if (isset($order.id_order_state) && ($order.id_order_state == 5)) && !isset($last_delivered_order) }
 						{$last_delivered_order = $order}
 					{/if}
-					{if ($order.id_order_state != 5) && !isset($last_order_done) }
+					{if (!isset($order.id_order_state) || ($order.id_order_state != 5)) && !isset($last_order_done) }
 						{$last_order_done = $order}
 					{/if}
 				{/foreach}
-
-				<pre>
-					{$orders|print_r}
-				</pre>
 
 				<div class="clearfix" id="mes-commandes">
 					{if isset($last_delivered_order)}
@@ -41,7 +37,13 @@
 							<p>Commande réalisée le : <span class="bold">{dateFormat date=$last_delivered_order.date_add full=0}</span></p>
 							<p>Montant total : <span class="bold">{displayPrice price=$last_delivered_order.total_paid currency=$last_delivered_order.id_currency no_utf8=false convert=false}</span></p>
 							<p>Mode de règlement : <span class="bold">{$last_delivered_order.payment|escape:'htmlall':'UTF-8'}</span></p>
-							<p>État du paiement : <span class="bold">{if isset($last_delivered_order.order_state)}{$last_delivered_order.order_state|escape:'htmlall':'UTF-8'}{/if}</span></p>
+							<p>État du paiement : <span class="bold">
+								{if isset($last_delivered_order.order_state)}
+									{$last_delivered_order.order_state|escape:'htmlall':'UTF-8'}
+								{else}
+									{l s='En cours de traitement'}
+								{/if}
+							</span></p>
 							<div class="clearfix commande-adresse">
 								<p>Adresse de livraison :</p>
 								<ul>
@@ -67,7 +69,13 @@
 							<p>Commande réalisée le : <span class="bold">{dateFormat date=$last_order_done.date_add full=0}</span></p>
 							<p>Montant total : <span class="bold">{displayPrice price=$last_order_done.total_paid currency=$last_order_done.id_currency no_utf8=false convert=false}</span></p>
 							<p>Mode de règlement : <span class="bold">{$last_order_done.payment|escape:'htmlall':'UTF-8'}</span></p>
-							<p>État du paiement : <span class="bold">{if isset($last_order_done.order_state)}{$last_order_done.order_state|escape:'htmlall':'UTF-8'}{/if}</span></p>
+							<p>État du paiement : <span class="bold">
+								{if isset($last_order_done.order_state)}
+									{$last_order_done.order_state|escape:'htmlall':'UTF-8'}
+								{else}
+									{l s='En cours de traitement'}
+								{/if}
+							</span></p>
 							<div class="clearfix commande-adresse">
 								<p>Adresse de livraison :</p>
 								<ul>

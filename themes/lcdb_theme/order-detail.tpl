@@ -18,7 +18,7 @@
 				</td>
 				<td>
 					<h5>Etat du paiment</h5>
-					<p>{$order_history[0].ostate_name|escape:'htmlall':'UTF-8'}</p>
+					<p>{l s='En cours de traitement'}</p>
 				</td>
 			</tr>
 			<tr>
