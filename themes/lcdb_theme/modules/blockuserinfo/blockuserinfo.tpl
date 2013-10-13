@@ -5,8 +5,7 @@
 				<a href="{$link->getPageLink('my-account', true)}" title="se connecter">Connexion</a> / 
 				<a href="{$link->getPageLink('authentication', true)}?create_account=true" title="s'inscrire">Inscription</a>
 			{else}
-				<a href="{$link->getPageLink('my-account', true)}" title="mon compte">Mon compte</a> /
-				<a href="{$base_dir}?logout" title="mon compte">Déconnexion</a>
+				<a href="{$link->getPageLink('my-account', true)}" title="mon compte">Mon compte</a>
 			{/if}
 		</div>
 		<div id="basket">

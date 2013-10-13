@@ -19,7 +19,11 @@
 			{if isset($delivery)}
 				<div class="bloc_inf_livraison">
 
-					{if $delivery.id == 0}
+					<pre>
+						{$delivery|print_r}
+					</pre>
+
+					{if $delivery.zone == 0}
 
 						<p>Erreur ! Votre code n'est pas valide.</p>
 
@@ -55,19 +59,19 @@
 							{/if}
 						</table>
 						
-						{if isset($delivery.id)}
+						{if isset($delivery.zone)}
 							
-							{if $delivery.id == 1}
+							{if $delivery.zone == 1}
 							
 								<p class="titre_vert_2">Regroupement de commande</p>
 								<p>Parlez des Colis du Boucher à vous voisins ou au bureau et économisez les frais de livraison. En commandant à plusieurs pour le même jour et à la même adresse de livraison vous pourrez ainsi plus facilement faire baisser les frais de livraison, voire les annuler complètement.</p>
 								
-							{elseif $delivery.id == 9}
+							{elseif $delivery.zone == 9}
 								
 								<p class="titre_vert_2">Pour une livraison à domicile ou au bureau</p>
 								<p>Quoi de mieux que de se faire livrer chez soi, directement d'Auvergne dans son frigo? <strong>Nous livrons à domicile ou au bureau de 7h30 à 20h</strong>, dans un créneau horaire  d'une heure minimum que vous nous communiquez lors de la commande. Dans l'idéal deux créneaux  horaires sont souhaités, dont un le matin.</p>
 								
-							{elseif $delivery.id == 10}
+							{elseif $delivery.zone == 10}
 								
 								<p class="titre_vert_2">Pour une livraison à domicile ou au bureau</p>
 								<p>Quoi de mieux que de se faire livrer chez soi, directement d'Auvergne dans son frigo? <strong>Nous livrons à domicile ou au bureau de 7h30 à 20h</strong>, dans un créneau horaire  d'une heure minimum que vous nous communiquez lors de la commande. Dans l'idéal deux créneaux  horaires sont souhaités, dont un le matin.</p>
@@ -89,7 +93,7 @@
 									</div>
 								</div>
 								
-							{elseif $delivery.id == 11}
+							{elseif $delivery.zone == 11}
 								
 								<p class="titre_vert_2">Pour une livraison à domicile ou au bureau</p>
 								<p>Quoi de mieux que de se faire livrer chez soi, directement d’Auvergne dans son frigo? Nous livrons à domicile ou au bureau de <strong>14h à 22h en semaine</strong>, dans un créneau horaire de 2 heures que vous nous communiquez lors de la commande, ou le <strong>samedi de 8h à 13h</strong>.</p>

@@ -25,6 +25,9 @@
 				<li class="submenu-item {if $page_name == 'module-referralprogram-program'}item-active{/if}">
 					<a href="{$base_dir}?fc=module&module=referralprogram&controller=program" title="Parainnage">Parainnage</a>
 				</li>
+				<li class="submenu-item">
+					<a href="{$base_dir}?logout" title="Déconnexion">Déconnexion</a>
+				</li>
 			</ul>
 		</li>
 	</ul>
