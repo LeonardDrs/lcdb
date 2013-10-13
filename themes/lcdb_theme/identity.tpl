@@ -25,7 +25,7 @@
 				<form  action="{$link->getPageLink('identity', true)}" method="post" class="mes_informations">
 					<p class="labels_infos">Civilité <span class="asterisque_rouge">*</span></p>
 					{foreach from=$genders key=k item=gender}
-						<label class="radio" for="id_gender{$gender->id}">
+						<label class="radio {if $gender->id > 1}label_radio{/if}" for="id_gender{$gender->id}">
 							<input type="radio" name="id_gender" id="id_gender{$gender->id}" {if isset($smarty.post.id_gender) && $smarty.post.id_gender == $gender->id}checked="checked"{/if} value="{$gender->id}" />
 							{$gender->name}
 						</label>

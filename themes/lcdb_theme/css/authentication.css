@@ -130,6 +130,7 @@
 #authentication .content-register-form form label,
 #authentication .content-register-form form p { margin-bottom: 3px; font-size: 14px; }
 #authentication .content-register-form form input { margin-bottom: 15px; width: 294px; }
+#authentication .content-register-form form select { margin-bottom: 15px; }
 
 #authentication .content-register-form form label.radio,
 #authentication .content-register-form form .radio input,
