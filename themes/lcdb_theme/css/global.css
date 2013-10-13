@@ -2371,12 +2371,22 @@ nav.secondary-menu{
 /* ************************************************************************************************
 		PRODUCT PAGE - RECIPE PAGE - Element en commun
 ************************************************************************************************ */
-#center_column span#big_cow{
+#center_column span.big_image{
 	display: block;
 	width: 96px;
 	height:56px;
-	background: url('../img/asset/img_solo/big_cow.png') no-repeat;
 }
+#center_column span.big_image#big_boeuf 	{ background: url('../img/asset/img_solo/big_boeuf.png') no-repeat; }
+#center_column span.big_image#big_veau 		{ background: url('../img/asset/img_solo/big_veau.png') no-repeat; }
+#center_column span.big_image#big_agneau 	{ background: url('../img/asset/img_solo/big_agneau.png') no-repeat; }
+#center_column span.big_image#big_porc 		{ background: url('../img/asset/img_solo/big_porc.png') no-repeat; }
+#center_column span.big_image#big_poulet 	{ background: url('../img/asset/img_solo/big_poulet.png') no-repeat; }
+#center_column span.big_image#big_vollailes { background: url('../img/asset/img_solo/big_vollailes.png') no-repeat; }
+#center_column span.big_image#big_lapin 	{ background: url('../img/asset/img_solo/big_lapin.png') no-repeat; }
+#center_column span.big_image#big_poisson	{ background: url('../img/asset/img_solo/big_poisson.png') no-repeat; }
+#center_column span.big_image#big_epicerie 	{ background: url('../img/asset/img_solo/big_epicerie.png') no-repeat; }
+#center_column span.big_image#big_sauces 	{ background: url('../img/asset/img_solo/big_sauces.png') no-repeat; }
+#center_column span.big_image#big_autres 	{ background: url('../img/asset/img_solo/big_autres.png') no-repeat; }
 /* ************************************************************************************************
 		PRODUCT PAGE
 ************************************************************************************************ */

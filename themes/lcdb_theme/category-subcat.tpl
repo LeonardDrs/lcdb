@@ -1,7 +1,7 @@
 
 		<div class="big-bloc">
 			<div class="title_list_product">
-				<span id="big_cow"></span>
+				<span class="big_image" id="big_{$category->name|lower}"></span>
 				<h1>
 					{strip}
 						{$category->name|escape:'htmlall':'UTF-8'}
