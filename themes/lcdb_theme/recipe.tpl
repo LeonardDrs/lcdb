@@ -16,14 +16,16 @@
 					<ul class="submenu">
 						{foreach from=$left_col item=maincat name=foo}
 							<li class="submenu-item {if $recipe_category->id_parent eq $maincat.id_recipe_category}item-active{/if} {if $smarty.foreach.foo.first}first {/if}{if $smarty.foreach.foo.last}last {/if}">
-								<a href="javascript:void(0);" title="{$maincat.name}"><span class="img-{$maincat.name|lower}"></span>{$maincat.name}</a>
-								<ul>
+								<a href="{$link->getRecipeCategoryLink($maincat.id_recipe_category, $maincat.link_rewrite)|escape:'htmlall':'UTF-8'}" title="{$maincat.name}"><span class="img-{$maincat.name|lower}"></span>{$maincat.name}</a>
+								{if $maincat.subcats}
+								<ul class="hasSubCat">
 									{foreach from=$maincat.subcats item=cat name=foo2}
 										<li class="{if $recipe_category->id_recipe_category eq $cat.id_recipe_category}item-active{/if}">
 											<a href="{$link->getRecipeCategoryLink($cat.id_recipe_category, false)|escape:'htmlall':'UTF-8'}" title="{$cat.name}">{$cat.name}</a>
 										</li>
 									{/foreach}
 								</ul>
+								{/if}
 							</li>
 						{/foreach}
 					</ul>

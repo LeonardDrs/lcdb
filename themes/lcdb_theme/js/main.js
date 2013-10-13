@@ -477,12 +477,14 @@ $(document).ready(function(){
 	/* Animation du sous-menu contenant les différentes catégories de recettes (Boeuf, Veau, Agneau, ...) */
 	function submenu(){
 		var submenu = $('#category-leftcol .secondary-menu-item ul.submenu');
-		submenu.children("li").each(function(){
-			$(this).children('a').click(function(event){
-				event.preventDefault();
-				$('.submenu > li ul').stop(true, true).slideUp("fast");
-				if ($(this).parent().find("ul").length > 0) {
-					$(this).parent().find("ul").stop(true, true).slideDown("fast");
+		submenu.children("li").each(function() {
+			$(this).children('a').click(function(event) {
+				if ($(this).parent().find('.hasSubCat').length > 0) {
+					event.preventDefault();
+					$('.submenu > li ul').stop(true, true).slideUp("fast");
+					if ($(this).parent().find("ul").length > 0) {
+						$(this).parent().find("ul").stop(true, true).slideDown("fast");
+					}
 				}
 			});
 		});
