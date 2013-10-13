@@ -68,7 +68,7 @@
 				<textarea id="message" name="message" data-required="true">{if isset($message)}{$message|escape:'htmlall':'UTF-8'|stripslashes}{/if}</textarea>
 				
 				<div class="action">
-					<button type="submit" name="submitMessage" id="submitMessage" class="red-button gradient" onclick="$(this).hide();">Envoyer</button>
+					<button type="submit" name="submitMessage" id="submitMessage" class="red-button gradient">Envoyer</button>
 				</div>
 			</form>
 			

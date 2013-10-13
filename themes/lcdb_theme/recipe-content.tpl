@@ -22,7 +22,7 @@
 	<div itemscope itemtype="http://schema.org/Recipe">
 		<div class="title_print_recipe">
 			<h1 class="title_list" itemprop="name">Paleron et ses champignons, sauce rouge</h1>
-			<a href="javascript:window.print()">Imprimer</a>
+			<a href="javascript:window.print()" title="imprimer" class="red-button">Imprimer</a>
 		</div>
 		<div id="presentation">
 			<ul class="presentation">

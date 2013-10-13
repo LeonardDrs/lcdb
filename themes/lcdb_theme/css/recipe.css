@@ -178,27 +178,6 @@
 	float: left;
 	width:540px;
 }
-#recipe #center_column.recipe_card .title_print_recipe a{
-	display: block;
-	float: right;
-	padding: 10px 20px 10px 20px;
-	color: white;
-	border: 1px solid #d44137;
-	background: #b02c25;
-	background: -moz-linear-gradient(top,  #e7665f 0%, #871711 62%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7665f), color-stop(62%,#871711));
-	background: -webkit-linear-gradient(top,  #e7665f 0%,#871711 62%);
-	background: -o-linear-gradient(top,  #e7665f 0%,#871711 62%);
-	background: -ms-linear-gradient(top,  #e7665f 0%,#871711 62%);
-	background: linear-gradient(to bottom,  #e7665f 0%,#871711 62%);
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-moz-box-shadow: 3px 3px 5px 0px #8f8f8f;
-	-webkit-box-shadow: 3px 3px 5px 0px #8f8f8f;
-	-o-box-shadow: 3px 3px 5px 0px #8f8f8f;
-	box-shadow: 3px 3px 5px 0px #8f8f8f;
-}
 #recipe #center_column.recipe_card .title_print_recipe a:hover{
 	text-decoration: none;
 }
