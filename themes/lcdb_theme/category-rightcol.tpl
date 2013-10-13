@@ -1,5 +1,6 @@
 
 {$HOOK_RIGHT_COLUMN}
+
 <div class="small-bloc frais-livraison">
 	<span class="bloc-title ribbon-frais-livraison"></span>
 	<p><span class="img-livraison"></span>Frais de livraison de 0 à 20 €</p>
@@ -10,16 +11,9 @@
 		<button type="submit" name="bouton_carre">OK</button>
 	</form>
 </div>
-{math equation='rand(1,3)'}
-<pre>
-
-{$right_col.tips|print_r}
-</pre>
-
-{$rand = 0}
 
 <div class="small-bloc mot-boucher">
 	<span class="bloc-title ribbon-mot-boucher"></span>
 	<h3>Le saviez-vous ?</h3>
-	{$right_col.tips[$rand].content}
+	{$right_col.tips[0].content}
 </div>
