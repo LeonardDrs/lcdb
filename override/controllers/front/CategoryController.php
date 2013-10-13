@@ -33,10 +33,13 @@ class CategoryController extends CategoryControllerCore
 	{
 		parent::initContent();
 		
-		// get left col of category page
-		$parent = new Category(3, $this->context->language->id);
-		$left_col = $parent->getSubCategoriesByDepth(2, 4, $this->context->language->id);
-		$this->context->smarty->assign('left_col', $left_col);
+		$leftcol = Category::getLeftColumn($this->context->language->id);
+		$rightcol = Category::getRightColumn($this->context->language->id);
+
+		$this->context->smarty->assign(array(
+				'left_col' => $leftcol,
+				'right_col' => $rightcol
+			));
 		
 	}
 	

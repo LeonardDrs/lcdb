@@ -21,8 +21,7 @@ class DeliveryControllerCore extends FrontController
 	
 	public function postProcess()
 	{
-		if (Tools::isSubmit('bouton_carre'))
-		{
+		if (Tools::isSubmit('bouton_carre')){
 
 			$zip = Tools::getValue("code_postal");
 
@@ -33,12 +32,8 @@ class DeliveryControllerCore extends FrontController
 				$id_zone = 0;
 			}
 
-			$id_zone=1;
-
 			$delivery = array();
 			$delivery['zone'] = $id_zone;
-
-
 
 			if($id_zone == 1){
 				// paris
@@ -51,44 +46,9 @@ class DeliveryControllerCore extends FrontController
 					),array(
 						"mode" =>"Livraison en Point Relais",
 						"ship" => "Offerts",
-						"time" => "L'après-midi, les horaires varient selon le point relais"
+						"time" => "L'après-midi, les horaires<br/> varient selon le point relais"
 					)
 				);
-				$delivery['content'] = "<p class='titre_vert_2'>Regroupement de commande</p><p>Parlez des Colis du Boucher à vous voisins ou au bureau
-				et économisez les frais de livraison. En commandant à plusieurs pour le même jour et à la même adresse de livraison vous pourrez ainsi
-				plus facilement faire baisser les frais de livraison, voire les annuler complètement.</p>";
-			}elseif($id_zone == 9){
-				// proche banlieue
-				$delivery['minimum_order'] = "65 €";
-				$delivery['infos'] = array(
-					array(
-						"montant" => "65 € à 100 €",
-						"ship" => "20 €*"
-					),array(
-						"montant" =>"Supérieur à 100 €",
-						"ship" => "Offerts"
-					)
-				);
-				$delivery['time'] = "Entre 7h30 et 20h, un créneau de 2h minimum";
-				$delivery['content'] = "<p class='titre_vert_2'>Pour une livraison à domicile ou au bureau</p><p>Quoi de mieux que de se faire livrer chez soi,
-				 directement d'Auvergne dans son frigo? <strong>Nous livrons à domicile ou au bureau de 7h30 à 20h</strong>, dans un créneau horaire d'une heure minimum
-				 que vous nous communiquez lors de la commande. Dans l'idéal deux créneaux  horaires sont souhaités, dont un le matin.</p";
-			}elseif($id_zone == 10){
-				// grande banlieue
-				$delivery['minimum_order'] = "65 €";
-				$delivery['infos'] = array(
-					array(
-						"montant" => "65 € à 100 €",
-						"ship" => "20 €*"
-					),array(
-						"montant" =>"100 € à 190 €",
-						"ship" => "14 €*"
-					),array(
-						"montant" =>"Supérieur à 190 €",
-						"ship" => "Offerts"
-					)
-				);
-				$delivery['time'] = "Entre 14h et 22h en semaine, un créneau de 2h <br/>Entre 8h et 13h le samedi";
 				$delivery['content'] = "<p class='titre_vert_2'>Pour une livraison à domicile ou au bureau</p><p>Quoi de mieux que de se faire livrer chez soi, directement 
 				d'Auvergne dans son frigo? <strong>Nous livrons à domicile ou au bureau de 7h30 à 20h</strong>, dans un créneau horaire  d'une heure minimum que vous 
 				nous communiquez lors de la commande. Dans l'idéal deux créneaux  horaires sont souhaités, dont un le matin.</p><p class='titre_vert_2'>Pour une livraison en 
@@ -108,30 +68,70 @@ class DeliveryControllerCore extends FrontController
 						</div>
 					</div>
 				</div>";
-			}elseif($id_zone == 11){
-				// province
+			}elseif($id_zone == 9){
+				// proche banlieue
 				$delivery['minimum_order'] = "65 €";
 				$delivery['infos'] = array(
 					array(
-						"montant" => "65 € à 100 €",
+						"price" => "65 € à 100 €",
 						"ship" => "20 €*"
 					),array(
-						"montant" =>"100 € à 190 €",
-						"ship" => "14 €*"
-					),array(
-						"montant" =>"Supérieur à 190 €",
+						"price" =>"Supérieur à 100 €",
 						"ship" => "Offerts"
 					)
 				);
-				$delivery['time'] = "Entre 8h et 15h le mercredi et vendredi";
+				$delivery['time'] = "Entre 7h30 et 20h, un créneau de 2h minimum";
+				$delivery['content'] = "<p class='titre_vert_2'>Pour une livraison à domicile ou au bureau</p><p>Quoi de mieux que de se faire livrer chez soi,
+				 directement d'Auvergne dans son frigo? <strong>Nous livrons à domicile ou au bureau de 7h30 à 20h</strong>, dans un créneau horaire d'une heure minimum
+				 que vous nous communiquez lors de la commande. Dans l'idéal deux créneaux  horaires sont souhaités, dont un le matin.</p";
+			}elseif($id_zone == 10){
+				// grande banlieue
+				$delivery['minimum_order'] = "65 €";
+				$delivery['infos'] = array(
+					array(
+						"price" => "65 € à 100 €",
+						"ship" => "20 €*"
+					),array(
+						"price" =>"100 € à 190 €",
+						"ship" => "14 €*"
+					),array(
+						"price" =>"Supérieur à 190 €",
+						"ship" => "Offerts"
+					)
+				);
+				$delivery['time'] = "Entre 14h et 22h en semaine, un créneau de 2h <br/>Entre 8h et 13h le samedi";
 				$delivery['content'] = "<p class='titre_vert_2'>Pour une livraison à domicile ou au bureau</p><p>Quoi de mieux que de se faire livrer chez soi, 
 				directement d’Auvergne dans son frigo? Nous livrons à domicile ou au bureau de <strong>14h à 22h en semaine</strong>, dans un créneau horaire de 2 
 				heures que vous nous communiquez lors de la commande, ou le <strong>samedi de 8h à 13h</strong>.</p><p class='titre_vert_2'>Regroupement de commande</p>
 				<p>Parlez des Colis du Boucher à vous voisins ou au bureau et économisez les frais de livraison. En commandant à plusieurs pour le même jour et à la même 
 				adresse de livraison vous pourrez ainsi plus facilement faire baisser les frais de livraison, voire les annuler complètement.</p>";
+			}elseif($id_zone == 11){
+				// province
+				$delivery['minimum_order'] = "65 €";
+				$delivery['infos'] = array(
+					array(
+						"price" => "65 € à 100 €",
+						"ship" => "20 €*"
+					),array(
+						"price" =>"100 € à 190 €",
+						"ship" => "14 €*"
+					),array(
+						"price" =>"Supérieur à 190 €",
+						"ship" => "Offerts"
+					)
+				);
+				$delivery['time'] = "Entre 8h et 15h le mercredi et vendredi";
+				$delivery['content'] = "<p class='titre_vert_2'>Regroupement de commande</p><p>Parlez des Colis du Boucher à vous voisins ou au bureau
+				et économisez les frais de livraison. En commandant à plusieurs pour le même jour et à la même adresse de livraison vous pourrez ainsi
+				plus facilement faire baisser les frais de livraison, voire les annuler complètement.</p>";
 			}
+
+			if(Tools::getValue("ajax") == true){
+				echo json_encode($delivery);
+			}else{
+				$this->context->smarty->assign('delivery', $delivery);
+			}	
 			
-			$this->context->smarty->assign('delivery', $delivery);
 		}
 	}
 }
