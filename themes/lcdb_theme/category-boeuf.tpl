@@ -19,19 +19,19 @@
 			</div>
 			
 			<div class="list-product">
-				
-				{foreach $subcategories as $subcat}
-					<div class="grill category">
-						<div class="category-title">
-							<span id="big_stove"></span>
-							<h2>Les viande de Boeuf {$subcat.name}</h2>
+				{if isset($subcategories)}
+					{foreach $subcategories as $subcat}
+						<div class="grill category">
+							<div class="category-title">
+								<span id="big_stove"></span>
+								<h2>Les viande de Boeuf {$subcat.name}</h2>
+							</div>
+							{if $subcat.products}
+								{include file="./product-list.tpl" products=$subcat.products}
+							{/if}
 						</div>
-						{if $products}
-							{include file="./product-list.tpl" products=$subcat.products}
-						{/if}
-					</div>
-				{/foreach}
-				
+					{/foreach}
+				{/if}
 				<div class="more-product">
 					<p class="blod">Vous chercher un produit particulier que nous ne proposons pas ?</p>
 					<p>

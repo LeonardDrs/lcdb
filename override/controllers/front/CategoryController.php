@@ -45,7 +45,7 @@ class CategoryController extends CategoryControllerCore
 	
 		protected function assignSubcategories()
 	{
-		if ($subCategories = $this->category->getFullSubCategories($this->context->language->id))
+		if ($subCategories = $this->category->getFullSubCategories($this->context->language->id, true, $this->orderBy, $this->orderWay))
 		{
 			$this->context->smarty->assign(array(
 				'subcategories' => $subCategories,

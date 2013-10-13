@@ -1,4 +1,3 @@
-
 		<div class="big-bloc">
 			<div class="title_list_product">
 				<span id="big_cow"></span>
