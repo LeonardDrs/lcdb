@@ -3,7 +3,7 @@
 	<input type="hidden" name="orderby" value="position" />
 	<input type="hidden" name="controller" value="search" />
 	<input type="hidden" name="orderway" value="desc" />
-	<input class="search_query" type="text" id="search" name="search_query" placeholder="{if isset($smarty.get.search_query)}{$smarty.get.search_query|htmlentities:$ENT_QUOTES:'utf-8'|stripslashes}{/if}" />
+	<input class="search_query" type="text" id="search" name="search_query" placeholder="{if isset($smarty.get.search_query)}{$smarty.get.search_query|htmlentities:$ENT_QUOTES:'utf-8'|stripslashes}{else}Votre recherche...{/if}" />
 	<button type="submit" name="submit">OK</button>
 </form>
 <nav class="secondary-menu small-bloc">
