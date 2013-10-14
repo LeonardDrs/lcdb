@@ -41,5 +41,21 @@ class Zone extends ZoneCore
 			WHERE `id_zone` = \''.pSQL($id_zone).'\'
 		');
 	}
+
+	/**
+	 * Get a all info for date delivery
+	 *
+	 * @param integer $id_zone
+	 * @return all
+	 * NEED ALREADY REGISTERED DELIVERY
+	 */
+	public static function getZoneCustomInfos($id_zone)
+	{
+		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+			SELECT `calendar`, `horaire`, `tranche`, `creneau`, `h_start`, `h_end`
+			FROM `'._DB_PREFIX_.'zone`
+			WHERE `id_zone` = \''.pSQL($id_zone).'\'
+		');
+	}
 }
 

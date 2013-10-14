@@ -234,6 +234,7 @@ class OrderController extends OrderControllerCore
 				$this->autoStep();
 				$this->_assignCarrier();
 				$this->processCarrier();
+				$this->_assignZone();
 				$this->setTemplate(_PS_THEME_DIR_.'order-date-delivery.tpl');
 			break;
 
@@ -287,6 +288,15 @@ class OrderController extends OrderControllerCore
 			'currencyBlank' => $this->context->currency->blank,
 		));
 	}
+
+	protected function _assignZone()
+	{
+		$id_address_delivery = $this->context->cart->id_address_delivery;
+		$id_zone = Address::getZoneById($id_address_delivery);
+		$vars = Zone::getZoneCustomInfos($id_zone);
+		$this->context->smarty->assign($vars);
+	}
+
 	protected function _getCarrierList($address_delivery)
 	{
 		$cms = new CMS(Configuration::get('PS_CONDITIONS_CMS_ID'), $this->context->language->id);
