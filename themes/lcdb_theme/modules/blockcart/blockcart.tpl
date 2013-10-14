@@ -45,7 +45,7 @@ var delete_txt = '{l s='Delete' mod='blockcart' js=1}';
 				        <tr>
 				            <th>Qt&eacute;</th>
 				            <th>Produit</th>
-				            <th>&euro;</th>
+				            <th class="price">Prix</th>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -55,8 +55,8 @@ var delete_txt = '{l s='Delete' mod='blockcart' js=1}';
 
 				    		<tr id="cart_block_product_{$product.id_product}_{if $product.id_product_attribute}{$product.id_product_attribute}{else}0{/if}_{if $product.id_address_delivery}{$product.id_address_delivery}{else}0{/if}" class="{if $smarty.foreach.myLoop.first}first_item{elseif $smarty.foreach.myLoop.last}last_item{else}item{/if}">
 				    		    <td>{$product.cart_quantity}</td>
-				    		    <td>{$product.name|truncate:13:'...'|escape:html:'UTF-8'}</td>
-				    		    <td>{if $product.total > 0}
+				    		    <td title="{$product.name|escape:html:'UTF-8'}">{$product.name|truncate:13:'...'|escape:html:'UTF-8'}</td>
+				    		    <td class="price">{if $product.total > 0}
 				    					{if $priceDisplay == $smarty.const.PS_TAX_EXC}{displayWtPrice p="`$product.total`"}{else}{displayWtPrice p="`$product.total_wt`"}{/if}
 				    				{else}
 				    					<b>{l s='Free!' mod='blockcart'}</b>
@@ -66,7 +66,7 @@ var delete_txt = '{l s='Delete' mod='blockcart' js=1}';
 				    	{/foreach}
 				    </tbody>
 				    <tfoot>
-				        <tr><td colspan="3">Sous total : <span class="basket-bold">{$total}</span></td></tr>
+				        <tr><td colspan="3">Sous total : <span class="basket-bold">{$product_total}</span></td></tr>
 				    </tfoot>
 				</table>
 				<dl class="products">
@@ -76,7 +76,7 @@ var delete_txt = '{l s='Delete' mod='blockcart' js=1}';
 				<p {if $products}class="hidden"{/if} id="cart_block_no_products">{l s='No products' mod='blockcart'}</p>
 
 				<div id="cart-buttons">
-					<!-- <div class="empty-link"><a href="#" title="Vider le panier" class="empty-basket">Vider le panier</a></div> -->
+					{if $order_process == 'order'}<div class="empty-link"><a href="{$link->getPageLink("$order_process", true)}" title="{l s='View my shopping cart' mod='blockcart'}" class="empty-basket">Voir mon panier</a></div>{/if}
 					<div class="basket-links"><a href="{$link->getPageLink("$order_process", true)}" title="{l s='Check out' mod='blockcart'}" class="place-order-button red-button gradient">Passer ma commande</a></div>
 				</div>
 			</div>
