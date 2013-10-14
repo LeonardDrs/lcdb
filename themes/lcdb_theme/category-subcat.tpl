@@ -1,6 +1,11 @@
 		<div class="big-bloc">
 			<div class="title_list_product">
-				<span class="big_image" id="big_{$category->name|lower}"></span>
+				{if $category->level_depth == 3}
+					{assign var=logo value="big_{$category->link_rewrite}"}
+				{else if( $category->level_depth == 4)}
+					{assign var=logo value="big_cow"}
+				{/if}
+				<span class="big_image" id="{$logo}"></span>
 				<h1>
 					{strip}
 						{$category->name|escape:'htmlall':'UTF-8'}
@@ -30,3 +35,7 @@
 				</div>
 			</div>
 		</div>
+
+		<pre>
+			{$category|print_r}
+		</pre>
