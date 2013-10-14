@@ -19,16 +19,16 @@
 		{$confirmation}
 	</p>
 	{/if}
-
-	<pre>
-		{$product|print_r}
-		{$category|print_r}
-	</pre>
 	
 	<div id="item" itemscope itemtype="http://schema.org/Product">
 		<div class="clearfix">
 			<div id="product-image">
-				<img src="{$base_dir}themes/lcdb_theme/img/asset/img_solo/product_boeuf.png" alt="Pavé (Rumsteak ou tende de tranche)" />
+				{foreach from=$product_categories item=category}
+					{if $category.level_depth == 3}
+							{assign var=logo_category value="product_{$category.link_rewrite}"}
+					{/if}
+				{/foreach}
+				<img src="{$base_dir}themes/lcdb_theme/img/asset/img_solo/{$logo_category}.png" alt="Pavé (Rumsteak ou tende de tranche)" />
 			</div>
 			<div id="main-product-infos">
 				<h1 itemprop="name">{$product->name|escape:'htmlall':'UTF-8'}</h1>
