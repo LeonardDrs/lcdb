@@ -100,12 +100,12 @@ class Category extends CategoryCore
 		return $result;
 	}
 
-	public function getLeftColumn($lang){
+	public static function getLeftColumn($lang){
 		$parent = new Category(3, $lang);
 		return $parent->getSubCategoriesByDepth(2, 4, $lang);
 	}
 
-	public function getRightColumn($lang){
+	public static function getRightColumn($lang){
 		$tips = CMS::getCMSPages($lang, 7);
 		return $content = array("tips" => $tips);
 	}

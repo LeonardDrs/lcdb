@@ -31,8 +31,6 @@
 	cursor: pointer
 }
 
-#cart_block  .block_content {padding:8px 8px 16px 8px;}
-
 #cart_block #cart_block_summary {display:none}
 #cart_block .quantity-formated {
 	display:inline-block;
@@ -57,13 +55,8 @@
 	float:right
 }
 
-#cart_block #cart_block_list dl {
-	padding-bottom:10px
-}
-#cart_block #cart_block_list dt {padding:4px 0}
-#cart_block #cart_block_list dt a {font-weight:bold}
-#cart_block #cart_block_list dd {
-	margin-left:20px
+#cart_block #cart_block_list td.price {
+	text-align: right;
 }
 
 #cart_block #cart-prices {

@@ -2,8 +2,8 @@
 			<div class="title_list_product">
 				{if $category->level_depth == 3}
 					{assign var=logo value="big_{$category->link_rewrite}"}
-				{elseif ( $category->level_depth == 4)}
-					{assign var=logo value="big_boeuf"}
+				{else if $category->level_depth == 4}
+					{assign var=logo value="big_cow"}
 				{/if}
 				<span class="big_image" id="{$logo}"></span>
 				<h1>
