@@ -23,16 +23,16 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<tr id="product_{$product.id_product}_{$product.id_product_attribute}_0_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="{if isset($productLast) && $productLast && (!isset($ignoreProductLast) || !$ignoreProductLast)}last_item{elseif isset($productFirst) && $productFirst}first_item{/if} {if isset($customizedDatas.$productId.$productAttributeId) AND $quantityDisplayed == 0}alternate_item{/if} cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}">
-	<td class="cart_product first">
+<tr id="product_{$product.id_product}_{$product.id_product_attribute}_0_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="row {if isset($productLast) && $productLast && (!isset($ignoreProductLast) || !$ignoreProductLast)}last_item{elseif isset($productFirst) && $productFirst}first_item{/if} {if isset($customizedDatas.$productId.$productAttributeId) AND $quantityDisplayed == 0}alternate_item{/if} cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}">
+	<td class="label cart_product first">
 		<a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute)|escape:'htmlall':'UTF-8'}">
 			<div{if isset($product.label) && $product.label} class="{$product.label|lower|replace:' ':'-'}"{/if}>
 				<span class="product-title">{$product.name|escape:'htmlall':'UTF-8'}</span>
 				<br/>
 				<span class="product-details">{$product.description_short|escape:'UTF-8'}</span>
 			</div>
-			<span class="product-rare">Produit rare : indisponibilité à prévoir.</span> <!-- mettre if $produit_rare -->
-			<br/>
+			<!-- <span class="product-rare">Produit rare : indisponibilité à prévoir.</span> <!-- mettre if $produit_rare -->
+			<!--<br/>
 			<span class="product-availability">Livrable jusqu'au 30/05/2013</span> <!-- mettre if $produit_rare -->
 		</a>
 	</td>
@@ -54,7 +54,7 @@
 	</td>
 	<td class="cart_quantity"{if isset($customizedDatas.$productId.$productAttributeId) AND $quantityDisplayed == 0} style="text-align: center;"{/if}>
 		{if isset($cannotModify) AND $cannotModify == 1}
-			<span style="float:left">
+			<span>
 				{if $quantityDisplayed == 0 AND isset($customizedDatas.$productId.$productAttributeId)}{$customizedDatas.$productId.$productAttributeId|@count}
 				{else}
 					{$product.cart_quantity-$quantityDisplayed}

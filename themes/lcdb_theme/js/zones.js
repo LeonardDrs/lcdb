@@ -1,5 +1,4 @@
 $(function() {
-	console.log('ok')
 	var array = $('#calendar_admin').data('array'),
 		year = $('#calendar_admin').find('table').data('year'),
 		month = $('#calendar_admin').find('table').data('month');
@@ -21,7 +20,7 @@ $(function() {
 			day = $this.parents('td').data('day'),
 			val = $this.siblings('.text').val();
 		if ($this.parents('td').hasClass('open')) {
-			if ( typeof array != "array") {
+			if ( typeof array != "object") {
 				array = {};
 			}
 			if (!array[year]) {
@@ -34,6 +33,7 @@ $(function() {
 		} else {
 			array[year][month][day] = null;
 		}
+
 		$('#calendar').val(JSON.stringify(array))
 		$this.parents('.desc').hide();
 	})

@@ -3,12 +3,13 @@
 class Zone extends ZoneCore
 {
 
-	public $horaire = true;
-	public $h_start = true;
-	public $h_end = true;
-	public $tranche = true;
-	public $creneau = true;
-	public $calendar = true;
+	public $horaire;
+	public $h_start;
+	public $h_end;
+	public $tranche;
+	public $creneau;
+	public $calendar;
+	public $minimum_order;
 
 	public static $definition = array(
 		'table' => 'zone',
@@ -21,8 +22,24 @@ class Zone extends ZoneCore
 			'h_end' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
 			'tranche' => array('type' => self::TYPE_FLOAT, 'validate' => 'isFloat'),
 			'creneau' => array('type' => self::TYPE_INT, 'validate' => 'isInt'),
+			'minimum_order' => array('type' => self::TYPE_FLOAT,'validate' => 'isFloat'),
 			'calendar' => array('type' => self::TYPE_STRING),
 		),
 	);
+
+	/**
+	 * Get a minimum order from a zone ID
+	 *
+	 * @param integer $id_zone
+	 * @return integer minimum_order
+	 */
+	public static function getMinimumOrderById($id_zone)
+	{
+		return Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+			SELECT `minimum_order`
+			FROM `'._DB_PREFIX_.'zone`
+			WHERE `id_zone` = \''.pSQL($id_zone).'\'
+		');
+	}
 }
 

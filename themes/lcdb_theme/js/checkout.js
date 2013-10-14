@@ -175,20 +175,20 @@ $(document).ready(function(){
     });
 
     function checkInformations() {
-        var postalCode = $('#address_delivery .address_postcode').text();
+        // var postalCode = $('#address_delivery .address_postcode').text();
             
-        $('#colis-cadeau-wrapper').hide();
-        $('#colis-cadeau-message').attr('disabled', 'disabled');
+        // $('#colis-cadeau-wrapper').hide();
+        // $('#colis-cadeau-message').attr('disabled', 'disabled');
 
 
-        if (postalCode.substring(0,2) === "75") {
-            //Paris
-            $('#colis-cadeau-wrapper').show();
-            $('#colis-cadeau-message').attr('disabled', '');
-        } else {
-            $('#colis-cadeau-wrapper').hide();
-            $('#colis-cadeau-message').attr('disabled', 'disabled');
-        }
+        // if (postalCode.substring(0,2) === "75") {
+        //     //Paris
+        //     $('#colis-cadeau-wrapper').show();
+        //     $('#colis-cadeau-message').attr('disabled', '');
+        // } else {
+        //     $('#colis-cadeau-wrapper').hide();
+        //     $('#colis-cadeau-message').attr('disabled', 'disabled');
+        // }
         //     priceLogic(40);
         //     setDeliveryCost('home');
         //     $('#delivery-home-li').show();
@@ -284,8 +284,8 @@ $(document).ready(function(){
     }
 
     function disableSubmit() {
-        $('#submit-address').attr('disabled', 'disabled');
-        $('#submit-address').removeClass('red-button').addClass('disabled-button');
+        // $('#submit-address').attr('disabled', 'disabled');
+        // $('#submit-address').removeClass('red-button').addClass('disabled-button');
     }
     if (google) {
         initialize();

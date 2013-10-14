@@ -5,6 +5,10 @@ class AdminZonesController extends AdminZonesControllerCore
 
 	public function renderForm()
 	{
+		$minimum_order_type = 'text';
+		if (Tools::getValue('id_zone') == 9) {
+			$minimum_order_type = 'hidden';
+		}
 		$this->fields_form = array(
 			'legend' => array(
 				'title' => $this->l('Zones'),
@@ -92,6 +96,14 @@ class AdminZonesController extends AdminZonesControllerCore
 					'size' => 33,
 					'required' => false,
 					'desc' => $this->l('Créneau horaire minimum (en heure)'),
+				),
+				array(
+					'type' => $minimum_order_type,
+					'label' => $this->l('Minimum Commande'),
+					'name' => 'minimum_order',
+					'size' => 33,
+					'required' => false,
+					'desc' => $this->l('Minimum requis pour passer une commande'),
 				),
 				array(
 					'type' => 'hidden',

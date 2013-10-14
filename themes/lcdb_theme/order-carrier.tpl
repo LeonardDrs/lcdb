@@ -43,6 +43,8 @@
 {/if}
 
 {include file="$tpl_dir./errors.tpl"}
+{assign var='order_total_flag' value='Cart::BOTH'|constant}
+{assign var='order_total_flag_without' value='Cart::BOTH_WITHOUT_SHIPPING'|constant}
 <div class="bloc content-delivery-mode" id="carrier_area">
 		<div class="delivery_options_address bloc content-delivery-modee">
 			<h2>Modes de livraison</h2>
@@ -54,7 +56,7 @@
 								{if $option.unique_carrier}
 									{foreach $option.carrier_list as $carrier}
 										<p>
-											<label class="radio" for="home-office"><input type="radio" name="delivery" id="home-office" value="{$carrier.instance->id}"/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
+											<label class="radio" for="delivery_option_{$id_address}_{$option@index}"><input type="radio" name="delivery" value="{$carrier.instance->id}" onchange="{if $opc}updateCarrierSelectionAndGift();{else}updateExtraCarrier('{$key}', {$id_address});{/if}" id="delivery_option_{$id_address}_{$option@index}"/><span class="delivery_option_title"><span class="delivery_option_title bold">{$carrier.instance->name}</span>
 											|	<span class="">
 												{if $option.total_price_with_tax && !$free_shipping}
 													{if $use_taxes == 1}
@@ -68,8 +70,8 @@
 											</span></label>
 										</p>
 									{/foreach}
-									{if isset($carrier.instance->delay[$cookie->id_lang])}
-										<p class="description delivery_option_delay">{$carrier.instance->delay[$cookie->id_lang]}</p>
+									{if isset($carrier.instance->description[$cookie->id_lang])}
+										<p class="description delivery_option_delay">{$carrier.instance->description[$cookie->id_lang]}</p>
 									{/if}
 								{/if}
 							</li>
@@ -97,20 +99,23 @@
 			<textarea name="gift_message" placeholder="Saisissez le message qui sera joint au cadeau" id="gift_message">{$cart->gift_message|escape:'htmlall':'UTF-8'}</textarea>
 		</div>
 		<hr class="dashed" />
-		<p id="total-price">Le montant TTC de votre commande est de <span class="price"><span data-price="67" id="final-price">67</span> &euro;</span></p>
+		<p id="total-price">Le montant TTC de votre commande est de <span class="price"><span data-price="{$cart->getOrderTotal(true, $order_total_flag)}" id="final-price">{$cart->getOrderTotal(true, $order_total_flag)}</span> &euro;</span></p>
 		<div id="error-price">
-			<p><span class="bold">Minimum de commande non atteint.</span> Nous vous invitons &agrave; continuer vos achats.<br />Pour une livraison dans le <span id="error-postal"></span>, le montant de votre commande doit &ecirc;tre au minimum de <span id="error-minimum-price"></span> &euro;.<br />Il est actuellement de <span id="error-current-price"></span>&euro;.</p>
+			<p><span class="bold">Minimum de commande non atteint.</span><br> Nous vous invitons &agrave; continuer vos achats.<br />Pour une livraison dans le <span id="error-postal">{$postcode}</span>, le montant de votre commande doit &ecirc;tre au minimum de <span id="error-minimum-price">{$minimum_order}</span> &euro;. <br>Il est actuellement de <span class="bold">{$cart->getOrderTotal(true, $order_total_flag_without)}</span> &euro;.</p>
 		</div>
 		<input type="hidden" class="hidden" name="step" value="2" />
 		<input type="hidden" name="back" value="{$back}" />
+		<script>
+			$('.delivery_options_address label').first().click();
+			updateMinimumOrderError({$minimum_order},{$cart->getOrderTotal(true, $order_total_flag)})
+		</script>
 </div>
 <script>
 	 $("html").addClass("has-js");
 
     // First let's prepend icons (needed for effects)
     $(".checkbox, .radio").prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
-
-    $(".checkbox, .radio").click(function(){
+     $(".checkbox, .radio").click(function(){
         setupLabel();
     });
     setupLabel();
