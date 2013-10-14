@@ -135,5 +135,38 @@ class ParentOrderController extends ParentOrderControllerCore
 			'HOOK_SHOPPING_CART_EXTRA' => Hook::exec('displayShoppingCart', $summary)
 		));
 	}
+
+	protected function _assignCarrier()
+	{
+		$address = new Address($this->context->cart->id_address_delivery);
+		$id_zone = Address::getZoneById($address->id);
+		$minimumOrder = Zone::getMinimumOrderById($id_zone);
+		$carriers = $this->context->cart->simulateCarriersOutput();
+		$checked = $this->context->cart->simulateCarrierSelectedOutput();
+		$delivery_option_list = $this->context->cart->getDeliveryOptionList();
+		$this->setDefaultCarrierSelection($this->context->cart->getDeliveryOptionList());
+		
+		$this->context->smarty->assign(array(
+			'address_collection' => $this->context->cart->getAddressCollection(),
+			'delivery_option_list' => $delivery_option_list,
+			'carriers' => $carriers,
+			'checked' => $checked,
+			'minimum_order' => $minimumOrder,
+			'delivery_option' => $this->context->cart->getDeliveryOption(null, false)
+		));
+
+		$vars = array(
+			'HOOK_BEFORECARRIER' => Hook::exec('displayBeforeCarrier', array(
+				'carriers' => $carriers,
+				'checked' => $checked,
+				'delivery_option_list' => $delivery_option_list,
+				'delivery_option' => $this->context->cart->getDeliveryOption(null, false)
+			))
+		);
+		
+		Cart::addExtraCarriers($vars);
+		
+		$this->context->smarty->assign($vars);
+	}
 }
 

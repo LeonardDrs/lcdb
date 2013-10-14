@@ -215,6 +215,7 @@ class OrderController extends OrderControllerCore
 			case 1:
 				$this->_assignAddress();
 				$this->_assignCarrier();
+
 				$this->processAddressFormat();
 				if (Tools::getValue('multi-shipping') == 1)
 				{
@@ -231,8 +232,8 @@ class OrderController extends OrderControllerCore
 				if (Tools::isSubmit('processAddress'))
 					$this->processAddress();
 				$this->autoStep();
-				$this->processCarrier();
 				$this->_assignCarrier();
+				$this->processCarrier();
 				$this->setTemplate(_PS_THEME_DIR_.'order-date-delivery.tpl');
 			break;
 
@@ -309,6 +310,9 @@ class OrderController extends OrderControllerCore
 		$wrapping_fees = $this->context->cart->getGiftWrappingPrice(false);
 		$wrapping_fees_tax_inc = $wrapping_fees = $this->context->cart->getGiftWrappingPrice();
 
+		$id_zone = Address::getZoneByZipCode($address_delivery->postcode);
+		$minimumOrder = Zone::getMinimumOrderById($id_zone);
+
 		$vars = array(
 			'free_shipping' => $free_shipping,
 			'checkedTOS' => (int)($this->context->cookie->checkedTOS),
@@ -325,7 +329,9 @@ class OrderController extends OrderControllerCore
 			'carriers' => $carriers,
 			'checked' => $this->context->cart->simulateCarrierSelectedOutput(),
 			'delivery_option' => $delivery_option,
-			'address_collection' => $this->context->cart->getAddressCollection()
+			'address_collection' => $this->context->cart->getAddressCollection(),
+			'minimum_order' => $minimumOrder,
+			'postcode' => $address_delivery->postcode
 		);
 		
 		Cart::addExtraCarriers($vars);

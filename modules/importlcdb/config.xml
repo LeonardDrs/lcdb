@@ -3,7 +3,7 @@
             <name>importlcdb</name>
             <displayName><![CDATA[Import LCDB]]></displayName>
             <version><![CDATA[2.0]]></version>
-            <description><![CDATA[synchronizes previous database of shop]]></description>
+            <description><![CDATA[Synchronizes previous database of shop]]></description>
             <author><![CDATA[PrestaShop]]></author>
             <tab><![CDATA[migration_tools]]></tab>
             <is_configurable>1</is_configurable>

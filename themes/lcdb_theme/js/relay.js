@@ -60,6 +60,8 @@ function initialize() {
     $relayList.append($documentFragment.children());
 }
 
+img_folder ='';
+
 function createMarker(index, nom, adresse, telephone, mention, lat, lon){
     var markerOptions = {
         draggable   : false,
@@ -67,7 +69,7 @@ function createMarker(index, nom, adresse, telephone, mention, lat, lon){
         map         : map,
         center      : new google.maps.LatLng(lat, lon),
         position    : new google.maps.LatLng(lat, lon),
-        icon        : new google.maps.MarkerImage(img_folder+'markers.png', new google.maps.Size(20, 34, "px", "px"), new google.maps.Point(0, (index*34+1)), null, null)
+        icon        : new google.maps.MarkerImage(img_folder+'img/markers.png', new google.maps.Size(20, 34, "px", "px"), new google.maps.Point(0, (index*34+1)), null, null)
     };
 
     m = new google.maps.Marker(markerOptions);

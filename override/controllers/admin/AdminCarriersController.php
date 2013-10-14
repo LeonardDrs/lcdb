@@ -28,6 +28,8 @@ class AdminCarriersController extends AdminCarriersControllerCore
 			'dir' => 's'
 		);
 
+		parent::__construct();
+
 		$this->fields_list = array(
 			'id_carrier' => array(
 				'title' => $this->l('ID'),
@@ -46,9 +48,9 @@ class AdminCarriersController extends AdminCarriersControllerCore
 				'search' => false,
 				'width' => 120
 			),
-			'delay' => array(
-				'title' => $this->l('Delay'),
-				'width' => 30,
+			'description' => array(
+				'title' => $this->l('Description'),
+				'width' => 300,
 				'orderby' => false
 			),
 			'active' => array(
@@ -128,7 +130,7 @@ class AdminCarriersController extends AdminCarriersControllerCore
 			)
 		);
 
-		parent::__construct();
+		
 	}
 
 	public function renderForm()
@@ -160,9 +162,9 @@ class AdminCarriersController extends AdminCarriersControllerCore
 				array(
 					'type' => 'text',
 					'label' => $this->l('Description'),
-					'name' => 'delay',
+					'name' => 'description',
 					'lang' => true,
-					'required' => true,
+					'required' => false,
 					'size' => 41,
 					'maxlength' => 255,
 					'desc' => $this->l('Description affiché')

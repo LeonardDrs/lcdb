@@ -2819,6 +2819,7 @@ class CartCore extends ObjectModel
 	*/
 	public function getSummaryDetails($id_lang = null, $refresh = false)
 	{
+		// var_dump($this->id_carrier);die();
 		$context = Context::getContext();
 		if (!$id_lang)
 			$id_lang = $context->language->id;
