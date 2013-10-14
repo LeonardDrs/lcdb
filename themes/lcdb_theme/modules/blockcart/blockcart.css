@@ -31,8 +31,6 @@
 	cursor: pointer
 }
 
-#cart_block  .block_content {padding:8px 8px 16px 8px;}
-
 #cart_block #cart_block_summary {display:none}
 #cart_block .quantity-formated {
 	display:inline-block;

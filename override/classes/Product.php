@@ -185,5 +185,26 @@ class Product extends ProductCore
 				'id_recipe_2' => (int)$id_recipe_2
 			));
 	}
+
+	public static function getProductCategoriesFull($id_product = '', $id_lang = null)
+	{
+		if (!$id_lang)
+			$id_lang = Context::getContext()->language->id;
+
+		$ret = array();
+		$row = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+			SELECT cp.`id_category`, cl.`name`, cl.`link_rewrite`, c.`level_depth` FROM `'._DB_PREFIX_.'category_product` cp
+			LEFT JOIN `'._DB_PREFIX_.'category` c ON (c.id_category = cp.id_category)
+			LEFT JOIN `'._DB_PREFIX_.'category_lang` cl ON (cp.`id_category` = cl.`id_category`'.Shop::addSqlRestrictionOnLang('cl').')
+			'.Shop::addSqlAssociation('category', 'c').'
+			WHERE cp.`id_product` = '.(int)$id_product.'
+				AND cl.`id_lang` = '.(int)$id_lang
+		);
+
+		foreach ($row as $val)
+			$ret[$val['id_category']] = $val;
+
+		return $ret;
+	}
 }
 

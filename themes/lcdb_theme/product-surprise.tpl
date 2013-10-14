@@ -2,8 +2,8 @@
 <div class="big-bloc colis colis-surprise" itemscope itemtype="http://schema.org/Product">
 	<div class="content-title">
 		<h1 itemprop="name">{$product->name}</h1>
-		{if $product->breeder != null}	
-			<p>{$product->breeder}</p>
+		{if $product->description_short != null}	
+			<p>{$product->description_short}</p>
 		{/if}
 	</div>
 	
@@ -26,8 +26,8 @@
 	<div class="price-infos clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 		<img src="{$base_dir}themes/lcdb_theme/img/asset/img_solo/colis-surprise.png" title="colis surprise"/>
 		
-		{if $product->description_short != null}	
-			<p class="colis-surprise-description">{$product->description_short}</p>
+		{if $product->description != null}	
+			<p class="colis-surprise-description">{$product->description}</p>
 		{/if}
 		<div class="price-details">
 			
@@ -56,9 +56,20 @@
 			<input type="hidden" name="add" value="1" />
 			<input type="hidden" name="id_product_attribute" id="idCombination" value="" />
 			<!-- select -->
-			<select>
-				<option>Label Rouge et Bio</option>
-			</select>
+			{if isset($groups)}
+				{foreach from=$groups key=id_attribute_group item=group}
+					{if $group.attributes|@count}
+						{assign var="groupName" value="group_$id_attribute_group"}
+						{if ($group.group_type == 'select')}
+							<select name="{$groupName}" id="group_{$id_attribute_group|intval}" class="attribute_select meat-race" onchange="findCombination();getProductAttribute();">
+								{foreach from=$group.attributes key=id_attribute item=group_attribute}
+									<option value="{$id_attribute|intval}"{if (isset($smarty.get.$groupName) && $smarty.get.$groupName|intval == $id_attribute) || $group.default == $id_attribute} selected="selected"{/if} title="{$group_attribute|escape:'htmlall':'UTF-8'}">{$group_attribute|escape:'htmlall':'UTF-8'}</option>
+								{/foreach}
+							</select>
+						{/if}
+					{/if}
+				{/foreach}
+			{/if}
 			<button type="button" name="minus" class="moreless minus">-</button>
 			<input  id="quantity_wanted" class="quantity" type="text" maxlength="2" value="0" name="quantity" disabled>
 			<button type="button" name="plus" class="moreless plus">+</button>
@@ -69,13 +80,21 @@
 	
 	{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
 	
-	<div class="misc-infos clearfix">
-		<p class="portions"><span class="img-portions"></span> 10 à 12 <span class="colis-portions">portions</span></p>
-		<p class="jours"><span class="img-jours"></span> 7 à 14 <span class="colis-jours">jours</span></p>
-	</div>
+	{if isset($features) && $features}
+		<div class="misc-infos clearfix">
+			{foreach from=$features item=feature}
+	            {if  isset($feature.value) && $feature.id_feature == 6}
+					<p class="portions"><span class="img-portions"></span> {$feature.value|escape:'htmlall':'UTF-8'} <span class="colis-portions">portions</span></p>
+				{/if}
+				{if  isset($feature.value) && $feature.id_feature == 7}
+					<p class="jours"><span class="img-jours"></span> {$feature.value|escape:'htmlall':'UTF-8'} <span class="colis-jours">jours</span></p>
+				{/if}
+			{/foreach}
+		</div>
+	{/if}
 	<hr />
-	{if $product->description != null}	
-		<div class="colis-description">{$product->description}</div>
+	{if $product->breeder != null}	
+		<div class="colis-description">{$product->breeder}</div>
 	{/if}
 	<hr />
 	<div class="colis-exemples">
@@ -89,9 +108,3 @@
 	<hr />
 	<p class="surprise-additional">Chaque semaine, une nouvelle surprise vous attends dans votre colis</p>
 </div><!-- / .colis -->
-
-
-	<pre>
-		{$product|print_r}
-	</pre>
-	
