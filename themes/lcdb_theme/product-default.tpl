@@ -50,15 +50,23 @@
 									{/foreach}
 								</select>
 							{/if}
+						</div>
 					{/if}
 				{/foreach}
 			{/if}
-		</div>
 
 			<div class="add-to-basket-form">
 				<div class="clearfix">
 					<div class="label">
-					</div>
+						{foreach from=$features item=feature}
+							{if $feature.id_feature == 11 && $feature.value == "Oui" }
+								<img class="bio" src="{$base_dir}/themes/lcdb_theme/img/asset/img_solo/agriculture-biologique.jpg" alt="Agriculture biologique"/>
+							{/if}
+							{if $feature.id_feature == 12 && $feature.value == "Oui" }
+								 <img class="bio" src="{$base_dir}/themes/lcdb_theme/img/asset/img_solo/product_labelrouge.png" alt="Label Rouge"/>
+							{/if}
+						{/foreach}
+                    </div>
 					<div class="detailed-price">
 						<p class="price our_price_display" itemprop="price">
 						{if $priceDisplay >= 0 && $priceDisplay <= 2}
@@ -90,12 +98,12 @@
 						</p>
 
 						<!-- availability -->
-						<p id="availability_statut"{if ($product->quantity <= 0 && !$product->available_later && $allow_oosp) OR ($product->quantity > 0 && !$product->available_now) OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
+						<!-- <p id="availability_statut"{if ($product->quantity <= 0 && !$product->available_later && $allow_oosp) OR ($product->quantity > 0 && !$product->available_now) OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
 							<span id="availability_label">{l s='Availability:'}</span>
 							<span id="availability_value"{if $product->quantity <= 0} class="warning_inline"{/if}>
 							{if $product->quantity <= 0}{if $allow_oosp}{$product->available_later}{else}{l s='This product is no longer in stock'}{/if}{else}{$product->available_now}{/if}
 							</span>
-						</p>
+						</p> -->
 
 						<p class="warning_inline" id="last_quantities"{if ($product->quantity > $last_qties OR $product->quantity <= 0) OR $allow_oosp OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none"{/if} >{l s='Warning: Last items in stock!'}</p>
 
@@ -169,7 +177,7 @@
 					<p class="jours"><span class="img-jours"></span> {$feature.value} <span class="colis-jours">jours</span></p>
 				{/if}
 				{if $feature.id_feature == 10 }
-					<p class="cuisson"><span class="img-cuisson"></span> <span class="mode-cuisson">à griller</span></p>
+					<p class="cuisson"><span class="img-cuisson"></span> <span class="mode-cuisson">{$feature.value}</span></p>
 				{/if}
 			{/foreach}
 		</div>
