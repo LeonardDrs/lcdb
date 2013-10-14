@@ -19,6 +19,11 @@
 		{$confirmation}
 	</p>
 	{/if}
+
+	<pre>
+		{$product|print_r}
+		{$category|print_r}
+	</pre>
 	
 	<div id="item" itemscope itemtype="http://schema.org/Product">
 		<div class="clearfix">
@@ -67,20 +72,61 @@
 							{/if}
 						{/foreach}
                     </div>
-					<div class="detailed-price">
-						<p class="price our_price_display" itemprop="price">
-						{if $priceDisplay >= 0 && $priceDisplay <= 2}
-							<span id="our_price_display">{convertPrice price=$productPrice}</span>
-							<!--{if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) OR !isset($display_tax_label))}
-								{if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}
-							{/if}-->
+
+                    {if $product->show_price}
+
+						{if !$priceDisplay || $priceDisplay == 2}
+							{assign var='productPrice' value=$product->getPrice(true, $smarty.const.NULL, $priceDisplayPrecision)}
+							{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(false, $smarty.const.NULL)}
+						{elseif $priceDisplay == 1}
+							{assign var='productPrice' value=$product->getPrice(false, $smarty.const.NULL, $priceDisplayPrecision)}
+							{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(true, $smarty.const.NULL)}
 						{/if}
-						</p>
-						{if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
-							 {math equation="pprice / punit_price"  pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
-							<p class="unit-price">{convertPrice price=$unit_price}/{$product->unity|escape:'htmlall':'UTF-8'}</p>
+
+						{if $product->specificPrice AND $product->specificPrice.reduction}
+							<div class="detailed-price promo clearfix">
+		                        <span class="reduction">
+		                        	{if $product->specificPrice AND $product->specificPrice.reduction_type == 'percentage'}
+		                        		-{$product->specificPrice.reduction*100}%
+		                        	{elseif ($product->specificPrice AND $product->specificPrice.reduction_type == 'amount')}
+		                        		{if $product->specificPrice AND $product->specificPrice.reduction_type == 'amount' && $product->specificPrice.reduction|intval !=0}
+		                        			-{convertPrice price=$product->specificPrice.reduction|floatval}
+		                        		{/if}
+		                        	{/if}
+		                        </span>
+		                        {if $priceDisplay >= 0 && $priceDisplay <= 2}
+									{if $productPriceWithoutReduction > $productPrice}
+										<div class="old-price">
+				                            <p id="old_price_display" class="price">{convertPrice price=$productPriceWithoutReduction}</p>
+				                            <!-- <p class="price-kg">25,62€/kg</p> -->
+				                        </div>
+									{/if}
+								{/if}
+								{if $priceDisplay == 2}
+								{/if}
+									<div class="new-price" id="pretaxe_price">
+			                            <p id="pretaxe_price_display" class="price" itemprop="price">{convertPrice price=$product->getPrice(false, $smarty.const.NULL)}</p>
+			                            <!-- <p class="price-kg">25,62€/kg</p> -->
+			                        </div>
+		                    </div>
 						{/if}
-					</div>
+
+					{else}
+
+						<div class="detailed-price">
+							<p class="price our_price_display" itemprop="price">
+							{if $priceDisplay >= 0 && $priceDisplay <= 2}
+								<span id="our_price_display">{convertPrice price=$productPrice}</span>
+							{/if}
+							</p>
+							{if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
+								 {math equation="pprice / punit_price"  pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
+								<p class="unit-price price-kg">{convertPrice price=$unit_price}/{$product->unity|escape:'htmlall':'UTF-8'}</p>
+							{/if}
+						</div>
+
+					{/if}
+
 				</div>
 				<div>
 					<form class="form-panier clearfix" action="{$link->getPageLink('cart')}" method="post">
@@ -105,57 +151,7 @@
 							</span>
 						</p> -->
 
-						<p class="warning_inline" id="last_quantities"{if ($product->quantity > $last_qties OR $product->quantity <= 0) OR $allow_oosp OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none"{/if} >{l s='Warning: Last items in stock!'}</p>
-
-						{if $product->show_price AND !isset($restricted_country_mode) AND !$PS_CATALOG_MODE}
-
-							{if !$priceDisplay || $priceDisplay == 2}
-								{assign var='productPrice' value=$product->getPrice(true, $smarty.const.NULL, $priceDisplayPrecision)}
-								{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(false, $smarty.const.NULL)}
-							{elseif $priceDisplay == 1}
-								{assign var='productPrice' value=$product->getPrice(false, $smarty.const.NULL, $priceDisplayPrecision)}
-								{assign var='productPriceWithoutReduction' value=$product->getPriceWithoutReduct(true, $smarty.const.NULL)}
-							{/if}
-
-							
-
-							{if $priceDisplay == 2}
-								<br />
-								<span id="pretaxe_price"><span id="pretaxe_price_display">{convertPrice price=$product->getPrice(false, $smarty.const.NULL)}</span>&nbsp;{l s='tax excl.'}</span>
-							{/if}
-
-						<p id="reduction_percent" {if !$product->specificPrice OR $product->specificPrice.reduction_type != 'percentage'} style="display:none;"{/if}><span id="reduction_percent_display">{if $product->specificPrice AND $product->specificPrice.reduction_type == 'percentage'}-{$product->specificPrice.reduction*100}%{/if}</span></p>
-
-						<p id="reduction_amount" {if !$product->specificPrice OR $product->specificPrice.reduction_type != 'amount' && $product->specificPrice.reduction|intval ==0} style="display:none"{/if}><span id="reduction_amount_display">{if $product->specificPrice AND $product->specificPrice.reduction_type == 'amount' && $product->specificPrice.reduction|intval !=0}-{convertPrice price=$product->specificPrice.reduction|floatval}{/if}</span></p>
-
-						{if $product->specificPrice AND $product->specificPrice.reduction}
-							<p id="old_price"><span class="bold">
-							{if $priceDisplay >= 0 && $priceDisplay <= 2}
-								{if $productPriceWithoutReduction > $productPrice}
-									<span id="old_price_display">{convertPrice price=$productPriceWithoutReduction}</span>
-									<!-- {if $tax_enabled && $display_tax_label == 1}
-										{if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}
-									{/if} -->
-								{/if}
-							{/if}
-							</span>
-							</p>
-						{/if}
-
-						{if $packItems|@count && $productPrice < $product->getNoPackPrice()}
-							<p class="pack_price">{l s='instead of'} <span style="text-decoration: line-through;">{convertPrice price=$product->getNoPackPrice()}</span></p>
-							<br class="clear" />
-						{/if}
-
-						{if $product->ecotax != 0}
-							<p class="price-ecotax">{l s='include'} <span id="ecotax_price_display">{if $priceDisplay == 2}{$ecotax_tax_exc|convertAndFormatPrice}{else}{$ecotax_tax_inc|convertAndFormatPrice}{/if}</span> {l s='for green tax'}
-								{if $product->specificPrice AND $product->specificPrice.reduction}
-								<br />{l s='(not impacted by the discount)'}
-								{/if}
-							</p>
-						{/if}
-
-						{/if}
+						<!-- <p class="warning_inline" id="last_quantities"{if ($product->quantity > $last_qties OR $product->quantity <= 0) OR $allow_oosp OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none"{/if} >{l s='Warning: Last items in stock!'}</p> -->
 
 						{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
 
