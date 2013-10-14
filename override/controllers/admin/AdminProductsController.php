@@ -17,7 +17,8 @@ class AdminProductsController extends AdminProductsControllerCore
 				'Seo' => 2,
 				'Associations' => 3,
 				'Shipping' => 4,
-				'Features' => 10,
+				'Features' => 11,
+				'Combinations' => 10,
 			));
 		}
 		

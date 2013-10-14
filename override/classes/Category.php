@@ -65,7 +65,7 @@ class Category extends CategoryCore
 		return $result;
 	}
 	
-	public function getFullSubCategories($id_lang, $active = true)
+	public function getFullSubCategories($id_lang, $active = true, $order_by_product = null, $order_way_product = null)
 	{
 	 	if (!Validate::isBool($active))
 	 		die(Tools::displayError());
@@ -95,9 +95,19 @@ class Category extends CategoryCore
 			$row['legend'] = 'no picture';
 			// gets products of category
 			$category = new Category($row['id_category'] , $id_lang);
-			$row['products'] = $category->getProducts($id_lang, 0, 100);
+			$row['products'] = $category->getProducts($id_lang, 0, 100, $order_by_product, $order_way_product);
 		}
 		return $result;
+	}
+
+	public function getLeftColumn($lang){
+		$parent = new Category(3, $lang);
+		return $parent->getSubCategoriesByDepth(2, 4, $lang);
+	}
+
+	public function getRightColumn($lang){
+		$tips = CMS::getCMSPages($lang, 7);
+		return $content = array("tips" => $tips);
 	}
 }
 

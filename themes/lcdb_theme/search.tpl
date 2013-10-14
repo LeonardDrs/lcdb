@@ -6,7 +6,7 @@
 		<div class="big-bloc">
 			<div class="title_list_product">
 				<h1>
-					{l s='Search'}&nbsp;{if $nbProducts > 0}"{if isset($search_query) && $search_query}{$search_query|escape:'htmlall':'UTF-8'}{elseif $search_tag}{$search_tag|escape:'htmlall':'UTF-8'}{elseif $ref}{$ref|escape:'htmlall':'UTF-8'}{/if}"{/if}
+					{l s='Recherche'}&nbsp;{if $nbProducts > 0}"{if isset($search_query) && $search_query}{$search_query|escape:'htmlall':'UTF-8'}{elseif $search_tag}{$search_tag|escape:'htmlall':'UTF-8'}{elseif $ref}{$ref|escape:'htmlall':'UTF-8'}{/if}"{/if}
 				</h1>
 				{include file="$tpl_dir./errors.tpl"}
 			</div>
@@ -43,7 +43,4 @@
 		</div>
 
 	</div><!-- end #center_column -->
-	<div id="right_column">
-		{include file="$tpl_dir./category-rightcol.tpl"}
-	</div>
 </div>

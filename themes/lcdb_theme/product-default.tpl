@@ -1,6 +1,6 @@
 
 <div class="big-bloc">
-	<a href="#" title="Retourner aux produits">&lt; Retourner aux produits</a>
+	<a href="javascript:history.back();" title="Retourner aux produits">&lt; Retourner aux produits</a>
 	
 	{if isset($adminActionDisplay) && $adminActionDisplay}
 	<div id="admin-action">
@@ -36,14 +36,25 @@
 			</div>
 		</div>
 		<div class="clearfix price-info">
-			<div class="choix-race">
-				<p>Race</p>
-				<select class="meat-race">
-					<option>Choisissez pour moi</option>
-					<option>race 1</option>
-					<option>race 2</option>
-				</select>
-			</div>
+
+			{if isset($groups)}
+				{foreach from=$groups key=id_attribute_group item=group}
+					{if $group.attributes|@count}
+						<div class="choix-race">
+							<p>{$group.name|escape:'htmlall':'UTF-8'} :</p>
+							{assign var="groupName" value="group_$id_attribute_group"}
+							{if ($group.group_type == 'select')}
+								<select name="{$groupName}" id="group_{$id_attribute_group|intval}" class="attribute_select meat-race" onchange="findCombination();getProductAttribute();">
+									{foreach from=$group.attributes key=id_attribute item=group_attribute}
+										<option value="{$id_attribute|intval}"{if (isset($smarty.get.$groupName) && $smarty.get.$groupName|intval == $id_attribute) || $group.default == $id_attribute} selected="selected"{/if} title="{$group_attribute|escape:'htmlall':'UTF-8'}">{$group_attribute|escape:'htmlall':'UTF-8'}</option>
+									{/foreach}
+								</select>
+							{/if}
+					{/if}
+				{/foreach}
+			{/if}
+		</div>
+
 			<div class="add-to-basket-form">
 				<div class="clearfix">
 					<div class="label">
