@@ -239,6 +239,12 @@ class OrderController extends OrderControllerCore
 			break;
 
 			case 3:
+				if (Tools::getValue('mydate'))
+				{
+					$this->context->cart->date_delivery = Tools::getValue('mydate');
+					$this->context->cart->hour_delivery = Tools::getValue('hour_delivery');
+					$this->context->cart->save();
+				}
 				// if (!$this->context->cart->isVirtualCart())
 				// 				{
 				// 					if (!Tools::getValue('delivery_option') && !Tools::getValue('id_carrier') && !$this->context->cart->delivery_option && !$this->context->cart->id_carrier)
@@ -294,7 +300,8 @@ class OrderController extends OrderControllerCore
 		$id_address_delivery = $this->context->cart->id_address_delivery;
 		$id_zone = Address::getZoneById($id_address_delivery);
 		$vars = Zone::getZoneCustomInfos($id_zone);
-		$this->context->smarty->assign($vars);
+		$vars[0]['name'] = str_replace(' ', '_', strtolower($vars[0]['name']));
+		$this->context->smarty->assign($vars[0]);
 	}
 
 	protected function _getCarrierList($address_delivery)

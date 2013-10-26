@@ -52,7 +52,7 @@ class Zone extends ZoneCore
 	public static function getZoneCustomInfos($id_zone)
 	{
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
-			SELECT `calendar`, `horaire`, `tranche`, `creneau`, `h_start`, `h_end`
+			SELECT `id_zone`, `name`, `calendar`, `horaire`, `tranche`, `creneau`, `h_start`, `h_end`
 			FROM `'._DB_PREFIX_.'zone`
 			WHERE `id_zone` = \''.pSQL($id_zone).'\'
 		');

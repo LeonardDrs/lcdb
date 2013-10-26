@@ -87,7 +87,7 @@ class AdminZonesController extends AdminZonesControllerCore
 					'name' => 'tranche',
 					'size' => 33,
 					'required' => false,
-					'desc' => $this->l('Tranche horaire (en heure)'),
+					'desc' => $this->l('Tranche horaire (en minutes)'),
 				),
 				array(
 					'type' => 'text',
@@ -95,7 +95,7 @@ class AdminZonesController extends AdminZonesControllerCore
 					'name' => 'creneau',
 					'size' => 33,
 					'required' => false,
-					'desc' => $this->l('Créneau horaire minimum (en heure)'),
+					'desc' => $this->l('Créneau horaire minimum (en minutes)'),
 				),
 				array(
 					'type' => $minimum_order_type,

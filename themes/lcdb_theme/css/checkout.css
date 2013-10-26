@@ -884,7 +884,7 @@
 }
 .content-delivery #selected-date-hours{
 	float: right;
-	margin-right: 5px;
+	margin-left: 15px;
 	width: 342px;
 }
 .content-delivery #selected-date{

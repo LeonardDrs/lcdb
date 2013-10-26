@@ -56,8 +56,8 @@ var txtProducts = "{l s='products' js=1}";
 				<div id="delivery-date">
 					<h3>Date de livraison</h3>
 					<a href="#" title="modifier">modifier</a>
-					<p>Jeudi 17 janvier 2013</p>
-					<p>Entre 20h30 et 21h30 ou entre 17h30 et 20h30</p>
+					<p>{$cart->date_delivery}</p>
+					<p>{$cart->hour_delivery}</p>
 				</div>
 				<div id="mode-delivery">
 					<h3>Mode de livraison</h3>
@@ -81,36 +81,6 @@ var txtProducts = "{l s='products' js=1}";
 										<td>10</td>
 										<td>90 €</td>
 									</tr>
-									<!-- <tr class="row">
-										<td class="label-bio label">Gite (Idéal en Tartare ou Haché) -5 % Mat. Grasse</td>
-										<td>9 €</td>
-										<td>3</td>
-										<td>27 €</td>
-									</tr>
-									<tr class="row">
-										<td>Filet mignon de Boeuf</td>
-										<td>15 €</td>
-										<td>2</td>
-										<td>30 €</td>
-									</tr>
-									<tr class="row">
-										<td class="label-rouge label">Gite (Idéal en Tartare ou Haché) -5% Mat. Grasse</td>
-										<td>9 €</td>
-										<td>1</td>
-										<td>1 €</td>
-									</tr>
-									<tr class="row">
-										<td class="label-rouge label">Gite (Idéal en Tartare ou Haché) -5% Mat. Grasse</td>
-										<td>9 €</td>
-										<td>3</td>
-										<td>27 €</td>
-									</tr>
-									<tr class="row">
-										<td class="label-rouge label">Pavé (Rumsteak Olgache) 180gr</td>
-										<td>9 €</td>
-										<td>10</td>
-										<td>100 €</td>
-									</tr> -->
 								</tbody>
 								{foreach from=$products item=product name=productLoop}
 									{assign var='productId' value=$product.id_product}
@@ -123,31 +93,6 @@ var txtProducts = "{l s='products' js=1}";
 								{/foreach}
 							</table>
 						</div>
-						
-<!-- 							<tr class="cart_total_voucher" {if $total_discounts == 0}style="display: none;"{/if}>
-								<td colspan="5">
-								{if $use_taxes}
-									{if $priceDisplay}
-										{if $display_tax_label}{l s='Total vouchers (tax excl.):'}{else}{l s='Total vouchers:'}{/if}
-									{else}
-										{if $display_tax_label}{l s='Total vouchers (tax incl.):'}{else}{l s='Total vouchers:'}{/if}
-									{/if}
-								{else}
-									{l s='Total vouchers:'}
-								{/if}
-								</td>
-								<td class="price-discount price" id="total_discount">
-								{if $use_taxes}
-									{if $priceDisplay}
-										{displayPrice price=$total_discounts_tax_exc}
-									{else}
-										{displayPrice price=$total_discounts}
-									{/if}
-								{else}
-									{displayPrice price=$total_discounts_tax_exc}
-								{/if}
-								</td>
-							</tr> -->
 
 						<div id="total-basket">
 							<p>
@@ -155,12 +100,15 @@ var txtProducts = "{l s='products' js=1}";
 								<span class="bold">
 									{if $use_taxes}
 										{if $priceDisplay}
-											{displayPrice price=$total_products}											</tr>
+											{displayPrice price=$total_products}
+											</tr>
 										{else}
-											{displayPrice price=$total_products_wt}											</tr>
+											{displayPrice price=$total_products_wt}
+											</tr>
 										{/if}
 									{else}
-										{displayPrice price=$total_products}										</tr>
+										{displayPrice price=$total_products}
+										</tr>
 									{/if}
 								</span>
 							</p>

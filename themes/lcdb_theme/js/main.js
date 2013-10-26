@@ -339,37 +339,79 @@ $(document).ready(function(){
 			}
 		});
 	}
-	
+
 /* ------ Calendrier du checkout ----------*/
 	/* Utilisation du plugin : glDatePicker.js (modifier pour s'adapter au projet) : http://glad.github.io/glDatePicker/ */
 	//place_delivery: lieu de livraison de l'internaute
 	//valeur possible: province, grande_banlieue, proche_banlieue, paris, point_relais
-	var place_delivery="proche_banlieue";
+// var place_delivery="";
 	var selectDays = null;
 	// Date spécial - Les dates de livraison déjà enregistrées et a afficher dans le calendrier
 	// 0: janvier, 1:fevrier, 2:mars, 3:avril, 4: mai, 5:juin, 6:juillet, 7:août, 8:septembre, 9:octobre, 10:novembre, 11:décembre
 	var recDate = [{date: new Date(2013, 3, 20), repeatMonth: true}, {date: new Date(2013, 3, 25)}];
-	var satSelectable = null;
-	var tabHours = Array();
+	var recDate = [];
+// var satSelectable = null;
+	var tabHours = ['-'];
+	// tabHours = ['-','7h30', '8h00', '8h30', '9h00', '9h30', '10h00', '10h30', '11h00', '11h30', '12h00', '12h30', '13h00', '13h30', '14h00', 
+		// '14h30', '15h00', '15h30', '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30', '20h00', '20h30', '21h00', '21h30', '22h'];
 	// Jour de livraison sélectionnable en fonction du lieu de résidence de l'internaute
-	if(place_delivery=="point_relais"){
-		selectDays = [2, 4, 5];
-	}else if(place_delivery=="province"){
-		selectDays = [3, 5]; // 0: Dimanche, 1:Lundi, 2:Mardi, 3:Mercredi, 4:Jeudi, 5:Vendredi, 6:Samedi
-		satSelectable = [{date: new Date(2013, 3, 20)}, {date: new Date(2013, 3, 27)}];
-	}else if(place_delivery=="grande_banlieue"){
-		selectDays = [2, 4, 5, 6];
-		tabHours = ['14h - 16h', '16h - 18h', '18h - 20h', '20h - 22h'];
-	}else if(place_delivery=="proche_banlieue" || place_delivery=="paris"){
-		selectDays = [2, 4, 5];
-		tabHours = ['-','7h30', '8h00', '8h30', '9h00', '9h30', '10h00', '10h30', '11h00', '11h30', '12h00', '12h30', '13h00', '13h30', '14h00', 
-		'14h30', '15h00', '15h30', '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30', '20h00', '20h30', '21h00', '21h30', '22h'];
+	// if(place_delivery=="point_relais"){
+		// selectDays = [2, 4, 5];
+	// }else if(place_delivery=="province"){
+		// selectDays = [3, 5]; // 0: Dimanche, 1:Lundi, 2:Mardi, 3:Mercredi, 4:Jeudi, 5:Vendredi, 6:Samedi
+		// satSelectable = [{date: new Date(2013, 10, 21)}, {date: new Date(2013, 3, 27)}];
+	// }else if(place_delivery=="grande_banlieue"){
+		// selectDays = [2, 4, 5, 6];
+		// tabHours = ['14h - 16h', '16h - 18h', '18h - 20h', '20h - 22h'];
+	// }else if(place_delivery=="proche_banlieue" || place_delivery=="paris"){
+		// selectDays = [2, 4, 5];
+		// satSelectable = [{date: new Date(2013, 9, 23)}, {date: new Date(2013, 9, 27)}];
+		// tabHours = ['-','7h30', '8h00', '8h30', '9h00', '9h30', '10h00', '10h30', '11h00', '11h30', '12h00', '12h30', '13h00', '13h30', '14h00', 
+		// '14h30', '15h00', '15h30', '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30', '20h00', '20h30', '21h00', '21h30', '22h'];
+	// }
+
+
+	if ($('#calendar').length > 0) {
+		satSelectable = JSON.parse(satSelectable) || {};
+		selectableDates = [];
+		for(year in satSelectable) {
+			for (month in satSelectable[year]) {
+				for (day in satSelectable[year][month]) {
+					selectableDates.push({date: new Date(year, month-1, day)})
+				}
+			}
+		}
+		hStart = hStart.split(':');
+		hStart = new Date(0,0,0,hStart[0],hStart[1]);
+		hEnd = hEnd.split(':');
+		hEnd = new Date(0,0,0,hEnd[0],hEnd[1]);
+
+		var d = new Date(hStart.getTime())
+
+		for (var d = new Date(hStart.getTime()); d <= hEnd; d = new Date(d.getTime() + tranche*60000)) {
+			var min = d.getMinutes(),
+				hours = d.getHours();
+			if (min < 10) {
+				min = "0"+min;
+			};
+			if (hours < 10) {
+				hours = "0"+hours;
+			};
+			tabHours.push(hours+'h'+min);
+		};
 	}
-	
+	// console.log(hStart,hEnd)
+
+	// console.log(satSelectable[0].date)
 	if($('input#mydate').length > 0){
 		$('input#mydate').glDatePicker({
 			showAlways: true,
-			selectableDates: satSelectable,
+			selectableDates: selectableDates,
+			selectableDateRange: [
+				{	from: selectableDates[0].date,
+					to: selectableDates[0].date
+				}
+			],
 			allowMonthSelect:false,
 			allowYearSelect:false,
 			specialDates: recDate,
@@ -385,47 +427,57 @@ $(document).ready(function(){
 				
 				var html = "";
 				var daynum = date.getDay(); 
-				if(place_delivery=="paris" || place_delivery=="proche_banlieue"){
-					var slot = (place_delivery == "paris") ? "1" : "2"
-					$("#selected-hours").removeClass().addClass("near");
-					$('.action button').attr('disabled', 'disabled');
-					html = '<div class="infos-hours"><p>Précisez le ou les créneau(x) horaires souhaité(s)</p>';
-					html += '<p>(avec au moins un créneau de '+slot+'h ou plus)</p></div>';
-					html += '<div class="error"></div>';
-					for (j=0; j<4; j++){
-						if(j%2!=0){
-							var label = " et ";
-							var name = "end_delivery_hour_"+j;
-						}else{
-							var label = (j==0) ? "Entre ":"ou entre ";
-							var name = "start_delivery_hour_"+j;
-							html += '<div class="combobox combobox_'+j+'">';
-						}
-						html += '<label>'+label+'</label>';
-						html = combobox_delivery(tabHours, name, html);
-						if(j==3) html += '<span>(facultatif)</span>';
-						if(j%2!=0) html += '</div>';
+				// if(place_delivery=="paris" || place_delivery=="proche_banlieue"){
+				$("#selected-hours").removeClass().addClass("near");
+				$('.action button').attr('disabled', 'disabled');
+				html = '<div class="infos-hours"><p>Précisez le ou les créneau(x) horaires souhaité(s)</p>';
+				html += '<p>(avec au moins un créneau de '+(hours_interval/60)+'h ou plus)</p></div>';
+				html += '<div class="error"></div>';
+				for (j=0; j<4; j++){
+					if(j%2!=0){
+						var label = " et ";
+						var name = "end_delivery_hour_"+j;
+					}else{
+						var label = (j==0) ? "Entre ":"ou entre ";
+						var name = "start_delivery_hour_"+j;
+						html += '<div class="combobox combobox_'+j+'">';
 					}
-					html += '<p class="infos-preferences">Votre boucher est plutôt est du matin</p>';
-				}else if(place_delivery=="grande_banlieue" && (daynum!=6)){
-					$("#selected-hours").removeClass().addClass("far");
-					$('.action button').removeAttr('disabled');
-					html = '<div class="infos-hours"><p>Précisez le créneau horaire de 2 heures souhaitées :</p></div>';
-					html += '<div class="error"></div>';
-					html = combobox_delivery(tabHours, "delivery_hour", html)
-				}else if(place_delivery=="grande_banlieue" && (daynum==6) || place_delivery=="province" || place_delivery=="point_relais"){
-					$("#selected-hours").removeClass().addClass("far far-sat");
-					$('.action button').removeAttr('disabled');
-					html = '<div class="infos-hours"><p>Votre colis vous sera livré entre <span class="hours">8h et 13h</span></p></div>';
+					html += '<label>'+label+'</label>';
+					html = combobox_delivery(tabHours, name, html);
+					if(j==3) html += '<span>(facultatif)</span>';
+					if(j%2!=0) html += '</div>';
 				}
+				html += '<p class="infos-preferences">Votre boucher est plutôt est du matin</p>';
+
+
+
+
+				// if(place_delivery=="grande_banlieue" && (daynum==6) || place_delivery=="province" || place_delivery=="point_relais"){
+				// 	$("#selected-hours").removeClass().addClass("far far-sat");
+				// 	$('.action button').removeAttr('disabled');
+				// 	html = '<div class="infos-hours"><p>Votre colis vous sera livré entre <span class="hours">8h et 13h</span></p></div>';
+				// }
+
+
+				// }else if(place_delivery=="grande_banlieue" && (daynum!=6)){
+				// 	$("#selected-hours").removeClass().addClass("far");
+				// 	$('.action button').removeAttr('disabled');
+				// 	html = '<div class="infos-hours"><p>Précisez le créneau horaire de 2 heures souhaitées :</p></div>';
+				// 	html += '<div class="error"></div>';
+				// 	html = combobox_delivery(tabHours, "delivery_hour", html)
+				// }else if(place_delivery=="grande_banlieue" && (daynum==6) || place_delivery=="province" || place_delivery=="point_relais"){
+				// 	$("#selected-hours").removeClass().addClass("far far-sat");
+				// 	$('.action button').removeAttr('disabled');
+				// 	html = '<div class="infos-hours"><p>Votre colis vous sera livré entre <span class="hours">8h et 13h</span></p></div>';
+				// }
 				$("#selected-hours").html(html);
 				
 				drop_down_list_without_submit($(".delivery"));
 				
 				/* ---------- Vérification du contenu du formulaire ------------*/
 				$(".near .combobox_0 .sbOptions a").click(function(event){
-					var hours_interval = 60;
-					if (place_delivery == "proche_banlieue") hours_interval = 120;
+					// var hours_interval = 60;
+					// if (place_delivery == "proche_banlieue") hours_interval = 120;
 					
 					var values = new  Array();
 					var i = 0;

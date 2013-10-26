@@ -2974,7 +2974,7 @@ ul.idTabs li {
 }
 .content-delivery #selected-date-hours{
 	float: right;
-	margin-right: 5px;
+	margin-left: 15px;
 	width: 342px;
 }
 .content-delivery #selected-date{
@@ -4006,7 +4006,7 @@ ul.idTabs li {
 }
 .content-checkout #selected-date-hours{
 	float: right;
-	margin-right: 5px;
+	margin-left: 15px;
 	width: 342px;
 }
 .content-checkout #selected-date{

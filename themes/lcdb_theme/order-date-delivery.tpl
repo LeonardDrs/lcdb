@@ -1,8 +1,25 @@
 {assign var='current_step' value='shipping'}
 <div id="columns" class="content clearfix">
-<pre>
-	<!-- {$cart|print_r} -->
-</pre>
+{assign var=calendarJson value=$calendar|json_decode:1}
+<script>
+	var place_delivery = "{$name}";
+	var satSelectable = '{$calendar}';
+	var horaire = '{$horaire}';
+	var hours_interval = '{$creneau}';
+	var tranche = '{$tranche}';
+	var hStart = '{$h_start}';
+	var hEnd = '{$h_end}';
+
+	$(function() {
+		$('form').on('submit',function(e) {
+			var horaire = 'Entre '+$('[name=start_delivery_hour_0]',this).val()+' et '+$('[name=end_delivery_hour_1]',this).val();
+			if ($('[name=start_delivery_hour_2]',this).val() != '-' && $('[name=end_delivery_hour_3]',this).val() != '-') {
+				horaire+= ' ou entre '+$('[name=start_delivery_hour_2]',this).val()+' et '+$('[name=end_delivery_hour_3]',this).val();
+			};
+			$('#hour_delivery').val(horaire);
+		});
+	})
+</script>
 	<div class="bloc-checkout">
 			{include file="./order-steps.tpl"}
 		<div class="content-checkout">
@@ -39,13 +56,12 @@
 							<a href="{$link->getCategoryLink(3)|escape:'htmlall':'UTF-8'}" title="Continuer mes achats"><span>&rarr;</span> Continuer mes achats</a>
 							<input type="hidden" name="step" value="3" />
 							<input type="hidden" name="back" value="{$back}" />
-							<button name="submit" name="processCarrier" type="submit" disabled>Valider ma date de livraison</button>
-							<input type="submit" value="Valider ma date de livraison" />
+							<button name="processCarrier" type="submit" disabled>Valider ma date de livraison</button>
+							<input type="hidden" value="" id="hour_delivery" name="hour_delivery">
 						</div>
 					</form>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </div>
