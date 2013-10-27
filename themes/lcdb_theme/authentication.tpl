@@ -424,8 +424,17 @@ $(function(){ldelim}
 									Non
 								</label>
 							{/if}
+
+							<script type="text/javascript">
+							function openCGV() {
+								var url = '{$link->getCMSLink('13', 'Conditions générales de vente')}&content_only=1',
+									top = (screen.height/2)-(500/2),
+									left = (screen.width/2)-(960/2);
+								window.open(url, 'Conditions générales de vente', 'width=960,height=500,scrollbars=yes,top='+top+',left='+left);
+							}
+							</script>
 							
-							<label class="checkbox" for="cgu"><input type="checkbox" id="cgu" name="cgu" />J'accepte les <a href="#" onclick="window.open('http://vps24258.ovh.net/shop/index.php?id_cms=13&controller=cms&content_only=1', 'Conditions générales de vente', 'width=960,height=500,scrollbars=yes');">conditions générales de vente</a> des Colis du Boucher <span class="required">*</span></label>
+							<label class="checkbox" for="cgu"><input type="checkbox" id="cgu" name="cgu" />J'accepte les <a href="javascript:void(0)" onclick="openCGV();">conditions générales de vente</a> des Colis du Boucher <span class="required">*</span></label>
 							
 							<div class="register-button">
 								<input type="hidden" name="email_create" value="1" />
