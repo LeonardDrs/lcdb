@@ -55,7 +55,7 @@ var delete_txt = '{l s='Delete' mod='blockcart' js=1}';
 
 				    		<tr id="cart_block_product_{$product.id_product}_{if $product.id_product_attribute}{$product.id_product_attribute}{else}0{/if}_{if $product.id_address_delivery}{$product.id_address_delivery}{else}0{/if}" class="{if $smarty.foreach.myLoop.first}first_item{elseif $smarty.foreach.myLoop.last}last_item{else}item{/if}">
 				    		    <td>{$product.cart_quantity}</td>
-				    		    <td title="{$product.name|escape:html:'UTF-8'}">{$product.name|truncate:13:'...'|escape:html:'UTF-8'}</td>
+				    		    <td title="{$product.name|escape:html:'UTF-8'}">{$product.name|truncate:13:'...':true|escape:html:'UTF-8'}</td>
 				    		    <td class="price">{if $product.total > 0}
 				    					{if $priceDisplay == $smarty.const.PS_TAX_EXC}{displayWtPrice p="`$product.total`"}{else}{displayWtPrice p="`$product.total_wt`"}{/if}
 				    				{else}

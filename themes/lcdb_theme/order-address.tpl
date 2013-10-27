@@ -451,7 +451,7 @@ function updateAddressSelection(addressType)
 					<div id="colis-cadeau-wrapper">
 						<hr class="dashed" />
 						<label for="colis-cadeau" id="colis-cadeau-toggle" class="checkbox"><input value="1" name="gift" type="checkbox" id="colis-cadeau"/> Je souhaite que ma commande soit envoyée par <a href="#">colis cadeau</a> <span class="price">+ <span id="sup">1,60</span> &euro;</span></label>
-						<textarea name="gift_message" placeholder="Saisissez le message qui sera joint au cadeau" id="gift_message">{$cart->gift_message|escape:'htmlall':'UTF-8'}</textarea>
+						<textarea name="gift_message" placeholder="Saisissez le message qui sera joint au cadeau" id="gift_message" class="hidden">{$cart->gift_message|escape:'htmlall':'UTF-8'}</textarea>
 					</div>
 					<hr class="dashed" />
 					<p id="total-price">Le montant TTC de votre commande est de <span class="price"><span data-price="{convertPrice price=$cart->getOrderTotal(true, $order_total_flag)}" id="final-price">{convertPrice price=$cart->getOrderTotal(true, $order_total_flag)}</span> &euro;</span></p>

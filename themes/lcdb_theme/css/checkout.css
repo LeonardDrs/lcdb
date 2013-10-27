@@ -162,7 +162,7 @@
 
 .ie7 #order .bloc,
 .ie8 #order .bloc{
-	background: url('../img//asset/textures/fond_blanc_ie.png') repeat !important;
+	background: url('../img/asset/textures/fond_blanc_ie.png') repeat !important;
 }
 
 
@@ -193,7 +193,7 @@
   	font-size: 14px;
 }
 #order .bloc.content-register h2{
-	background: url('../img//asset/img_solo/checkout-first-command.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/checkout-first-command.png') no-repeat 0 0;
 	padding-left: 40px;
 	margin-bottom: 70px;
 }
@@ -213,7 +213,7 @@
   	font-size: 14px;
 }
 #order .content-login h2{
-	background: url('../img//asset/img_solo/checkout-login.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/checkout-login.png') no-repeat 0 0;
 	padding-left: 24px;
 }
 #order .content-register .red-button{
@@ -258,7 +258,7 @@
 	padding: 0 0 10px 40px;
 	line-height: 30px;
 	border-bottom: 1px dashed #342110;
-	background: url('../img//asset/img_solo/checkout-first-command.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/checkout-first-command.png') no-repeat 0 0;
 }
 
 #order.ext-checkout .content-register-form h1{
@@ -425,17 +425,17 @@
 }
 
 #order .content-address-invoice h2 { 
-	background: url('../img//asset/img_solo/checkout-invoice.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/checkout-invoice.png') no-repeat 0 0;
 	padding-left: 25px;
 }
 
 #order .content-address-delivery h2 { 
-	background: url('../img//asset/img_solo/checkout-delivery.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/checkout-delivery.png') no-repeat 0 0;
 	padding-left: 28px;
 }
 
 #order .content-delivery-mode h2 { 
-	background: url('../img//asset/img_solo/checkout-delivery-mode.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/checkout-delivery-mode.png') no-repeat 0 0;
 	padding-left: 30px;
 }
 
@@ -565,7 +565,7 @@
 
 #order .content-address-delivery #relays {
     display: none;
-    background: url('../img//asset/img_solo/popin-overlay.png') repeat;
+    background: url('../img/asset/img_solo/popin-overlay.png') repeat;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -582,7 +582,7 @@
     left: 50%;
     top: 50%;
     margin: -233px 0 0 -456px;
-    background: url('../img//asset/textures/fond-papier-clair.jpg') repeat-y 0 0;
+    background: url('../img/asset/textures/fond-papier-clair.jpg') repeat-y 0 0;
     -moz-border-radius: 4px;
          border-radius: 4px;
     padding: 15px;
@@ -608,7 +608,7 @@
     height: 16px;
     top: 6px;
     right: 6px;
-    background: url('../img//asset/img_solo/popin-close.png') no-repeat;
+    background: url('../img/asset/img_solo/popin-close.png') no-repeat;
 }
 
 #order .content-address-delivery #relays #left-side,
@@ -654,7 +654,7 @@
 
 .ie7 #order .content-address-delivery #relays #relay-list,
 .ie8 #order .content-address-delivery #relays #relay-list {
-	background: url('../img//asset/textures/fond-blanc-ie.png') repeat;
+	background: url('../img/asset/textures/fond-blanc-ie.png') repeat;
 }
 
 #order .content-address-delivery #delivery-relay #relay-list li {
@@ -674,7 +674,7 @@
 }
 
 #order .content-address-delivery #delivery-relay #relay-list li span {
-	background-image: url('../img//asset/markers.png');
+	background-image: url('../img/asset/markers.png');
 	position: absolute;
 	top: 0;
 	left: 5px;
@@ -824,7 +824,7 @@
 }
 #breadcrumb-checkout ol li:after{  
 	content:"";
-	background: url('../img//asset/img_solo/triangle-transparent.png') no-repeat 0 0 transparent;
+	background: url('../img/asset/img_solo/triangle-transparent.png') no-repeat 0 0 transparent;
 	width: 14px;
 	height: 39px;
 	display: block;
@@ -838,7 +838,7 @@
 	content: "";
 	position: absolute;
 	bottom:0;  
-	background: url('../img//asset/img_solo/triangle-green.png') no-repeat 0 0px transparent;
+	background: url('../img/asset/img_solo/triangle-green.png') no-repeat 0 0px transparent;
 	left: -14px;
 	width:14px;
 	height:100%;
@@ -851,7 +851,7 @@
 	content: "";
 	position: absolute;
 	bottom:0; 
-	background: url('../img//asset/img_solo/triangle-green-2.png') no-repeat 0 0 transparent;
+	background: url('../img/asset/img_solo/triangle-green-2.png') no-repeat 0 0 transparent;
 	right: -21px;
 	width:21px;
 	height:39px;
@@ -868,7 +868,7 @@
 	font-size: 16px;
 	padding: 2px 10px 10px 31px;
 	border-bottom: 1px dashed #342110;
-	background: url('../img//asset/img_solo/calendar.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/calendar.png') no-repeat 0 0;
 }
 .content-delivery p{
 	font-size: 16px;
@@ -1128,7 +1128,7 @@
 }
 .content-delivery p.infos-preferences{
 	color: #4d9810;
-	background: url('../img//asset/img_solo/smiley.png') no-repeat right center;
+	background: url('../img/asset/img_solo/smiley.png') no-repeat right center;
 	padding: 10px 35px 10px 0px;
 	float: left;
 	margin-top: 15px;
@@ -1155,7 +1155,7 @@
 	color: #ad2a24;
 	font-family:'MyriadWebPro-Italic';
 	font-size: 16px;
-	background: url('../img//asset/img_solo/warning.png') no-repeat 0 center;
+	background: url('../img/asset/img_solo/warning.png') no-repeat 0 center;
 }
 .content-delivery .warning p a{
 	color: #ad2a24;
@@ -1247,7 +1247,7 @@
 	margin-bottom: 30px;
 }
 #order .content-payment .bloc:first-child h2{
-	background: url('../img//asset/img_solo/recapitulatif.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/recapitulatif.png') no-repeat 0 0;
 	padding-left: 34px;
 	margin:10px 10px 0px 10px;
 	border: none;
@@ -1355,10 +1355,10 @@
 	padding-left: 45px;
 }
 #order .content-payment .bloc #recap-basket #basket-content table td.label-rouge{
-	background:url('../img//asset/img_solo/petit_label_rouge.png') no-repeat 5px center;
+	background:url('../img/asset/img_solo/petit_label_rouge.png') no-repeat 5px center;
 }
 #order .content-payment .bloc #recap-basket #basket-content table td.label-bio{
-	background:url('../img//asset/img_solo/petit_label_bio.png') no-repeat 10px center;
+	background:url('../img/asset/img_solo/petit_label_bio.png') no-repeat 10px center;
 }
 #order .content-payment .bloc .scrollbar{
 	height: 215px;
@@ -1385,7 +1385,7 @@
 	padding-left: 20px;
 }
 #order .content-payment .bloc #bloc-reduction h2{
-	background: url('../img//asset/img_solo/reduction.png') no-repeat 7px 3px;
+	background: url('../img/asset/img_solo/reduction.png') no-repeat 7px 3px;
 	padding-left: 24px;
 }
 #order .content-payment .bloc #bloc-reduction #form-reduc input{
@@ -1452,7 +1452,7 @@
 	padding-bottom: 30px;
 }
 #order .content-payment #form-payment .bloc  h2{
-	background: url('../img//asset/img_solo/moyen_paiement.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/moyen_paiement.png') no-repeat 0 0;
 	padding-left: 36px;
 	padding-top: 5px;
 }
@@ -1465,13 +1465,13 @@
 	margin-top: 0px;
 }
 #order .content-payment .bloc #payment-means #credit-card{
-	background: url('../img//asset/img_solo/carte.png') no-repeat 5px 0;
+	background: url('../img/asset/img_solo/carte.png') no-repeat 5px 0;
 }
 #order .content-payment .bloc #payment-means #paypal{
-	background: url('../img//asset/img_solo/paypal.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/paypal.png') no-repeat 0 0;
 }
 #order .content-payment .bloc #payment-means #check-transfert{
-	background: url('../img//asset/img_solo/virement_especes.png') no-repeat 10px 0;
+	background: url('../img/asset/img_solo/virement_especes.png') no-repeat 10px 0;
 }
 #order .content-payment .bloc #payment-means > div p{
 	font-family: 'MyriadWebPro-Italic';
@@ -1571,7 +1571,7 @@
 	font-size: 18px;
 	color: #4d9810;
 	border: none;
-	background:url('../img//asset/img_solo/check.png') no-repeat 0 0;
+	background:url('../img/asset/img_solo/check.png') no-repeat 0 0;
 }
 #order .bloc-checkout #push{
 	float: right;
@@ -1602,7 +1602,7 @@
 	font-family: 'MyriadWebPro-Bold', Arial,sans-serif;
 	border-bottom: 1px dashed #342110;
 	padding: 0px 0px 10px 35px;
-	background: url('../img//asset/img_solo/heart.png') no-repeat 0 0;
+	background: url('../img/asset/img_solo/heart.png') no-repeat 0 0;
 	margin-bottom: 20px;
 }
 #order .bloc-checkout #push p.grip{
