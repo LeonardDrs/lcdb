@@ -400,7 +400,7 @@ $(function(){ldelim}
 								Non
 							</label>
 							<div id="from-ce">
-								<label for="entreprise">De quel entreprise/groupement ? <span class="required">*</span></label>
+								<label for="entreprise">De quel(le) entreprise/groupement ? <span class="required">*</span></label>
 								<select id="entreprise" name="entreprise" disabled>
 									<option>Fondation pour la Nature et l'Homme</option>
 									<option>Fondation pour la Nature et l'Homme</option>
@@ -425,7 +425,7 @@ $(function(){ldelim}
 								</label>
 							{/if}
 							
-							<label class="checkbox" for="cgu"><input type="checkbox" id="cgu" name="cgu" />J'accepte les <a href="#">conditions générales d'utilisation</a> des Colis du Boucher <span class="required">*</span></label>
+							<label class="checkbox" for="cgu"><input type="checkbox" id="cgu" name="cgu" />J'accepte les <a href="#" onclick="window.open('http://vps24258.ovh.net/shop/index.php?id_cms=13&controller=cms&content_only=1', 'Conditions générales de vente', 'width=960,height=500,scrollbars=yes');">conditions générales de vente</a> des Colis du Boucher <span class="required">*</span></label>
 							
 							<div class="register-button">
 								<input type="hidden" name="email_create" value="1" />
