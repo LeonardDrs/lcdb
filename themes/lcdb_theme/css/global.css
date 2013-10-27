@@ -475,7 +475,6 @@ input {
 input:focus {
 	border: 1px solid #ba884f;
 	padding: 4px 1px 4px 5px;
-	font-size: 13px;
 }
 
 /* table *************************************************************************************** */
