@@ -19,15 +19,6 @@
 			{if $orders && count($orders) && "test" == "test"}
 				<hr />
 
-				{foreach from=$orders item=order}
-					{if (isset($order.id_order_state) && ($order.id_order_state == 5)) && !isset($last_delivered_order) }
-						{$last_delivered_order = $order}
-					{/if}
-					{if (!isset($order.id_order_state) || ($order.id_order_state != 5)) && !isset($last_order_done) }
-						{$last_order_done = $order}
-					{/if}
-				{/foreach}
-
 				<div class="clearfix" id="mes-commandes">
 					{if isset($last_delivered_order)}
 						<div class="left-side">
@@ -37,6 +28,7 @@
 							<p>Commande réalisée le : <span class="bold">{dateFormat date=$last_delivered_order.date_add full=0}</span></p>
 							<p>Montant total : <span class="bold">{displayPrice price=$last_delivered_order.total_paid currency=$last_delivered_order.id_currency no_utf8=false convert=false}</span></p>
 							<p>Mode de règlement : <span class="bold">{$last_delivered_order.payment|escape:'htmlall':'UTF-8'}</span></p>
+							{$last_delivered_order|@var_dump}uiuo
 							<p>État du paiement : <span class="bold">
 								{if isset($last_delivered_order.order_state)}
 									{$last_delivered_order.order_state|escape:'htmlall':'UTF-8'}
@@ -47,11 +39,31 @@
 							<div class="clearfix commande-adresse">
 								<p>Adresse de livraison :</p>
 								<ul>
-									<li>Jean-Baptiste Poquelin</li>
-									<li>3 rue du chène</li>
-									<li>Bat. A, appt 34, code : 7899</li>
-									<li>69000 Lyon</li>
-									<li>0148354756</li>
+									{foreach from=$dlv_adr_fields name=dlv_loop item=field_item}
+									{if $field_item eq "company" && isset($address_delivery->company)}
+										<li class="address_company">
+											{$address_delivery->company|escape:'htmlall':'UTF-8'}
+										</li>
+									{elseif $field_item eq "address2" && $address_delivery->address2}
+										<li class="address_address2">
+											{$address_delivery->address2|escape:'htmlall':'UTF-8'}
+										</li>
+									{elseif $field_item eq "phone_mobile" && $address_delivery->phone_mobile}
+										<li class="address_phone_mobile">
+											{$address_delivery->phone_mobile|escape:'htmlall':'UTF-8'}
+										</li>
+									{else}
+										{assign var=address_words value=" "|explode:$field_item} 
+										<li>
+											{foreach from=$address_words item=word_item name="word_loop"}
+												{if !$smarty.foreach.word_loop.first} {/if}
+												<span class="address_{$word_item|replace:',':''}">
+														{$deliveryAddressFormatedValues[$word_item|replace:',':'']|escape:'htmlall':'UTF-8'}
+												</span>
+											{/foreach}
+										</li>
+									{/if}
+									{/foreach}
 								</ul>
 							</div>
 							<hr />
@@ -79,11 +91,31 @@
 							<div class="clearfix commande-adresse">
 								<p>Adresse de livraison :</p>
 								<ul>
-									<li>Jean-Baptiste Poquelin</li>
-									<li>3 rue du chène</li>
-									<li>Bat. A, appt 34, code : 7899</li>
-									<li>69000 Lyon</li>
-									<li>0148354756</li>
+								{foreach from=$dlv_adr_fields name=dlv_loop item=field_item}
+								{if $field_item eq "company" && isset($address_delivery->company)}
+									<li class="address_company">
+										{$address_delivery->company|escape:'htmlall':'UTF-8'}
+									</li>
+								{elseif $field_item eq "address2" && $address_delivery->address2}
+									<li class="address_address2">
+										{$address_delivery->address2|escape:'htmlall':'UTF-8'}
+									</li>
+								{elseif $field_item eq "phone_mobile" && $address_delivery->phone_mobile}
+									<li class="address_phone_mobile">
+										{$address_delivery->phone_mobile|escape:'htmlall':'UTF-8'}
+									</li>
+								{else}
+									{assign var=address_words value=" "|explode:$field_item} 
+									<li>
+										{foreach from=$address_words item=word_item name="word_loop"}
+											{if !$smarty.foreach.word_loop.first} {/if}
+											<span class="address_{$word_item|replace:',':''}">
+													{$deliveryAddressFormatedValues[$word_item|replace:',':'']|escape:'htmlall':'UTF-8'}
+											</span>
+										{/foreach}
+									</li>
+								{/if}
+								{/foreach}
 								</ul>
 							</div>
 							<hr />
