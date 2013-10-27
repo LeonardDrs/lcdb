@@ -133,6 +133,12 @@
     margin-left: 10px;
 }
 
+#abo #step1 .right-side p .euro {
+    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+    color: #4d9810;
+    font-size: 30px;
+}
+
 #abo #step2 .left-side {
     min-height: 116px;
     margin-bottom: 20px;

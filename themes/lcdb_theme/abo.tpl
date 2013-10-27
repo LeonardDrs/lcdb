@@ -41,7 +41,7 @@
 									<option value="18">18</option>
 								</select>
 							</div>
-							<p><span class="bold">Prix unitaire*** TTC</span> de votre colis en abonnement : <span class="price">35&euro;</span></p>
+							<p><span class="bold">Prix unitaire*** TTC</span> de votre colis en abonnement : <span class="price">35</span><span class="euro">&euro;</span></p>
 						</div>
 						<ul class="notes">
 							<li>* Colis composé uniquement de viandes à griller ou à rôtir.</li>
@@ -54,28 +54,32 @@
 						<h2 class="green-title"><span class="img-step img-step-2"></span>Adresse</h2>
 						<div class="left-side">
 							<ul id="saved-adresse">
-								<li>Pierre DURAN</li>
-								<li>3, rue du chêne</li>
-								<li>BAT A, appt 23, code : 4738</li>
-								<li>75003 Paris</li>
-								<li>0616186327</li>
+								{foreach from=$dlv_adr_fields name=dlv_loop item=field_item}
+								{if $field_item eq "company" && isset($address_delivery->company)}
+									<li class="address_company">
+										{$address_delivery->company|escape:'htmlall':'UTF-8'}
+									</li>
+								{elseif $field_item eq "address2" && $address_delivery->address2}
+									<li class="address_address2">
+										{$address_delivery->address2|escape:'htmlall':'UTF-8'}
+									</li>
+								{elseif $field_item eq "phone_mobile" && $address_delivery->phone_mobile}
+									<li class="address_phone_mobile">
+										{$address_delivery->phone_mobile|escape:'htmlall':'UTF-8'}
+									</li>
+								{else}
+									{assign var=address_words value=" "|explode:$field_item} 
+									<li>
+										{foreach from=$address_words item=word_item name="word_loop"}
+											{if !$smarty.foreach.word_loop.first} {/if}
+											<span class="address_{$word_item|replace:',':''}">
+													{$deliveryAddressFormatedValues[$word_item|replace:',':'']|escape:'htmlall':'UTF-8'}
+											</span>
+										{/foreach}
+									</li>
+								{/if}
+								{/foreach}
 							</ul>
-							<div id="form-adresse" class="hidden">
-								<label for="adresse-1">Adresse</label>
-								<input type="text" id="adresse-1" value="Pierre DURAN"/>
-								<label for="adresse-2">Adresse compl&eacute;mentaire</label>
-								<input type="text" id="adresse-2" value="3, rue du chêne"/>
-								<label for="code-postal">Code Postal</label>
-								<input type="text" id="code-postal" value="BAT A, appt 23, code : 4738"/>
-								<label for="ville">Ville</label>
-								<input type="text" id="ville" value="75003 Paris"/>
-								<label for="telephone">T&eacute;l&eacute;phone</label>
-								<input type="text" id="telephone" value="0616186327"/>
-								<div class="clearfix">
-									<button type="submit" id="adress-submit" class="red-button gradient">ENREGISTRER</button>
-									<a href="#" title="annuler" id="cancel-address" class="hidden">Annuler</a>
-								</div>
-							</div>
 							<a href="#" title="modifier votre adresse de livraison" id="modify-address">modifier votre adresse de livraison</a>
 						</div>
 						<div class="right-side">
