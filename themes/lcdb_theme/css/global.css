@@ -4673,3 +4673,9 @@ div.pager .pager-last{
 #search .list-product {
 	padding-top: 20px;
 }
+
+.basket-links a:hover,
+.basket-links a {
+	font-size: 10px;
+	padding: 6px 21px;
+}

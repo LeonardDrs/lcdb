@@ -77,7 +77,7 @@ var delete_txt = '{l s='Delete' mod='blockcart' js=1}';
 
 				<div id="cart-buttons">
 					{if $order_process == 'order'}<div class="empty-link"><a href="{$link->getPageLink("$order_process", true)}" title="{l s='View my shopping cart' mod='blockcart'}" class="empty-basket">Voir mon panier</a></div>{/if}
-					<div class="basket-links"><a href="{$link->getPageLink("$order_process", true)}" title="{l s='Check out' mod='blockcart'}" class="place-order-button red-button gradient">Passer ma commande</a></div>
+					<div class="basket-links"><a href="{$link->getPageLink("$order_process", true)}" title="{l s='Check out' mod='blockcart'}" class="green-button gradient">Passer ma commande</a></div>
 				</div>
 			</div>
 		</div>
