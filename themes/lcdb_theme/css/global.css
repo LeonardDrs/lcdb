@@ -2366,7 +2366,9 @@ nav.secondary-menu{
 .submenu .img-autres{
 	background: url('../img/asset/img_solo/autres.png') no-repeat;
 }
-
+.submenu .img-autres-volailles{
+	background: url('../img/asset/img_solo/autres-volailles.png') no-repeat;
+}
 /* ************************************************************************************************
 		PRODUCT PAGE - RECIPE PAGE - Element en commun
 ************************************************************************************************ */
@@ -2386,6 +2388,7 @@ nav.secondary-menu{
 #center_column span.big_image#big_epicerie 	{ background: url('../img/asset/img_solo/big_epicerie.png') no-repeat; }
 #center_column span.big_image#big_sauces 	{ background: url('../img/asset/img_solo/big_sauces.png') no-repeat; }
 #center_column span.big_image#big_autres 	{ background: url('../img/asset/img_solo/big_autres.png') no-repeat; }
+#center_column span.big_image#big_autres-volailles 	{ background: url('../img/asset/img_solo/big_autres-volailles.png') no-repeat; }
 /* ************************************************************************************************
 		PRODUCT PAGE
 ************************************************************************************************ */
