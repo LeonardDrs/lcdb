@@ -4669,3 +4669,7 @@ div.pager .pager-last{
 	font-size: 12px;
 	padding: 4px 15px;
 }
+
+#search .list-product {
+	padding-top: 20px;
+}

@@ -10,7 +10,7 @@
 				</h1>
 				{include file="$tpl_dir./errors.tpl"}
 			</div>
-			{include file="./product-sort.tpl"}
+			<!-- {include file="./product-sort.tpl"} -->
 			<div class="list-product">
 				<div class="category">
 
