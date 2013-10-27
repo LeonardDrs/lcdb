@@ -333,38 +333,52 @@ $(function(){ldelim}
 							<label for="prenom">Prénom <span class="required">*</span></label>
 							<input type="text" id="customer_firstname" name="customer_firstname" value="{if isset($smarty.post.customer_firstname)}{$smarty.post.customer_firstname}{/if}" />
 							<label for="prenom">Date de naissance <span class="required">*</span></label>
-							<select id="days" name="days">
-								<option value="">-</option>
-								{foreach from=$days item=day}
-									<option value="{$day}" {if ($sl_day == $day)} selected="selected"{/if}>{$day}&nbsp;&nbsp;</option>
-								{/foreach}
-							</select>
-							{*
-								{l s='January'}
-								{l s='February'}
-								{l s='March'}
-								{l s='April'}
-								{l s='May'}
-								{l s='June'}
-								{l s='July'}
-								{l s='August'}
-								{l s='September'}
-								{l s='October'}
-								{l s='November'}
-								{l s='December'}
-							*}
-							<select id="months" name="months">
-								<option value="">-</option>
-								{foreach from=$months key=k item=month}
-									<option value="{$k}" {if ($sl_month == $k)} selected="selected"{/if}>{l s=$month}&nbsp;</option>
-								{/foreach}
-							</select>
-							<select id="years" name="years">
-								<option value="">-</option>
-								{foreach from=$years item=year}
-									<option value="{$year}" {if ($sl_year == $year)} selected="selected"{/if}>{$year}&nbsp;&nbsp;</option>
-								{/foreach}
-							</select>
+							<div class="clearfix">
+								<div class="birthdate" id="days">
+									<select name="days">
+										<option value="">-</option>
+										{foreach from=$days item=day}
+											<option value="{$day}" {if ($sl_day == $day)} selected="selected"{/if}>{$day}&nbsp;&nbsp;</option>
+										{/foreach}
+									</select>
+								</div>
+								<div class="birthdate" id="months">
+									{*
+										{l s='January'}
+										{l s='February'}
+										{l s='March'}
+										{l s='April'}
+										{l s='May'}
+										{l s='June'}
+										{l s='July'}
+										{l s='August'}
+										{l s='September'}
+										{l s='October'}
+										{l s='November'}
+										{l s='December'}
+									*}
+									<select name="months">
+										<option value="">-</option>
+										{foreach from=$months key=k item=month}
+											<option value="{$k}" {if ($sl_month == $k)} selected="selected"{/if}>{l s=$month}&nbsp;</option>
+										{/foreach}
+									</select>
+								</div>
+								<div class="birthdate" id="years">
+									<select name="years">
+										<option value="">-</option>
+										{foreach from=$years item=year}
+											<option value="{$year}" {if ($sl_year == $year)} selected="selected"{/if}>{$year}&nbsp;&nbsp;</option>
+										{/foreach}
+									</select>
+								</div>
+
+								<script type="text/javascript">
+									$(document).ready(function(){
+										$('.birthdate select').selectbox();
+									});
+								</script>
+							</div>
 							<label for="adresse">Adresse <span class="required">*</span></label>
 							<input type="text" id="adresse" name="adresse" value="{if isset($smarty.post.adresse)}{$smarty.post.adresse}{/if}" />
 							<label for="adresseplus">Complément d'adresse</label>

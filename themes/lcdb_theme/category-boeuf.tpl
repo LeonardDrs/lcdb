@@ -23,8 +23,8 @@
 					{foreach $subcategories as $subcat}
 						<div class="grill category">
 							<div class="category-title">
-								<span id="big_stove"></span>
-								<h2>Les viande de Boeuf {$subcat.name}</h2>
+								<span id="{$subcat.name|lower|substr:3}"></span>
+								<h2>Les viandes de Boeuf {$subcat.name}</h2>
 							</div>
 							{if $subcat.products}
 								{include file="./product-list.tpl" products=$subcat.products}
