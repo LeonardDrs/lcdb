@@ -3,7 +3,11 @@
 				{if $category->level_depth == 3}
 					{assign var=logo value="big_{$category->link_rewrite}"}
 				{else if $category->level_depth == 4}
-					{assign var=logo value="big_cow"}
+					{if $category->id_category == 8}
+						{assign var=logo value="big_cow"}
+					{else}
+						{assign var=logo value="big_autres-volailles"}
+					{/if}
 				{/if}
 				<span class="big_image" id="{$logo}"></span>
 				<h1>

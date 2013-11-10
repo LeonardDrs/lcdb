@@ -111,17 +111,17 @@
 	display: block;
 	margin: auto;
 }
-.list-product .category-title #big_stove{
+.list-product .category-title #griller{
 	background: url('../img/asset/img_solo/gros_a_griller.png') no-repeat 0 0;
 	width: 75px;
 	height: 39px;
 }
-.list-product .category-title #pot{
-	background: url('../img/asset/img_solo/a_mijoter.png') no-repeat 0 0;
-	width: 62px;
-	height: 43px;
+.list-product .category-title #mijoter{
+	background: url('../img/asset/img_solo/gros_mijoter.png') no-repeat 0 0;
+	width: 90px;
+	height: 62px;
 }
-.list-product .category-title #oven{
+.list-product .category-title #rotir{
 	background: url('../img/asset/img_solo/four.png') no-repeat 0 0;
 	width: 62px;
 	height: 48px;

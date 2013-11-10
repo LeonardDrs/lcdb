@@ -93,18 +93,18 @@ $(document).ready(function(){
 
     $('#colis-cadeau').change(function(){
         //checkInformations();
-        var textarea = $('#colis-cadeau-message'),
+        var $textarea = $('#gift_message'),
             total    = parseFloat($('#final-price').text().replace(',','.')),
             sup      = parseFloat($('#sup').text().replace(',','.'));
         if ($('#colis-cadeau').is(':checked')) {
-            $('#colis-cadeau-message').removeAttr('disabled');
-            $('#colis-cadeau-message').fadeIn('fast');
+            $textarea.removeAttr('disabled');
+            $textarea.fadeIn('fast');
             var price = total+sup;
             $('#final-price').text(price.toFixed(2).replace('.',','));
             $('#final-price').data('price', price.toFixed(2).replace('.',','));
         } else {
-            $('#colis-cadeau-message').fadeOut('fast', function(){
-                $('#colis-cadeau-message').attr('disabled', 'disabled');
+            $textarea.fadeOut('fast', function(){
+                $textarea.attr('disabled', 'disabled');
             });
             var price = total-sup;
             $('#final-price').text(price.toFixed(2).replace('.',','));
@@ -178,16 +178,16 @@ $(document).ready(function(){
         // var postalCode = $('#address_delivery .address_postcode').text();
             
         // $('#colis-cadeau-wrapper').hide();
-        // $('#colis-cadeau-message').attr('disabled', 'disabled');
+        // $('#gift_message').attr('disabled', 'disabled');
 
 
         // if (postalCode.substring(0,2) === "75") {
         //     //Paris
         //     $('#colis-cadeau-wrapper').show();
-        //     $('#colis-cadeau-message').attr('disabled', '');
+        //     $('#gift_message').attr('disabled', '');
         // } else {
         //     $('#colis-cadeau-wrapper').hide();
-        //     $('#colis-cadeau-message').attr('disabled', 'disabled');
+        //     $('#gift_message').attr('disabled', 'disabled');
         // }
         //     priceLogic(40);
         //     setDeliveryCost('home');
@@ -196,7 +196,7 @@ $(document).ready(function(){
         //     $('#delivery-relay-li').show();
         //     $('#delivery-frozen-li').hide();
         //     $('#colis-cadeau-wrapper').show();
-        //     $('#colis-cadeau-message').removeAttr('disabled');
+        //     $('#gift_message').removeAttr('disabled');
         // } else if ($.inArray(postalCode.substring(0,2), zipCodes.proche) != -1 || $.inArray(postalCode, zipCodes.proche) != -1) {
         //     //Proche banlieue
         //     priceLogic(40); // à changer

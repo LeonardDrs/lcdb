@@ -2366,7 +2366,9 @@ nav.secondary-menu{
 .submenu .img-autres{
 	background: url('../img/asset/img_solo/autres.png') no-repeat;
 }
-
+.submenu .img-autres-volailles{
+	background: url('../img/asset/img_solo/autres-volailles.png') no-repeat;
+}
 /* ************************************************************************************************
 		PRODUCT PAGE - RECIPE PAGE - Element en commun
 ************************************************************************************************ */
@@ -2386,6 +2388,7 @@ nav.secondary-menu{
 #center_column span.big_image#big_epicerie 	{ background: url('../img/asset/img_solo/big_epicerie.png') no-repeat; }
 #center_column span.big_image#big_sauces 	{ background: url('../img/asset/img_solo/big_sauces.png') no-repeat; }
 #center_column span.big_image#big_autres 	{ background: url('../img/asset/img_solo/big_autres.png') no-repeat; }
+#center_column span.big_image#big_autres-volailles 	{ background: url('../img/asset/img_solo/big_autres-volailles.png') no-repeat; }
 /* ************************************************************************************************
 		PRODUCT PAGE
 ************************************************************************************************ */
@@ -2631,212 +2634,6 @@ ul.idTabs li {
 /* ************************************************************************************************
 		STYLE DU CHECKOUT - 2) ADRESSE DE LIVRAISON
 ************************************************************************************************ */
-
-#order #content-wrapper {
-	margin-bottom: 20px;
-}
-
-#order .content-address-invoice,
-#order .content-address-delivery {
-	font-size: 14px;
-	width: 192px;
-	float: left;
-	margin-right: 14px;
-	padding: 10px;
-}
-
-#order .content-delivery-mode {
-	font-size: 14px;
-	width: 441px;
-	float: left;
-	padding: 10px;
-	position: relative;
-	margin-bottom: 40px;
-	-webkit-transition: all 5ms ease !important;
-	   -moz-transition: all 5ms ease !important;
-	    -ms-transition: all 5ms ease !important;
-	     -o-transition: all 5ms ease !important;
-	        transition: all 5ms ease !important;
-}
-
-#order .content-address-invoice h2,
-#order .content-address-delivery h2,
-#order .content-delivery-mode h2 {
-	margin-bottom: 10px;
-}
-
-#order .content-address-invoice h2 { 
-	background: url('../img/asset/img_solo/checkout-invoice.png') no-repeat 0 0;
-	padding-left: 25px;
-}
-
-#order .content-address-delivery h2 { 
-	background: url('../img/asset/img_solo/checkout-delivery.png') no-repeat 0 0;
-	padding-left: 28px;
-}
-
-#order .content-delivery-mode h2 { 
-	background: url('../img/asset/img_solo/checkout-delivery-mode.png') no-repeat 0 0;
-	padding-left: 30px;
-}
-
-#order .content-address-invoice label,
-#order .content-address-delivery label,
-#order .content-address-invoice input,
-#order .content-address-delivery input {
-	display: block;
-}
-
-#order .content-address-invoice input,
-#order .content-address-delivery input {
-	margin: 2px 0 10px 0;
-	width: 170px;
-}
-
-#order .content-address-invoice #saved-address-invoice,
-#order .content-address-delivery #saved-address-delivery,
-#order .content-address-invoice #form-address-invoice,
-#order .content-address-delivery #form-address-delivery,
-#order .content-address-delivery #form-add-address-delivery {
-	margin: 15px 0;
-}
-
-#order .content-address-delivery .sbHolder,
-#order .content-address-invoice .sbHolder {
-    position: relative;
-    width: 155px;
-}
-
-#order .content-address-delivery .sbOptions,
-#order .content-address-invoice .sbOptions { width: 155px; }
-#order .content-address-delivery .sbSelector,
-#order .content-address-invoice .sbSelector { width: 125px; }
-
-#order #cancel-address-invoice,
-#order #cancel-address-delivery {
-	float: left;
-	margin-top: 7px;
-}
-
-#order #add-address-submit-delivery,
-#order #address-submit-delivery,
-#order #adress-submit-invoice {
-	float: right;
-	width: 110px;
-}
-
-#order .content-delivery-mode ul li p {
-	margin-bottom: 6px;
-}
-
-#order .content-delivery-mode .description {
-	margin-left: 25px;
-	padding-right: 10px;
-	text-align: justify;
-	font: 13px 'MyriadWebPro-Italic', Arial, sans-serif;
-	margin-bottom: 10px;
-}
-
-#order .content-delivery-mode #colis-cadeau-message {
-	width: 412px;
-	max-width: 412px;
-	height: 76px;
-	margin: 12px;
-}
-
-#order .content-delivery-mode #colis-cadeau-toggle { padding-left: 4px; }
-.ie9 #order .content-delivery-mode #colis-cadeau-toggle { font-size: 13px; }
-.ie9 .gradient { filter: none !important; }
-
-#order .content-delivery-mode #total-price {
-	text-align: center;
-	margin: 18px 0;
-}
-
-#order .content-delivery-mode .price {
-	color: #4d9810;
-	font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
-}
-
-#order .content-delivery-mode #submit-address {
-	padding-left: 50px;
-	padding-right: 50px;
-	position: absolute;
-	bottom: -50px;
-	right: 0;
-}
-
-#order .content-address-delivery #relays {
-    display: none;
-    background: url('../img/asset/img_solo/popin-overlay.png') repeat;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1337;
-}
-
-#order .content-address-delivery #relays .popin {
-    position: fixed;
-    width: 882px;
-    height: 436px;
-    left: 50%;
-    top: 50%;
-    margin: -233px 0 0 -456px;
-    background: url('../img/asset//textures/fond-papier-clair.jpg') repeat-y 0 0;
-    -moz-border-radius: 4px;
-         border-radius: 4px;
-    padding: 15px;
-    border: 1px solid #bead9f;
-}
-
-#order .content-address-delivery #relays .popin .popin-close {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 6px;
-    right: 6px;
-    background: url('../img/asset/img_solo/popin-close.png') no-repeat;
-}
-
-#order .content-address-delivery #relays #map {
-	width: 617px;
-	height: 370px;
-	border: 9px solid #fdfbf9;
-}
-
-#order .content-address-delivery #delivery-relay #relay-list li {
-    background: url('../img/asset//markers.png') no-repeat top left;
-}
-
-
-.markerA { background-position: 0 0; width: 20px; height: 34px; } 
-.markerB { background-position: 0 -35px; width: 20px; height: 34px; } 
-.markerC { background-position: 0 -70px; width: 20px; height: 34px; } 
-.markerD { background-position: 0 -105px; width: 20px; height: 34px; } 
-.markerE { background-position: 0 -140px; width: 20px; height: 34px; } 
-.markerF { background-position: 0 -175px; width: 20px; height: 34px; } 
-.markerG { background-position: 0 -210px; width: 20px; height: 34px; } 
-.markerH { background-position: 0 -245px; width: 20px; height: 34px; } 
-.markerI { background-position: 0 -280px; width: 20px; height: 34px; } 
-.markerJ { background-position: 0 -315px; width: 20px; height: 34px; } 
-.markerK { background-position: 0 -350px; width: 20px; height: 34px; } 
-.markerL { background-position: 0 -385px; width: 20px; height: 34px; } 
-.markerM { background-position: 0 -420px; width: 20px; height: 34px; } 
-.markerN { background-position: 0 -455px; width: 20px; height: 34px; } 
-.markerO { background-position: 0 -490px; width: 20px; height: 34px; } 
-.markerP { background-position: 0 -525px; width: 20px; height: 34px; } 
-.markerQ { background-position: 0 -560px; width: 20px; height: 34px; } 
-.markerR { background-position: 0 -595px; width: 20px; height: 34px; } 
-.markerS { background-position: 0 -630px; width: 20px; height: 34px; } 
-.markerT { background-position: 0 -665px; width: 20px; height: 34px; } 
-.markerU { background-position: 0 -700px; width: 20px; height: 34px; } 
-.markerV { background-position: 0 -735px; width: 20px; height: 34px; } 
-.markerW { background-position: 0 -770px; width: 20px; height: 34px; } 
-.markerX { background-position: 0 -805px; width: 20px; height: 34px; } 
-.markerY { background-position: 0 -840px; width: 20px; height: 34px; } 
-.markerZ { background-position: 0 -875px; width: 20px; height: 34px; }
 
 /* ************************************************************************************************
 		STYLE DU CHECKOUT - 3) DATE DE LIVRAISON
