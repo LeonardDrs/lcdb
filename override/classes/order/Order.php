@@ -55,7 +55,7 @@ class Order extends OrderCore
 			'reference' => 					array('type' => self::TYPE_STRING),
 			'date_add' => 					array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
 			'date_upd' => 					array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
-			'date_delivery' => 				array('type' => self::TYPE_STRING),
+			'date_delivery' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
 			'hour_delivery' => 				array('type' => self::TYPE_STRING),
 		),
 	);

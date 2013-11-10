@@ -17,6 +17,8 @@
 				horaire+= ' ou entre '+$('[name=start_delivery_hour_2]',this).val()+' et '+$('[name=end_delivery_hour_3]',this).val();
 			};
 			$('#hour_delivery').val(horaire);
+			var date = $('input#mydate').data('glDatePicker').options.selectedDate;
+			$('#date_delivery').val(date);
 		});
 	})
 </script>
@@ -58,6 +60,7 @@
 							<input type="hidden" name="back" value="{$back}" />
 							<button name="processCarrier" type="submit" disabled>Valider ma date de livraison</button>
 							<input type="hidden" value="" id="hour_delivery" name="hour_delivery">
+							<input type="hidden" value="" id="date_delivery" name="date_delivery">
 						</div>
 					</form>
 				</div>

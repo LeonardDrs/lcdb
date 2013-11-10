@@ -55,8 +55,8 @@ var txtProducts = "{l s='products' js=1}";
 				</div>
 				<div id="delivery-date">
 					<h3>Date de livraison</h3>
-					<a href="#" title="modifier">modifier</a>
-					<p>{$cart->date_delivery}</p>
+					<a href="{$link->getPageLink('order', true, NULL, "{$smarty.capture.url_back}&step=2&multi-shipping={$multi_shipping}")}" title="modifier">modifier</a>
+					<p>{$cart->date_delivery|date_format:"%A %e %B %Y"}</p>
 					<p>{$cart->hour_delivery}</p>
 				</div>
 				<div id="mode-delivery">
@@ -65,7 +65,7 @@ var txtProducts = "{l s='products' js=1}";
 				</div>
 				<div id="bloc-basket">
 					<h3>Panier</h3>
-					<a href="#" title="modifier">modifier</a>
+					<a href="{$link->getPageLink('order', true, NULL, "{$smarty.capture.url_back}&multi-shipping={$multi_shipping}")}" title="modifier">modifier</a>
 					<div id="recap-basket">
 						<div id="basket-head">
 							<div><p>Prix unitaire</p></div>
