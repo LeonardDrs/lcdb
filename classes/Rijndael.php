@@ -48,6 +48,7 @@ class RijndaelCore
         if ($length >= 1048576)
 			return false;
 		return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->_key, $plaintext, MCRYPT_MODE_ECB, $this->_iv)).sprintf('%06d', $length);
+		return false;
 	}
 
 	public function decrypt($ciphertext)

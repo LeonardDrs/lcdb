@@ -136,37 +136,37 @@ class Importlcdb extends Module
 		
 		foreach ($content as $row){
 			
-			echo "id_produit ".$row->idproduit;
-			echo "<br/>";
-			echo "type ".$row->type;
-			echo "<br/>";
-			echo "libellé ".$row->libelle;
-			echo "<br/>";
-			echo "conditionnement ".$row->conditionnement;
-			echo "<br/>";
-			echo "personnes ".$row->pers;
-			echo "<br/>";
-			echo "frais ".$row->frais;
-			echo "<br/>";
-			echo "bio ? ".$row->bio;
-			echo "<br/>";
-			echo "label rouge ? ".$row->labelrouge;
-			echo "<br/>";
-			echo "prix ".$row->prix;
-			echo "<br/>";
-			echo "tva".$row->tva;
-			echo "<br/>";
-			echo "poids ".$row->poids;
-			echo "<br/>";
-			echo "prix kg ".$row->prixkg;
-			echo "<br/>";
-			echo "etat ".$row->etat;
-			echo "<br/>";
-			echo "cible ".$row->cible;
-			echo "<br/>";
-			echo "date limite ".$row->datelimite;
-			echo "<br/>";
-			echo "<br/>";
+			// echo "id_produit ".$row->idproduit;
+			// echo "<br/>";
+			// echo "type ".$row->type;
+			// echo "<br/>";
+			// echo "libellé ".$row->libelle;
+			// echo "<br/>";
+			// echo "conditionnement ".$row->conditionnement;
+			// echo "<br/>";
+			// echo "personnes ".$row->pers;
+			// echo "<br/>";
+			// echo "frais ".$row->frais;
+			// echo "<br/>";
+			// echo "bio ? ".$row->bio;
+			// echo "<br/>";
+			// echo "label rouge ? ".$row->labelrouge;
+			// echo "<br/>";
+			// echo "prix ".$row->prix;
+			// echo "<br/>";
+			// echo "tva".$row->tva;
+			// echo "<br/>";
+			// echo "poids ".$row->poids;
+			// echo "<br/>";
+			// echo "prix kg ".$row->prixkg;
+			// echo "<br/>";
+			// echo "etat ".$row->etat;
+			// echo "<br/>";
+			// echo "cible ".$row->cible;
+			// echo "<br/>";
+			// echo "date limite ".$row->datelimite;
+			// echo "<br/>";
+			// echo "<br/>";
 
 			if($row->libelle == null){
 				$row->libelle = "Nom manquant !";
@@ -298,23 +298,12 @@ class Importlcdb extends Module
 	
 	public function updateCustomers($content)
 	{
-		
+
+
 		foreach ($content as $row){
 			
-			if($row->email == null){
-				echo "Erreur : User vide !";
-				echo "<br/>";
-			}else{
-				$sql = 'SELECT c.id_customer
-						FROM '._DB_PREFIX_.'customer c
-						WHERE c.id_lcdb_import = '.(int)$row->idclient;
-				
-				$result = Db::getInstance()->getValue($sql);
-				
-				if($result !=null){
-					echo 'l utilisateur existe <br/>';
-				}else{
-					
+					echo "New client :";
+					echo "<br/>";
 					echo "id ".$row->idclient;
 					echo "<br/>";
 					echo "civilite ".$row->civil;
@@ -383,56 +372,202 @@ class Importlcdb extends Module
 					echo "<br/>";
 					echo "extract ".$row->extract;
 					echo "<br/>";
-					
-					// ajouter un thread 
-					// ajouter un message 
-					// associer au bon client
-					// l'adresser au bon destinataire 
-					
-					
-					
-					
-					
-					
-					
-					// $guestbook = new Guestbook();
-					// 					$guestbook->id_lcdb_import = $row->idcomment;
-					// 					$guestbook->firstname = "Utilisateur";
-					// 					$guestbook->lastname = "inconnu";
-					// 					$guestbook->message = Importlcdb::createMultiLangField($row->comment);
-					// 					$guestbook->active = 1;
-					// 					
-					// 					$res = false;
-					// 					$field_error = $guestbook->validateFields(UNFRIENDLY_ERROR, true);
-					// 					$lang_field_error = $guestbook->validateFieldsLang(UNFRIENDLY_ERROR, true);
-					// 					
-					// 					if ($field_error === true && $lang_field_error === true)
-					// 					{
-					// 					
-					// 						if (!$res)
-					// 						{
-					// 							$res = $guestbook->add();
-					// 						}
-					// 					}else{
-					// 						echo "<br/>error<br/><br/>";
-					// 					}
-					// 					
-					// 					if (!$res)
-					// 					{
-					// 						$this->errors[] = sprintf(
-					// 							Tools::displayError('post cannot be saved')
-					// 						);
-					// 						$this->errors[] = ($field_error !== true ? $field_error : '').($lang_field_error !== true ? $lang_field_error : '').
-					// 							Db::getInstance()->getMsgError();
-					// 						
-					// 					}else{
-					// 						echo "Commentaire enregistré <br/><br/>";
-					// 					}
-					// 					
-				}
+					echo "<br/>";
+					echo "<br/>";
+
+					// NEED 
+					// id -> (stocké dans id_lcdb)
+					// gender -> OK (traitement ?)
+					// firstname -> OK
+					// lastname -> OK
+					// address -> (traitement)
+					// cp -> (traitement)
+					// ville -> (traitement)
+					// acces -> (traitement)
+					// tel1 -> (traitement)
+					// tel2 -> (traitement)
+					// email -> OK 
+					// password -> (cryptage)
+					// actif -> OK
+					// inscription -> ?????
+					// vic -> ???
+					// statut -> ?????
+					// abonnement -> OK
+					// pro -> (traitement)
+					// last -> "dernier visite" -> OK
+					// ce -> (traitement)
+					// kelce	??????
+					// parrainde -> ?????
+					// filleuilde -> ?????
+					// status -> ??????
+					// prov -> ???????
+					// detail prov -> ??????
+					// detailsprov1 -> ??????
+					// promo parrain -> ?????
+					// detail prov 2 -> ??????
+					// prime parrain -> ?????
+					// prime vic -> ?????
+					// avoir -> ?????
+					// optin -> ?????
+					// note -> OK
+					// extract -> ??????
+
+
+
+					// HAVE 
+					// id
+					// shop group : 1
+					// shop : 1
+					// gender 
+					// default_group
+					// lang
+					// risk ?????
+					// company 
+					// siret 
+					// ape 
+					// firstname
+					// lastname 
+					// email 
+					// passwd 
+					// birthday
+					// newsletter ????
+					// optin 
+					// outstanding allow amount ???
+					// show public prices 
+					// max payment days
+					// secure key 
+					// note
+					// active
+					// date_add 
+					// date_update
+					// id lcdb import
+
+			if($row->email == null){
+				$row->libelle = "Email manquant !";
 			}
-			
+
+			$sql = 'SELECT c.id_customer
+					FROM '._DB_PREFIX_.'customer c
+					WHERE c.id_lcdb_import = '.(int)$row->idclient;
+
+			$result = Db::getInstance()->getValue($sql);
+
+			if($result !=null){
+				echo 'l utilisateur existe <br/>';
+			}else{
+
+					$customer = new Customer();
+					$customer->id_lcdb_import = $row->idclient;
+
+					$customer->id_shop_default = 1;
+					//$customer->id_lang = 1;
+
+					if($row->civil == "M."){
+					 	$customer->gender = 1;
+					}else{
+						$customer->gender = 2;
+					}
+
+					$customer->firstname = $row->prenom ? $row->prenom : " ";
+					$customer->lastname = $row->nom ? $row->nom : " ";
+					$customer->email = $row->email;
+					$customer->passwd = Tools::encrypt($row->password);
+
+					$customer->date_add = $row->inscription;
+					
+					
+					//$customer->add();		
+					
+					
+					// if($row->actif == "off"){
+					// 	$customer->active = 0;
+					// }
+					
+					$res = false;
+					$field_error = $customer->validateFields(UNFRIENDLY_ERROR, true);
+					$lang_field_error = $customer->validateFieldsLang(UNFRIENDLY_ERROR, true);
+
+					// if ($field_error === true && $lang_field_error === true){
+
+					// 	if (!$res){
+					// 		if (isset($product->date_add) && $product->date_add != '')
+					// 			$res = $product->add(false);
+					// 		else
+					// 			$res = $product->add();
+
+					// 		if($row->cible == "pro"){
+					// 			$product->addToCategories(array(14, 6)); // ug
+					// 		}else{
+					// 			$product->addToCategories(array(14));
+					// 		}
+
+					// 		$product->id_category_default = 14;
+
+					// 		// conditionnement 
+					// 		if(isset($row->conditionnement) && ($row->conditionnement != "")){
+					// 			// $id_feature = Feature::addFeatureImport($feature_name, $position);
+					// 			$id_feature_value = FeatureValue::addFeatureValueImport(1, $row->conditionnement);
+					// 			Product::addFeatureProductImport($product->id, 1, $id_feature_value);
+					// 		}
+
+					// 		// nombre de personnes
+					// 		if(isset($row->pers) && ($row->pers != "")){
+					// 			$id_feature_value = FeatureValue::addFeatureValueImport(2, $row->pers);
+					// 			Product::addFeatureProductImport($product->id, 2, $id_feature_value);
+					// 		}
+
+					// 		// durée de conservation
+					// 		if(isset($row->frais) && ($row->frais != "")){
+					// 			$id_feature_value = FeatureValue::addFeatureValueImport(5, $row->frais);
+					// 			Product::addFeatureProductImport($product->id, 5, $id_feature_value);
+					// 		}
+
+					// 		// poids 
+					// 		if(isset($row->poids) && ($row->poids != "")){
+					// 			$id_feature_value = FeatureValue::addFeatureValueImport(6, $row->poids);
+					// 			Product::addFeatureProductImport($product->id, 6, $id_feature_value);
+					// 		}
+
+					// 		// label rouge
+					// 		if($row->labelrouge == "oui"){
+					// 			Product::addFeatureProductImport($product->id, 7, 8);
+					// 		}else{
+					// 			Product::addFeatureProductImport($product->id, 7, 9);
+					// 		}
+
+					// 		// bio
+					// 		if($row->bio == "oui"){
+					// 			Product::addFeatureProductImport($product->id, 8, 10);
+					// 		}else{
+					// 			Product::addFeatureProductImport($product->id, 8, 11);
+					// 		}
+
+					// 		Feature::cleanPositions();
+					// 		$product->update();
+
+					// 	}
+					// }else{
+					// 	echo "<br/><br/>error<br/><br/>";
+					// }
+
+					// if (!$res){
+					// 	$this->errors[] = sprintf(
+					// 		Tools::displayError('product cannot be saved')
+					// 	);
+					// 	$this->errors[] = ($field_error !== true ? $field_error : '').($lang_field_error !== true ? $lang_field_error : '').
+					// 		Db::getInstance()->getMsgError();
+
+					// }else{
+					//		echo "Produit enregistré <br/>";
+					// }
+
+			}
+
+			//die();
+
 		}
+
+		die();
 		
 	}
 	
@@ -456,65 +591,7 @@ class Importlcdb extends Module
 					echo 'le message existe <br/>';
 				}else{
 					
-					echo "id commande ".$row->idcommande;
-					echo "<br/>";
-					echo "id client ".$row->idclient;
-					echo "<br/>";
-					echo "type ".$row->document;
-					echo "<br/>";
-					echo "date ".$row->date;
-					echo "<br/>";
-					echo "montant ".$row->montant;
-					echo "<br/>";
-					echo "paiement ".$row->paiement;
-					echo "<br/>";
-					echo "nom ".$row->cp;
-					echo "<br/>";
-					echo "adresse ".$row->adresse;
-					echo "<br/>";
-					echo "facturation ".$row->facturation;
-					echo "<br/>";
-					echo "facture ".$row->facture;
-					echo "<br/>";
-					echo "facturedone ".$row->facturedone;
-					echo "<br/>";
-					echo "facturedone2 ".$row->facturedone2;
-					echo "<br/>";
-					echo "keltype ".$row->keltype;
-					echo "<br/>";
-					echo "pr ".$row->pr;
-					echo "<br/>";
-					echo "creneau_de1 ".$row->creneau_de1;
-					echo "<br/>";
-					echo "creneau_hor ".$row->creneau_hor;
-					echo "<br/>";
-					echo "creneau_a1 ".$row->creneau_a1;
-					echo "<br/>";
-					echo "creneau_de2 ".$row->creneau_de2;
-					echo "<br/>";
-					echo "creneau_a2 ".$row->creneau_a2;
-					echo "<br/>";
-					echo "creneau_de3 ".$row->creneau_de3;
-					echo "<br/>";
-					echo "creneau_a3 ".$row->creneau_a3;
-					echo "<br/>";
-					echo "timestamp ".$row->timestamp;
-					echo "<br/>";
-					echo "status ".$row->status;
-					echo "<br/>";
-					echo "ip ".$row->ip;
-					echo "<br/>";
-					echo "compta_valide ".$row->compta_valide;
-					echo "<br/>";
-					echo "recup_avoir ".$row->recup_avoir;
-					echo "<br/>";
-					echo "passe_le ".$row->passe_le;
-					echo "<br/>";
-					
-					// order, order detail, order carrier, order invoice...
-					
-					
-					
+						
 					
 					// $order = new Order();
 					// // content

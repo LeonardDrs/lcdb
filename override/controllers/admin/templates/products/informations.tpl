@@ -8,6 +8,7 @@
 <div id="step1">
 	<h4 class="tab">1. {l s='Info.'}</h4>
 	<h4>{l s='Product global information'}</h4>
+	<div style="background: red; width: 10px; height: 10px;"></div>
 	<script type="text/javascript">
 		{if isset($PS_ALLOW_ACCENTED_CHARS_URL) && $PS_ALLOW_ACCENTED_CHARS_URL}
 			var PS_ALLOW_ACCENTED_CHARS_URL = 1;

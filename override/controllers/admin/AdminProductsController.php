@@ -379,5 +379,211 @@ class AdminProductsController extends AdminProductsControllerCore
 		$this->tpl_form_vars['custom_form'] = $data->fetch();
 	}
 
+	public function processAdd()
+	{
+		$this->checkProduct();
+
+		if (!empty($this->errors))
+		{
+			$this->display = 'add';
+			return false;
+		}
+
+		$this->object = new $this->className();
+		$this->_removeTaxFromEcotax();
+		$this->copyFromPost($this->object, $this->table);
+
+		if ($this->object->add())
+		{
+			$this->addCarriers();
+			$this->updateAccessories($this->object);
+			$this->updateRecipes($this->object);
+			$this->updatePackItems($this->object);
+			$this->updateDownloadProduct($this->object);
+
+			if (empty($this->errors))
+			{
+				$languages = Language::getLanguages(false);
+				if ($this->isProductFieldUpdated('category_box') && !$this->object->updateCategories(Tools::getValue('categoryBox')))
+					$this->errors[] = Tools::displayError('An error occurred while linking object.').' <b>'.$this->table.'</b> '.Tools::displayError('To categories');
+				elseif (!$this->updateTags($languages, $this->object))
+					$this->errors[] = Tools::displayError('An error occurred while adding tags.');
+				else
+				{
+					Hook::exec('actionProductAdd', array('product' => $this->object));
+					if (in_array($this->object->visibility, array('both', 'search')) && Configuration::get('PS_SEARCH_INDEXATION'))
+						Search::indexation(false, $this->object->id);
+				}
+
+				// Save and preview
+				if (Tools::isSubmit('submitAddProductAndPreview'))
+				{
+					$preview_url = $this->context->link->getProductLink(
+						$this->getFieldValue($this->object, 'id'),
+						$this->getFieldValue($this->object, 'link_rewrite', $this->context->language->id),
+						Category::getLinkRewrite($this->getFieldValue($this->object, 'id_category_default'), $this->context->language->id),
+						null,
+						null,
+						Context::getContext()->shop->id,
+						0,
+						(bool)Configuration::get('PS_REWRITING_SETTINGS')
+					);
+
+					if (!$this->object->active)
+					{
+						$admin_dir = dirname($_SERVER['PHP_SELF']);
+						$admin_dir = substr($admin_dir, strrpos($admin_dir, '/') + 1);
+						$preview_url .= '&adtoken='.$this->token.'&ad='.$admin_dir.'&id_employee='.(int)$this->context->employee->id;
+					}
+
+					$this->redirect_after = $preview_url;
+				}
+
+				// Save and stay on same form
+				if ($this->display == 'edit')
+					$this->redirect_after = self::$currentIndex.'&id_product='.(int)$this->object->id
+						.(Tools::getIsset('id_category') ? '&id_category='.(int)Tools::getValue('id_category') : '')
+						.'&updateproduct&conf=3&key_tab='.Tools::safeOutput(Tools::getValue('key_tab')).'&token='.$this->token;
+				else
+					// Default behavior (save and back)
+					$this->redirect_after = self::$currentIndex
+						.(Tools::getIsset('id_category') ? '&id_category='.(int)Tools::getValue('id_category') : '')
+						.'&conf=3&token='.$this->token;
+			}
+			else
+				$this->object->delete();
+				// if errors : stay on edit page
+				$this->display = 'edit';
+		}
+		else
+			$this->errors[] = Tools::displayError('An error occurred while creating object.').' <b>'.$this->table.'</b>';
+			
+		return $this->object;
+	}
+
+	public function processUpdate()
+	{
+		$this->checkProduct();
+
+		if (!empty($this->errors))
+		{
+			$this->display = 'edit';
+			return false;
+		}
+
+		$id = (int)Tools::getValue('id_'.$this->table);
+		/* Update an existing product */
+		if (isset($id) && !empty($id))
+		{
+			$object = new $this->className((int)$id);
+			$this->object = $object;
+
+			if (Validate::isLoadedObject($object))
+			{
+				$this->_removeTaxFromEcotax();
+				$this->copyFromPost($object, $this->table);
+				$object->indexed = 0;
+
+				if (Shop::isFeatureActive() && Shop::getContext() != Shop::CONTEXT_SHOP)
+					$object->setFieldsToUpdate((array)Tools::getValue('multishop_check'));
+
+				if ($object->update())
+				{
+					if (in_array($this->context->shop->getContext(), array(Shop::CONTEXT_SHOP, Shop::CONTEXT_ALL)))
+					{
+						if ($this->isTabSubmitted('Shipping'))
+							$this->addCarriers();
+						if ($this->isTabSubmitted('Associations')){
+							$this->updateAccessories($object);
+							$this->updateRecipes($object);
+						}
+						if ($this->isTabSubmitted('Suppliers'))
+							$this->processSuppliers();
+						if ($this->isTabSubmitted('Features'))
+							$this->processFeatures();
+						if ($this->isTabSubmitted('Combinations'))
+							$this->processProductAttribute();
+						if ($this->isTabSubmitted('Prices'))
+						{
+							$this->processPriceAddition();
+							$this->processSpecificPricePriorities();
+							$this->object->id_tax_rules_group = (int)Tools::getValue('id_tax_rules_group');
+						}
+						if ($this->isTabSubmitted('Customization'))
+							$this->processCustomizationConfiguration();
+						if ($this->isTabSubmitted('Attachments'))
+							$this->processAttachments();
+
+						$this->updatePackItems($object);
+						$this->updateDownloadProduct($object, 1);
+						$this->updateTags(Language::getLanguages(false), $object);
+						
+						if ($this->isProductFieldUpdated('category_box') && !$object->updateCategories(Tools::getValue('categoryBox')))
+							$this->errors[] = Tools::displayError('An error occurred while linking object.').' <b>'.$this->table.'</b> '.Tools::displayError('To categories');
+					}
+					
+					if ($this->isTabSubmitted('Warehouses'))
+						$this->processWarehouses();
+					if (empty($this->errors))
+					{
+						Hook::exec('actionProductUpdate', array('product' => $object));
+
+						if (in_array($object->visibility, array('both', 'search')) && Configuration::get('PS_SEARCH_INDEXATION'))
+							Search::indexation(false, $object->id);
+
+						// Save and preview
+						if (Tools::isSubmit('submitAddProductAndPreview'))
+						{
+							$preview_url = $this->context->link->getProductLink(
+								$this->getFieldValue($object, 'id'),
+								$this->getFieldValue($object, 'link_rewrite', $this->context->language->id),
+								Category::getLinkRewrite($this->getFieldValue($object, 'id_category_default'), $this->context->language->id),
+								null,
+								null,
+								Context::getContext()->shop->id,
+								0,
+								(bool)Configuration::get('PS_REWRITING_SETTINGS')
+							);
+
+							if (!$object->active)
+							{
+								$admin_dir = dirname($_SERVER['PHP_SELF']);
+								$admin_dir = substr($admin_dir, strrpos($admin_dir, '/') + 1);
+								if (strpos($preview_url, '?') === false)
+									$preview_url .= '?';
+								else
+									$preview_url .= '&';
+								$preview_url .= 'adtoken='.$this->token.'&ad='.$admin_dir.'&id_employee='.(int)$this->context->employee->id;
+							}
+							$this->redirect_after = $preview_url;
+						}
+						else
+						{
+							// Save and stay on same form
+							if ($this->display == 'edit')
+							{
+								$this->confirmations[] = $this->l('Update successful');
+								$this->redirect_after = self::$currentIndex.'&id_product='.(int)$this->object->id
+									.(Tools::getIsset('id_category') ? '&id_category='.(int)Tools::getValue('id_category') : '')
+									.'&updateproduct&conf=4&key_tab='.Tools::safeOutput(Tools::getValue('key_tab')).'&token='.$this->token;
+							}
+							else
+								// Default behavior (save and back)
+								$this->redirect_after = self::$currentIndex.(Tools::getIsset('id_category') ? '&id_category='.(int)Tools::getValue('id_category') : '').'&conf=4&token='.$this->token;
+						}
+					}
+					// if errors : stay on edit page
+					else
+						$this->display = 'edit';
+				}
+				else
+					$this->errors[] = Tools::displayError('An error occurred while updating object.').' <b>'.$this->table.'</b> ('.Db::getInstance()->getMsgError().')';
+			}
+			else
+				$this->errors[] = Tools::displayError('An error occurred while updating object.').' <b>'.$this->table.'</b> ('.Tools::displayError('Cannot load object').')';
+			return $object;
+		}
+	}
+
 }
 
