@@ -239,9 +239,9 @@ class OrderController extends OrderControllerCore
 			break;
 
 			case 3:
-				if (Tools::getValue('mydate'))
+				if (Tools::getValue('date_delivery'))
 				{
-					$this->context->cart->date_delivery = Tools::getValue('mydate');
+					$this->context->cart->date_delivery = date('Y-m-d',strtotime(Tools::getValue('date_delivery')));
 					$this->context->cart->hour_delivery = Tools::getValue('hour_delivery');
 					$this->context->cart->save();
 				}

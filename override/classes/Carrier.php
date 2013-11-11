@@ -36,7 +36,7 @@ class Carrier extends CarrierCore
 			'deleted' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 
 			/* Lang fields */
-			'delay' => 					array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 128),
+			'delay' => 					array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => false, 'size' => 128),
 			'description' => 			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 255),
 		),
 	);
