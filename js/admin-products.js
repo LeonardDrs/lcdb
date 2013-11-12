@@ -1645,6 +1645,8 @@ var ProductMultishop = new function()
 		ProductMultishop.checkField($('input[name=\'multishop_check[show_price]\']').prop('checked'), 'show_price', 'show_price');
 		ProductMultishop.checkField($('input[name=\'multishop_check[online_only]\']').prop('checked'), 'online_only');
 		ProductMultishop.checkField($('input[name=\'multishop_check[condition]\']').prop('checked'), 'condition');
+		ProductMultishop.checkField($('input[name=\'multishop_check[abo]\']').prop('checked'), 'abo');
+		ProductMultishop.checkField($('input[name=\'multishop_check[unusual_product]\']').prop('checked'), 'unusual_product');
 		$.each(languages, function(k, v)
 		{
 			ProductMultishop.checkField($('input[name=\'multishop_check[name]['+v.id_lang+']\']').prop('checked'), 'name_'+v.id_lang);

@@ -6,6 +6,15 @@ class AdminOrdersController extends AdminOrdersControllerCore
 	{
 		
 		parent::__construct();
+
+		$this->_select = '
+		a.id_currency,
+		a.id_order AS id_pdf,
+		(SELECT ad.postcode FROM `'._DB_PREFIX_.'address` ad WHERE ad.id_address = a.id_address_delivery) AS zip,
+		CONCAT(LEFT(c.`firstname`, 1), \'. \', c.`lastname`) AS `customer`,
+		osl.`name` AS `osname`,
+		os.`color`,
+		IF((SELECT COUNT(so.id_order) FROM `'._DB_PREFIX_.'orders` so WHERE so.id_customer = a.id_customer) > 1, 0, 1) as new';
 		
 		$statuses_array = array();
 		$statuses = OrderState::getOrderStates((int)$this->context->language->id);
@@ -41,10 +50,11 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'filter_key' => 'os!id_order_state',
 			'filter_type' => 'int'
 		),
-		'new' => array(
+		'zip' => array(
 			'title' => $this->l('Arrondissement / Ville'),
 			'align' => 'center',
-			'width' => 100
+			'width' => 100,
+			'havingFilter' => true
 		),
 		'total_paid_tax_incl' => array(
 			'title' => $this->l('Total'),
@@ -55,13 +65,13 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'type' => 'price',
 			'currency' => true
 		),
-		'date_asdd' => array(
-			'title' => $this->l('Date delivery'),
-			'width' => 150,
-			'align' => 'right',
-			'type' => 'datetime',
-			'filter_key' => 'a!date_add'
-		),
+		// 'date_asdd' => array(
+		// 	'title' => $this->l('Date delivery'),
+		// 	'width' => 150,
+		// 	'align' => 'right',
+		// 	'type' => 'datetime',
+		// 	'filter_key' => 'a!date_add'
+		// ),
 		'date_add' => array(
 			'title' => $this->l('Date'),
 			'width' => 150,
@@ -155,12 +165,6 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		}
 
 		$list = $helper->generateList($this->_list, $this->fields_list);
-		
-		// if($_GET['export']==true){
-		// 	echo "<pre>";
-		// 	print_r($this->_list);
-		// 	echo "</pre>";
-		// }
 		
 		return $list;
 	}

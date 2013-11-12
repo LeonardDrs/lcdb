@@ -39,8 +39,15 @@ class AdminCustomersController extends AdminCustomersControllerCore
 			WHERE g.id_customer = a.id_customer
 			ORDER BY c.date_add DESC
 			LIMIT 1
-		) as connect, (SELECT rp.id_sponsor FROM '._DB_PREFIX_.'referralprogram rp WHERE
-		rp.id_sponsor=a.id_customer and rp.id_customer!=0 group by  rp.id_sponsor) as godfather';
+		) as connect,
+		(SELECT GROUP_CONCAT(distinct gl.name SEPARATOR " | ") FROM `'._DB_PREFIX_.'group_lang` gl
+		LEFT JOIN '._DB_PREFIX_.'customer_group cg ON gl.id_group = cg.id_group
+		WHERE cg.id_customer = a.id_customer) as userGroup,
+		(SELECT count(o.id_order) FROM `'._DB_PREFIX_.'orders` o
+		WHERE o.id_customer = a.id_customer) as orderDone,
+		a.note as memo';
+
+
 		$this->fields_list = array(
 			'id_customer' => array(
 				'title' => $this->l('ID'),
@@ -59,35 +66,32 @@ class AdminCustomersController extends AdminCustomersControllerCore
 			),
 			'lastname' => array(
 				'title' => $this->l('Last Name'),
-				'width' => 'auto'
+				'width' => 100
 			),
 			'firstname' => array(
 				'title' => $this->l('First name'),
-				'width' => 'auto'
+				'width' => 100
 			),
 			'email' => array(
 				'title' => $this->l('E-mail address'),
 				'width' => 140,
 			),
-			'email' => array(
+			'userGroup' => array(
 				'title' => $this->l('Group'),
-				'width' => 140,
+				'width' => "auto",
+				'havingFilter' => true
 			),
-			'email' => array(
-				'title' => $this->l('Subscription'),
-				'width' => 140,
+			'orderDone' => array(
+				'title' => $this->l('Commandes'),
+				'width' => 60,
 			),
-			'email' => array(
-				'title' => $this->l('Commandes Faites'),
-				'width' => 140,
-			),
-			'email' => array(
-				'title' => $this->l('Commandes à venir'),
-				'width' => 140,
-			),
-			'email' => array(
+			// 'orderNext' => array(
+			// 	'title' => $this->l('Commandes à venir'),
+			// 	'width' => 140,
+			// ),
+			'memo' => array(
 				'title' => $this->l('memo'),
-				'width' => 140,
+				'width' => 'auto',
 			),
 			'active' => array(
 				'title' => $this->l('Enabled'),
@@ -142,10 +146,10 @@ class AdminCustomersController extends AdminCustomersControllerCore
 				'href' => $this->context->link->getAdminLink('AdminImport', true).'&import_type='.$this->table,
 				'desc' => $this->l('Import')
 			);
-			$this->toolbar_btn['export'] = array(
-				'href' => self::$currentIndex.'&amp;export=true&amp;token='.$this->token,
-				'desc' => $this->l('Export')
-			);
+			// $this->toolbar_btn['export'] = array(
+			// 	'href' => self::$currentIndex.'&amp;export=true&amp;token='.$this->token,
+			// 	'desc' => $this->l('Export')
+			// );
 		}
 	}
 	

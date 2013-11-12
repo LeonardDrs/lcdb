@@ -11,6 +11,12 @@ class AdminGroupsController extends AdminGroupsControllerCore
 		$this->className = 'Group';
 		$this->lang = true;
 		
+		$groups_to_keep = array(
+			Configuration::get('PS_UNIDENTIFIED_GROUP'),
+			Configuration::get('PS_GUEST_GROUP'),
+			Configuration::get('PS_CUSTOMER_GROUP')
+		);
+		
 		$this->_select = '
 		(SELECT COUNT(jcg.`id_customer`)
 		FROM `'._DB_PREFIX_.'customer_group` jcg

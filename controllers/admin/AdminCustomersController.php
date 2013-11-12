@@ -72,6 +72,7 @@ class AdminCustomersControllerCore extends AdminController
 			ORDER BY c.date_add DESC
 			LIMIT 1
 		) as connect';
+
 		$this->fields_list = array(
 			'id_customer' => array(
 				'title' => $this->l('ID'),

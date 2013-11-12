@@ -8,7 +8,7 @@
 <div id="step1">
 	<h4 class="tab">1. {l s='Info.'}</h4>
 	<h4>{l s='Product global information'}</h4>
-	<div style="background: red; width: 10px; height: 10px;"></div>
+
 	<script type="text/javascript">
 		{if isset($PS_ALLOW_ACCENTED_CHARS_URL) && $PS_ALLOW_ACCENTED_CHARS_URL}
 			var PS_ALLOW_ACCENTED_CHARS_URL = 1;
@@ -71,12 +71,24 @@
 
 	<div class="separation"></div>
 	<div id="warn_virtual_combinations" class="warn" style="display:none">{l s='You cannot use combinations with a virtual product.'}</div>
-	<div>
-		<label class="text">{$bullet_common_field} {l s='Type:'}</label>
-		<input type="radio" name="type_product" id="simple_product" value="{Product::PTYPE_SIMPLE}" {if $product_type == Product::PTYPE_SIMPLE}checked="checked"{/if} />
-		<label class="radioCheck" for="simple_product">{l s='Product'}</label>
-		<input type="radio" name="type_product" id="pack_product" value="{Product::PTYPE_PACK}" {if $product_type == Product::PTYPE_PACK}checked="checked"{/if} />
-		<label class="radioCheck" for="pack_product">{l s='Pack'}</label>
+
+	<div style="height: 60px; position: relative;">
+		<div>
+			<label class="text">{$bullet_common_field} {l s='Type:'}</label>
+			<input type="radio" name="type_product" id="simple_product" value="{Product::PTYPE_SIMPLE}" {if $product_type == Product::PTYPE_SIMPLE}checked="checked"{/if} />
+			<label class="radioCheck" for="simple_product">{l s='Product'}</label>
+			<input type="radio" name="type_product" id="pack_product" value="{Product::PTYPE_PACK}" {if $product_type == Product::PTYPE_PACK}checked="checked"{/if} />
+			<label class="radioCheck" for="pack_product">{l s='Pack'}</label>
+		</div>
+		<div style="position: absolute; top: 0; left: 10px; height: 50px;">
+			{foreach from=$features item=feature}
+				{if ($feature.id_feature == 12) && ($feature.val.value == "Oui")}
+					<img src="../img/admin/logo-label-rouge.png" alt="label rouge">
+				{else if ($feature.id_feature == 11) && ($feature.val.value == "Oui")}
+					<img src="../img/admin/logo-label-bio.jpg" alt="label bio">
+				{/if}
+			{/foreach}
+		</div>
 	</div>
 
 	<div class="separation"></div>
@@ -221,7 +233,7 @@
 				<label for="show_price" class="t">{l s='show price'}</label>
 			</li>
 			<li>
-				<input type="checkbox" name="abo" id="abo" {if $product->abo}checked="checked"{/if} />
+				<input type="checkbox" name="abo" id="abo" value="1" {if $product->abo}checked="checked"{/if} />
 				<label for="abo" class="t">{l s='Abonnement'}</label>
 			</li>
 			<li>

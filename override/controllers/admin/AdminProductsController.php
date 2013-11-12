@@ -21,6 +21,21 @@ class AdminProductsController extends AdminProductsControllerCore
 				'Combinations' => 10,
 			));
 		}
+
+		$this->_select .= ',
+			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
+				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
+				WHERE fp.id_product = a.id_product AND fp.id_feature=12 AND fvl.id_lang=1) as label_rouge,
+			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
+				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
+				WHERE fp.id_product = a.id_product AND fp.id_feature=11 AND fvl.id_lang=1) as label_bio,
+			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
+				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
+				WHERE fp.id_product = a.id_product AND fp.id_feature=7 AND fvl.id_lang=1) as count,
+			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
+				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
+				WHERE fp.id_product = a.id_product AND fp.id_feature=13 AND fvl.id_lang=1) as weight,
+			(a.price / a.unit_price_ratio) as unitPrice';
 		
 		// $this->_select = '
 		// 		(SELECT  GROUP_CONCAT(distinct cl.name SEPARATOR " | ") FROM `'._DB_PREFIX_.'category_lang` cl WHERE cl.id_category = cp.id_category) AS categories
@@ -42,30 +57,35 @@ class AdminProductsController extends AdminProductsControllerCore
 		$this->fields_list['name'] = array(
 			'title' => $this->l('Name'),
 			'filter_key' => 'b!name',
-			'width' => 120
+			'width' => "auto"
 		);
 		$this->fields_list['name_category'] = array(
 			'title' => $this->l('Category'),
-			'width' => 120,
+			'width' => "auto",
 			'filter_key' => 'cl!name',
 		);
-		$this->fields_list['champ0'] = array(
-			'title' => $this->l('Labels'),
-			'width' => 120,
-			'filter_key' => 'cl!name',
+		$this->fields_list['label_bio'] = array(
+			'title' => $this->l('Label Bio'),
+			'width' => 60,
+			'havingFilter' => true
 		);
-		$this->fields_list['champ1'] = array(
-			'title' => $this->l('Count'),
-			'width' => 90,
-			'filter_key' => 'cl!name',
+		$this->fields_list['label_rouge'] = array(
+			'title' => $this->l('Label Rouge'),
+			'width' => 60,
+			'havingFilter' => true
 		);
-		$this->fields_list['champ3'] = array(
-			'title' => $this->l('Target weight'),
-			'width' => 90,
-			'filter_key' => 'cl!name',
+		$this->fields_list['count'] = array(
+			'title' => $this->l('Personnes'),
+			'width' => 60,
+			'havingFilter' => true
 		);
-		$this->fields_list['champ4'] = array(
-			'title' => $this->l('Price per kg'),
+		$this->fields_list['weight'] = array(
+			'title' => $this->l('Poids'),
+			'width' => 60,
+			'havingFilter' => true
+		);
+		$this->fields_list['unitPrice'] = array(
+			'title' => $this->l('Price/kg'),
 			'width' => 90,
 			'type' => 'price',
 			'align' => 'right',
@@ -87,6 +107,101 @@ class AdminProductsController extends AdminProductsControllerCore
 				'align' => 'center',
 				'position' => 'position'
 			);
+	}
+
+	public function initFormInformations($product)
+	{
+		$data = $this->createTemplate($this->tpl_form);
+
+		$currency = $this->context->currency;
+		$data->assign('languages', $this->_languages);
+		$data->assign('currency', $currency);
+		$this->object = $product;
+		$this->display = 'edit';
+		$data->assign('product_name_redirected', Product::getProductName((int)$product->id_product_redirected, null, (int)$this->context->language->id));
+		/*
+		* Form for adding a virtual product like software, mp3, etc...
+		*/
+		$product_download = new ProductDownload();
+		if ($id_product_download = $product_download->getIdFromIdProduct($this->getFieldValue($product, 'id')))
+			$product_download = new ProductDownload($id_product_download);
+		$product->{'productDownload'} = $product_download;
+
+		$cache_default_attribute = (int)$this->getFieldValue($product, 'cache_default_attribute');
+
+		$product_props = array();
+		// global informations
+		array_push($product_props, 'reference', 'ean13', 'upc',
+		'available_for_order', 'show_price', 'online_only',
+		'id_manufacturer'
+		);
+
+		// specific / detailled information
+		array_push($product_props,
+		// physical product
+		'width', 'height', 'weight', 'active', 'is_subscription',
+		// virtual product
+		'is_virtual', 'cache_default_attribute',
+		// customization
+		'uploadable_files', 'text_fields'
+		);
+		// prices
+		array_push($product_props,
+			'price', 'wholesale_price', 'id_tax_rules_group', 'unit_price_ratio', 'on_sale',
+			'unity', 'minimum_quantity', 'additional_shipping_cost',
+			'available_now', 'available_later', 'available_date'
+		);
+
+		if (Configuration::get('PS_USE_ECOTAX'))
+			array_push($product_props, 'ecotax');
+
+		foreach ($product_props as $prop)
+			$product->$prop = $this->getFieldValue($product, $prop);
+
+		$product->name['class'] = 'updateCurrentText';
+		if (!$product->id)
+			$product->name['class'] .= ' copy2friendlyUrl';
+
+		$images = Image::getImages($this->context->language->id, $product->id);
+
+		foreach ($images as $k => $image)
+			$images[$k]['src'] = $this->context->link->getImageLink($product->link_rewrite[$this->context->language->id], $product->id.'-'.$image['id_image'], 'small_default');
+		$data->assign('images', $images);
+		$data->assign('imagesTypes', ImageType::getImagesTypes('products'));
+
+		$product->tags = Tag::getProductTags($product->id);
+
+		$data->assign('product_type', (int)Tools::getValue('type_product', $product->getType()));
+
+		$check_product_association_ajax = false;
+		if (Shop::isFeatureActive() && Shop::getContext() != Shop::CONTEXT_ALL)
+			$check_product_association_ajax = true;
+
+		$features = $product->getFeatures();
+
+		foreach ($features as $k => $tab_features)
+		{
+			$values = FeatureValue::getFeatureValueLang($features[$k]['id_feature_value']);
+			$features[$k]['val'] = $values[0];
+		}
+
+		$data->assign('features', $features);
+
+		// TinyMCE
+		$iso_tiny_mce = $this->context->language->iso_code;
+		$iso_tiny_mce = (file_exists(_PS_JS_DIR_.'tiny_mce/langs/'.$iso_tiny_mce.'.js') ? $iso_tiny_mce : 'en');
+		$data->assign('ad', dirname($_SERVER['PHP_SELF']));
+		$data->assign('iso_tiny_mce', $iso_tiny_mce);
+		$data->assign('check_product_association_ajax', $check_product_association_ajax);
+		$data->assign('id_lang', $this->context->language->id);
+		$data->assign('product', $product);
+		$data->assign('token', $this->token);
+		$data->assign('currency', $currency);
+		$data->assign($this->tpl_form_vars);
+		$data->assign('link', $this->context->link);
+		$data->assign('PS_PRODUCT_SHORT_DESC_LIMIT', Configuration::get('PS_PRODUCT_SHORT_DESC_LIMIT') ? Configuration::get('PS_PRODUCT_SHORT_DESC_LIMIT') : 400);
+		$this->tpl_form_vars['product'] = $product;
+		$this->tpl_form_vars['custom_form'] = $data->fetch();
 	}
 	
 	public function initFormAssociations($obj)
