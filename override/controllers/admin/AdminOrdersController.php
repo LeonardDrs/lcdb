@@ -164,6 +164,22 @@ class AdminOrdersController extends AdminOrdersControllerCore
 				$this->actions[] = $action;
 		}
 
+		$totalOrders = count($this->_list);
+		$totalAmount = 0;
+
+		foreach ($this->_list as $key => $order){
+			$totalAmount += $order['total_paid_tax_incl'];
+		}
+
+		$cartAverage = $totalAmount/$totalOrders;
+
+		$this->context->smarty->assign(array(
+			"totalOrders" => $totalOrders,
+			"totalAmount" => $totalAmount,
+			"cartAverage" => $cartAverage
+		)); 
+
+
 		$list = $helper->generateList($this->_list, $this->fields_list);
 		
 		return $list;

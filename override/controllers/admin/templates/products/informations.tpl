@@ -83,9 +83,9 @@
 		<div style="position: absolute; top: 0; left: 10px; height: 50px;">
 			{foreach from=$features item=feature}
 				{if ($feature.id_feature == 12) && ($feature.val.value == "Oui")}
-					<img src="../img/admin/logo-label-rouge.png" alt="label rouge">
-				{else if ($feature.id_feature == 11) && ($feature.val.value == "Oui")}
-					<img src="../img/admin/logo-label-bio.jpg" alt="label bio">
+					<img src="../img/admin/logo-label-rouge.png" alt="label rouge " style="height: 60px;">
+				{elseif ($feature.id_feature == 11) && ($feature.val.value == "Oui")}
+					<img src="../img/admin/logo-label-bio.jpg" alt="label bio" style="height: 60px;">
 				{/if}
 			{/foreach}
 		</div>
