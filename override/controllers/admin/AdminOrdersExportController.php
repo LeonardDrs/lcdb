@@ -1,146 +1,105 @@
 <?php
 
-class AdminOrdersExportController extends AdminOrdersControllerCore
+class AdminOrdersExportController extends AdminProductsControllerCore
 {
+	
 	public function __construct()
 	{
-		
+
 		parent::__construct();
 
-		$this->_select = '
-		a.id_currency,
-		a.id_order AS id_pdf,
-		(SELECT ad.postcode FROM `'._DB_PREFIX_.'address` ad WHERE ad.id_address = a.id_address_delivery) AS zip,
-		CONCAT(LEFT(c.`firstname`, 1), \'. \', c.`lastname`) AS `customer`,
-		osl.`name` AS `osname`,
-		os.`color`,
-		IF((SELECT COUNT(so.id_order) FROM `'._DB_PREFIX_.'orders` so WHERE so.id_customer = a.id_customer) > 1, 0, 1) as new';
+		// masquer les produits qui n'ont pas de commande 
+		// afficher les declinaisons 
+
+		// le nombre de produits total est faux
+		// faire la fonction d'export 
+		// rajouter une date de filtre -> compliqué (ou selon un etat de commande)
+		// faire pour que la page produit soit rediriger sur product
 		
-		$statuses_array = array();
-		$statuses = OrderState::getOrderStates((int)$this->context->language->id);
+		
 
-		foreach ($statuses as $status)
-			$statuses_array[$status['id_order_state']] = $status['name'];
-
-		$this->fields_list = array(
-		'id_order' => array(
+		$this->_select .= ',
+			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
+				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
+				WHERE fp.id_product = a.id_product AND fp.id_feature=12 AND fvl.id_lang=1) as label_rouge,
+			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
+				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
+				WHERE fp.id_product = a.id_product AND fp.id_feature=11 AND fvl.id_lang=1) as label_bio,
+			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
+				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
+				WHERE fp.id_product = a.id_product AND fp.id_feature=7 AND fvl.id_lang=1) as count,
+			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
+				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
+				WHERE fp.id_product = a.id_product AND fp.id_feature=13 AND fvl.id_lang=1) as weight,
+			(SELECT sum(od.product_quantity) FROM `'._DB_PREFIX_.'order_detail` od
+				WHERE od.product_id = a.id_product) as orderNumber,
+			(SELECT GROUP_CONCAT(distinct od.product_attribute_id SEPARATOR " | ") FROM `'._DB_PREFIX_.'order_detail` od
+				WHERE od.product_id = a.id_product) as attribute';
+	
+			
+		$this->fields_list = array();
+		$this->fields_list['id_product'] = array(
 			'title' => $this->l('ID'),
 			'align' => 'center',
-			'width' => 25
-		),
-		'reference' => array(
-			'title' => $this->l('Reference'),
-			'align' => 'center',
-			'width' => 65
-		),
-		'customer' => array(
-			'title' => $this->l('Customer'),
-			'havingFilter' => true,
-		),
-		'payment' => array(
-			'title' => $this->l('Payment'),
-			'width' => 100
-		),
-		'osname' => array(
-			'title' => $this->l('Status'),
-			'color' => 'color',
-			'width' => 280,
-			'type' => 'select',
-			'list' => $statuses_array,
-			'filter_key' => 'os!id_order_state',
-			'filter_type' => 'int'
-		),
-		'zip' => array(
-			'title' => $this->l('Arrondissement / Ville'),
-			'align' => 'center',
-			'width' => 100,
-			'havingFilter' => true
-		),
-		'total_paid_tax_incl' => array(
-			'title' => $this->l('Total'),
-			'width' => 70,
-			'align' => 'right',
-			'prefix' => '<b>',
-			'suffix' => '</b>',
-			'type' => 'price',
-			'currency' => true
-		),
-		// 'date_asdd' => array(
-		// 	'title' => $this->l('Date delivery'),
-		// 	'width' => 150,
-		// 	'align' => 'right',
-		// 	'type' => 'datetime',
-		// 	'filter_key' => 'a!date_add'
-		// ),
-		'date_add' => array(
-			'title' => $this->l('Date'),
-			'width' => 150,
-			'align' => 'right',
-			'type' => 'datetime',
-			'filter_key' => 'a!date_add'
-		),
-		'id_pdf' => array(
-			'title' => $this->l('PDF'),
-			'width' => 50,
-			'align' => 'center',
-			'callback' => 'printPDFIcons',
-			'orderby' => false,
-			'search' => false,
-			'remove_onclick' => true)
+			'width' => 20
 		);
-
+		$this->fields_list['name'] = array(
+			'title' => $this->l('Name'),
+			'filter_key' => 'b!name',
+			'width' => "auto"
+		);
+		$this->fields_list['orderNumber'] = array(
+			'title' => $this->l('Quantité'),
+			'width' => 90,
+			'havingFilter' => true
+		);
+		$this->fields_list['attribute'] = array(
+			'title' => $this->l('Déclinaison'),
+			'width' => 90,
+			'havingFilter' => true
+		);
+		$this->fields_list['label_bio'] = array(
+			'title' => $this->l('Label Bio'),
+			'width' => 60,
+			'havingFilter' => true
+		);
+		$this->fields_list['label_rouge'] = array(
+			'title' => $this->l('Label Rouge'),
+			'width' => 60,
+			'havingFilter' => true
+		);
+		$this->fields_list['count'] = array(
+			'title' => $this->l('Personnes'),
+			'width' => 60,
+			'havingFilter' => true
+		);
+		$this->fields_list['weight'] = array(
+			'title' => $this->l('Poids'),
+			'width' => 60,
+			'havingFilter' => true
+		);
+		if ((int)Tools::getValue('id_category'))
+			$this->fields_list['position'] = array(
+				'title' => $this->l('Position'),
+				'width' => 70,
+				'filter_key' => 'cp!position',
+				'align' => 'center',
+				'position' => 'position'
+			);
 	}
-	
+
 	public function initToolbar()
 	{
-		if ($this->display == 'view')
-		{
-			$order = new Order((int)Tools::getValue('id_order'));
-			if ($order->hasBeenShipped())
-				$type = $this->l('Return products');
-			elseif ($order->hasBeenPaid())
-				$type = $this->l('Standard refund');
-			else
-				$type = $this->l('Cancel products');
-
-			if (!$order->hasBeenShipped() && !$this->lite_display)
-				$this->toolbar_btn['new'] = array(
-					'short' => 'Create',
-					'href' => '#',
-					'desc' => $this->l('Add a product'),
-					'class' => 'add_product'
-				);
-
-			if (Configuration::get('PS_ORDER_RETURN') && !$this->lite_display)
-				$this->toolbar_btn['standard_refund'] = array(
-					'short' => 'Create',
-					'href' => '',
-					'desc' => $type,
-					'class' => 'process-icon-standardRefund'
-				);
-			
-			if ($order->hasInvoice() && !$this->lite_display)
-				$this->toolbar_btn['partial_refund'] = array(
-					'short' => 'Create',
-					'href' => '',
-					'desc' => $this->l('Partial refund'),
-					'class' => 'process-icon-partialRefund'
-				);
-		}
-		else if (!$this->display) //display import button only on listing
+		parent::initToolbar();
+		if (!$this->display) //display import button only on listing
 		{
 			$this->toolbar_btn['export'] = array(
 				'href' => self::$currentIndex.'&amp;export=true&amp;token='.$this->token,
 				'desc' => $this->l('Export')
 			);
 		}
-		
-		$res = parent::initToolbar();
-		if (Context::getContext()->shop->getContext() != Shop::CONTEXT_SHOP && isset($this->toolbar_btn['new']) && Shop::isFeatureActive())
-			unset($this->toolbar_btn['new']);
-		return $res;
 	}
-	
+
 	public function renderList()
 	{
 		if (!($this->fields_list && is_array($this->fields_list)))
@@ -164,25 +123,56 @@ class AdminOrdersExportController extends AdminOrdersControllerCore
 				$this->actions[] = $action;
 		}
 
-		$totalOrders = count($this->_list);
-		$totalAmount = 0;
+		$new_list = Array();
 
-		foreach ($this->_list as $key => $order){
-			$totalAmount += $order['total_paid_tax_incl'];
+		foreach ($this->_list as $key => $product) {
+			if(isset($product['orderNumber']) && ($product['orderNumber'] > 0)){
+				$new_list[] = $product;
+			}
 		}
 
-		$cartAverage = $totalAmount/$totalOrders;
-
-		$this->context->smarty->assign(array(
-			"totalOrders" => $totalOrders,
-			"totalAmount" => $totalAmount,
-			"cartAverage" => $cartAverage
-		)); 
-
-
-		$list = $helper->generateList($this->_list, $this->fields_list);
+		$list = $helper->generateList($new_list, $this->fields_list);
 		
 		return $list;
 	}
+
+	// public function getList($id_lang, $orderBy = null, $orderWay = null, $start = 0, $limit = null, $id_lang_shop = null)
+	// {
+	// 	$orderByPriceFinal = (empty($orderBy) ? ($this->context->cookie->__get($this->table.'Orderby') ? $this->context->cookie->__get($this->table.'Orderby') : 'id_'.$this->table) : $orderBy);
+	// 	$orderWayPriceFinal = (empty($orderWay) ? ($this->context->cookie->__get($this->table.'Orderway') ? $this->context->cookie->__get($this->table.'Orderby') : 'ASC') : $orderWay);
+	// 	if ($orderByPriceFinal == 'price_final')
+	// 	{
+	// 		$orderBy = 'id_'.$this->table;
+	// 		$orderWay = 'ASC';
+	// 	}
+	// 	parent::getList($id_lang, $orderBy, $orderWay, $start, $limit, $this->context->shop->id);
+
+	// 	/* update product quantity with attributes ...*/
+	// 	$nb = count($this->_list);
+	// 	if ($this->_list)
+	// 	{
+	// 		/* update product final price */
+	// 		for ($i = 0; $i < $nb; $i++)
+	// 		{
+	// 			// convert price with the currency from context
+	// 			$this->_list[$i]['price'] = Tools::convertPrice($this->_list[$i]['price'], $this->context->currency, true, $this->context);
+	// 			$this->_list[$i]['price_tmp'] = Product::getPriceStatic($this->_list[$i]['id_product'], true, null, 2, null, false, true, 1, true);
+	// 		}
+	// 	}
+
+	// 	if ($orderByPriceFinal == 'price_final')
+	// 	{
+	// 		if (strtolower($orderWayPriceFinal) == 'desc')
+	// 			uasort($this->_list, 'cmpPriceDesc');
+	// 		else
+	// 			uasort($this->_list, 'cmpPriceAsc');
+	// 	}
+	// 	for ($i = 0; $this->_list && $i < $nb; $i++)
+	// 	{
+	// 		$this->_list[$i]['price_final'] = $this->_list[$i]['price_tmp'];
+	// 		unset($this->_list[$i]['price_tmp']);
+	// 	}
+	// }
+
 }
 
