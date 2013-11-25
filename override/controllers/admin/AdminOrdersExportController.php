@@ -8,13 +8,20 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 
 		parent::__construct();
 
-		// masquer les produits qui n'ont pas de commande 
-		// afficher les declinaisons 
+		$this->addRowAction('view');
 
+		// masquer les produits qui n'ont pas de commande 
+		// filtrer selon un etat de commande
 		// le nombre de produits total est faux
-		// faire la fonction d'export 
-		// rajouter une date de filtre -> compliqué (ou selon un etat de commande)
+
+		// rajouter une date de filtre 
+
+		// faire la fonction d'export
+		// afficher les declinaisons par nombre +labels
+
 		// faire pour que la page produit soit rediriger sur product
+
+		// verifier le bon fonctionnement de la pagination
 		
 		
 
@@ -32,14 +39,15 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
 				WHERE fp.id_product = a.id_product AND fp.id_feature=13 AND fvl.id_lang=1) as weight,
 			(SELECT sum(od.product_quantity) FROM `'._DB_PREFIX_.'order_detail` od
-				WHERE od.product_id = a.id_product) as orderNumber,
+				LEFT JOIN '._DB_PREFIX_.'orders o ON o.id_order = od.id_order
+				WHERE od.product_id = a.id_product AND o.valid=0) as orderNumber,
 			(SELECT GROUP_CONCAT(distinct od.product_attribute_id SEPARATOR " | ") FROM `'._DB_PREFIX_.'order_detail` od
 				WHERE od.product_id = a.id_product) as attribute';
 	
 			
 		$this->fields_list = array();
 		$this->fields_list['id_product'] = array(
-			'title' => $this->l('ID'),
+			'title' => $this->l('ID Produit'),
 			'align' => 'center',
 			'width' => 20
 		);
@@ -49,7 +57,7 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 			'width' => "auto"
 		);
 		$this->fields_list['orderNumber'] = array(
-			'title' => $this->l('Quantité'),
+			'title' => $this->l('Quantité achetée'),
 			'width' => 90,
 			'havingFilter' => true
 		);
@@ -78,24 +86,26 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 			'width' => 60,
 			'havingFilter' => true
 		);
-		if ((int)Tools::getValue('id_category'))
-			$this->fields_list['position'] = array(
-				'title' => $this->l('Position'),
-				'width' => 70,
-				'filter_key' => 'cp!position',
-				'align' => 'center',
-				'position' => 'position'
-			);
+		$this->fields_list['date_add'] = array(
+			'title' => $this->l('Date'),
+			'width' => 150,
+			'align' => 'right',
+			'type' => 'datetime',
+			'filter_key' => 'a!date_add'
+		);
 	}
 
 	public function initToolbar()
 	{
 		parent::initToolbar();
-		if (!$this->display) //display import button only on listing
+		if (!$this->display)
 		{
-			$this->toolbar_btn['export'] = array(
-				'href' => self::$currentIndex.'&amp;export=true&amp;token='.$this->token,
-				'desc' => $this->l('Export')
+			unset($this->toolbar_btn['import']);
+
+			$this->toolbar_btn['export-csv-orders'] = array(
+				'short' => 'Exporter Orders',
+				'href' => $this->context->link->getAdminLink('AdminOrdersExport').'&amp;csv_orders',
+				'desc' => $this->l('Exporter'),
 			);
 		}
 	}
@@ -131,48 +141,44 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 			}
 		}
 
+		$helper->listTotal = count($new_list);
 		$list = $helper->generateList($new_list, $this->fields_list);
+
+		if (Tools::isSubmit('csv_orders'))
+		{
+			if (count($this->_list) > 0){
+				$this->renderCSV($new_list);
+				die;
+			}else{
+				$this->displayWarning($this->l('There is nothing to export as a CSV.'));
+			}
+		}
 		
 		return $list;
 	}
 
-	// public function getList($id_lang, $orderBy = null, $orderWay = null, $start = 0, $limit = null, $id_lang_shop = null)
-	// {
-	// 	$orderByPriceFinal = (empty($orderBy) ? ($this->context->cookie->__get($this->table.'Orderby') ? $this->context->cookie->__get($this->table.'Orderby') : 'id_'.$this->table) : $orderBy);
-	// 	$orderWayPriceFinal = (empty($orderWay) ? ($this->context->cookie->__get($this->table.'Orderway') ? $this->context->cookie->__get($this->table.'Orderby') : 'ASC') : $orderWay);
-	// 	if ($orderByPriceFinal == 'price_final')
-	// 	{
-	// 		$orderBy = 'id_'.$this->table;
-	// 		$orderWay = 'ASC';
-	// 	}
-	// 	parent::getList($id_lang, $orderBy, $orderWay, $start, $limit, $this->context->shop->id);
+	protected function renderCSV($list)
+	{
+		$ids = array();
+		foreach ($list as $entry)
+			$ids[] = $entry['id_product'];
 
-	// 	/* update product quantity with attributes ...*/
-	// 	$nb = count($this->_list);
-	// 	if ($this->_list)
-	// 	{
-	// 		/* update product final price */
-	// 		for ($i = 0; $i < $nb; $i++)
-	// 		{
-	// 			// convert price with the currency from context
-	// 			$this->_list[$i]['price'] = Tools::convertPrice($this->_list[$i]['price'], $this->context->currency, true, $this->context);
-	// 			$this->_list[$i]['price_tmp'] = Product::getPriceStatic($this->_list[$i]['id_product'], true, null, 2, null, false, true, 1, true);
-	// 		}
-	// 	}
+		if (count($ids) <= 0)
+			return;
 
-	// 	if ($orderByPriceFinal == 'price_final')
-	// 	{
-	// 		if (strtolower($orderWayPriceFinal) == 'desc')
-	// 			uasort($this->_list, 'cmpPriceDesc');
-	// 		else
-	// 			uasort($this->_list, 'cmpPriceAsc');
-	// 	}
-	// 	for ($i = 0; $this->_list && $i < $nb; $i++)
-	// 	{
-	// 		$this->_list[$i]['price_final'] = $this->_list[$i]['price_tmp'];
-	// 		unset($this->_list[$i]['price_tmp']);
-	// 	}
-	// }
+		$id_lang = Context::getContext()->language->id;
+		$products = new Collection('Product', $id_lang);
+		$products->where('id_product', 'in', $ids);
+		$products->getAll();
+
+		// echo "<pre>";
+		// print_r($products[]);
+		// echo "</pre>";
+		// die();
+
+		$csv = new CSV($products, $this->l('commandes'));
+		$csv->export();
+	}
 
 }
 
