@@ -20,7 +20,7 @@
 				<div class="infos">
 					<div class="identification-description">
 						<div class="identification {$label} label">
-							<h3 itemprop="name">{$product.name|escape:'htmlall':'UTF-8'|truncate:35:'...'}</h3>
+							<a href="{$product.link|escape:'htmlall':'UTF-8'}" class="Voir ce produit"><h3 itemprop="name">{$product.name|escape:'htmlall':'UTF-8'|truncate:35:'...'}</h3></a>
 							<p itemprop="description">{$product.description_short|strip_tags:'UTF-8'|truncate:100:'...'}</p>
 						</div>
 						<!-- <p class="warning" itemscope itemtype="http://schema.org/Offer">
@@ -87,7 +87,7 @@
 							<option value="blonde_aquitaine">Charentaise</option>
 						</select> -->
 						<button class="moreless minus" name="minus" type="button">-</button>
-						<input class="quantity" type="text" disabled="" name="qty" value="0" maxlength="2">
+						<input class="quantity" type="text" disabled="" name="qty" value="1" maxlength="2">
 						<button class="moreless plus" name="plus" type="button">+</button>
 
 						<input type="hidden" name="token" value="{$static_token}" />
