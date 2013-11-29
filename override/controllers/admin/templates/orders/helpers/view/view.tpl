@@ -183,6 +183,17 @@
 				{/if}
 			{/if}
 
+			<br />
+			<fieldset>
+				<legend><img src="../img/admin/tab-customers.gif" /> {l s='Date and hour delivery'}</legend>
+					{l s='Date delivery:'} <b>{dateFormat date=$order->date_delivery full=false}</b><br />
+					{l s='Hour delivery:'} <b>{$order->hour_delivery}</b>
+					<form method="post" action="{$currentIndex}&vieworder&id_order={$order->id}&token={$smarty.get.token|escape:'htmlall':'UTF-8'}">
+						<input type="text" class="datepicker" name="date_delivery" placeholder="dd/mm/yyyy" id="date_delivery">
+						<input class="button" type="submit" name="submitDateDelivery" value="Change">
+					</form>
+			</fieldset>
+
 			<!-- Sources block -->
 			{if (sizeof($sources))}
 			<br />
@@ -431,12 +442,6 @@
 			{if !$order->isVirtual()}
 				<fieldset>
 					<legend><img src="../img/admin/delivery.gif" /> {l s='Shipping'}</legend>
-					
-					Afficher l'adresse de livraison <br />
-					Afficher la date de livraison <br />
-					Afficher la possibilité de changer de transporteur <br />
-					Afficher la possibilité de changer d'adresse et de date de livraison <br /><br />
-
 					<div class="clear" style="float: left; margin-right: 10px;">
 						<span>{l s='Recycled packaging:'}</span>
 						{if $order->recyclable}
