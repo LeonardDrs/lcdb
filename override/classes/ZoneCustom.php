@@ -102,7 +102,7 @@ class ZoneCustom extends ObjectModel
 	 * @param integer $cp
 	 * @return array Addresses
 	 */
-	public function isProche($cp)
+	public static function isProche($cp)
 	{
 		$sql = 'SELECT a.*
 				FROM `'._DB_PREFIX_.'zone_proche` a
@@ -115,7 +115,7 @@ class ZoneCustom extends ObjectModel
 	 * @param integer $cp
 	 * @return array Addresses
 	 */
-	public function isGrande($cp)
+	public static function isGrande($cp)
 	{
 		$sql = 'SELECT a.*
 				FROM `'._DB_PREFIX_.'zone_grande` a
