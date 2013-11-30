@@ -14,7 +14,8 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		CONCAT(LEFT(c.`firstname`, 1), \'. \', c.`lastname`) AS `customer`,
 		osl.`name` AS `osname`,
 		os.`color`,
-		IF((SELECT COUNT(so.id_order) FROM `'._DB_PREFIX_.'orders` so WHERE so.id_customer = a.id_customer) > 1, 0, 1) as new';
+		IF((SELECT COUNT(so.id_order) FROM `'._DB_PREFIX_.'orders` so WHERE so.id_customer = a.id_customer) > 1, 0, 1) as new,
+		a.total_products_wt as priceWithoutTax';
 		
 		$statuses_array = array();
 		$statuses = OrderState::getOrderStates((int)$this->context->language->id);
@@ -127,16 +128,14 @@ class AdminOrdersController extends AdminOrdersControllerCore
 
 		$totalOrders = count($this->_list);
 		$totalAmount = 0;
-
-		echo "<pre>";
-			print_r($this->_list);
-		echo "</pre>";
+		$totalAmountWithoutTax = 0;
 
 		foreach ($this->_list as $key => $order){
 			$totalAmount += $order['total_paid_tax_incl'];
+			$totalAmountWithoutTax += $order['priceWithoutTax'];
 		}
 
-		$cartAverage = $totalAmount/$totalOrders;
+		$cartAverage = $totalAmountWithoutTax/$totalOrders;
 
 		$this->context->smarty->assign(array(
 			"totalOrders" => $totalOrders,
@@ -167,44 +166,6 @@ class AdminOrdersController extends AdminOrdersControllerCore
 
 	protected function renderCSV()
 	{
-		// $ids = array();
-		// foreach ($list as $entry)
-		// 	$ids[] = $entry['id_product'];
-
-		// if (count($ids) <= 0)
-		// 	return;
-
-		// $id_lang = Context::getContext()->language->id;
-		// $products = new Collection('Product', $id_lang);
-		// $products->where('id_product', 'in', $ids);
-		// $products->getAll();
-
-		// $csv = new CSV($products, $this->l('commandes'));
-		// $csv->export();
-
-
-
-		// exports orders
-		// if (Tools::isSubmit('csv_orders'))
-		// {
-		// 	$ids = array();
-		// 	foreach ($this->_list as $entry)
-		// 		$ids[] = $entry['id_supply_order'];
-
-		// 	if (count($ids) <= 0)
-		// 		return;
-
-		// 	$id_lang = Context::getContext()->language->id;
-		// 	$orders = new Collection('SupplyOrder', $id_lang);
-		// 	$orders->where('is_template', '=', false);
-		// 	$orders->where('id_supply_order', 'in', $ids);
-		// 	$id_warehouse = $this->getCurrentWarehouse();
-		// 	if ($id_warehouse != -1)
-		// 		$orders->where('id_warehouse', '=', $id_warehouse);
-		// 	$orders->getAll();
-		// 	$csv = new CSV($orders, $this->l('supply_orders'));
-  //   		$csv->export();
-		// }
 
 		// exports details for all orders
 		if (Tools::isSubmit('csv_orders'))
@@ -214,7 +175,7 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			// header('Content-type: text/csv');
 			// header('Content-Type: application/force-download; charset=UTF-8');
 			// header('Cache-Control: no-store, no-cache');
-   //      	header('Content-disposition: attachment; filename="'.$this->l('orders_products').'.csv"');
+   			//      	header('Content-disposition: attachment; filename="'.$this->l('orders_products').'.csv"');
 
         	// echoes details
 			$ids = array();
