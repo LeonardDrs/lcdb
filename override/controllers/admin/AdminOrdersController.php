@@ -95,11 +95,22 @@ class AdminOrdersController extends AdminOrdersControllerCore
 	{
 		if (!($this->fields_list && is_array($this->fields_list)))
 			return false;
+
 		$this->getList($this->context->language->id);
-		
+
 		// Empty list is ok
 		if (!is_array($this->_list))
 			return false;
+
+		// export
+		if (Tools::isSubmit('csv_orders'))
+		{
+			if (count($this->_list) > 0)
+			{
+				$this->renderCSV();
+				die;
+			}
+		}
 
 		$helper = new HelperList();
 
@@ -116,6 +127,10 @@ class AdminOrdersController extends AdminOrdersControllerCore
 
 		$totalOrders = count($this->_list);
 		$totalAmount = 0;
+
+		echo "<pre>";
+			print_r($this->_list);
+		echo "</pre>";
 
 		foreach ($this->_list as $key => $order){
 			$totalAmount += $order['total_paid_tax_incl'];
@@ -134,5 +149,127 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		
 		return $list;
 	}
+
+	public function initToolbar()
+	{
+
+		parent::initToolbar();
+
+		if (!$this->display)
+		{
+			$this->toolbar_btn['export'] = array(
+				'href' => $this->context->link->getAdminLink('AdminOrders').'&amp;csv_orders',
+				'desc' => $this->l('Export products')
+			);
+		}
+
+	}
+
+	protected function renderCSV()
+	{
+		// $ids = array();
+		// foreach ($list as $entry)
+		// 	$ids[] = $entry['id_product'];
+
+		// if (count($ids) <= 0)
+		// 	return;
+
+		// $id_lang = Context::getContext()->language->id;
+		// $products = new Collection('Product', $id_lang);
+		// $products->where('id_product', 'in', $ids);
+		// $products->getAll();
+
+		// $csv = new CSV($products, $this->l('commandes'));
+		// $csv->export();
+
+
+
+		// exports orders
+		// if (Tools::isSubmit('csv_orders'))
+		// {
+		// 	$ids = array();
+		// 	foreach ($this->_list as $entry)
+		// 		$ids[] = $entry['id_supply_order'];
+
+		// 	if (count($ids) <= 0)
+		// 		return;
+
+		// 	$id_lang = Context::getContext()->language->id;
+		// 	$orders = new Collection('SupplyOrder', $id_lang);
+		// 	$orders->where('is_template', '=', false);
+		// 	$orders->where('id_supply_order', 'in', $ids);
+		// 	$id_warehouse = $this->getCurrentWarehouse();
+		// 	if ($id_warehouse != -1)
+		// 		$orders->where('id_warehouse', '=', $id_warehouse);
+		// 	$orders->getAll();
+		// 	$csv = new CSV($orders, $this->l('supply_orders'));
+  //   		$csv->export();
+		// }
+
+		// exports details for all orders
+		if (Tools::isSubmit('csv_orders'))
+		{
+
+			// header
+			// header('Content-type: text/csv');
+			// header('Content-Type: application/force-download; charset=UTF-8');
+			// header('Cache-Control: no-store, no-cache');
+   //      	header('Content-disposition: attachment; filename="'.$this->l('orders_products').'.csv"');
+
+        	// echoes details
+			$ids = array();
+			foreach ($this->_list as $entry)
+				$ids[] = $entry['id_order'];
+
+
+			if (count($ids) <= 0)
+				return;
+
+			// for each supply order
+			// $keys = array('id_product', 'id_product_attribute', 'reference', 'supplier_reference', 'ean13', 'upc', 'name',
+			// 			  'unit_price_te', 'quantity_expected', 'quantity_received', 'price_te', 'discount_rate', 'discount_value_te',
+			// 			  'price_with_discount_te', 'tax_rate', 'tax_value', 'price_ti', 'tax_value_with_order_discount',
+			// 			  'price_with_order_discount_te', 'id_supply_order');
+
+			// type de viande, label, nombre de pièce et poids, quantité
+			$keys = array('id_product', 'reference', 'name');
+			echo sprintf("%s\n", implode(';', array_map(array('CSVCore', 'wrap'), $keys)));
+
+			// overrides keys (in order to add FORMAT calls)
+			// $keys = array('p.id_product', 'p.reference', 'p.name',
+			// 			  'FORMAT(p.unit_price_te, 2)', 'p.quantity_expected', 'p.quantity_received', 'FORMAT(p.price_te, 2)',
+			// 			  'FORMAT(p.discount_rate, 2)', 'FORMAT(p.discount_value_te, 2)',
+			// 			  'FORMAT(p.price_with_discount_te, 2)', 'FORMAT(p.tax_rate, 2)', 'FORMAT(p.tax_value, 2)',
+			// 			  'FORMAT(p.price_ti, 2)', 'FORMAT(p.tax_value_with_order_discount, 2)',
+			// 			  'FORMAT(p.price_with_order_discount_te, 2)');
+			$number = "";
+			$keys = array('p.id_product', 'p.reference', 'pl.name');
+
+			foreach ($ids as $id)
+			{
+				$query = new DbQuery();
+				$query->select(implode(', ', $keys));
+				$query->from('product', 'p');
+				$query->leftJoin('order_detail', 'od', 'p.id_product = od.product_id');
+				$query->leftJoin('orders', 'o', 'o.id_order = od.id_order');
+				$query->leftJoin('product_lang', 'pl', 'p.id_product = pl.id_product', 'id_lang=1');
+				// $id_warehouse = $this->getCurrentWarehouse();
+				// if ($id_warehouse != -1)
+				// $query->where('so.id_warehouse = '.(int)$id_warehouse);
+				$query->where('o.id_order = '.(int)$id);
+				// $query->orderBy('p.id_supply_order_detail DESC');
+				$resource = Db::getInstance()->query($query);
+				// gets details
+				while ($row = Db::getInstance()->nextRow($resource)){
+					echo sprintf("%s\n", implode(';', array_map(array('CSVCore', 'wrap'), $row)));
+					echo "<br/>";
+				}
+
+			}
+
+		}
+
+	}
+
 }
 

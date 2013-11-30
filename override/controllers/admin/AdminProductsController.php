@@ -576,6 +576,19 @@ class AdminProductsController extends AdminProductsControllerCore
 		return $this->object;
 	}
 
+	protected function copyFromPost(&$object, $table)
+	{
+		parent::copyFromPost($object, $table);
+
+		$object->abo = (int)Tools::getValue('abo');
+		$object->unusual_product = (int)Tools::getValue('unusual_product');
+
+		$object->product_type_bio = (int)Tools::getValue('product_type_bio');
+		$object->product_type_cook = (int)Tools::getValue('product_type_cook');
+		$object->product_type_wtlamb = (int)Tools::getValue('product_type_wtlamb');
+		$object->product_type_wtpork = (int)Tools::getValue('product_type_wtpork');
+	}
+
 	public function processUpdate()
 	{
 		$this->checkProduct();

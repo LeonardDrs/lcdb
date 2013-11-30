@@ -6,7 +6,10 @@ class Product extends ProductCore
 	public $breeder;
 	public $abo;
 	public $unusual_product;
-	public $product_type;
+	public $product_type_cook;
+	public $product_type_bio;
+	public $product_type_wtlamb;
+	public $product_type_wtpork;
 	public $serving;
 	public $id_lcdb_import;
 	public $date_start;
@@ -37,7 +40,10 @@ class Product extends ProductCore
 			'is_virtual' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'abo' =>						array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'unusual_product' =>			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
-			'product_type' => 				array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
+			'product_type_cook' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'product_type_bio' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'product_type_wtlamb' => 		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'product_type_wtpork' => 		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'serving' => 					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 			'id_lcdb_import' => 			array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
 			'date_start' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
