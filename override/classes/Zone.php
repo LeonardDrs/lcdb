@@ -10,6 +10,7 @@ class Zone extends ZoneCore
 	public $creneau;
 	public $calendar;
 	public $minimum_order;
+	public $abonnement;
 
 	public static $definition = array(
 		'table' => 'zone',
@@ -17,6 +18,7 @@ class Zone extends ZoneCore
 		'fields' => array(
 			'name' => 	array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'required' => true, 'size' => 64),
 			'active' => array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'abonnement' => array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'horaire' => array('type' => self::TYPE_BOOL, 'validate' => 'isInt'),
 			'h_start' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
 			'h_end' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
@@ -52,7 +54,7 @@ class Zone extends ZoneCore
 	public static function getZoneCustomInfos($id_zone)
 	{
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
-			SELECT `id_zone`, `name`, `calendar`, `horaire`, `tranche`, `creneau`, `h_start`, `h_end`
+			SELECT `id_zone`, `name`, `abonnement`, `calendar`, `horaire`, `tranche`, `creneau`, `h_start`, `h_end`
 			FROM `'._DB_PREFIX_.'zone`
 			WHERE `id_zone` = \''.pSQL($id_zone).'\'
 		');
