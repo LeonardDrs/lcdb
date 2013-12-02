@@ -41,7 +41,6 @@ class Address extends AddressCore
 		} else {
 			$idZone = 11; // Province
 		}
-		// var_dump($idZone);
 
 		return $idZone;
 
