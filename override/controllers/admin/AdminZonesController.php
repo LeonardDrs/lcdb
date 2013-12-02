@@ -231,13 +231,12 @@ class AdminZonesController extends AdminZonesControllerCore
 			// {"2013":{"04":[1,4,11,19,25]}}
 			// {"04":[1,4,7,11,19,25]}
 			// {"04":{"1":"-2","4":"-2","11":"-2","19":"-2","25":"-2"}}
-
 			$opens = json_decode($this->fields_value['calendar']);
 			if (!$month && !$year) {
 				$month = date('m');
 				$year = date('Y');
 			}
-			$op = ($opens->$year->$month) ? $opens->$year->$month : array();
+			$op = (isset($opens->$year->$month)) ? $opens->$year->$month : array();
 			$cal .= AdminZonesController::Calendrier($month, $year, $op);
 
 			$cal .= '</div>';
@@ -303,12 +302,12 @@ class AdminZonesController extends AdminZonesControllerCore
 			// $html.= ($numday == $today ? ' class="today">' : '>');
 			// $html.= (in_array($numday, $links) ? ' class="open">' : '>');
 
-			$html.= '<td'.(!empty($class) ? ' class="'.$class.'"': '').' data-day="'.$numday.'" data-val="'.$links->$numday.'">';
+			$html.= '<td'.(!empty($class) ? ' class="'.$class.'"': '').' data-day="'.$numday.'" data-val="'.(isset($links->$numday) ? $links->$numday : 2).'">';
 			// on affiche le numéro du jour
 			$html.= '<div class="desc">
 				<strong>'.$numday.' '.$title.'</strong> <br>
 				Ouvert à la livraison <input type="checkbox" class="check" '.(isset($links->$numday) ? ' checked' : '').'> <br>
-				Jours de différence avant la fin de commande <input type="text" class="text" value="'.($links->$numday ? $links->$numday : 2).'"> <span class="okk">Ok</span>
+				Jours de différence avant la fin de commande <input type="text" class="text" value="'.(isset($links->$numday) ? $links->$numday : 2).'"> <span class="okk">Ok</span>
 			</div>'; 
 			$html.= $numday;
 			// on ferme la case
