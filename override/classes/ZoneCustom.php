@@ -31,6 +31,8 @@ class ZoneCustom extends ObjectModel
 	public $minimum = null;
 
 	public $free_shipping = null;
+	
+	public $abonnement_by_cp = 0;
 
 	/**
 	 * @see ObjectModel::$definition
@@ -42,6 +44,7 @@ class ZoneCustom extends ObjectModel
 			'cp' => 		array('type' => self::TYPE_INT, 'validate' => 'isNullOrUnsignedId', 'copy_post' => false),
 			'minimum' => 	array('type' => self::TYPE_INT, 'validate' => 'isNullOrUnsignedId', 'copy_post' => false),
 			'free_shipping' => 		array('type' => self::TYPE_INT, 'validate' => 'isNullOrUnsignedId', 'copy_post' => false),
+			'abonnement_by_cp' => 		array('type' => self::TYPE_INT, 'validate' => 'isBool', 'copy_post' => false),
 		),
 	);
 
@@ -54,6 +57,7 @@ class ZoneCustom extends ObjectModel
 			'cp' => array('xlink_resource'=> 'cp'),
 			'minimum' => array('xlink_resource'=> 'minimum'),
 			'free_shipping' => array('xlink_resource'=> 'free_shipping'),
+			'abonnement_by_cp' => array('xlink_resource'=> 'abonnement_by_cp'),
 		),
 	);
 
@@ -102,7 +106,7 @@ class ZoneCustom extends ObjectModel
 	 * @param integer $cp
 	 * @return array Addresses
 	 */
-	public function isProche($cp)
+	public static function isProche($cp)
 	{
 		$sql = 'SELECT a.*
 				FROM `'._DB_PREFIX_.'zone_proche` a
@@ -115,9 +119,23 @@ class ZoneCustom extends ObjectModel
 	 * @param integer $cp
 	 * @return array Addresses
 	 */
-	public function isGrande($cp)
+	public static function isGrande($cp)
 	{
 		$sql = 'SELECT a.*
+				FROM `'._DB_PREFIX_.'zone_grande` a
+				WHERE cp ='.$cp;
+		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+	}
+
+	/**
+	 * Return true if $ville is ok for abonnement
+	 *
+	 * @param integer $cp
+	 * @return array Addresses
+	 */
+	public function getAbonnementByCp($cp)
+	{
+		$sql = 'SELECT a.abonnement_by_cp
 				FROM `'._DB_PREFIX_.'zone_grande` a
 				WHERE cp ='.$cp;
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);

@@ -2127,6 +2127,38 @@ html body .place-order-button:hover,
 	color: #C1B9A9;
 	cursor: pointer;
 }
+#form-code-postal button:disabled {
+	background-color: #ddd;
+	color: #eee;
+	border-color: #eee;
+	cursor: not-allowed;
+}
+#form-code-postal .error {
+	margin: 8px 0;
+	padding: 4px 6px;
+}
+.frais-livraison .no-padding {
+	padding-top: 10px;
+	color: #ae2b25;
+	font-size: 12px;
+	text-align: center;
+}
+.frais-livraison table { margin: 10px -5px; }
+.frais-livraison table th{color:#897d71; padding-bottom:5px;}
+.frais-livraison table td {padding-top:10px; font-size:12px;}
+.frais-livraison .col_1{text-align:right; border-right:1px solid #beb5ac; padding-right:7px;}
+.frais-livraison .col_2{text-align:left; border-left:1px solid #ded9d2; padding-left:7px;}
+
+.frais-livraison .gras{font-weight:bold;}
+.frais-livraison .rouge{font-weight:bold; color:#a32519;}
+
+.frais-livraison a {font-size:12px;}
+.frais-livraison table a {font-size:9px;}
+.frais-livraison .italique{font-style:italic;}
+.frais-livraison .lien_vert a{color: #4D9810; line-height:18px; }
+.frais-livraison .lien_vert a:hover{text-decoration:none;color: #4D9810;border-bottom: 1px solid #4D9810;}
+.frais-livraison .lien_vert a:active{text-decoration:none;color: #4D9810;}
+
 #center_column .big-bloc{
 	border: 1px solid #bead9f;
 	-webkit-border-radius: 8px;
