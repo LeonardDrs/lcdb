@@ -66,6 +66,27 @@ class AdminZonesController extends AdminZonesControllerCore
 					'desc' => $this->l('Activer ou non les horaires de livraison pour cette zone')
 				),
 				array(
+					'type' => 'radio',
+					'label' => $this->l('Abonnement:'),
+					'name' => 'abonnement',
+					'required' => false,
+					'class' => 't',
+					'is_bool' => true,
+					'values' => array(
+						array(
+							'id' => 'abonnement_on',
+							'value' => 1,
+							'label' => $this->l('Enabled')
+						),
+						array(
+							'id' => 'abonnement_off',
+							'value' => 0,
+							'label' => $this->l('Disabled')
+						)
+					),
+					'desc' => $this->l('Activer ou non l\'abonnement pour cette zone')
+				),
+				array(
 					'type' => 'text',
 					'label' => $this->l('Début'),
 					'name' => 'h_start',
@@ -210,13 +231,12 @@ class AdminZonesController extends AdminZonesControllerCore
 			// {"2013":{"04":[1,4,11,19,25]}}
 			// {"04":[1,4,7,11,19,25]}
 			// {"04":{"1":"-2","4":"-2","11":"-2","19":"-2","25":"-2"}}
-
 			$opens = json_decode($this->fields_value['calendar']);
 			if (!$month && !$year) {
 				$month = date('m');
 				$year = date('Y');
 			}
-			$op = ($opens->$year->$month) ? $opens->$year->$month : array();
+			$op = (isset($opens->$year->$month)) ? $opens->$year->$month : array();
 			$cal .= AdminZonesController::Calendrier($month, $year, $op);
 
 			$cal .= '</div>';
@@ -282,12 +302,12 @@ class AdminZonesController extends AdminZonesControllerCore
 			// $html.= ($numday == $today ? ' class="today">' : '>');
 			// $html.= (in_array($numday, $links) ? ' class="open">' : '>');
 
-			$html.= '<td'.(!empty($class) ? ' class="'.$class.'"': '').' data-day="'.$numday.'" data-val="'.$links->$numday.'">';
+			$html.= '<td'.(!empty($class) ? ' class="'.$class.'"': '').' data-day="'.$numday.'" data-val="'.(isset($links->$numday) ? $links->$numday : 2).'">';
 			// on affiche le numéro du jour
 			$html.= '<div class="desc">
 				<strong>'.$numday.' '.$title.'</strong> <br>
 				Ouvert à la livraison <input type="checkbox" class="check" '.(isset($links->$numday) ? ' checked' : '').'> <br>
-				Jours de différence avant la fin de commande <input type="text" class="text" value="'.($links->$numday ? $links->$numday : 2).'"> <span class="okk">Ok</span>
+				Jours de différence avant la fin de commande <input type="text" class="text" value="'.(isset($links->$numday) ? $links->$numday : 2).'"> <span class="okk">Ok</span>
 			</div>'; 
 			$html.= $numday;
 			// on ferme la case
@@ -308,12 +328,25 @@ class AdminZonesController extends AdminZonesControllerCore
 		$html = '<div id="cp-zone-list">
 		<label>Code postaux</label>
 		<table>
-			<tr><th>Code postal</th><th>Minimum de commande</th><th>Livraison offerte</th></tr>';
+			<tr><th>Code postal</th><th>Minimum de commande</th><th>Livraison offerte</th><th>Abonnement</th></tr>';
 		foreach ($procheFields as $key => $value) {
-			$html.= '<tr><td><input type="text" name="cp[]" value="'.$value['cp'].'"></td><td><input type="text" name="minimum[]" value="'.$value['minimum'].'"></td><td><input type="text" name="free_shipping[]" value="'.$value['free_shipping'].'"></td></tr>';
+			$val = 0;
+			$html.= '<tr><td><input type="text" name="cp[]" value="'.$value['cp'].'"></td><td><input type="text" name="minimum[]" value="'.$value['minimum'].'"></td><td><input type="text" name="free_shipping[]" value="'.$value['free_shipping'].'"></td><td><input class="cheat" type="checkbox" value="1" name="abonnement_by_cp_cheat[]"';
+			if ($value['abonnement_by_cp']) {
+				$html.= ' checked ';
+				$val = 1;
+			}
+			$html.= '><input class="cheat_2" type="hidden" name="abonnement_by_cp[]" value="'.$val.'" /></td></tr>';
 		}
-		$html.= '<tr><td><input type="text" name="cp[]" value=""></td><td><input type="text" name="minimum[]" value=""></td><td><input type="text" name="free_shipping[]" value=""></td></tr>';
-		$html .= '</table></div>';
+		$html.= '<tr><td><input type="text" name="cp[]" value=""></td><td><input type="text" name="minimum[]" value=""></td><td><input type="text" name="free_shipping[]" value=""></td><td><input type="checkbox" name="abonnement_by_cp_cheat[]" class="cheat" value="1"><input class="cheat_2" type="hidden" name="abonnement_by_cp[]" value="0" /></td></tr>';
+		$html .= '</table>
+		<script>
+			$("#cp-zone-list .cheat").on("click",function(){
+				$(this).siblings(".cheat_2").val(this.checked | 0);
+				console.log($(this).siblings(".cheat_2").val());
+			});
+		</script>
+		</div>';
 		$str .= $html;
 	}
 
@@ -368,16 +401,24 @@ class AdminZonesController extends AdminZonesControllerCore
 		$cps = Tools::getValue('cp');
 		$minim = Tools::getValue('minimum');
 		$freeShip = Tools::getValue('free_shipping');
-		$sql = 'INSERT INTO `'._DB_PREFIX_.'zone_proche` (`cp`, `minimum`, `free_shipping`) VALUES';
+		$abo = Tools::getValue('abonnement_by_cp');
+		// var_dump($abo);die();
+		$sql = 'INSERT INTO `'._DB_PREFIX_.'zone_proche` (`cp`, `minimum`, `free_shipping`, `abonnement_by_cp`) VALUES';
 		// var_dump($cps);
 		foreach ($cps as $key => $value) {
 			if (!empty($value)) {
-				$sql .= '('.$cps[$key].', '.$minim[$key].', '.$freeShip[$key].')';
+				$abo_ = 0;
+				// var_dump($abo);
+				if ($abo[$key]) {
+					$abo_ = 1;
+				}
+				$sql .= '('.$cps[$key].', '.$minim[$key].', '.$freeShip[$key].', '.$abo_.')';
 				if (isset($cps[$key+1]) and $cps[$key+1]) {
 					$sql .= ', ';
 				}
 			}
 		}
+		// die();
 		Db::getInstance()->execute('TRUNCATE `'._DB_PREFIX_.'zone_proche`');
 		Db::getInstance()->execute($sql);
 	}

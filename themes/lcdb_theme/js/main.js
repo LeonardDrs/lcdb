@@ -115,6 +115,50 @@ $(document).ready(function(){
 		});
 	}
 
+	if ($('#form-code-postal').length > 0) {
+		$('#form-code-postal').submit(function() {
+			var $this 	= $(this),
+				$input 	= $this.find('input'),
+				$block  = $this.parent();
+
+			if ($input.val().length < 2 || $input.val().length > 5) {
+				$this.append('<p class="error">Code invalide</p>');
+				return false;
+			} else {
+				$this.find('p.error').remove();
+			}
+
+			$this.find('button').prop('disabled', true);
+
+			$.ajax({
+				method: 'POST',
+				url: $this.attr('action'),
+				data: { 'code_postal' : $input.val(), 'ajax': true },
+				dataType: 'json'
+			}).done(function( data ) {
+				var content = '',
+					first = '',
+					head = (data.zone == 1) ? 'Service' : 'Commande';
+				$block.find('.header').empty();
+				content += '<p class="no-padding">Minimum de commande : '+data.minimum_order+'</p>';
+				content += '<table><tbody><tr><th class="col_1">'+head+'</th><th class="col_2">Livraison</th></tr>';
+				for (var i = 0; i < data.infos.length; i++) {
+					first = (data.zone == 1) ? data.infos[i].mode : data.infos[i].price;
+					content += '<tr><td class="col_1">'+first+'</td><td class="col_2">'+data.infos[i].ship+'</td></tr>';
+				};
+				content += '</table>';
+				content += data.more;
+				$block.find('.response').html(content);
+
+			}).fail(function( jqXHR, textStatus, msg ) {
+				$this.append('<p class="error">Erreur</p>');
+			}).always(function() {
+				$this.find('button').prop('disabled', false);
+			});
+			return false;
+		});
+	}
+
 	$('input, textarea').placeholder();
 	
 	if($(".guestbook #temoignage").length > 0){

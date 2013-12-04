@@ -21,7 +21,7 @@ class DeliveryControllerCore extends FrontController
 	
 	public function postProcess()
 	{
-		if (Tools::isSubmit('bouton_carre')){
+		if (Tools::isSubmit('bouton_carre') || $this->ajax) {
 
 			$zip = Tools::getValue("code_postal");
 
@@ -41,11 +41,11 @@ class DeliveryControllerCore extends FrontController
 				$delivery['infos'] = array(
 					array(
 						"mode" => "Livraison à domicile",
-						"ship" => "Offerts",
+						"ship" => ($this->ajax) ? "<b class='rouge'>Offerte</b>" : "Offerts",
 						"time" => "Entre 7h30 et 20h, un créneau de 1h"
 					),array(
 						"mode" =>"Livraison en Point Relais",
-						"ship" => "Offerts",
+						"ship" => ($this->ajax) ? "<b class='rouge'>Offerte</b>" : "Offerts",
 						"time" => "L'après-midi, les horaires<br/> varient selon le point relais"
 					)
 				);
@@ -77,7 +77,7 @@ class DeliveryControllerCore extends FrontController
 						"ship" => "20 €*"
 					),array(
 						"price" =>"Supérieur à 100 €",
-						"ship" => "Offerts"
+						"ship" => ($this->ajax) ? "<b class='rouge'>Offerte</b>" : "Offerts"
 					)
 				);
 				$delivery['time'] = "Entre 7h30 et 20h, un créneau de 2h minimum";
@@ -96,7 +96,7 @@ class DeliveryControllerCore extends FrontController
 						"ship" => "14 €*"
 					),array(
 						"price" =>"Supérieur à 190 €",
-						"ship" => "Offerts"
+						"ship" => ($this->ajax) ? "<b class='rouge'>Offerte</b>" : "Offerts"
 					)
 				);
 				$delivery['time'] = "Entre 14h et 22h en semaine, un créneau de 2h <br/>Entre 8h et 13h le samedi";
@@ -117,21 +117,24 @@ class DeliveryControllerCore extends FrontController
 						"ship" => "14 €*"
 					),array(
 						"price" =>"Supérieur à 190 €",
-						"ship" => "Offerts"
+						"ship" => ($this->ajax) ? "<b class='rouge'>Offerte</b>" : "Offerts"
 					)
 				);
 				$delivery['time'] = "Entre 8h et 15h le mercredi et vendredi";
 				$delivery['content'] = "<p class='titre_vert_2'>Regroupement de commande</p><p>Parlez des Colis du Boucher à vous voisins ou au bureau
 				et économisez les frais de livraison. En commandant à plusieurs pour le même jour et à la même adresse de livraison vous pourrez ainsi
 				plus facilement faire baisser les frais de livraison, voire les annuler complètement.</p>";
+			}else{
+				$delivery['content'] = 'error';
 			}
 
-			if(Tools::getValue("ajax") == true){
-				echo json_encode($delivery);
+			$delivery['more'] = '<span class="lien_vert italique"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'index.php?controller=delivery">En savoir plus sur la livraison</a></span>';
+
+			if($this->ajax){
+				echo Tools::jsonEncode($delivery);
 			}else{
 				$this->context->smarty->assign('delivery', $delivery);
-			}	
-			
+			}
 		}
 	}
 }
