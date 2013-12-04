@@ -68,3 +68,7 @@
 		<p itemprop="description">Côte de Bœuf (Label Rouge - 1,2 kg) et Brochettes de Porc (Bio - 1 kg)</p>
 	</div>
 </div><!-- / .colis -->
+
+<pre>
+	{$product|print_r}
+</pre>

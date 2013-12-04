@@ -172,60 +172,84 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		{
 
 			// header
-			// header('Content-type: text/csv');
-			// header('Content-Type: application/force-download; charset=UTF-8');
-			// header('Cache-Control: no-store, no-cache');
-   			//      	header('Content-disposition: attachment; filename="'.$this->l('orders_products').'.csv"');
+			// header('Content-Type: application/vnd.ms-excel');
+			//   header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
+			//   header('Cache-Control: max-age=0');
+			header('Content-type: text/csv');
+			header('Content-Type: application/force-download; charset=UTF-8');
+			header('Cache-Control: no-store, no-cache');
+   			header('Content-disposition: attachment; filename="'.$this->l('orders_products').'.csv"');
 
-        	// echoes details
 			$ids = array();
-			foreach ($this->_list as $entry)
+			$list_id_order = "("; 
+			foreach ($this->_list as $key => $entry){
+				if($key != 0){
+					$list_id_order .= ",";
+				}
 				$ids[] = $entry['id_order'];
-
+				$list_id_order .= $entry['id_order']; 
+			}
+			$list_id_order .= ")"; 
 
 			if (count($ids) <= 0)
 				return;
 
-			// for each supply order
-			// $keys = array('id_product', 'id_product_attribute', 'reference', 'supplier_reference', 'ean13', 'upc', 'name',
-			// 			  'unit_price_te', 'quantity_expected', 'quantity_received', 'price_te', 'discount_rate', 'discount_value_te',
-			// 			  'price_with_discount_te', 'tax_rate', 'tax_value', 'price_ti', 'tax_value_with_order_discount',
-			// 			  'price_with_order_discount_te', 'id_supply_order');
-
-			// type de viande, label, nombre de pièce et poids, quantité
-			$keys = array('id_product', 'reference', 'name');
+			$keys = array('id_product', 'reference', 'name', 'quantité totale', 'quantité sélection', 'label_rouge', 'label_bio', 'nombre pers.', "poids (kg)");
 			echo sprintf("%s\n", implode(';', array_map(array('CSVCore', 'wrap'), $keys)));
 
-			// overrides keys (in order to add FORMAT calls)
-			// $keys = array('p.id_product', 'p.reference', 'p.name',
-			// 			  'FORMAT(p.unit_price_te, 2)', 'p.quantity_expected', 'p.quantity_received', 'FORMAT(p.price_te, 2)',
-			// 			  'FORMAT(p.discount_rate, 2)', 'FORMAT(p.discount_value_te, 2)',
-			// 			  'FORMAT(p.price_with_discount_te, 2)', 'FORMAT(p.tax_rate, 2)', 'FORMAT(p.tax_value, 2)',
-			// 			  'FORMAT(p.price_ti, 2)', 'FORMAT(p.tax_value_with_order_discount, 2)',
-			// 			  'FORMAT(p.price_with_order_discount_te, 2)');
 			$number = "";
-			$keys = array('p.id_product', 'p.reference', 'pl.name');
+			$keys = array('p.id_product', 'p.reference', 'pl.name', 'od.product_quantity');
 
-			foreach ($ids as $id)
-			{
-				$query = new DbQuery();
-				$query->select(implode(', ', $keys));
-				$query->from('product', 'p');
-				$query->leftJoin('order_detail', 'od', 'p.id_product = od.product_id');
-				$query->leftJoin('orders', 'o', 'o.id_order = od.id_order');
-				$query->leftJoin('product_lang', 'pl', 'p.id_product = pl.id_product', 'id_lang=1');
-				// $id_warehouse = $this->getCurrentWarehouse();
-				// if ($id_warehouse != -1)
-				// $query->where('so.id_warehouse = '.(int)$id_warehouse);
-				$query->where('o.id_order = '.(int)$id);
-				// $query->orderBy('p.id_supply_order_detail DESC');
-				$resource = Db::getInstance()->query($query);
-				// gets details
-				while ($row = Db::getInstance()->nextRow($resource)){
-					echo sprintf("%s\n", implode(';', array_map(array('CSVCore', 'wrap'), $row)));
-					echo "<br/>";
+			$queryBase = '
+				SELECT p.`id_product`, p.`reference`, pl.`name`, SUM(od.`product_quantity`) AS quantity
+			    FROM `lcdb_product` AS p
+			    LEFT JOIN `lcdb_product_lang` AS pl ON pl.`id_product` = p.`id_product`
+			    LEFT JOIN `lcdb_order_detail` AS od ON p.`id_product` = od.`product_id`
+			    LEFT JOIN `lcdb_orders` AS o ON od.`id_order` = o.`id_order`    
+			    WHERE o.`id_order` IN '.$list_id_order.'
+			    GROUP BY od.`product_id`
+			';
+
+			$resource = Db::getInstance()->query($queryBase);
+
+
+			while ($row = Db::getInstance()->nextRow($resource)){
+
+				// quantité selection 
+				$query = '
+					SELECT SUM(od.`product_quantity`), al.`name`
+					FROM `lcdb_order_detail` AS od
+					LEFT JOIN `lcdb_orders` AS o ON od.`id_order` = o.`id_order`
+					LEFT JOIN `lcdb_product_attribute_combination` AS pac ON pac.`id_product_attribute` = od.`product_attribute_id`
+					LEFT JOIN `lcdb_attribute_lang` AS al ON al.`id_attribute` = pac.`id_attribute`    
+					WHERE o.`id_order` IN '.$list_id_order.'
+					AND od.`product_id` = '.$row["id_product"].'
+					GROUP BY al.`name`
+				';
+
+				$quantity_selection = Db::getInstance()->executeS($query);
+				$row['quantity_selection'] = "";
+				foreach ($quantity_selection as $key => $item) {
+					if($item['name'] != ""){
+						$row['quantity_selection'] .=  $item['SUM(od.`product_quantity`)'] . " => ". $item['name'] . ' / ';
+					}
 				}
 
+				// features
+				$features = array(12, 11, 7, 13);
+				foreach ($features as $key) {
+					$query = '
+						SELECT fvl.`value`
+						FROM `lcdb_product` AS p
+						LEFT JOIN `lcdb_feature_product` AS fp ON fp.`id_product` = p.`id_product`
+						LEFT JOIN `lcdb_feature_value_lang` AS fvl ON fvl.`id_feature_value` = fp.`id_feature_value`
+						WHERE fp.`id_feature` = '.$key.' AND p.`id_product` = '.$row["id_product"].'
+					';
+
+					$feature = Db::getInstance()->executeS($query);
+					$row['feature_'.$key] = $feature[0]['value'];
+				}
+				echo sprintf("%s\n", implode(';', array_map(array('CSVCore', 'wrap'), $row)));
 			}
 
 		}

@@ -17,7 +17,7 @@ class CategoryController extends CategoryControllerCore
 				Tools::redirect('index.php?id_product=729&controller=product');
 				break;
 			case 7:
-				Tools::redirect('index.php?id_product=4&controller=product');
+				Tools::redirect('index.php?id_product=1029&controller=product');
 				break;
 			case 8:
 				Tools::redirect('index.php?id_category=11&controller=category');

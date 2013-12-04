@@ -102,6 +102,7 @@ class Category extends CategoryCore
 
 	public static function getLeftColumn($lang){
 		$parent = new Category(3, $lang);
+		// voir si la zone est bien lcdb, sinon on retire le colis cadeau
 		return $parent->getSubCategoriesByDepth(2, 4, $lang);
 	}
 
