@@ -717,8 +717,9 @@ product_tabs['Associations'] = new function(){
 	{
 		if (data == null)
 			return false;
-		var recipeId = data[1];
+
 		var recipeName = data[0];
+		var recipeId = data[1];
 
 		var $divRecipes = $('#divRecipes');
 		var $inputRecipes = $('#inputRecipes');
@@ -727,7 +728,7 @@ product_tabs['Associations'] = new function(){
 		/* delete recipe from select + add recipe line to the div, input_name, input_ids elements */
 		$divRecipes.html($divRecipes.html() + recipeName + ' <span class="delRecipe" name="' + recipeId + '" style="cursor: pointer;"><img src="../img/admin/delete.gif" /></span><br />');
 		$nameRecipes.val($nameRecipes.val() + recipeName + '¤');
-		$inputRecipes.val($inputRecipes.val() + RecipeId + '-');
+		$inputRecipes.val($inputRecipes.val() + recipeId + '-');
 		$('#recipe_autocomplete_input').val('');
 		$('#recipe_autocomplete_input').setOptions({
 			extraParams: {excludeIds : self.getRecipesIds()}

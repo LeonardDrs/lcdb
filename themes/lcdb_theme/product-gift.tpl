@@ -63,12 +63,14 @@
 		<p class="portions"><span class="img-portions"></span> 10 à 12 <span class="colis-portions">portions</span></p>
 		<p class="jours"><span class="img-jours"></span> 7 à 14 <span class="colis-jours">jours</span></p>
 	</div>
-	<div class="colis-composition">
-		<p class="green-title">La composition du colis pré-composé du mois</p>
-		<p itemprop="description">Côte de Bœuf (Label Rouge - 1,2 kg) et Brochettes de Porc (Bio - 1 kg)</p>
-	</div>
+	{if $packItems|@count > 0}
+		<div class="colis-composition">
+			<p class="green-title">La composition du colis pré-composé du mois</p>
+			<p itemprop="description">
+				{foreach from=$packItems item=packItem}
+					<span style="display:block;">{$packItem.name|escape:'htmlall':'UTF-8'}</span> 
+				{/foreach}
+			</p>
+		</div>
+	{/if}
 </div><!-- / .colis -->
-
-<pre>
-	{$product|print_r}
-</pre>

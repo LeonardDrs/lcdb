@@ -10,6 +10,36 @@ class FrontController extends FrontControllerCore
 		$menu_infos = CMS::getCMSPages($this->context->language->id, 3);
 		$menu_approach = CMS::getCMSPages($this->context->language->id, 2);
 		$menu_recipe = RecipeCategory::getSubCategoriesByDepth(1, 3, $this->context->language->id);
+
+		$allowed_zone = false;
+
+		// get zipcodes list
+		if ($this->context->customer->id){
+			$customer_adresses = $this->context->customer->getAddresses($this->context->language->id);
+			foreach ($customer_adresses as $key => $address) {
+				if(isset($address["postcode"]) && ($address["postcode"] != "")){
+					$zipcodes[] = $address["postcode"];
+				}
+			}
+		}
+
+		// display gift category only if allowed zone
+		if((count($zipcodes) > 0)){
+			foreach ($zipcodes as $key => $zip) {
+				$zone = Address::getZoneByZipCode($zip);
+				if($zone == ID_ZONE_PARIS){
+					$allowed_zone = true;
+				}
+			}
+		}
+
+		if($allowed_zone != true){
+			foreach ($menu_cats as $key => $category){
+				if($category['id_category'] == ID_CATEGORY_GIFT){
+					unset($menu_cats[$key]);
+				}
+			}
+		}
 		
 		$this->context->smarty->assign(array(
 			'menu_cats' => $menu_cats,

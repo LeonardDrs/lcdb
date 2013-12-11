@@ -245,7 +245,7 @@ class AdminProductsController extends AdminProductsControllerCore
 		
 		// recipe block
 		$recipes = Product::getRecipesLight($this->context->language->id, $product->id);
-		if ($post_recipes = Tools::getValue('inputRecipes'))
+		if ($post_recipes = Tools::getValue('inputRecipes', "17-"))
 		{
 			$post_recipes_tab = explode('-', Tools::getValue('inputRecipes'));
 			foreach ($post_recipes_tab as $recipe_id)
@@ -284,6 +284,14 @@ class AdminProductsController extends AdminProductsControllerCore
 				$recipe->changeAccessories($recipes_id);
 			}
 		}
+	}
+
+	public function haveThisRecipe($recipe_id, $recipes)
+	{
+		foreach ($recipes as $recipe)
+			if ((int)$recipe['id_recipe'] == (int)$recipe_id)
+				return true;
+		return false;
 	}
 	
 	public function renderForm()

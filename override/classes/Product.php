@@ -133,15 +133,15 @@ class Product extends ProductCore
 		if (!$context)
 			$context = Context::getContext();
 
-		$sql = 'SELECT p.`id_product`, p.`reference`, pl.`name`
-				FROM `'._DB_PREFIX_.'accessory`
-				LEFT JOIN `'._DB_PREFIX_.'product` p ON (p.`id_product`= `id_product_2`)
-				'.Shop::addSqlAssociation('product', 'p').'
-				LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (
-					p.`id_product` = pl.`id_product`
-					AND pl.`id_lang` = '.(int)$id_lang.Shop::addSqlRestrictionOnLang('pl').'
+		$sql = 'SELECT r.`id_recipe`, rl.`title`
+				FROM `'._DB_PREFIX_.'product_recipe` pr
+				LEFT JOIN `'._DB_PREFIX_.'recipe` r ON (r.`id_recipe`= pr.`id_recipe`)
+				'.Shop::addSqlAssociation('recipe', 'r').'
+				LEFT JOIN `'._DB_PREFIX_.'recipe_lang` rl ON (
+					r.`id_recipe` = rl.`id_recipe`
+					AND rl.`id_lang` = '.(int)$id_lang.'
 				)
-				WHERE `id_product_1` = '.(int)$id_product;
+				WHERE pr.`id_product` = '.(int)$id_product;
 
 		return Db::getInstance()->executeS($sql);
 	}

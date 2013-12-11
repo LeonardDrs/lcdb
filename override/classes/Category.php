@@ -100,10 +100,31 @@ class Category extends CategoryCore
 		return $result;
 	}
 
-	public static function getLeftColumn($lang){
+	public static function getLeftColumn($lang, $zipcodes = null){
+
 		$parent = new Category(3, $lang);
-		// voir si la zone est bien lcdb, sinon on retire le colis cadeau
-		return $parent->getSubCategoriesByDepth(2, 4, $lang);
+		$categories_list = $parent->getSubCategoriesByDepth(2, 4, $lang);
+		$allowed_zone = false;
+
+		// display gift category only if allowed zone
+		if((count($zipcodes) > 0)){
+			foreach ($zipcodes as $key => $zip) {
+				$zone = Address::getZoneByZipCode($zip);
+				if($zone == ID_ZONE_PARIS){
+					$allowed_zone = true;
+				}
+			}
+		}
+
+		if($allowed_zone != true){
+			foreach ($categories_list as $key => $category){
+				if($category['id_category'] == ID_CATEGORY_GIFT){
+					unset($categories_list[$key]);
+				}
+			}
+		}
+		
+		return $categories_list;
 	}
 
 	public static function getRightColumn($lang){

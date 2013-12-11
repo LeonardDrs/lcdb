@@ -32,8 +32,20 @@ class CategoryController extends CategoryControllerCore
 	public function initContent()
 	{
 		parent::initContent();
+
+		$zipcodes = array();
+
+		// get zipcodes list
+		if ($this->context->customer->id){
+			$customer_adresses = $this->context->customer->getAddresses($this->context->language->id);
+			foreach ($customer_adresses as $key => $address) {
+				if(isset($address["postcode"]) && ($address["postcode"] != "")){
+					$zipcodes[] = $address["postcode"];
+				}
+			}
+		}
 		
-		$leftcol = Category::getLeftColumn($this->context->language->id);
+		$leftcol = Category::getLeftColumn($this->context->language->id, $zipcodes);
 		$rightcol = Category::getRightColumn($this->context->language->id);
 
 		$this->context->smarty->assign(array(
