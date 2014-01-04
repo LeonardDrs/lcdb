@@ -245,12 +245,15 @@ class AdminProductsController extends AdminProductsControllerCore
 		
 		// recipe block
 		$recipes = Product::getRecipesLight($this->context->language->id, $product->id);
-		if ($post_recipes = Tools::getValue('inputRecipes', "17-"))
+		if ($post_recipes = Tools::getValue('inputRecipes'))
 		{
 			$post_recipes_tab = explode('-', Tools::getValue('inputRecipes'));
-			foreach ($post_recipes_tab as $recipe_id)
-				if (!$this->haveThisRecipe($recipe_id, $recipes) && $recipe = Product::getRecipeById($recipe_id))
+			foreach ($post_recipes_tab as $recipe_id){
+				if (!$this->haveThisRecipe($recipe_id, $recipes) && $recipe = Product::getRecipeById($recipe_id)){
 					$recipes[] = $recipe;
+				}
+			}
+
 		}
 		$data->assign('recipes', $recipes);
 		
@@ -274,6 +277,10 @@ class AdminProductsController extends AdminProductsControllerCore
 	
 	public function updateRecipes($recipe)
 	{
+		die();
+		echo "<pre>";
+		print_r($recipe);
+		echo "</pre>";
 		$recipe->deleteAccessories();
 		if ($recipes = Tools::getValue('inputRecipes'))
 		{
@@ -623,10 +630,14 @@ class AdminProductsController extends AdminProductsControllerCore
 				if (Shop::isFeatureActive() && Shop::getContext() != Shop::CONTEXT_SHOP)
 					$object->setFieldsToUpdate((array)Tools::getValue('multishop_check'));
 
+				echo "oui";
+
 				if ($object->update())
 				{
 					if (in_array($this->context->shop->getContext(), array(Shop::CONTEXT_SHOP, Shop::CONTEXT_ALL)))
 					{
+
+						echo "ouiiiii";
 						if ($this->isTabSubmitted('Shipping'))
 							$this->addCarriers();
 						if ($this->isTabSubmitted('Associations')){
