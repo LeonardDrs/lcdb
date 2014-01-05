@@ -24,7 +24,7 @@ class FrontController extends FrontControllerCore
 		}
 
 		// display gift category only if allowed zone
-		if((count($zipcodes) > 0)){
+		if(isset($zipcodes) && (count($zipcodes) > 0)){
 			foreach ($zipcodes as $key => $zip) {
 				$zone = Address::getZoneByZipCode($zip);
 				if($zone == ID_ZONE_PARIS){

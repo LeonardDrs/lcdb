@@ -14,6 +14,7 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		CONCAT(LEFT(c.`firstname`, 1), \'. \', c.`lastname`) AS `customer`,
 		osl.`name` AS `osname`,
 		os.`color`,
+		(SELECT c.name FROM `'._DB_PREFIX_.'carrier` c WHERE c.id_carrier = a.id_carrier) AS carrier,
 		IF((SELECT COUNT(so.id_order) FROM `'._DB_PREFIX_.'orders` so WHERE so.id_customer = a.id_customer) > 1, 0, 1) as new,
 		a.total_products_wt as priceWithoutTax';
 		
@@ -38,10 +39,6 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'title' => $this->l('Customer'),
 			'havingFilter' => true,
 		),
-		'payment' => array(
-			'title' => $this->l('Payment'),
-			'width' => 100
-		),
 		'osname' => array(
 			'title' => $this->l('Status'),
 			'color' => 'color',
@@ -50,6 +47,16 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'list' => $statuses_array,
 			'filter_key' => 'os!id_order_state',
 			'filter_type' => 'int'
+		),
+		'payment' => array(
+			'title' => $this->l('Payment'),
+			'width' => 100
+		),
+		'carrier' => array(
+			'title' => $this->l('Transport'),
+			'align' => 'center',
+			'width' => 200,
+			'havingFilter' => true
 		),
 		'zip' => array(
 			'title' => $this->l('Arrondissement / Ville'),
@@ -66,19 +73,19 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'type' => 'price',
 			'currency' => true
 		),
-		// 'date_asdd' => array(
-		// 	'title' => $this->l('Date delivery'),
-		// 	'width' => 150,
-		// 	'align' => 'right',
-		// 	'type' => 'datetime',
-		// 	'filter_key' => 'a!date_add'
-		// ),
 		'date_add' => array(
-			'title' => $this->l('Date'),
+			'title' => $this->l('Date commande'),
 			'width' => 150,
 			'align' => 'right',
 			'type' => 'datetime',
 			'filter_key' => 'a!date_add'
+		),
+		'date_delivery' => array(
+			'title' => $this->l('Date livraison'),
+			'width' => 150,
+			'align' => 'right',
+			'type' => 'date',
+			'filter_key' => 'a!date_delivery'
 		),
 		'id_pdf' => array(
 			'title' => $this->l('PDF'),
@@ -171,14 +178,10 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		if (Tools::isSubmit('csv_orders'))
 		{
 
-			// header
-			// header('Content-Type: application/vnd.ms-excel');
-			//   header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
-			//   header('Cache-Control: max-age=0');
-			header('Content-type: text/csv');
-			header('Content-Type: application/force-download; charset=UTF-8');
+   			header('Content-type: text/csv');
+	        header('Content-Type: application/force-download; charset=UTF-8');
 			header('Cache-Control: no-store, no-cache');
-   			header('Content-disposition: attachment; filename="'.$this->l('orders_products').'.csv"');
+	        header('Content-disposition: attachment; filename="'.$this->l('orders_products').'.csv"');
 
 			$ids = array();
 			$list_id_order = "("; 
@@ -195,7 +198,7 @@ class AdminOrdersController extends AdminOrdersControllerCore
 				return;
 
 			$keys = array('id_product', 'reference', 'name', 'quantité totale', 'quantité sélection', 'label_rouge', 'label_bio', 'nombre pers.', "poids (kg)");
-			echo sprintf("%s\n", implode(';', array_map(array('CSVCore', 'wrap'), $keys)));
+			$this->RowCSV($keys);
 
 			$number = "";
 			$keys = array('p.id_product', 'p.reference', 'pl.name', 'od.product_quantity');
@@ -207,11 +210,9 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			    LEFT JOIN `lcdb_order_detail` AS od ON p.`id_product` = od.`product_id`
 			    LEFT JOIN `lcdb_orders` AS o ON od.`id_order` = o.`id_order`    
 			    WHERE o.`id_order` IN '.$list_id_order.'
-			    GROUP BY od.`product_id`
-			';
+			    GROUP BY od.`product_id`';
 
 			$resource = Db::getInstance()->query($queryBase);
-
 
 			while ($row = Db::getInstance()->nextRow($resource)){
 
@@ -224,8 +225,7 @@ class AdminOrdersController extends AdminOrdersControllerCore
 					LEFT JOIN `lcdb_attribute_lang` AS al ON al.`id_attribute` = pac.`id_attribute`    
 					WHERE o.`id_order` IN '.$list_id_order.'
 					AND od.`product_id` = '.$row["id_product"].'
-					GROUP BY al.`name`
-				';
+					GROUP BY al.`name`';
 
 				$quantity_selection = Db::getInstance()->executeS($query);
 				$row['quantity_selection'] = "";
@@ -236,25 +236,32 @@ class AdminOrdersController extends AdminOrdersControllerCore
 				}
 
 				// features
-				$features = array(12, 11, 7, 13);
+				$features = array(ID_FEATURE_LABEL_ROUGE, ID_FEATURE_LABEL_BIO, ID_FEATURE_NUMBER_OF, ID_FEATURE_WEIGHT);
 				foreach ($features as $key) {
 					$query = '
 						SELECT fvl.`value`
 						FROM `lcdb_product` AS p
 						LEFT JOIN `lcdb_feature_product` AS fp ON fp.`id_product` = p.`id_product`
 						LEFT JOIN `lcdb_feature_value_lang` AS fvl ON fvl.`id_feature_value` = fp.`id_feature_value`
-						WHERE fp.`id_feature` = '.$key.' AND p.`id_product` = '.$row["id_product"].'
-					';
+						WHERE fp.`id_feature` = '.$key.' AND p.`id_product` = '.$row["id_product"];
 
 					$feature = Db::getInstance()->executeS($query);
 					$row['feature_'.$key] = $feature[0]['value'];
 				}
-				echo sprintf("%s\n", implode(';', array_map(array('CSVCore', 'wrap'), $row)));
+
+				$this->RowCSV($row);
 			}
 
 		}
 
 	}
+
+	public function RowCSV($content)
+	{
+		$wraped_data = array_map(array('CSVCore', 'wrap'), $content);
+		$new_content = utf8_encode(implode(";", $wraped_data));
+        echo sprintf("%s\n", $new_content);
+    }
 
 	public function postProcess()
 	{

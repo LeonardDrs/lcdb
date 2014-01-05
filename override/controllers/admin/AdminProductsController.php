@@ -275,20 +275,17 @@ class AdminProductsController extends AdminProductsControllerCore
 		$this->tpl_form_vars['custom_form'] = $data->fetch();
 	}
 	
-	public function updateRecipes($recipe)
+	public function updateRecipes($product)
 	{
-		die();
-		echo "<pre>";
-		print_r($recipe);
-		echo "</pre>";
-		$recipe->deleteAccessories();
+
+		$product->deleteRecipes();
 		if ($recipes = Tools::getValue('inputRecipes'))
 		{
 			$recipes_id = array_unique(explode('-', $recipes));
 			if (count($recipes_id))
 			{
 				array_pop($recipes_id);
-				$recipe->changeAccessories($recipes_id);
+				$product->changeRecipes($recipes_id);
 			}
 		}
 	}
@@ -630,14 +627,11 @@ class AdminProductsController extends AdminProductsControllerCore
 				if (Shop::isFeatureActive() && Shop::getContext() != Shop::CONTEXT_SHOP)
 					$object->setFieldsToUpdate((array)Tools::getValue('multishop_check'));
 
-				echo "oui";
-
 				if ($object->update())
 				{
 					if (in_array($this->context->shop->getContext(), array(Shop::CONTEXT_SHOP, Shop::CONTEXT_ALL)))
 					{
 
-						echo "ouiiiii";
 						if ($this->isTabSubmitted('Shipping'))
 							$this->addCarriers();
 						if ($this->isTabSubmitted('Associations')){

@@ -811,7 +811,7 @@ product_tabs['Associations'] = new function(){
 			self.delAccessory($(this).attr('name'));
 		});
 		$('#divRecipes').delegate('.delRecipe', 'click', function(){
-			self.delAccessory($(this).attr('name'));
+			self.delRecipe($(this).attr('name'));
 		});
 		if (display_multishop_checkboxes)
 			ProductMultishop.checkAllAssociations();

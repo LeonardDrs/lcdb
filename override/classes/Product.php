@@ -102,31 +102,21 @@ class Product extends ProductCore
 	);
 	
 	/**
-	 * Delete product accessories
+	 * Delete product recipes
 	 *
 	 * @return mixed Deletion result
 	 */
-	public function deleteAccessories()
+	public function deleteRecipes()
 	{
-		return Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'accessory` WHERE `id_product_1` = '.(int)$this->id);
+		return Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'product_recipe` WHERE `id_product` = '.(int)$this->id);
 	}
 
 	/**
-	 * Delete product from other products accessories
-	 *
-	 * @return mixed Deletion result
-	 */
-	public function deleteFromAccessories()
-	{
-		return Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'accessory` WHERE `id_product_2` = '.(int)$this->id);
-	}
-
-	/**
-	 * Get product accessories (only names)
+	 * Get product recipes (only names)
 	 *
 	 * @param integer $id_lang Language id
 	 * @param integer $id_product Product id
-	 * @return array Product accessories
+	 * @return array Product recipes
 	 */
 	public static function getRecipesLight($id_lang, $id_product, Context $context = null)
 	{
@@ -150,7 +140,7 @@ class Product extends ProductCore
 	 * Get product recipes
 	 *
 	 * @param integer $id_lang Language id
-	 * @return array Product accessories
+	 * @return array Product recipes
 	 */
 	public function getRecipes($id_lang, $active = true, Context $context = null)
 	{
@@ -179,16 +169,16 @@ class Product extends ProductCore
 	}
 
 	/**
-	 * Link accessories with product
+	 * Link recipes with product
 	 *
-	 * @param array $accessories_id Accessories ids
+	 * @param array $recipes_id Recipes ids
 	 */
 	public function changeRecipes($recipes_id)
 	{
-		foreach ($recipes_id as $id_recipe_2)
-			Db::getInstance()->insert('recipe', array(
-				'id_recipe_1' => (int)$this->id,
-				'id_recipe_2' => (int)$id_recipe_2
+		foreach ($recipes_id as $id_recipe)
+			Db::getInstance()->insert('product_recipe', array(
+				'id_product' => (int)$this->id,
+				'id_recipe' => (int)$id_recipe
 			));
 	}
 
