@@ -38,7 +38,7 @@ class AdminGuestbookControllerCore extends AdminController
 
 		$this->fields_form = array(
 			'tinymce' => true,
-		'legend' => array(
+			'legend' => array(
 			'title' => $this->l('Guestbook Page'),
 			'image' => '../img/admin/tab-categories.gif'
 			),
@@ -123,6 +123,7 @@ class AdminGuestbookControllerCore extends AdminController
 			'active' => $this->object->active,
 			'PS_ALLOW_ACCENTED_CHARS_URL', (int)Configuration::get('PS_ALLOW_ACCENTED_CHARS_URL')
 			);
+
 		return parent::renderForm();
 	}
 
@@ -137,168 +138,132 @@ class AdminGuestbookControllerCore extends AdminController
 		return parent::renderList();
 	}
 
-	public function displayList($token = null)
+	public function postProcess()
 	{
-		/* Display list header (filtering, pagination and column names) */
-		$this->displayListHeader($token);
-		if (!count($this->_list))
-			echo '<tr><td class="center" colspan="'.(count($this->fields_list) + 2).'">'.$this->l('No items found').'</td></tr>';
-
-		/* Show the content of the table */
-		$this->displayListContent($token);
-
-		/* Close list table and submit button */
-		$this->displayListFooter($token);
-	}
-
-	/**
-	* Modifying initial getList method to display position feature (drag and drop)
-	*/
-public function getList($id_lang, $order_by = null, $order_way = null, $start = 0, $limit = null, $id_lang_shop = false)
-{
-	if ($order_by && $this->context->cookie->__get($this->table.'Orderby'))
-		$order_by = $this->context->cookie->__get($this->table.'Orderby');
-
-	parent::getList($id_lang, $order_by, $order_way, $start, $limit, $id_lang_shop);
-}
-
-public function guestbookProcess()
-{
-	if (Tools::isSubmit('viewguestbook') && ($id_guestbook = (int)Tools::getValue('id_guestbook')) && ($guestbook = new Guestbook($id_guestbook, $this->context->language->id)) && Validate::isLoadedObject($guestbook))
-	{
-		$redir = $this->context->link->getGuestbookLink($guestbook);
-		if (!$guestbook->active)
+		if (Tools::isSubmit('viewguestbook') && ($id_guestbook = (int)Tools::getValue('id_guestbook')) && ($guestbook = new Guestbook($id_guestbook, $this->context->language->id)) && Validate::isLoadedObject($guestbook))
 		{
-			$admin_dir = dirname($_SERVER['PHP_SELF']);
-			$admin_dir = substr($admin_dir, strrpos($admin_dir, '/') + 1);
-			$redir .= '?adtoken='.Tools::getAdminTokenLite('AdminGuestbookContent').'&ad='.$admin_dir.'&id_employee='.(int)$this->context->employee->id;
-		}
-		Tools::redirectAdmin($redir);
-	}
-	elseif (Tools::isSubmit('deleteguestbook'))
-	{
-		if (Tools::getValue('id_guestbook') == Configuration::get('PS_CONDITIONS_POST_ID'))
-		{
-			Configuration::updateValue('PS_CONDITIONS', 0);
-			Configuration::updateValue('PS_CONDITIONS_POST_ID', 0);
-		}
-		$guestbook = new Guestbook((int)Tools::getValue('id_guestbook'));
-		if (!$guestbook->delete())
-			$this->errors[] = Tools::displayError('An error occurred while deleting object.')
-			.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
-		else
-			Tools::redirectAdmin(self::$currentIndex.'&conf=1&token='.Tools::getAdminTokenLite('AdminGuestbookContent'));
-	}/* Delete multiple objects */
-	elseif (Tools::getValue('submitDel'.$this->table))
-	{
-		if ($this->tabAccess['delete'] === '1')
-		{
-			if (Tools::isSubmit($this->table.'Box'))
+			$redir = $this->context->link->getGuestbookLink($guestbook);
+			if (!$guestbook->active)
 			{
-				$guestbook = new Guestbook();
-				$result = true;
-				$result = $guestbook->deleteSelection(Tools::getValue($this->table.'Box'));
-				if ($result)
+				$admin_dir = dirname($_SERVER['PHP_SELF']);
+				$admin_dir = substr($admin_dir, strrpos($admin_dir, '/') + 1);
+				$redir .= '?adtoken='.Tools::getAdminTokenLite('AdminGuestbookContent').'&ad='.$admin_dir.'&id_employee='.(int)$this->context->employee->id;
+			}
+			Tools::redirectAdmin($redir);
+		}
+		elseif (Tools::isSubmit('deleteguestbook'))
+		{
+			if (Tools::getValue('id_guestbook') == Configuration::get('PS_CONDITIONS_POST_ID'))
+			{
+				Configuration::updateValue('PS_CONDITIONS', 0);
+				Configuration::updateValue('PS_CONDITIONS_POST_ID', 0);
+			}
+			$guestbook = new Guestbook((int)Tools::getValue('id_guestbook'));
+			if (!$guestbook->delete())
+				$this->errors[] = Tools::displayError('An error occurred while deleting object.')
+				.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
+			else
+				Tools::redirectAdmin(self::$currentIndex.'&conf=1&token='.Tools::getAdminTokenLite('AdminGuestbook'));
+		}/* Delete multiple objects */
+		elseif (Tools::getValue('submitDel'.$this->table))
+		{
+			if ($this->tabAccess['delete'] === '1')
+			{
+				if (Tools::isSubmit($this->table.'Box'))
 				{
-					$token = Tools::getAdminTokenLite('AdminGuestbookContent');
-					Tools::redirectAdmin(self::$currentIndex.'&conf=2&token='.$token);
+					$guestbook = new Guestbook();
+					$result = true;
+					$result = $guestbook->deleteSelection(Tools::getValue($this->table.'Box'));
+					if ($result)
+					{
+						$token = Tools::getAdminTokenLite('AdminGuestbook');
+						Tools::redirectAdmin(self::$currentIndex.'&conf=2&token='.$token);
+					}
+					$this->errors[] = Tools::displayError('An error occurred while deleting selection.');
+
 				}
-				$this->errors[] = Tools::displayError('An error occurred while deleting selection.');
-
+				else
+					$this->errors[] = Tools::displayError('You must select at least one element to delete.');
 			}
 			else
-				$this->errors[] = Tools::displayError('You must select at least one element to delete.');
+				$this->errors[] = Tools::displayError('You do not have permission to delete here.');
 		}
-		else
-			$this->errors[] = Tools::displayError('You do not have permission to delete here.');
-	}
-	elseif (Tools::isSubmit('submitAddguestbook') || Tools::isSubmit('submitAddguestbookAndPreview'))
-	{
-		parent::validateRules();
-		if (!count($this->errors))
+		elseif (Tools::isSubmit('submitAddguestbook') || Tools::isSubmit('submitAddguestbookAndPreview'))
 		{
-			if (!$id_guestbook = (int)Tools::getValue('id_guestbook'))
+			parent::validateRules();
+			if (!count($this->errors))
 			{
-				$guestbook = new Guestbook();
-				$this->copyFromGuestbook($guestbook, 'guestbook');
-				if (!$guestbook->add())
-					$this->errors[] = Tools::displayError('An error occurred while creating object.')
-					.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
-				else
-					$this->updateAssoShop($guestbook->id);
-			}
-			else
-			{
-				$guestbook = new Guestbook($id_guestbook);
-				$this->copyFromGuestbook($guestbook, 'guestbook');
-				if (!$guestbook->update())
-					$this->errors[] = Tools::displayError('An error occurred while updating object.')
-					.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
-				else
-					$this->updateAssoShop($guestbook->id);
-
-			}
-			if (Tools::isSubmit('submitAddguestbookAndPreview'))
-			{
-				$alias = $this->getFieldValue($guestbook, 'link_rewrite', $this->context->language->id);
-				$preview_url = $this->context->link->getGuestbookLink($guestbook, $alias, $this->context->language->id);
-
-				if (!$guestbook->active)
+				if (!$id_guestbook = (int)Tools::getValue('id_guestbook'))
 				{
-					$admin_dir = dirname($_SERVER['PHP_SELF']);
-					$admin_dir = substr($admin_dir, strrpos($admin_dir, '/') + 1);
-
-					$params = http_build_query(array(
-						'adtoken' => Tools::getAdminTokenLite('AdminGuestbookContent'),
-						'ad' => $admin_dir,
-						'id_employee' => (int)$this->context->employee->id)
-						);
-					if (Configuration::get('PS_REWRITING_SETTINGS'))
-						$params = '?'.$params;
+					$guestbook = new Guestbook();
+					$this->copyFromPost($guestbook, 'guestbook');
+					if (!$guestbook->add())
+						$this->errors[] = Tools::displayError('An error occurred while creating object.')
+						.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
 					else
-						$params = '&'.$params;
-
-					$preview_url .= $guestbook->active ? '' : $params;
+						$this->updateAssoShop($guestbook->id);
 				}
-				Tools::redirectAdmin($preview_url);
-			}
-			else
-				Tools::redirectAdmin(self::$currentIndex.'&conf=4&token='.Tools::getAdminTokenLite('AdminGuestbookContent'));
-		}
-	}
-	elseif (Tools::getValue('position'))
-	{
-		if ($this->tabAccess['edit'] !== '1')
-			$this->errors[] = Tools::displayError('You do not have permission to edit here.');
-		elseif (!Validate::isLoadedObject($object = $this->loadObject()))
-			$this->errors[] = Tools::displayError('An error occurred while updating status for object.')
-			.' <b>'.$this->table.'</b> '.Tools::displayError('(cannot load object)');
-		elseif (!$object->updatePosition((int)Tools::getValue('way'), (int)Tools::getValue('position')))
-			$this->errors[] = Tools::displayError('Failed to update the position.');
-		else
-			Tools::redirectAdmin(self::$currentIndex.'&'.$this->table.'Orderby=position&'.$this->table.'Orderway=asc'.'&token='.Tools::getAdminTokenLite('AdminGuestbookContent'));
-	}
-	/* Change object statuts (active, inactive) */
-	elseif (Tools::isSubmit('statusguestbook') && Tools::isSubmit($this->identifier))
-	{
-		if ($this->tabAccess['edit'] === '1')
-		{
-			if (Validate::isLoadedObject($object = $this->loadObject()))
-			{
-				if ($object->toggleStatus())
-					Tools::redirectAdmin(self::$currentIndex.'&token='.Tools::getValue('token'));
 				else
-					$this->errors[] = Tools::displayError('An error occurred while updating status.');
+				{
+					$guestbook = new Guestbook($id_guestbook);
+					$this->copyFromPost($guestbook, 'guestbook');
+					if (!$guestbook->update())
+						$this->errors[] = Tools::displayError('An error occurred while updating object.')
+						.' <b>'.$this->table.' ('.Db::getInstance()->getMsgError().')</b>';
+					else
+						$this->updateAssoShop($guestbook->id);
+
+				}
+				if (Tools::isSubmit('submitAddguestbookAndPreview'))
+				{
+					$alias = $this->getFieldValue($guestbook, 'link_rewrite', $this->context->language->id);
+					$preview_url = $this->context->link->getGuestbookLink($guestbook, $alias, $this->context->language->id);
+
+					if (!$guestbook->active)
+					{
+						$admin_dir = dirname($_SERVER['PHP_SELF']);
+						$admin_dir = substr($admin_dir, strrpos($admin_dir, '/') + 1);
+
+						$params = http_build_query(array(
+							'adtoken' => Tools::getAdminTokenLite('AdminGuestbookContent'),
+							'ad' => $admin_dir,
+							'id_employee' => (int)$this->context->employee->id)
+							);
+						if (Configuration::get('PS_REWRITING_SETTINGS'))
+							$params = '?'.$params;
+						else
+							$params = '&'.$params;
+
+						$preview_url .= $guestbook->active ? '' : $params;
+					}
+					Tools::redirectAdmin($preview_url);
+				}
+				else
+					Tools::redirectAdmin(self::$currentIndex.'&conf=4&token='.Tools::getAdminTokenLite('AdminGuestbook'));
+			}
+		}
+		/* Change object statuts (active, inactive) */
+		elseif (Tools::isSubmit('statusguestbook') && Tools::isSubmit($this->identifier))
+		{
+			if ($this->tabAccess['edit'] === '1')
+			{
+				if (Validate::isLoadedObject($object = $this->loadObject()))
+				{
+					if ($object->toggleStatus())
+						Tools::redirectAdmin(self::$currentIndex.'&token='.Tools::getValue('token'));
+					else
+						$this->errors[] = Tools::displayError('An error occurred while updating status.');
+				}
+				else
+					$this->errors[] = Tools::displayError('An error occurred while updating status for object.')
+					.' <b>'.$this->table.'</b> '.Tools::displayError('(cannot load object)');
 			}
 			else
-				$this->errors[] = Tools::displayError('An error occurred while updating status for object.')
-				.' <b>'.$this->table.'</b> '.Tools::displayError('(cannot load object)');
+				$this->errors[] = Tools::displayError('You do not have permission to edit here.');
+
 		}
 		else
-			$this->errors[] = Tools::displayError('You do not have permission to edit here.');
+			parent::postProcess(true);
 	}
-	else
-		parent::guestbookProcess(true);
-}
 }
 

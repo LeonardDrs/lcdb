@@ -110,6 +110,9 @@
 						<li class="center"></li>
 						<li class="village"><a href="#" title="Le village">Le village</a>
 							<ul>
+								<li class="first"><a href="{$link->getPageLink('guestbook', true)}" title="Parrainage">Témoignages</a></li>
+								<li class=""><a href="/blog" title="Parrainage">Blog</a></li>
+								<li class=""><a href="{$link->getPageLink('post', true)}" title="Parrainage">Presse</a></li>
 								<li class="last"><a href="{$base_dir}?fc=module&module=referralprogram&controller=program" title="Parrainage">Parrainage</a></li>
 							</ul>
 						</li>
@@ -118,7 +121,7 @@
 								{foreach from=$menu_infos item=page name=foo}
 									<li class="{if $smarty.foreach.foo.first}first {/if}"><a href="{$link->getCMSLink($page.id_cms, $page.link_rewrite)}" title="{$page.meta_title}">{$page.meta_title}</a></li>
 								{/foreach}
-								<li><a href="{$base_dir}index.php?controller=delivery">Livraison</a></li>
+								<li><a href="{$link->getPageLink('delivery', true)}">Livraison</a></li>
 								<li class="last"><a href="{$link->getCMSCategoryLink(4)}">Question fréquentes</a></li>
 							</ul>
 						</li>

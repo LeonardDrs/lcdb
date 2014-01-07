@@ -19,6 +19,7 @@ class Guestbook extends ObjectModel
 		'primary' => 'id_guestbook',
 		'multilang' => true,
 		'fields' => array(
+			'position' => 			array('type' => self::TYPE_INT),
 			'active' => 			array('type' => self::TYPE_BOOL),
 			'id_lcdb_import' => 	array('type' => self::TYPE_INT),
 			'firstname' =>	array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'required' => true, 'size' => 100),
@@ -38,12 +39,15 @@ class Guestbook extends ObjectModel
 	public function update($null_values = false)
 	{
 		if (parent::update($null_values))
+			return true;
 		return false;
 	}
 
 	public function delete()
 	{
+
 	 	if (parent::delete())
+			return true;
 		return false;
 	}
 
@@ -53,12 +57,11 @@ class Guestbook extends ObjectModel
 			$id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
-		SELECT c.id_guestbook, l.email
+		SELECT c.id_guestbook, c.email
 		FROM  '._DB_PREFIX_.'guestbook c
 		JOIN '._DB_PREFIX_.'guestbook_lang l ON (c.id_guestbook = l.id_guestbook)
 		'.Shop::addSqlAssociation('guestbook', 'c').'
-		'.(($id_block) ? 'JOIN '._DB_PREFIX_.'block_guestbook b ON (c.id_guestbook = b.id_guestbook)' : '').'
-		WHERE l.id_lang = '.(int)$id_lang.(($id_block) ? ' AND b.id_block = '.(int)$id_block : '').($active ? ' AND c.`active` = 1 ' : '').'
+		WHERE l.id_lang = '.(int)$id_lang.($active ? ' AND c.`active` = 1 ' : '').'
 		GROUP BY c.id_guestbook');
 	}
 
@@ -78,13 +81,14 @@ class Guestbook extends ObjectModel
 
 	public static function getUrlRewriteInformations($id_guestbook)
 	{
-	    $sql = 'SELECT l.`id_lang`, c.`link_rewrite`
-				FROM `'._DB_PREFIX_.'guestbook_lang` AS c
-				LEFT JOIN  `'._DB_PREFIX_.'lang` AS l ON c.`id_lang` = l.`id_lang`
+	    $sql = 'SELECT l.`id_lang`
+				FROM `'._DB_PREFIX_.'guestbook` AS c
+				LEFT JOIN  `'._DB_PREFIX_.'guestbook_lang` AS l ON c.`id_lang` = l.`id_lang`
 				WHERE c.`id_guestbook` = '.(int)$id_guestbook.'
-				AND l.`active` = 1';
+				AND c.`active` = 1';
 
 		return Db::getInstance()->executeS($sql);
 	}
+
 }
 
