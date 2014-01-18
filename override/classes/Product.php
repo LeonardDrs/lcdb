@@ -6,7 +6,10 @@ class Product extends ProductCore
 	public $breeder;
 	public $abo;
 	public $unusual_product;
-	public $product_type;
+	public $product_type_cook;
+	public $product_type_bio;
+	public $product_type_wtlamb;
+	public $product_type_wtpork;
 	public $serving;
 	public $id_lcdb_import;
 	public $date_start;
@@ -37,7 +40,10 @@ class Product extends ProductCore
 			'is_virtual' => 				array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'abo' =>						array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'unusual_product' =>			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
-			'product_type' => 				array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
+			'product_type_cook' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'product_type_bio' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'product_type_wtlamb' => 		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+			'product_type_wtpork' => 		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'serving' => 					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 			'id_lcdb_import' => 			array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
 			'date_start' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
@@ -96,46 +102,36 @@ class Product extends ProductCore
 	);
 	
 	/**
-	 * Delete product accessories
+	 * Delete product recipes
 	 *
 	 * @return mixed Deletion result
 	 */
-	public function deleteAccessories()
+	public function deleteRecipes()
 	{
-		return Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'accessory` WHERE `id_product_1` = '.(int)$this->id);
+		return Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'product_recipe` WHERE `id_product` = '.(int)$this->id);
 	}
 
 	/**
-	 * Delete product from other products accessories
-	 *
-	 * @return mixed Deletion result
-	 */
-	public function deleteFromAccessories()
-	{
-		return Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'accessory` WHERE `id_product_2` = '.(int)$this->id);
-	}
-
-	/**
-	 * Get product accessories (only names)
+	 * Get product recipes (only names)
 	 *
 	 * @param integer $id_lang Language id
 	 * @param integer $id_product Product id
-	 * @return array Product accessories
+	 * @return array Product recipes
 	 */
 	public static function getRecipesLight($id_lang, $id_product, Context $context = null)
 	{
 		if (!$context)
 			$context = Context::getContext();
 
-		$sql = 'SELECT p.`id_product`, p.`reference`, pl.`name`
-				FROM `'._DB_PREFIX_.'accessory`
-				LEFT JOIN `'._DB_PREFIX_.'product` p ON (p.`id_product`= `id_product_2`)
-				'.Shop::addSqlAssociation('product', 'p').'
-				LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (
-					p.`id_product` = pl.`id_product`
-					AND pl.`id_lang` = '.(int)$id_lang.Shop::addSqlRestrictionOnLang('pl').'
+		$sql = 'SELECT r.`id_recipe`, rl.`title`
+				FROM `'._DB_PREFIX_.'product_recipe` pr
+				LEFT JOIN `'._DB_PREFIX_.'recipe` r ON (r.`id_recipe`= pr.`id_recipe`)
+				'.Shop::addSqlAssociation('recipe', 'r').'
+				LEFT JOIN `'._DB_PREFIX_.'recipe_lang` rl ON (
+					r.`id_recipe` = rl.`id_recipe`
+					AND rl.`id_lang` = '.(int)$id_lang.'
 				)
-				WHERE `id_product_1` = '.(int)$id_product;
+				WHERE pr.`id_product` = '.(int)$id_product;
 
 		return Db::getInstance()->executeS($sql);
 	}
@@ -144,7 +140,7 @@ class Product extends ProductCore
 	 * Get product recipes
 	 *
 	 * @param integer $id_lang Language id
-	 * @return array Product accessories
+	 * @return array Product recipes
 	 */
 	public function getRecipes($id_lang, $active = true, Context $context = null)
 	{
@@ -173,16 +169,16 @@ class Product extends ProductCore
 	}
 
 	/**
-	 * Link accessories with product
+	 * Link recipes with product
 	 *
-	 * @param array $accessories_id Accessories ids
+	 * @param array $recipes_id Recipes ids
 	 */
 	public function changeRecipes($recipes_id)
 	{
-		foreach ($recipes_id as $id_recipe_2)
-			Db::getInstance()->insert('recipe', array(
-				'id_recipe_1' => (int)$this->id,
-				'id_recipe_2' => (int)$id_recipe_2
+		foreach ($recipes_id as $id_recipe)
+			Db::getInstance()->insert('product_recipe', array(
+				'id_product' => (int)$this->id,
+				'id_recipe' => (int)$id_recipe
 			));
 	}
 

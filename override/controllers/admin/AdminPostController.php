@@ -38,8 +38,6 @@ class AdminPostControllerCore extends AdminController
 		if (!$this->loadObject(true))
 			return;
 			
-		$test= "<p>pl</p>";
-
 		$this->fields_form = array(
 			'tinymce' => true,
 			'legend' => array(
@@ -275,21 +273,9 @@ class AdminPostControllerCore extends AdminController
 					
 
 				}
-				Tools::redirectAdmin(self::$currentIndex.'&conf=4&token='.Tools::getAdminTokenLite('AdminPostContent'));
+				Tools::redirectAdmin(self::$currentIndex.'&conf=4&token='.Tools::getAdminTokenLite('AdminPost'));
 					
 			}
-		}
-		elseif (Tools::getValue('position'))
-		{
-			if ($this->tabAccess['edit'] !== '1')
-				$this->errors[] = Tools::displayError('You do not have permission to edit here.');
-			elseif (!Validate::isLoadedObject($object = $this->loadObject()))
-				$this->errors[] = Tools::displayError('An error occurred while updating status for object.')
-					.' <b>'.$this->table.'</b> '.Tools::displayError('(cannot load object)');
-			elseif (!$object->updatePosition((int)Tools::getValue('way'), (int)Tools::getValue('position')))
-				$this->errors[] = Tools::displayError('Failed to update the position.');
-			else
-				Tools::redirectAdmin(self::$currentIndex.'&'.$this->table.'Orderby=position&'.$this->table.'Orderway=asc'.'&token='.Tools::getAdminTokenLite('AdminPostContent'));
 		}
 		/* Change object statuts (active, inactive) */
 		elseif (Tools::isSubmit('statuspost') && Tools::isSubmit($this->identifier))

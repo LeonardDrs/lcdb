@@ -120,18 +120,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="col-left"><label>{$bullet_common_field} {l s='Product type:'}</label></td>
-			<td style="padding-bottom:5px;">
-				<select name="product_type" id="product_type">
-					<option value="nothing" {if $product->product_type == 'nothing'}selected="selected"{/if} >{l s='Nothing'}</option>
-					<option value="wtpork" {if $product->product_type == 'wtpork'}selected="selected"{/if} >{l s='Without pork'}</option>
-					<option value="wtlamb" {if $product->product_type == 'wtlamb'}selected="selected"{/if} >{l s='Without lamb'}</option>
-					<option value="bio" {if $product->product_type == 'bio'}selected="selected"{/if} >{l s='100 bio'}</option>
-					<option value="cook" {if $product->product_type == 'cook'}selected="selected"{/if}>{l s='Easy cooking'}</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
 			<td class="col-left"><label>{l s='Date of start:'}</label></td>
 			<td style="padding-bottom:5px;">
 				<input id="date_start" name="date_start" value="{$product->date_start}" class="datepicker"
@@ -222,6 +210,7 @@
 
 			<label>{l s='Options:'}</label>
 		</td>
+
 		<td style="padding-bottom:5px;">
 			<ul class="listForm">
 				<li>
@@ -240,6 +229,37 @@
 				<input type="checkbox" name="unusual_product" id="unusual_product" value="1" {if $product->unusual_product}checked="checked"{/if} />
 				<label for="unusual_product" class="t">{l s='Unusual product'}</label>
 			</li>
+			</ul>
+		</td>
+	</tr>
+</table>
+
+<table cellpadding="5" cellspacing="0" border="0" style="width: 100%;"><tr><td><div class="separation"></div></td></tr></table>
+
+<table>
+	<tr>
+		<td class="col-left">
+			{include file="controllers/products/multishop/checkbox.tpl" field="active" type="radio" onclick=""}
+			<label class="text">{l s='Product type:'}</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<ul class="listForm">
+				<li>
+					<input type="checkbox" name="product_type_wtpork" id="product_type_wtpork" value="1" {if $product->product_type_wtpork}checked="checked"{/if} />
+					<label for="product_type_wtpork" class="radioCheck">{l s='Without pork'}</label>
+				</li>
+				<li>
+					<input type="checkbox" name="product_type_wtlamb" id="product_type_wtlamb" value="1" {if $product->product_type_wtlamb}checked="checked"{/if} />
+					<label for="product_type_wtlamb" class="radioCheck">{l s='Without lamb'}</label>
+				</li>
+				<li>
+					<input type="checkbox" name="product_type_bio" id="product_type_bio" value="1" {if $product->product_type_bio}checked="checked"{/if} />
+					<label for="product_type_bio" class="radioCheck">{l s='100 bio'}</label>
+				</li>
+				<li>
+					<input type="checkbox" name="product_type_cook" id="product_type_cook" value="1" {if $product->product_type_cook}checked="checked"{/if} />
+					<label for="product_type_cook" class="radioCheck">{l s='Easy cooking'}</label>
+				</li>
 			</ul>
 		</td>
 	</tr>

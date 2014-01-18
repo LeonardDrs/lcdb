@@ -2,6 +2,10 @@
 
 class AdminOrdersExportController extends AdminProductsControllerCore
 {
+
+	private $range = "";
+	private $dateStartFilter = "";
+	private $dateEndFilter = "";
 	
 	public function __construct()
 	{
@@ -14,16 +18,31 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 		// filtrer selon un etat de commande
 		// le nombre de produits total est faux
 
-		// rajouter une date de filtre 
-
+		// rajouter une date de filtre (impact de la date sur chaque requete ?)
 		// faire la fonction d'export
-		// afficher les declinaisons par nombre +labels
+		// afficher les declinaisons par nombre +labels (prendre en compte la langue)
 
 		// faire pour que la page produit soit rediriger sur product
-
 		// verifier le bon fonctionnement de la pagination
-		
-		
+
+		if(Tools::getValue('dateStartFilter')){
+			$this->dateStartFilter = Tools::getValue('dateStartFilter');
+			$filterDateStart = "AND o.date_add > " . $this->dateStartFilter;
+			$this->range .= " " . $this->dateStartFilter . " ";
+		}else{
+			$filterDateStart = " ";
+		}
+
+		if(Tools::getValue('dateEndFilter')){
+			// $this->dateEndFilter = Tools::getValue('dateEndFilter');
+			$test = new DateTime();
+			$this->dateEndFilter = $test->format('Y-m-d');
+			$this->dateEndFilter = "2013-12-01 21:10:10";
+			$filterDateEnd = "AND o.date_add < " . $this->dateEndFilter;
+			$this->range .= " " . $this->dateEndFilter . " ";
+		}else{
+			$filterDateEnd = " ";
+		}		
 
 		$this->_select .= ',
 			(SELECT fvl.value FROM `'._DB_PREFIX_.'feature_value_lang` fvl
@@ -40,8 +59,10 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 				WHERE fp.id_product = a.id_product AND fp.id_feature=13 AND fvl.id_lang=1) as weight,
 			(SELECT sum(od.product_quantity) FROM `'._DB_PREFIX_.'order_detail` od
 				LEFT JOIN '._DB_PREFIX_.'orders o ON o.id_order = od.id_order
-				WHERE od.product_id = a.id_product AND o.valid=0) as orderNumber,
-			(SELECT GROUP_CONCAT(distinct od.product_attribute_id SEPARATOR " | ") FROM `'._DB_PREFIX_.'order_detail` od
+				WHERE od.product_id = a.id_product AND o.valid=0
+				' . $filterDateStart . ' ' . $filterDateEnd . ') as orderNumber,
+			(SELECT GROUP_CONCAT(al.name SEPARATOR " | ") FROM `'._DB_PREFIX_.'order_detail` od
+				LEFT JOIN '._DB_PREFIX_.'attribute_lang al ON al.id_attribute = od.product_attribute_id
 				WHERE od.product_id = a.id_product) as attribute';
 	
 			
@@ -63,7 +84,7 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 		);
 		$this->fields_list['attribute'] = array(
 			'title' => $this->l('Déclinaison'),
-			'width' => 90,
+			'width' => "auto",
 			'havingFilter' => true
 		);
 		$this->fields_list['label_bio'] = array(
@@ -86,28 +107,6 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 			'width' => 60,
 			'havingFilter' => true
 		);
-		$this->fields_list['date_add'] = array(
-			'title' => $this->l('Date'),
-			'width' => 150,
-			'align' => 'right',
-			'type' => 'datetime',
-			'filter_key' => 'a!date_add'
-		);
-	}
-
-	public function initToolbar()
-	{
-		parent::initToolbar();
-		if (!$this->display)
-		{
-			unset($this->toolbar_btn['import']);
-
-			$this->toolbar_btn['export-csv-orders'] = array(
-				'short' => 'Exporter Orders',
-				'href' => $this->context->link->getAdminLink('AdminOrdersExport').'&amp;csv_orders',
-				'desc' => $this->l('Exporter'),
-			);
-		}
 	}
 
 	public function renderList()
@@ -141,18 +140,15 @@ class AdminOrdersExportController extends AdminProductsControllerCore
 			}
 		}
 
-		$helper->listTotal = count($new_list);
-		$list = $helper->generateList($new_list, $this->fields_list);
+		$this->context->smarty->assign(array(
+			"priceRange" => $this->range,
+			"dateStartFilter" => $this->dateStartFilter,
+			"dateEndFilter" => $this->dateEndFilter
+		)); 
 
-		if (Tools::isSubmit('csv_orders'))
-		{
-			if (count($this->_list) > 0){
-				$this->renderCSV($new_list);
-				die;
-			}else{
-				$this->displayWarning($this->l('There is nothing to export as a CSV.'));
-			}
-		}
+		$helper->listTotal = count($new_list);
+		$this->_list = $new_list;
+		$list = $helper->generateList($this->_list, $this->fields_list);
 		
 		return $list;
 	}

@@ -248,9 +248,12 @@ class AdminProductsController extends AdminProductsControllerCore
 		if ($post_recipes = Tools::getValue('inputRecipes'))
 		{
 			$post_recipes_tab = explode('-', Tools::getValue('inputRecipes'));
-			foreach ($post_recipes_tab as $recipe_id)
-				if (!$this->haveThisRecipe($recipe_id, $recipes) && $recipe = Product::getRecipeById($recipe_id))
+			foreach ($post_recipes_tab as $recipe_id){
+				if (!$this->haveThisRecipe($recipe_id, $recipes) && $recipe = Product::getRecipeById($recipe_id)){
 					$recipes[] = $recipe;
+				}
+			}
+
 		}
 		$data->assign('recipes', $recipes);
 		
@@ -272,18 +275,27 @@ class AdminProductsController extends AdminProductsControllerCore
 		$this->tpl_form_vars['custom_form'] = $data->fetch();
 	}
 	
-	public function updateRecipes($recipe)
+	public function updateRecipes($product)
 	{
-		$recipe->deleteAccessories();
+
+		$product->deleteRecipes();
 		if ($recipes = Tools::getValue('inputRecipes'))
 		{
 			$recipes_id = array_unique(explode('-', $recipes));
 			if (count($recipes_id))
 			{
 				array_pop($recipes_id);
-				$recipe->changeAccessories($recipes_id);
+				$product->changeRecipes($recipes_id);
 			}
 		}
+	}
+
+	public function haveThisRecipe($recipe_id, $recipes)
+	{
+		foreach ($recipes as $recipe)
+			if ((int)$recipe['id_recipe'] == (int)$recipe_id)
+				return true;
+		return false;
 	}
 	
 	public function renderForm()
@@ -576,6 +588,19 @@ class AdminProductsController extends AdminProductsControllerCore
 		return $this->object;
 	}
 
+	protected function copyFromPost(&$object, $table)
+	{
+		parent::copyFromPost($object, $table);
+
+		$object->abo = (int)Tools::getValue('abo');
+		$object->unusual_product = (int)Tools::getValue('unusual_product');
+
+		$object->product_type_bio = (int)Tools::getValue('product_type_bio');
+		$object->product_type_cook = (int)Tools::getValue('product_type_cook');
+		$object->product_type_wtlamb = (int)Tools::getValue('product_type_wtlamb');
+		$object->product_type_wtpork = (int)Tools::getValue('product_type_wtpork');
+	}
+
 	public function processUpdate()
 	{
 		$this->checkProduct();
@@ -606,6 +631,7 @@ class AdminProductsController extends AdminProductsControllerCore
 				{
 					if (in_array($this->context->shop->getContext(), array(Shop::CONTEXT_SHOP, Shop::CONTEXT_ALL)))
 					{
+
 						if ($this->isTabSubmitted('Shipping'))
 							$this->addCarriers();
 						if ($this->isTabSubmitted('Associations')){

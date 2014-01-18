@@ -73,10 +73,12 @@ class AdminGroupsController extends AdminGroupsControllerCore
 		$this->addRowActionSkipList('delete', $groups_to_keep);
 
 	}
-	
+
 	public function renderForm()
 	{
-		
+		if (!($group = $this->loadObject(true)))
+			return;
+
 		$this->fields_form = array(
 			'legend' => array(
 				'title' => $this->l('Customer group'),
@@ -179,9 +181,22 @@ class AdminGroupsController extends AdminGroupsControllerCore
 				)
 			)
 		);
-		
-		return parent::renderForm() ;
 
+		if (Shop::isFeatureActive())
+		{
+			$this->fields_form['input'][] = array(
+				'type' => 'shop',
+				'label' => $this->l('Shop association:'),
+				'name' => 'checkBoxShopAsso',
+			);
+		}
+
+		$this->fields_value['reduction'] = isset($group->reduction) ? $group->reduction : 0;
+
+		$helper = new Helper();
+		$this->tpl_form_vars['categoryTreeView'] = $helper->renderCategoryTree(null, array(), 'id_category', true, false, array(), true, true);
+
+		return AdminController::renderForm();
 	}
 	
 	public static function printGroupmentIcon($id_group, $tr)

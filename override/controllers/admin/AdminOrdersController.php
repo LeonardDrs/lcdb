@@ -14,7 +14,9 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		CONCAT(LEFT(c.`firstname`, 1), \'. \', c.`lastname`) AS `customer`,
 		osl.`name` AS `osname`,
 		os.`color`,
-		IF((SELECT COUNT(so.id_order) FROM `'._DB_PREFIX_.'orders` so WHERE so.id_customer = a.id_customer) > 1, 0, 1) as new';
+		(SELECT c.name FROM `'._DB_PREFIX_.'carrier` c WHERE c.id_carrier = a.id_carrier) AS carrier,
+		IF((SELECT COUNT(so.id_order) FROM `'._DB_PREFIX_.'orders` so WHERE so.id_customer = a.id_customer) > 1, 0, 1) as new,
+		a.total_products_wt as priceWithoutTax';
 		
 		$statuses_array = array();
 		$statuses = OrderState::getOrderStates((int)$this->context->language->id);
@@ -37,10 +39,6 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'title' => $this->l('Customer'),
 			'havingFilter' => true,
 		),
-		'payment' => array(
-			'title' => $this->l('Payment'),
-			'width' => 100
-		),
 		'osname' => array(
 			'title' => $this->l('Status'),
 			'color' => 'color',
@@ -49,6 +47,16 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'list' => $statuses_array,
 			'filter_key' => 'os!id_order_state',
 			'filter_type' => 'int'
+		),
+		'payment' => array(
+			'title' => $this->l('Payment'),
+			'width' => 100
+		),
+		'carrier' => array(
+			'title' => $this->l('Transport'),
+			'align' => 'center',
+			'width' => 200,
+			'havingFilter' => true
 		),
 		'zip' => array(
 			'title' => $this->l('Arrondissement / Ville'),
@@ -65,19 +73,19 @@ class AdminOrdersController extends AdminOrdersControllerCore
 			'type' => 'price',
 			'currency' => true
 		),
-		// 'date_asdd' => array(
-		// 	'title' => $this->l('Date delivery'),
-		// 	'width' => 150,
-		// 	'align' => 'right',
-		// 	'type' => 'datetime',
-		// 	'filter_key' => 'a!date_add'
-		// ),
 		'date_add' => array(
-			'title' => $this->l('Date'),
+			'title' => $this->l('Date commande'),
 			'width' => 150,
 			'align' => 'right',
 			'type' => 'datetime',
 			'filter_key' => 'a!date_add'
+		),
+		'date_delivery' => array(
+			'title' => $this->l('Date livraison'),
+			'width' => 150,
+			'align' => 'right',
+			'type' => 'date',
+			'filter_key' => 'a!date_delivery'
 		),
 		'id_pdf' => array(
 			'title' => $this->l('PDF'),
@@ -95,11 +103,22 @@ class AdminOrdersController extends AdminOrdersControllerCore
 	{
 		if (!($this->fields_list && is_array($this->fields_list)))
 			return false;
+
 		$this->getList($this->context->language->id);
-		
+
 		// Empty list is ok
 		if (!is_array($this->_list))
 			return false;
+
+		// export
+		if (Tools::isSubmit('csv_orders'))
+		{
+			if (count($this->_list) > 0)
+			{
+				$this->renderCSV();
+				die;
+			}
+		}
 
 		$helper = new HelperList();
 
@@ -116,12 +135,14 @@ class AdminOrdersController extends AdminOrdersControllerCore
 
 		$totalOrders = count($this->_list);
 		$totalAmount = 0;
+		$totalAmountWithoutTax = 0;
 
 		foreach ($this->_list as $key => $order){
 			$totalAmount += $order['total_paid_tax_incl'];
+			$totalAmountWithoutTax += $order['priceWithoutTax'];
 		}
 
-		$cartAverage = $totalAmount/$totalOrders;
+		$cartAverage = $totalAmountWithoutTax/$totalOrders;
 
 		$this->context->smarty->assign(array(
 			"totalOrders" => $totalOrders,
@@ -134,6 +155,113 @@ class AdminOrdersController extends AdminOrdersControllerCore
 		
 		return $list;
 	}
+
+	public function initToolbar()
+	{
+
+		parent::initToolbar();
+
+		if (!$this->display)
+		{
+			$this->toolbar_btn['export'] = array(
+				'href' => $this->context->link->getAdminLink('AdminOrders').'&amp;csv_orders',
+				'desc' => $this->l('Export products')
+			);
+		}
+
+	}
+
+	protected function renderCSV()
+	{
+
+		// exports details for all orders
+		if (Tools::isSubmit('csv_orders'))
+		{
+
+   			header('Content-type: text/csv');
+	        header('Content-Type: application/force-download; charset=UTF-8');
+			header('Cache-Control: no-store, no-cache');
+	        header('Content-disposition: attachment; filename="'.$this->l('orders_products').'.csv"');
+
+			$ids = array();
+			$list_id_order = "("; 
+			foreach ($this->_list as $key => $entry){
+				if($key != 0){
+					$list_id_order .= ",";
+				}
+				$ids[] = $entry['id_order'];
+				$list_id_order .= $entry['id_order']; 
+			}
+			$list_id_order .= ")"; 
+
+			if (count($ids) <= 0)
+				return;
+
+			$keys = array('id_product', 'reference', 'name', 'quantité totale', 'quantité sélection', 'label_rouge', 'label_bio', 'nombre pers.', "poids (kg)");
+			$this->RowCSV($keys);
+
+			$number = "";
+			$keys = array('p.id_product', 'p.reference', 'pl.name', 'od.product_quantity');
+
+			$queryBase = '
+				SELECT p.`id_product`, p.`reference`, pl.`name`, SUM(od.`product_quantity`) AS quantity
+			    FROM `lcdb_product` AS p
+			    LEFT JOIN `lcdb_product_lang` AS pl ON pl.`id_product` = p.`id_product`
+			    LEFT JOIN `lcdb_order_detail` AS od ON p.`id_product` = od.`product_id`
+			    LEFT JOIN `lcdb_orders` AS o ON od.`id_order` = o.`id_order`    
+			    WHERE o.`id_order` IN '.$list_id_order.'
+			    GROUP BY od.`product_id`';
+
+			$resource = Db::getInstance()->query($queryBase);
+
+			while ($row = Db::getInstance()->nextRow($resource)){
+
+				// quantité selection 
+				$query = '
+					SELECT SUM(od.`product_quantity`), al.`name`
+					FROM `lcdb_order_detail` AS od
+					LEFT JOIN `lcdb_orders` AS o ON od.`id_order` = o.`id_order`
+					LEFT JOIN `lcdb_product_attribute_combination` AS pac ON pac.`id_product_attribute` = od.`product_attribute_id`
+					LEFT JOIN `lcdb_attribute_lang` AS al ON al.`id_attribute` = pac.`id_attribute`    
+					WHERE o.`id_order` IN '.$list_id_order.'
+					AND od.`product_id` = '.$row["id_product"].'
+					GROUP BY al.`name`';
+
+				$quantity_selection = Db::getInstance()->executeS($query);
+				$row['quantity_selection'] = "";
+				foreach ($quantity_selection as $key => $item) {
+					if($item['name'] != ""){
+						$row['quantity_selection'] .=  $item['SUM(od.`product_quantity`)'] . " => ". $item['name'] . ' / ';
+					}
+				}
+
+				// features
+				$features = array(ID_FEATURE_LABEL_ROUGE, ID_FEATURE_LABEL_BIO, ID_FEATURE_NUMBER_OF, ID_FEATURE_WEIGHT);
+				foreach ($features as $key) {
+					$query = '
+						SELECT fvl.`value`
+						FROM `lcdb_product` AS p
+						LEFT JOIN `lcdb_feature_product` AS fp ON fp.`id_product` = p.`id_product`
+						LEFT JOIN `lcdb_feature_value_lang` AS fvl ON fvl.`id_feature_value` = fp.`id_feature_value`
+						WHERE fp.`id_feature` = '.$key.' AND p.`id_product` = '.$row["id_product"];
+
+					$feature = Db::getInstance()->executeS($query);
+					$row['feature_'.$key] = $feature[0]['value'];
+				}
+
+				$this->RowCSV($row);
+			}
+
+		}
+
+	}
+
+	public function RowCSV($content)
+	{
+		$wraped_data = array_map(array('CSVCore', 'wrap'), $content);
+		$new_content = utf8_encode(implode(";", $wraped_data));
+        echo sprintf("%s\n", $new_content);
+    }
 
 	public function postProcess()
 	{

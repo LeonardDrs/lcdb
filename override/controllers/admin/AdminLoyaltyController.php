@@ -43,7 +43,18 @@ class AdminLoyaltyControllerCore extends AdminController
 		$this->context = Context::getContext();
 		$this->default_form_language = $this->context->language->id;
 
-		$this->_select = 'a.ape as first_order, a.id_risk as order_modulo, a.birthday as tel';
+		$this->_select = '
+			a.ape as first_order, 
+			a.id_risk as order_modulo,
+			a.birthday as tel'; 
+
+			// prendre la premiere commande et verifier si plus de 15 jours 
+			// modulo 5 sur le nombre de commande -> si oui = check 
+			// concat de tous ces nums de tel 
+			// page detail => page de la derniere commande ? 
+
+			// comment verifier que la fidelisation a ete faite ? 
+			
 		$this->fields_list = array(
 			'id_customer' => array(
 				'title' => $this->l('ID'),
@@ -62,7 +73,7 @@ class AdminLoyaltyControllerCore extends AdminController
 				'title' => $this->l('E-mail address'),
 				'width' => 140,
 			),
-			'tel' => array(
+			'phone' => array(
 				'title' => $this->l('Phone number'),
 				'width' => 140,
 			),

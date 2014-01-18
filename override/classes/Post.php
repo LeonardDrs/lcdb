@@ -36,21 +36,20 @@ class PostCore extends ObjectModel
 
 	public function add($autodate = true, $null_values = false)
 	{
-	//	$this->position = Post::getLastPosition((int)$this->id_post_category);
 		return parent::add($autodate, true);
 	}
 
 	public function update($null_values = false)
 	{
 		if (parent::update($null_values))
-	//		return $this->cleanPositions($this->id_post_category);
+			return true;
 		return false;
 	}
 
 	public function delete()
 	{
 	 	if (parent::delete())
-	//		return $this->cleanPositions($this->id_post_category);
+			return true;
 		return false;
 	}
 
