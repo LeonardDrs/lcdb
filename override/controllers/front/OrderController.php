@@ -209,6 +209,7 @@ class OrderController extends OrderControllerCore
 				$left_col = Category::getSubCategoriesByDepth(2, 4, $this->context->language->id);
 				$this->context->smarty->assign('left_col', $left_col);
 				$this->addCSS(_THEME_CSS_DIR_.'cart.css');
+				$this->addCSS(_THEME_CSS_DIR_.'delivery.css');
 				$this->setTemplate(_PS_THEME_DIR_.'shopping-cart.tpl');
 			break;
 
@@ -283,6 +284,7 @@ class OrderController extends OrderControllerCore
 				$left_col = Category::getSubCategoriesByDepth(2, 4, $this->context->language->id);
 				$this->context->smarty->assign('left_col', $left_col);
 				$this->addCSS(_THEME_CSS_DIR_.'cart.css');
+				$this->addCSS(_THEME_CSS_DIR_.'delivery.css');
 				$this->setTemplate(_PS_THEME_DIR_.'shopping-cart.tpl');
 			break;
 		}

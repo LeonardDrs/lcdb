@@ -4,6 +4,37 @@ $(document).ready(function(){
 	Cufon.replace('.global .footer-top ul li > p.push');
 	Cufon.replace('.guestbook .green-button');
 
+
+	if ($('#form-code-postal_cart').length) {
+		$('#form-code-postal_cart').on('submit', function(e) {
+			e.preventDefault();
+			var $this=$(this);
+			$input = $('#postal-code',this);
+			$.ajax({
+				method: 'POST',
+				url: $this.attr('action'),
+				data: { 'code_postal' : $input.val(), 'ajax': true },
+				dataType: 'json',
+				success: function(response) {
+					console.log(response);
+					if (parseInt($('#total_price').val()) < parseInt(response.minimum_order)) {
+						$('#validate-cart').removeAttr('disabled');
+					};
+				}
+			})
+			$.ajax({
+				method: 'POST',
+				url: $this.attr('action'),
+				data: { 'code_postal' : $input.val(),'bouton_carre':'OK' },
+				success: function(response) {
+					$('.bloc_inf_livraison').remove();
+					var t = $(response).find('.bloc_inf_livraison');
+					$('#form-code-postal_cart').after(t);
+				}
+			})
+		})
+	};
+
 	if($("#id_country").length > 0){
 		drop_down_list_without_submit($("#id_country"));
 	}
