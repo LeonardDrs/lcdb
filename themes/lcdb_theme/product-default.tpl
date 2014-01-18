@@ -60,7 +60,22 @@
 				{/foreach}
 			{/if}
 
-			<div class="add-to-basket-form">
+			<div class="add-to-basket-form alerte">
+				<div class="alerte-message">
+                    <p>
+                    	<span class="img-warning"></span>
+                    	{if $product->quantity < 5 and $product->quantity > 0}
+							Plus que {$product->quantity} produits restants
+						{/if}
+						{if $product->quantity == 0}
+							Produits indisponible.
+						{/if}
+                    	<br />
+                    	{if $product->date_start and $product->date_end}
+                    		Livrable du {$product->date_start} au {$product->date_end}
+                    	{/if}
+                    </p>
+                </div>
 				<div class="clearfix">
 					<div class="label">
 						{foreach from=$features item=feature}
@@ -103,28 +118,28 @@
 									{/if}
 								{/if}
 								{if $priceDisplay == 2}
-								{/if}
 									<div class="new-price" id="pretaxe_price">
 			                            <p id="pretaxe_price_display" class="price" itemprop="price">{convertPrice price=$product->getPrice(false, $smarty.const.NULL)}</p>
 			                            <!-- <p class="price-kg">25,62€/kg</p> -->
 			                        </div>
+								{/if}
 		                    </div>
+
+						{else}
+
+							<div class="detailed-price">
+								<p class="price our_price_display" itemprop="price">
+								{if $priceDisplay >= 0 && $priceDisplay <= 2}
+									<span id="our_price_display">{convertPrice price=$productPrice}</span>
+								{/if}
+								</p>
+								{if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
+									 {math equation="pprice / punit_price"  pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
+									<p class="unit-price price-kg">{convertPrice price=$unit_price}/{$product->unity|escape:'htmlall':'UTF-8'}</p>
+								{/if}
+							</div>
+
 						{/if}
-
-					{else}
-
-						<div class="detailed-price">
-							<p class="price our_price_display" itemprop="price">
-							{if $priceDisplay >= 0 && $priceDisplay <= 2}
-								<span id="our_price_display">{convertPrice price=$productPrice}</span>
-							{/if}
-							</p>
-							{if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
-								 {math equation="pprice / punit_price"  pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
-								<p class="unit-price price-kg">{convertPrice price=$unit_price}/{$product->unity|escape:'htmlall':'UTF-8'}</p>
-							{/if}
-						</div>
-
 					{/if}
 
 				</div>

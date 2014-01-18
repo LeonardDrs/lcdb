@@ -19,7 +19,6 @@ class Guestbook extends ObjectModel
 		'primary' => 'id_guestbook',
 		'multilang' => true,
 		'fields' => array(
-			'position' => 			array('type' => self::TYPE_INT),
 			'active' => 			array('type' => self::TYPE_BOOL),
 			'id_lcdb_import' => 	array('type' => self::TYPE_INT),
 			'firstname' =>	array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'required' => true, 'size' => 100),
