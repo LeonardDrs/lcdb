@@ -10,18 +10,18 @@ class CategoryController extends CategoryControllerCore
 		
 		// redirect category
 		switch ($id_category) {
-			case 3:
+			case ID_CATEGORY_MAIN:
 				Tools::redirect('index.php?id_category=11&controller=category');
 				break;
-			case 4:
-				Tools::redirect('index.php?id_product=729&controller=product');
+			case ID_CATEGORY_SURPRISE:
+				Tools::redirect('index.php?id_product='.ID_PRODUCT_SURPRISE.'&controller=product');
 				break;
-			case 7:
-				Tools::redirect('index.php?id_product=1029&controller=product');
+			case ID_CATEGORY_GIFT:
+				Tools::redirect('index.php?id_product='.ID_PRODUCT_GIFT.'&controller=product');
 				break;
-			case 8:
-				Tools::redirect('index.php?id_category=11&controller=category');
-				break;
+			//case 8:
+			//	Tools::redirect('index.php?id_category=11&controller=category');
+			//	break;
 			default: 
 				parent::init();
 				break;

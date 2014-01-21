@@ -31,7 +31,7 @@
 								Produits indisponible.
 							{/if}
 							{if $product.date_end}
-								Livrable jusqu'au <span itemprop="availabilityEnds">{$product.date_end}</span>
+								Livrable jusqu'au <span itemprop="availabilityEnds">{$product.date_end|date_format:"%D"}</span>
 							{/if}
 						</p>
 					</div>

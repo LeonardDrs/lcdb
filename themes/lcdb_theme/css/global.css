@@ -4505,6 +4505,8 @@ div.pager .pager-last{
 
 .basket-links a:hover,
 .basket-links a {
+    display: block;
 	font-size: 10px;
-	padding: 6px 21px;
+	padding: 6px 0px;
+    text-align: center;
 }

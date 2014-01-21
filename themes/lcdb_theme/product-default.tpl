@@ -72,7 +72,7 @@
 						{/if}
                     	<br />
                     	{if $product->date_start and $product->date_end}
-                    		Livrable du {$product->date_start} au {$product->date_end}
+                    		Livrable du {$product->date_start|date_format:"%D"} au {$product->date_end|date_format:"%D"}
                     	{/if}
                     </p>
                 </div>
@@ -188,7 +188,7 @@
 					<p class="jours"><span class="img-jours"></span> {$feature.value} <span class="colis-jours">jours</span></p>
 				{/if}
 				{if $feature.id_feature == 10 }
-					<p class="cuisson"><span class="img-cuisson"></span> <span class="mode-cuisson">{$feature.value}</span></p>
+					<p class="cuisson"><span class="img-cuisson"></span> {$feature.value} <span class="mode-cuisson">min</span></p>
 				{/if}
 			{/foreach}
 		</div>
@@ -214,23 +214,25 @@
 			<div id="idees-recettes">
 				<h2><span class="img-idees-recettes"></span>Idées recettes</h2>
 				<ul>
-					{foreach from=$recipes item=recipe}
-						<li itemscope itemtype="http://schema.org/Recipe">
-							<a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
-							<h3 itemprop="name">{$recipe.title}</h3>
-							<p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_{$recipe.difficulty}">{$recipe.difficulty}/5</span></p>
-							<div class="recipe-details hidden">
-								<h4>Ingrédients :</h4>
-								<div class="ingredients clearfix">
-									{$recipe.ingredients_content}
-								</div>
-								<h4>Recette :</h4>
-								<div class="recette">
-									{$recipe.recipe_content}
-								</div>
-							</div>
-							<hr class="dashed" />
-						</li>
+					{foreach from=$recipes item=recipe name=list_3_recipe}
+                        {if $smarty.foreach.list_3_recipe.index < 3 }
+                            <li itemscope itemtype="http://schema.org/Recipe">
+                                <a href="#" title="voir la recette" class="recipe-link">voir la recette</a>
+                                <h3 itemprop="name">{$recipe.title}</h3>
+                                <p class="clearfix"><span class="intitule">difficulté</span> <span class="difficulte_level difficulte_{$recipe.difficulty}">{$recipe.difficulty}/5</span></p>
+                                <div class="recipe-details hidden">
+                                    <h4>Ingrédients :</h4>
+                                    <div class="ingredients clearfix">
+                                        {$recipe.ingredients_content}
+                                    </div>
+                                    <h4>Recette :</h4>
+                                    <div class="recette">
+                                        {$recipe.recipe_content}
+                                    </div>
+                                </div>
+                                <hr class="dashed" />
+                            </li>
+                        {/if}
 					{/foreach}
 				</ul>
 			</div>

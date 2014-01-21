@@ -9,7 +9,7 @@ class ProductController extends ProductControllerCore
 		$now = date("Y-m-d h:i:s");
 
 		if(!(($now >= $this->product->date_start)&&($now <= $this->product->date_end))){
-			echo "product not available";
+			//echo "product not available";
 		}
 
 		// get zipcodes list
@@ -27,10 +27,14 @@ class ProductController extends ProductControllerCore
 
 		$categories = Product::getProductCategoriesFull($this->product->id);
 
-		$this->context->smarty->assign('left_col', $leftcol);
-		$this->context->smarty->assign('right_col', $rightcol);
-		$this->context->smarty->assign('recipes', $this->product->getRecipes($this->context->language->id));
-		$this->context->smarty->assign('product_categories', $categories);
+        $this->context->smarty->assign(array(
+            'left_col' => $leftcol,
+            'right_col' => $rightcol,
+            'recipes' => $this->product->getRecipes($this->context->language->id),
+            'product_categories' => $categories,
+            'id_product_surprise' => ID_PRODUCT_SURPRISE,
+            'id_product_gift' => ID_PRODUCT_GIFT
+        ));
 		
 	}
 }

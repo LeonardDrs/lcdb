@@ -130,11 +130,11 @@ var fieldRequired = '{l s='Please fill in all required fields, then save the cus
 	{include file="$tpl_dir./errors.tpl"}
 	
 	{if $errors|@count == 0}
-		{if $product->id == 729}
+		{if $product->id == $id_product_surprise}
 			<div id="center_column">
 				{include file="$tpl_dir./product-surprise.tpl"}
 			</div>
-		{elseif $product->id == 1029}
+		{elseif $product->id == $id_product_gift}
 			<div id="center_column">
 				{include file="$tpl_dir./product-gift.tpl"}
 			</div>
