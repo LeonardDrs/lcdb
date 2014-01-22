@@ -35,7 +35,7 @@ class DeliveryControllerCore extends FrontController
 			$delivery = array();
 			$delivery['zone'] = $id_zone;
 
-			if($id_zone == 1){
+			if($id_zone == ID_ZONE_PARIS){
 				// paris
 				$delivery['minimum_order'] = "40 €";
 				$delivery['infos'] = array(
@@ -68,7 +68,7 @@ class DeliveryControllerCore extends FrontController
 						</div>
 					</div>
 				</div>";
-			}elseif($id_zone == 9){
+			}elseif($id_zone == ID_ZONE_PETITE_BANLIEUE){
 				// proche banlieue
 				$delivery['minimum_order'] = "65 €";
 				$delivery['infos'] = array(
@@ -84,7 +84,7 @@ class DeliveryControllerCore extends FrontController
 				$delivery['content'] = "<p class='titre_vert_2'>Pour une livraison à domicile ou au bureau</p><p>Quoi de mieux que de se faire livrer chez soi,
 				 directement d'Auvergne dans son frigo? <strong>Nous livrons à domicile ou au bureau de 7h30 à 20h</strong>, dans un créneau horaire d'une heure minimum
 				 que vous nous communiquez lors de la commande. Dans l'idéal deux créneaux  horaires sont souhaités, dont un le matin.</p";
-			}elseif($id_zone == 10){
+			}elseif($id_zone == ID_ZONE_GRANDE_BANLIEUE){
 				// grande banlieue
 				$delivery['minimum_order'] = "65 €";
 				$delivery['infos'] = array(
@@ -105,7 +105,7 @@ class DeliveryControllerCore extends FrontController
 				heures que vous nous communiquez lors de la commande, ou le <strong>samedi de 8h à 13h</strong>.</p><p class='titre_vert_2'>Regroupement de commande</p>
 				<p>Parlez des Colis du Boucher à vous voisins ou au bureau et économisez les frais de livraison. En commandant à plusieurs pour le même jour et à la même 
 				adresse de livraison vous pourrez ainsi plus facilement faire baisser les frais de livraison, voire les annuler complètement.</p>";
-			}elseif($id_zone == 11){
+			}elseif($id_zone == ID_ZONE_PROVINCE){
 				// province
 				$delivery['minimum_order'] = "65 €";
 				$delivery['infos'] = array(

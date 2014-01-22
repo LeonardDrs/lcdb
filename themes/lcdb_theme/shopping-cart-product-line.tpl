@@ -17,12 +17,12 @@
 * versions in the future. If you wish to customize PrestaShop for your
 * needs please refer to http://www.prestashop.com for more information.
 *
+
 *  @author PrestaShop SA <contact@prestashop.com>
 *  @copyright  2007-2012 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-
 <tr id="product_{$product.id_product}_{$product.id_product_attribute}_0_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="row {if isset($productLast) && $productLast && (!isset($ignoreProductLast) || !$ignoreProductLast)}last_item{elseif isset($productFirst) && $productFirst}first_item{/if} {if isset($customizedDatas.$productId.$productAttributeId) AND $quantityDisplayed == 0}alternate_item{/if} cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}">
 	<td class="label cart_product first">
 		<a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute)|escape:'htmlall':'UTF-8'}">
@@ -31,9 +31,18 @@
 				<br/>
 				<span class="product-details">{$product.description_short|escape:'UTF-8'}</span>
 			</div>
-			<!-- <span class="product-rare">Produit rare : indisponibilité à prévoir.</span> <!-- mettre if $produit_rare -->
-			<!--<br/>
-			<span class="product-availability">Livrable jusqu'au 30/05/2013</span> <!-- mettre if $produit_rare -->
+			{$now = $smarty.now|date_format:"%Y-%m-%d"}
+			{$start = $product.date_start|date_format:"%Y-%m-%d"}
+			{$end = $product.date_end|date_format:"%Y-%m-%d"}
+			{if isset($product.unusual_product) && $product.unusual_product}
+				<span class="product-rare">Produit rare : indisponibilité à prévoir.</span>
+			{/if}
+			{if isset($product.unusual_product) && $product.unusual_product && (isset($product.date_start) && $product.date_start < $now) && isset($product.date_end) && $product.date_end > $now}
+				<br/>
+			{/if}
+			{if (isset($product.date_start) && $product.date_start < $now) && isset($product.date_end) && $product.date_end > $now}
+				<span class="product-availability">Livrable jusqu'au {$product.date_end|date_format:"%d/%m/%Y"}</span>
+			{/if}
 		</a>
 	</td>
 	<td class="cart_unit">

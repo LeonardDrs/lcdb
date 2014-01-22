@@ -100,7 +100,7 @@
 			<div class="clearfix" id="page-buttons">
 				<a id="continue-shopping" href="{if (isset($smarty.server.HTTP_REFERER) && strstr($smarty.server.HTTP_REFERER, 'order.php')) || isset($smarty.server.HTTP_REFERER) && strstr($smarty.server.HTTP_REFERER, 'order-opc') || !isset($smarty.server.HTTP_REFERER)}{$link->getPageLink('index')}{else}{$smarty.server.HTTP_REFERER|escape:'htmlall':'UTF-8'|secureReferrer}{/if}" title="{l s='Continue shopping'}">&rarr;&nbsp;<span>{l s='Continue shopping'}</span></a>
 				{if !$opc}
-					<a href="{if $back}{$link->getPageLink('order', true, NULL, 'step=1&amp;back={$back}')}{else}{$link->getPageLink('order', true, NULL, 'step=1')}{/if}" id="validate-cart" disabled class="red-button gradien" title="{l s='Next'}">{l s='Validate my cart'} &raquo;</a>
+					<a href="{if $back}{$link->getPageLink('order', true, NULL, 'step=1&amp;back={$back}')}{else}{$link->getPageLink('order', true, NULL, 'step=1')}{/if}" id="validate-cart" class="red-button gradien disabled-button" title="{l s='Next'}">{l s='Validate my cart'} &raquo;</a>
 				{/if}
 			</div>
 			{/if}

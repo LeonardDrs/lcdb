@@ -4,6 +4,11 @@ $(document).ready(function(){
 	Cufon.replace('.global .footer-top ul li > p.push');
 	Cufon.replace('.guestbook .green-button');
 
+	$('.disabled-button').on('click',function(e) {
+		if ($(this).hasClass('disabled-button'))
+			e.preventDefault();
+	})
+
 
 	if ($('#form-code-postal_cart').length) {
 		$('#form-code-postal_cart').on('submit', function(e) {
@@ -16,9 +21,10 @@ $(document).ready(function(){
 				data: { 'code_postal' : $input.val(), 'ajax': true },
 				dataType: 'json',
 				success: function(response) {
-					console.log(response);
-					if (parseInt($('#total_price').val()) < parseInt(response.minimum_order)) {
-						$('#validate-cart').removeAttr('disabled');
+					// console.log(response);
+					console.log(parseInt($('#total_price').text()) , parseInt(response.minimum_order))
+					if (parseInt($('#total_price').text()) > parseInt(response.minimum_order)) {
+						$('#validate-cart').removeClass('disabled-button');
 					};
 				}
 			})

@@ -258,11 +258,7 @@ function updateAddressSelection(addressType)
                                 }/*,
                                     PHP -> suite points relai
                                 */
-                            ],
-                zipCodes   = { // codes postaux proche et grande banlieue
-                                'proche' : ['93','94','92000','92100','92110','92120','92130','92140','92150','92160','92170','92190','92200','92210','92220','92230','92240','92250','92260','92270','92290','92300','92310','92320','92330','92340','92350','92360','92370'],
-                                'grande' : ['77','78','91','95']
-                            };
+                            ];
         </script>
         {/literal}
 
@@ -293,7 +289,7 @@ function updateAddressSelection(addressType)
 						<li></li>
 						<li></li>
 					</ul>
-					<div id="form-address-invoice" class="hidden">
+					<!-- <div id="form-address-invoice" class="hidden">
 						<label for="nom-invoice">Nom</label>
 						<input type="text" id="nom-invoice" value="DURAND"/>
 						<label for="prenom-invoice">Prénom</label>
@@ -312,9 +308,9 @@ function updateAddressSelection(addressType)
 							<a href="#" title="annuler" id="cancel-address-invoice" class="hidden">Annuler</a>
 							<input type="submit" class="red-button gradient" value="ENREGISTRER" id="adress-submit-invoice" />
 						</div>
-					</div>
+					</div> -->
 					<!-- <a href="#" title="annuler" id="cancel-address-invoice" class="hidden">Annuler</a> -->
-					<a href="#" title="modifier votre adresse de livraison" id="modify-address-invoice">&rarr;&nbsp;<span>Modifier cette adresse</span></a>
+					<!-- <a href="#" title="modifier votre adresse de livraison" id="modify-address-invoice">&rarr;&nbsp;<span>Modifier cette adresse</span></a> -->
 				</div>
 				<div class="bloc content-address-delivery">
 					<h2>Adresse de livraison</h2>
@@ -332,7 +328,7 @@ function updateAddressSelection(addressType)
 							<li></li>
 							<li></li>
 						</ul>
-						<div id="form-address-delivery" class="hidden">
+						<!-- <div id="form-address-delivery" class="hidden">
 							<label for="nom">Nom</label>
 							<input type="text" id="nom" value="DURAND"/>
 							<label for="prenom">Prénom</label>
@@ -351,8 +347,8 @@ function updateAddressSelection(addressType)
 								<a href="#" title="annuler" id="cancel-address-delivery" class="hidden">Annuler</a>
 								<input type="submit" class="red-button gradient" value="ENREGISTRER" id="address-submit-delivery" />
 							</div>
-						</div>
-						<div id="form-add-address-delivery" class="hidden">
+						</div> -->
+<!-- 						<div id="form-add-address-delivery" class="hidden">
 							<label for="new-title">Libellé de l'adresse</label>
 							<input type="text" id="new-title" value="" />
 							<label for="new-company">Raison sociale (optionnel)</label>
@@ -371,10 +367,10 @@ function updateAddressSelection(addressType)
 								<a href="#" title="annuler" id="cancel-add-address-delivery" class="hidden">Annuler</a>
 								<input type="submit" class="red-button gradient" value="ENREGISTRER" id="add-address-submit-delivery" />
 							</div>
-						</div>
+						</div> -->
 						<!-- <div><a href="#" title="annuler" id="cancel-address-delivery" class="hidden">Annuler</a></div> -->
-						<div><a href="#" title="modifier votre adresse de livraison" id="modify-address-delivery">&rarr;&nbsp;<span>Modifier cette adresse</span></a></div>
-						<div><a href="{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{if $back}&mod={$back}{/if}")}" title="ajouter une nouvelle adresse" id="add-address-delivery">&rarr;&nbsp;<span>Ajouter une nouvelle adresse</span></a></div>
+						<!-- <div><a href="#" title="modifier votre adresse de livraison" id="modify-address-delivery">&rarr;&nbsp;<span>Modifier cette adresse</span></a></div> -->
+						<div><a href="{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{if $back}&mod={$back}{/if}")}" title="ajouter une nouvelle adresse" id="aadd-address-delivery">&rarr;&nbsp;<span>Ajouter une nouvelle adresse</span></a></div>
 					</div>
 					<div id="delivery-relay" class="hidden">
 						<p>Adresse Point Relais</p>
@@ -448,7 +444,7 @@ function updateAddressSelection(addressType)
 							{/foreach}
 						{/if}
 					</div>
-					<div id="colis-cadeau-wrapper">
+					<div id="colis-cadeau-wrapper" style="display:none">
 						<hr class="dashed" />
 						<label for="colis-cadeau" id="colis-cadeau-toggle" class="checkbox"><input value="1" name="gift" type="checkbox" id="colis-cadeau"/> Je souhaite que ma commande soit envoyée par <a href="#">colis cadeau</a> <span class="price">+ <span id="sup">1,60</span> &euro;</span></label>
 						<textarea name="gift_message" placeholder="Saisissez le message qui sera joint au cadeau" id="gift_message" class="hidden">{$cart->gift_message|escape:'htmlall':'UTF-8'}</textarea>

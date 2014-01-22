@@ -33,13 +33,13 @@ class Address extends AddressCore
 	{
 
 		if (substr($cp, 0, 2) == "75") {
-			$idZone = 1; // Paris
+			$idZone = ID_ZONE_PARIS; // Paris
 		} else if (ZoneCustom::isProche($cp)){
-			$idZone = 9; // Proche banlieue
+			$idZone = ID_ZONE_PETITE_BANLIEUE; // Proche banlieue
 		} else if (ZoneCustom::isGrande($cp)) {
-			$idZone = 10; // Grande banlieue
+			$idZone = ID_ZONE_GRANDE_BANLIEUE; // Grande banlieue
 		} else {
-			$idZone = 11; // Province
+			$idZone = ID_ZONE_PROVINCE; // Province
 		}
 
 		return $idZone;
