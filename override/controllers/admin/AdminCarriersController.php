@@ -10,9 +10,6 @@ class AdminCarriersController extends AdminCarriersControllerCore
 		$this->lang = false;
 		$this->deleted = true;
 
-		$this->addRowAction('edit');
-		$this->addRowAction('delete');
-
 		$this->_defaultOrderBy = 'position';
 
 		$this->context = Context::getContext();
@@ -154,12 +151,6 @@ class AdminCarriersController extends AdminCarriersControllerCore
 					)
 				),
 				array(
-					'type' => 'file',
-					'label' => $this->l('Logo:'),
-					'name' => 'logo',
-					'desc' => $this->l('Upload a logo from your computer').' (.gif, .jpg, .jpeg '.$this->l('or').' .png)'
-				),
-				array(
 					'type' => 'text',
 					'label' => $this->l('Description'),
 					'name' => 'description',
@@ -168,21 +159,6 @@ class AdminCarriersController extends AdminCarriersControllerCore
 					'size' => 41,
 					'maxlength' => 255,
 					'desc' => $this->l('Description affiché')
-				),
-				array(
-					'type' => 'text',
-					'label' => $this->l('Speed Grade:'),
-					'name' => 'grade',
-					'required' => false,
-					'size' => 1,
-					'desc' => $this->l('"0" for a longest shipping delay, "9" for the shortest shipping delay.')
-				),
-				array(
-					'type' => 'text',
-					'label' => $this->l('URL:'),
-					'name' => 'url',
-					'size' => 40,
-					'desc' => $this->l('Delivery tracking URL; type \'@\' where the tracking number will appear, it will be automatically replaced by the tracking number')
 				),
 				array(
 					'type' => 'checkbox',
@@ -322,38 +298,6 @@ class AdminCarriersController extends AdminCarriersControllerCore
 						'name' => 'name'
 					),
 					'desc' => $this->l('Out-of-range behavior when none is defined (e.g. when a customer\'s cart weight is greater than the highest range limit)')
-				),
-				array(
-					'type' => 'text',
-					'label' => $this->l('Maximium package height:'),
-					'name' => 'max_height',
-					'required' => false,
-					'size' => 10,
-					'desc' => $this->l('Maximum height managed by this carrier. Set "0" or leave this field blank to ignore this.')
-				),
-				array(
-					'type' => 'text',
-					'label' => $this->l('Maximium package width:'),
-					'name' => 'max_width',
-					'required' => false,
-					'size' => 10,
-					'desc' => $this->l('Maximum width managed by this carrier. Set "0" or leave this field blank to ignore this.')
-				),
-				array(
-					'type' => 'text',
-					'label' => $this->l('Maximium package depth:'),
-					'name' => 'max_depth',
-					'required' => false,
-					'size' => 10,
-					'desc' => $this->l('Maximum depth managed by this carrier. Set "0" or leave this field blank to ignore this.')
-				),
-				array(
-					'type' => 'text',
-					'label' => $this->l('Maximium package weight:'),
-					'name' => 'max_weight',
-					'required' => false,
-					'size' => 10,
-					'desc' => $this->l('Maximum weight managed by this carrier. Set "0" or leave this field blank to ignore this.')
 				),
 				array(
 					'type' => 'hidden',

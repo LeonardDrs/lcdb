@@ -39,7 +39,7 @@ class Carrier extends CarrierCore
             'lat' => 			        array('type' => self::TYPE_STRING, 'validate' => 'isString', 'size' => 100),
 
             /* Lang fields */
-            'delay' => 					array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 128),
+            'delay' => 					array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 128),
             'description' => 			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 255),
             'name' => 		        	array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 150),
             'address' => 	    		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 255),
