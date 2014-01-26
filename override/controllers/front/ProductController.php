@@ -7,6 +7,7 @@ class ProductController extends ProductControllerCore
 		parent::initContent();
 
 		$now = date("Y-m-d h:i:s");
+        $zipcodes = array();
 
 		if(!(($now >= $this->product->date_start)&&($now <= $this->product->date_end))){
 			//echo "product not available";
