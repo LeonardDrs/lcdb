@@ -12,6 +12,7 @@ class Product extends ProductCore
 	public $product_type_wtpork;
 	public $serving;
 	public $id_lcdb_import;
+    public $limit_date;
 	public $date_start;
 	public $date_end;
 	
@@ -46,6 +47,7 @@ class Product extends ProductCore
 			'product_type_wtpork' => 		array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'serving' => 					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 50),
 			'id_lcdb_import' => 			array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
+            'limit_date' => 			    array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'date_start' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
 			'date_end' => 					array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
 

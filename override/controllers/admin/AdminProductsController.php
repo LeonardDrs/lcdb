@@ -36,17 +36,7 @@ class AdminProductsController extends AdminProductsControllerCore
 				LEFT JOIN '._DB_PREFIX_.'feature_product fp ON fvl.id_feature_value = fp.id_feature_value
 				WHERE fp.id_product = a.id_product AND fp.id_feature=13 AND fvl.id_lang=1) as weight,
 			(a.price / a.unit_price_ratio) as unitPrice';
-		
-		// $this->_select = '
-		// 		(SELECT  GROUP_CONCAT(distinct cl.name SEPARATOR " | ") FROM `'._DB_PREFIX_.'category_lang` cl WHERE cl.id_category = cp.id_category) AS categories
-		// 		';
-		
-		// $this->_select .= '
-		// 		(SELECT fvl.name FROM `'._DB_PREFIX_.'feature_value_lang` fvl WHERE fl.id_lang = 1 
-		// 		LEFT JOIN `'._DB_PREFIX_.'feature_product` fp ON (fvl.`id_feature_value` = fp.`id_feature_value` AND fp.id_feature = 1)
-		// 		) AS count
-		// 	';
-	
+
 			
 		$this->fields_list = array();
 		$this->fields_list['id_product'] = array(
@@ -599,6 +589,8 @@ class AdminProductsController extends AdminProductsControllerCore
 		$object->product_type_cook = (int)Tools::getValue('product_type_cook');
 		$object->product_type_wtlamb = (int)Tools::getValue('product_type_wtlamb');
 		$object->product_type_wtpork = (int)Tools::getValue('product_type_wtpork');
+
+        $object->limit_date = (int)Tools::getValue('limit_date');
 	}
 
 	public function processUpdate()
