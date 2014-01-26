@@ -4,6 +4,11 @@ class Carrier extends CarrierCore
 {
 
 	public $description;
+    public $lon;
+    public $lat;
+    public $address;
+    public $phone;
+    public $mention;
 
 	/**
 	 * @see ObjectModel::$definition
@@ -41,7 +46,6 @@ class Carrier extends CarrierCore
             /* Lang fields */
             'delay' => 					array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 128),
             'description' => 			array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 255),
-            'name' => 		        	array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 150),
             'address' => 	    		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 255),
             'phone' => 			        array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 50),
             'mention' => 	    		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 255),

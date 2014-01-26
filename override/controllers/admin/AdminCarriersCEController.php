@@ -39,19 +39,6 @@ class AdminCarriersCEControllerCore extends AdminController
 				'title' => $this->l('Name'),
 				'width' => 'auto'
 			),
-			'image' => array(
-				'title' => $this->l('Logo'),
-				'align' => 'center',
-				'image' => 's',
-				'orderby' => false,
-				'search' => false,
-				'width' => 120
-			),
-			'delay' => array(
-				'title' => $this->l('Delay'),
-				'width' => 300,
-				'orderby' => false
-			),
 			'active' => array(
 				'title' => $this->l('Status'),
 				'align' => 'center',
@@ -59,18 +46,6 @@ class AdminCarriersCEControllerCore extends AdminController
 				'type' => 'bool',
 				'orderby' => false,
 				'width' => 25
-			),
-			'is_free' => array(
-				'title' => $this->l('Free Shipping'),
-				'align' => 'center',
-				'icon' => array(
-					0 => 'disabled.gif',
-					1 => 'enabled.gif',
-					'default' => 'disabled.gif'
-				),
-				'type' => 'bool',
-				'orderby' => false,
-				'width' => 150
 			),
 			'position' => array(
 				'title' => $this->l('Position'),

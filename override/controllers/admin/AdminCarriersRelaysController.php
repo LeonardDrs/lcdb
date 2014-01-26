@@ -48,18 +48,6 @@ class AdminCarriersRelaysControllerCore extends AdminController
 				'orderby' => false,
 				'width' => 25
 			),
-			'is_free' => array(
-				'title' => $this->l('Free Shipping'),
-				'align' => 'center',
-				'icon' => array(
-					0 => 'disabled.gif',
-					1 => 'enabled.gif',
-					'default' => 'disabled.gif'
-				),
-				'type' => 'bool',
-				'orderby' => false,
-				'width' => 150
-			),
 			'position' => array(
 				'title' => $this->l('Position'),
 				'width' => 40,
