@@ -206,6 +206,55 @@ class AdminCarriersRelaysControllerCore extends AdminController
 						$this->l('For in-store pickup, enter 0 to replace the carrier name with your shop name')
 					)
 				),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('Address:'),
+                    'name' => 'address',
+                    'lang' => true,
+                    'required' => false,
+                    'size' => 41,
+                    'maxlength' => 255,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('Phone:'),
+                    'name' => 'phone',
+                    'lang' => true,
+                    'required' => false,
+                    'size' => 41,
+                    'maxlength' => 50,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('Mention:'),
+                    'name' => 'mention',
+                    'lang' => true,
+                    'required' => false,
+                    'size' => 41,
+                    'maxlength' => 255,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('Longitude:'),
+                    'name' => 'lon',
+                    'size' => 41,
+                    'maxlength' => 100,
+                    'desc' => array(
+                        $this->l('Use the following url to find location related to the address'),
+                        $this->l('http://www.latlong.net/')
+                    )
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('Latitude:'),
+                    'name' => 'lat',
+                    'size' => 41,
+                    'maxlength' => 100,
+                    'desc' => array(
+                        $this->l('Use the following url to find location related to the address'),
+                        $this->l('http://www.latlong.net/')
+                    )
+                ),
 				array(
 					'type' => 'checkbox',
 					'label' => $this->l('Zone:'),
