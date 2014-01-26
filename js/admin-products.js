@@ -407,6 +407,34 @@ function enableSave()
 		$('#desc-product-save-and-stay').show();
 }
 
+/**
+ * disable limit date if needed
+ *
+ * @access public
+ * @return void
+ */
+function enableLimitDate(value)
+{
+    var enable = false;
+
+    switch(value)
+    {
+        case true:
+            enable = true;
+            break;
+        case 1:
+            enable = true;
+            break;
+    }
+
+    if(enable == true){
+        $('#date_start, #date_end').removeAttr("disabled");
+    }else{
+        $('#date_start, #date_end').attr("disabled", "disabled");
+    }
+
+}
+
 function handleSaveButtons(e)
 {
 	msg = [];
@@ -1736,4 +1764,5 @@ $(document).ready(function() {
 		code = (e.keyCode ? e.keyCode : e.which);
 		return (code == 13) ? false : true;
 	});
+
 });

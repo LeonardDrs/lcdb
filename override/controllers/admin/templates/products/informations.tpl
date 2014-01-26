@@ -124,14 +124,19 @@
                 {include file="controllers/products/multishop/checkbox.tpl" field="date_limit" type="radio" onclick=""}
                 <label class="text">{l s='Date limit:'}</label>
             </td>
+            <script>
+                $(document).ready(function() {
+                    enableLimitDate({$product->limit_date});
+                });
+            </script>
             <td style="padding-bottom:5px;">
                 <ul class="listForm">
                     <li>
-                        <input type="radio" name="limit_date" id="limit_date_on" value="1" {if $product->limit_date}checked="checked" {/if} />
+                        <input onclick="enableLimitDate(true);" type="radio" name="limit_date" id="limit_date_on" value="1" {if $product->limit_date}checked="checked" {/if} />
                         <label for="limit_date_on" class="radioCheck">{l s='Enabled'}</label>
                     </li>
                     <li>
-                        <input type="radio" name="limit_date" id="limit_date_off" value="0" {if !$product->limit_date}checked="checked"{/if} />
+                        <input onclick="enableLimitDate(false);" type="radio" name="limit_date" id="limit_date_off" value="0" {if !$product->limit_date}checked="checked"{/if} />
                         <label for="limit_date_off" class="radioCheck">{l s='Disabled'}</label>
                     </li>
                 </ul>
