@@ -62,21 +62,27 @@
 			</div>
 
 			<div class="add-to-basket-form alerte">
-				<div class="alerte-message clearfix">
-                    <p>
-                    	<span class="img-warning"></span>
-                    	{if $product->quantity < 5 and $product->quantity > 0}
-							Plus que {$product->quantity} produits restants
-						{/if}
-						{if $product->quantity == 0}
-							Produits indisponible.
-						{/if}
-                    	<br />
-                    	{if $product->date_start and $product->date_end}
-                    		Livrable du {$product->date_start|date_format:"%D"} au {$product->date_end|date_format:"%D"}
-                    	{/if}
-                    </p>
-                </div>
+                {if $product->quantity < 5 or $product->limit_date or $product->unusual_product}
+                    <div class="alerte-message">
+                        <p>
+                            <span class="img-warning"></span>
+                            {if $product->unusual_product}
+                                Produit en quantité limitée, risque de manque à la livraison.
+                            {else}
+                                {if $product->quantity < 5 and $product->quantity > 0}
+                                    Plus que {$product->quantity} produits restants
+                                {/if}
+                                {if $product->quantity == 0}
+                                    Produits indisponible.
+                                {/if}
+                                <br />
+                                {if $product->date_start and $product->date_end and $product->limit_date}
+                                    Livrable du {$product->date_start|date_format:"%D"} au {$product->date_end|date_format:"%D"}
+                                {/if}
+                            {/if}
+                        </p>
+                    </div>
+                {/if}
 				<div class="clearfix">
 					<div class="label">
 						{foreach from=$features item=feature}

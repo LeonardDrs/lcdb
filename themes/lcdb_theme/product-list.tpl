@@ -23,17 +23,23 @@
 							<a href="{$product.link|escape:'htmlall':'UTF-8'}" class="Voir ce produit"><h3 itemprop="name">{$product.name|escape:'htmlall':'UTF-8'|truncate:35:'...'}</h3></a>
 							<p itemprop="description">{$product.description_short|strip_tags:'UTF-8'|truncate:100:'...'}</p>
 						</div>
-						<p class="warning" itemscope itemtype="http://schema.org/Offer">
-							{if $product.quantity < 5 and $product.quantity > 0}
-								Plus que {$product.quantity} produits restants.
-							{/if}
-							{if $product.quantity == 0}
-								Produits indisponible.
-							{/if}
-							{if $product.date_end}
-								Livrable jusqu'au <span itemprop="availabilityEnds">{$product.date_end|date_format:"%D"}</span>
-							{/if}
-						</p>
+                         {if $product.quantity < 5 or $product.date_end or $product.unusual_product}
+                            <p class="warning" itemscope itemtype="http://schema.org/Offer">
+                                {if $product.unusual_product}
+                                    Produit en quantité limitée, risque de manque à la livraison.
+                                {else}
+                                    {if $product.quantity < 5 and $product.quantity > 0}
+                                        Plus que {$product.quantity} produits restants.
+                                    {/if}
+                                    {if $product.quantity == 0}
+                                        Produits indisponible.
+                                    {/if}
+                                    {if $product.date_end and $product.limit_date}
+                                        Livrable jusqu'au <span itemprop="availabilityEnds">{$product.date_end|date_format:"%D"}</span>
+                                    {/if}
+                                {/if}
+                            </p>
+                         {/if}
 					</div>
 					<div class="detail">
 						{foreach from=$product.features item=feature name=feature}
