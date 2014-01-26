@@ -25,7 +25,8 @@
 }
 
 #product #item h1 {
-    font: 16px 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
     color: #4d9810;
     text-decoration: none;
     margin-bottom: 4px;
@@ -33,7 +34,8 @@
 
 #product .full-description p {
     margin-bottom: 0;
-    font: 13px 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-size: 13px;
+    font-style: italic;
 }
 
 #product .price-info {
@@ -72,7 +74,7 @@
 #product .add-to-basket-form.alerte { padding-top: 0; }
 
 #product .add-to-basket-form .alerte-message {
-    height: 45px;
+    padding: 27px 0;
 }
 
 #product .add-to-basket-form .alerte-message p { margin: 5px auto 0; color: #d44137; }
@@ -99,7 +101,7 @@
 }
 
 #product .add-to-basket-form .detailed-price .price {
-    font-family: 'MyriadWebPro-Bold';
+    font-weight: bold;
     color: #4d9810;
     font-size: 30px;
     margin-bottom: 5px;
@@ -115,7 +117,8 @@
     position: absolute;
     border: 1px solid #4d9810;
     color: #4d9810;
-    font: 13px 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
     -webkit-border-radius: 3px;
        -moz-border-radius: 3px;
             border-radius: 3px;
@@ -189,8 +192,8 @@
 }
 
 #product .mode-cuisson {
-    font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
     font-size: 13px;
+    font-style: italic;
 }
 
 #product .jours {
@@ -230,7 +233,8 @@
 }
 
 #product h2 {
-    font: 16px 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-size: 16px;
+    font-style: italic;
     margin-left: 5px;
     color: #604e3e;
     line-height: 28px;
@@ -267,7 +271,8 @@
 
 #product #idees-recettes li {
     position: relative;
-    font: 14px 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-size: 14px;
+    font-style: italic;
     margin-bottom: 15px;
 }
 
@@ -309,7 +314,7 @@
 }
 
 .price-infos .price{
-    font-family: 'MyriadWebPro-Bold';
+    font-weight: bold;
     color: #4d9810;
     font-size: 30px;
 }
@@ -361,7 +366,7 @@
     margin: 38px 0;
 }
 .misc-infos p{
-    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-weight: bold;
     font-size: 19px;
     color: #604e3e;
     float: left;
@@ -376,8 +381,8 @@
 }
 .colis-portions,
 .colis-jours{
-    font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
     font-size: 13px;
+    font-style: italic;
 }
 .img-portions{
     display: inline-block;
@@ -413,7 +418,7 @@
     float: left;
     width: 287px;
     font-size: 14px;
-    font-family: 'MyriadWebPro-italic';
+    font-style: italic;
     text-align: justify;
     margin-bottom: 13px;
 }
@@ -472,7 +477,7 @@
     float: left;
     width: 150px;
     color: #4d9810;
-    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-weight: bold;
     font-size: 14px;
     text-align: justify;
     margin: 9px 0 0 0;
