@@ -63,7 +63,7 @@
 
 			<div class="add-to-basket-form alerte">
                 {if $product->quantity < 5 or $product->limit_date or $product->unusual_product}
-                    <div class="alerte-message">
+                    <div class="alerte-message clearfix">
                         <p>
                             <span class="img-warning"></span>
                             {if $product->unusual_product}
