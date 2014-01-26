@@ -87,7 +87,7 @@
 
 #abo .step .notes {
     margin: 20px 0;
-    font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-style: italic;
     font-size: 12px;
 }
 
@@ -127,14 +127,14 @@
 }
 
 #abo #step1 .right-side p .price {
-    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-weight: bold;
     color: #4d9810;
     font-size: 30px;
     margin-left: 10px;
 }
 
 #abo #step1 .right-side p .euro {
-    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-weight: bold;
     color: #4d9810;
     font-size: 30px;
 }
@@ -194,7 +194,7 @@
 
 #abo #step2 a {
     font-size: 13px;
-    font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-style: italic;
 }
 
 #abo #villes-abonnees {
@@ -291,7 +291,7 @@
 }
 
 #abo .comment {
-    font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-size: 12px; font-style: italic;
 }
 
 #abo #step3 #creneau {
@@ -311,7 +311,7 @@
 #abo #step3 #creneau li + li + li + li { margin-bottom: 0; }
 
 #abo #step3 #creneau li p {
-    font: 14px 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-size: 14px; font-style: italic;
     line-height: 24px;
     color: #4D9810;
 }

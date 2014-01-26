@@ -7,7 +7,9 @@
     padding-left: 30px;
     float: left;
     background: url('../img/asset/img_solo/panier.png') no-repeat;
-    font: 16px/24px 'MyriadWebPro-bold', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: bold;
     color: #342110;
 }
 
@@ -60,13 +62,13 @@
 
 #order .form-panier tfoot td { border: none; height: 30px; }
 #order .form-panier tfoot td.first { border-left: 1px solid #c4b5aa; }
-#order .form-panier tfoot td + td { text-align: right; font: 16px 'MyriadWebPro-bold', Arial, sans-serif; }
+#order .form-panier tfoot td + td { text-align: right; font-size: 16px; font-weight: bold; }
 #order .form-panier tfoot td + td + td { text-align: center; color: #d44137; }
 
-#order .form-panier tbody tr td + td { font: 16px 'MyriadWebPro-bold', Arial, sans-serif;}
-#order .form-panier tbody tr td + td + td { font: 20px 'MyriadWebPro-regular', Arial, sans-serif; }
-#order .form-panier tbody tr td + td + td + td { font: 16px 'MyriadWebPro-bold', Arial, sans-serif; color: #4D9810; }
-#order .form-panier tbody tr td + td + td + td + td a { font: 14px 'MyriadWebPro-italic', Arial, sans-serif; color: #4D9810; }
+#order .form-panier tbody tr td + td { font-size: 16px; font-weight: bold; }
+#order .form-panier tbody tr td + td + td { font-size: 20px; font-weight: normal; font-style: normal; }
+#order .form-panier tbody tr td + td + td + td { font-size: 16px; font-weight: bold; color: #4D9810; }
+#order .form-panier tbody tr td + td + td + td + td a { font-size: 14px; font-style: italic; color: #4D9810; }
 
 #order .form-panier td .label-rouge {
     background: url('../img/asset/img_solo/petit_label_rouge.png') no-repeat 9px;
@@ -74,11 +76,12 @@
 }
 
 #order .form-panier td .product-title {
-    font: 15px 'MyriadWebPro-bold', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 #order .form-panier td .product-details {
-    font: 13px 'MyriadWebPro-italic', Arial, sans-serif;
+    font-size: 13px; font-style: italic;
 }
 #order .form-panier td .product-details *{
     margin: 0;
@@ -86,13 +89,13 @@
 
 #order .form-panier td .product-rare,
 #order .form-panier td .product-availability {
-    font: 13px 'MyriadWebPro-regular', Arial, sans-serif;
+    font-size: 13px; font-weight: normal; font-style: normal;
     color: #ae2b25;
 }
 
 #order #continue-shopping {
     color: #4d9810;
-    font: 16px 'MyriadWebPro-italic', Arial, sans-serif;
+    font-size: 16px; font-style: italic;
 }
 
 #order #enter-postal-code {
@@ -147,7 +150,7 @@
 }
 
 #order .cart-minimum .free-delivery,
-#order .cart-minimum thead th { font: 14px 'MyriadWebPro-bold', Arial, sans-serif; color: #a5211f; }
+#order .cart-minimum thead th { font-size: 14px; font-weight: bold; color: #a5211f; }
 
 #order .cart-minimum th,
 #order .cart-minimum td {
@@ -174,7 +177,7 @@
 #order #delivery-more-infos { text-align: right; margin-top: 5px; }
 
 #order #delivery-more-infos a {
-    font: 14px 'MyriadWebPro-italic', Arial, sans-serif;
+    font-size: 14px; font-style: 14px;
     color: #4d9810;
     
 }

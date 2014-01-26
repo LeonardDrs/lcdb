@@ -57,7 +57,7 @@
 }
 #history #mes-commandes .right-side a span,
 #history #mes-commandes .left-side a span{
-    font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-style: 14px;
 }
 #history #mes-commandes .right-side a:hover span,
 #history #mes-commandes .left-side a:hover span{
@@ -73,7 +73,7 @@
 #history #commande-detail h4 {
     font-size: 15px;
     color: #4d9810;
-    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-weight: bold;
 }
 #history #commande-detail h4.detail-title {
     margin-top: 40px;
@@ -81,7 +81,7 @@
 #history #commande-detail h5 {
     font-size: 14px;
     color: #342110;
-    font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-weight: bold;
 }
 #history #commande-detail #facture-detail-table {
     width: 100%;
@@ -120,7 +120,7 @@
 }
 #history #detail-commande-table th {
     width: 60px;
-    font: 13px 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-size: 13px; font-style: italic;
     color: #fff;
     background: #70ac3e;
 }
@@ -140,7 +140,7 @@
     background: url('../img/asset/img_solo/petit_label_rouge.png') no-repeat 9px;
     padding: 8px 8px 8px 54px;
     text-align: left;
-    font: 13px 'MyriadWebPro-Bold', Arial, sans-serif;
+    font-size: 13px; font-weight: bold;
 }
 #history #detail-commande-table tr {
     height: 36px;

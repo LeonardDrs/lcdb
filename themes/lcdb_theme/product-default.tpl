@@ -41,11 +41,11 @@
 			</div>
 		</div>
 		<div class="clearfix price-info">
-
+			<div class="choix-race">
 			{if isset($groups)}
 				{foreach from=$groups key=id_attribute_group item=group}
 					{if $group.attributes|@count}
-						<div class="choix-race">
+						
 							<p>{$group.name|escape:'htmlall':'UTF-8'} :</p>
 							{assign var="groupName" value="group_$id_attribute_group"}
 							{if ($group.group_type == 'select')}
@@ -55,13 +55,14 @@
 									{/foreach}
 								</select>
 							{/if}
-						</div>
+						
 					{/if}
 				{/foreach}
 			{/if}
+			</div>
 
 			<div class="add-to-basket-form alerte">
-				<div class="alerte-message">
+				<div class="alerte-message clearfix">
                     <p>
                     	<span class="img-warning"></span>
                     	{if $product->quantity < 5 and $product->quantity > 0}
@@ -146,7 +147,7 @@
 				<div>
 					<form class="form-panier clearfix" action="{$link->getPageLink('cart')}" method="post">
 						<button type="button" name="minus" class="moreless minus">-</button>
-						<input class="quantity" type="text" maxlength="2" value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product->minimal_quantity > 1}{$product->minimal_quantity}{else}1{/if}{/if}" id="quantity_wanted" name="qty" disabled {if $product->minimal_quantity > 1}onkeyup="checkMinimalQuantity({$product->minimal_quantity});"{/if} />
+						<input class="quantity" type="text" maxlength="2" value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product->minimal_quantity > 1}{$product->minimal_quantity}{else}1{/if}{/if}" id="quantity_wanted" name="qty" {if $product->minimal_quantity > 1}onkeyup="checkMinimalQuantity({$product->minimal_quantity});"{/if} />
 						<button type="button" name="plus" class="moreless plus">+</button>
 						<button type="submit" name="submit" class="ajout-panier green-button gradient">ajouter au panier</button>
 

@@ -52,13 +52,13 @@ margin: 0 24px 0 12px;
 	overflow: auto;
 }
 #addresses .address .details-address p.information{
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 	margin-bottom: 8px;
 }
 #addresses .address .action-link a{
 	color: #4D9810;
 	display: block;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 }
 #addresses .address .action-link {
 	border-top: 1px solid #342110;

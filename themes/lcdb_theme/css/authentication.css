@@ -15,7 +15,9 @@
 		STYLE DU CHECKOUT - 1) IDENTIFICATION
 ************************************************************************************************ */
 #authentication .bloc-checkout h2{
-	font: 16px/30px 'MyriadWebPro-Bold', Arial, sans-serif;
+	font-size: 16px;
+	line-height: 30px;
+	font-weight: bold;
 	border-bottom: 1px dashed #342110;
 	padding-bottom: 10px;
 	margin-bottom: 70px;
@@ -146,7 +148,7 @@
 }
 
 #authentication .content-register-form form p.annotation {
-	font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
+	font-size: 12px; font-style: italic;
 }
 
 #authentication .content-register-form .register-button {
@@ -163,7 +165,7 @@
 }
 
 #authentication .content-register-form p.cnil {
-	font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
+	font-size: 12px; font-style: italic;
 }
 
 #authentication .content-register-form a {
