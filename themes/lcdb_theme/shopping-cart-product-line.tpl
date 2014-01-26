@@ -23,25 +23,39 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
+<pre>{$product|print_r}</pre>
+
+{$features = ""}
+{foreach $product.features as $feature}
+    {$features = $features+" "+$feature.id_feature_value}
+{/foreach}
+
 <tr id="product_{$product.id_product}_{$product.id_product_attribute}_0_{$product.id_address_delivery|intval}{if !empty($product.gift)}_gift{/if}" class="row {if isset($productLast) && $productLast && (!isset($ignoreProductLast) || !$ignoreProductLast)}last_item{elseif isset($productFirst) && $productFirst}first_item{/if} {if isset($customizedDatas.$productId.$productAttributeId) AND $quantityDisplayed == 0}alternate_item{/if} cart_item address_{$product.id_address_delivery|intval} {if $odd}odd{else}even{/if}">
 	<td class="label cart_product first">
 		<a href="{$link->getProductLink($product.id_product, $product.link_rewrite, $product.category, null, null, $product.id_shop, $product.id_product_attribute)|escape:'htmlall':'UTF-8'}">
-			<div{if isset($product.label) && $product.label} class="{$product.label|lower|replace:' ':'-'}"{/if}>
+			<div{if isset($features)} class="{$features}"{/if}>
 				<span class="product-title">{$product.name|escape:'htmlall':'UTF-8'}</span>
 				<br/>
 				<span class="product-details">{$product.description_short|escape:'UTF-8'}</span>
+                <span class="product-details">{$product.attributes|escape:'UTF-8'}</span>
 			</div>
+
 			{$now = $smarty.now|date_format:"%Y-%m-%d"}
 			{$start = $product.date_start|date_format:"%Y-%m-%d"}
 			{$end = $product.date_end|date_format:"%Y-%m-%d"}
-			{if isset($product.unusual_product) && $product.unusual_product}
+
+			{if ($product.unusual_product)}
 				<span class="product-rare">Produit rare : indisponibilité à prévoir.</span>
-			{/if}
-			{if isset($product.unusual_product) && $product.unusual_product && (isset($product.date_start) && $product.date_start < $now) && isset($product.date_end) && $product.date_end > $now}
-				<br/>
-			{/if}
-			{if (isset($product.date_start) && $product.date_start < $now) && isset($product.date_end) && $product.date_end > $now}
-				<span class="product-availability">Livrable jusqu'au {$product.date_end|date_format:"%d/%m/%Y"}</span>
+            {else}
+                {if $product.quantity < 5 and $product.quantity > 0}
+                    <span class="product-availability">Plus que {$product.quantity} produits restants.</span>
+                {/if}
+                {if $product.quantity == 0}
+                    <span class="product-availability">Produits indisponible.</span>
+                {/if}
+                {if $product.limit_date && isset($product.date_end) && $product.date_end > $now}
+                    <span class="product-availability">Livrable jusqu'au {$product.date_end|date_format:"%d/%m/%Y"}</span>
+                {/if}
 			{/if}
 		</a>
 	</td>

@@ -48,6 +48,13 @@ class FrontController extends FrontControllerCore
 			'menu_approach' => $menu_approach,
 			'menu_recipe' => $menu_recipe
 		));
+
+        // assign id to smarty
+        $this->context->smarty->assign(array(
+            'id_feature_label_bio' => ID_FEATURE_LABEL_BIO,
+            'id_feature_label_rouge' => ID_FEATURE_LABEL_ROUGE
+        ));
+
 	}
 
 	public function setMedia()

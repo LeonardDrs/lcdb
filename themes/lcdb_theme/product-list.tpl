@@ -83,13 +83,13 @@
 				<div class="action-product">
 					<a href="{$product.link|escape:'htmlall':'UTF-8'}" class="Voir ce produit">{l s='View the product'}</a>
 					<form class="form-panier" method="post" action="{$link->getPageLink('cart')}" >
-						<!-- <label>Race :</label> -->
-						<!-- <select name="race" class="meat-race">
+						<label>Race :</label>
+						<select name="race" class="meat-race">
 							<option value="ramdom">Choisissez pour moi</option>
 							<option value="aubrac">Saler</option>
 							<option value="limousine">Limousine</option>
 							<option value="blonde_aquitaine">Charentaise</option>
-						</select> -->
+						</select>
 						<button class="moreless minus" name="minus" type="button">-</button>
 						<input class="quantity" type="text" disabled="" name="qty" value="1" maxlength="2">
 						<button class="moreless plus" name="plus" type="button">+</button>
@@ -104,6 +104,8 @@
 			</div>
 
 		{/if}
+
+        <pre>{$product|print_r}</pre>
 
 	{/foreach}
 {/if}
