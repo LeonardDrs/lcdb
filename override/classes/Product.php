@@ -188,14 +188,15 @@ class Product extends ProductCore
     {
         if (!Feature::isFeatureActive())
             return array();
-        if (!array_key_exists($id_product, self::$_cacheFeatures))
-            self::$_cacheFeatures[$id_product] = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
-				SELECT p.`id_feature`, p.`id_product`, p.`id_feature_value`, fvl.value
-				FROM `'._DB_PREFIX_.'feature_product` p
-				LEFT JOIN `'._DB_PREFIX_.'feature_value_lang` fvl ON (p.id_feature_value = fvl.id_feature_value) AND fvl.`id_lang` = '.(int)$id_lang.'
-				WHERE p.`id_product` = '.(int)$id_product
-            );
-        return self::$_cacheFeatures[$id_product];
+
+        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+			SELECT p.`id_feature`, p.`id_product`, p.`id_feature_value`, fvl.`value`
+			FROM `'._DB_PREFIX_.'feature_product` p
+			LEFT JOIN `'._DB_PREFIX_.'feature_value_lang` fvl ON (p.id_feature_value = fvl.id_feature_value) AND fvl.`id_lang` = '.(int)$id_lang.'
+			WHERE p.`id_product` = '.(int)$id_product
+        );
+
+        return $result;
     }
 
 	public static function getProductCategoriesFull($id_product = '', $id_lang = null)

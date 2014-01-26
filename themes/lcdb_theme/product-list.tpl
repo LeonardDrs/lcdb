@@ -105,7 +105,5 @@
 
 		{/if}
 
-        <pre>{$product|print_r}</pre>
-
 	{/foreach}
 {/if}
