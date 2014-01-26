@@ -2662,6 +2662,18 @@ ul.idTabs li {
   	height: 260px; /* ie */ 
 }
 
+.bloc{
+	border: 1px solid #bead9f;
+	-webkit-border-radius: 8px;
+	   -moz-border-radius: 8px;
+			border-radius: 8px;
+	padding: 20px;
+	background-color: rgba(255,255,255,.4);
+	min-height: 260px;
+	height: auto !important; /* ie */ 
+  	height: 260px; /* ie */ 
+}
+
 
 /* ************************************************************************************************
 		STYLE DU CHECKOUT - 2) ADRESSE DE LIVRAISON
