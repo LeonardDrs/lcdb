@@ -165,6 +165,15 @@ class AdminCarriersCEControllerCore extends AdminController
 						$this->l('For in-store pickup, enter 0 to replace the carrier name with your shop name')
 					)
 				),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('Day:'),
+                    'name' => 'day_CE',
+                    'lang' => true,
+                    'required' => false,
+                    'size' => 41,
+                    'maxlength' => 255,
+                ),
 				array(
 					'type' => 'checkbox',
 					'label' => $this->l('Zone:'),

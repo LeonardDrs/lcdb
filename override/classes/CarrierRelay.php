@@ -131,6 +131,7 @@ class CarrierRelayCore extends ObjectModel
             'address' => 	    		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 255),
             'phone' => 			        array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 50),
             'mention' => 	    		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 255),
+            'day_CE' => 	    		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isString', 'size' => 30),
         ),
     );
 
