@@ -48,6 +48,7 @@ $(function(){ldelim}
 {capture name=path}{l s='Login'}{/capture}
 {assign var='current_step' value='login'}
 
+
 <div id="columns" class="content clearfix">
 	<div class="bloc-checkout">
 		{include file="$tpl_dir./errors.tpl"}
@@ -415,11 +416,12 @@ $(function(){ldelim}
 							</label>
 							<div id="from-ce">
 								<label for="entreprise">De quel(le) entreprise/groupement ? <span class="required">*</span></label>
-								<select id="entreprise" name="entreprise" disabled>
-									<option>Fondation pour la Nature et l'Homme</option>
-									<option>Fondation pour la Nature et l'Homme</option>
-									<option>Fondation pour la Nature et l'Homme</option>
-									<option>Fondation pour la Nature et l'Homme</option>
+								<select id="entreprise" name="groupments" disabled>
+                                    {foreach from=$groups item=group}
+                                        {if $group.is_group == true}
+                                            <option value="{$group.id_group}">{$group.name}</option>
+                                        {/if}
+                                    {/foreach}
 								</select>
 							</div>
 							

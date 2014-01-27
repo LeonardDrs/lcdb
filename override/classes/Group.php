@@ -22,5 +22,18 @@ class Group extends GroupCore
 		),
 	);
 
+    public static function getGroups($id_lang, $id_shop = false)
+    {
+        $shop_criteria = '';
+        if ($id_shop)
+            $shop_criteria = Shop::addSqlAssociation('group', 'g');
+
+        return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+		SELECT DISTINCT g.`id_group`, g.`reduction`, g.`is_group`, g.`price_display_method`, gl.`name`
+		FROM `'._DB_PREFIX_.'group` g
+		LEFT JOIN `'._DB_PREFIX_.'group_lang` AS gl ON (g.`id_group` = gl.`id_group` AND gl.`id_lang` = '.(int)$id_lang.')
+		'.$shop_criteria.'
+		ORDER BY g.`id_group` ASC');
+    }
 }
 

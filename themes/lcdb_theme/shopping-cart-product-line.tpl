@@ -44,7 +44,9 @@
 				<span class="product-title">{$product.name|escape:'htmlall':'UTF-8'}</span>
 				<br/>
 				<span class="product-details">{$product.description_short|escape:'UTF-8'}</span>
-                <span class="product-details">{$product.attributes|escape:'UTF-8'}</span>
+                {if isset($product.attributes)}
+                    <span class="product-details">{$product.attributes|escape:'UTF-8'}</span>
+                {/if}
 			</div>
 
 			{$now = $smarty.now|date_format:"%Y-%m-%d"}
