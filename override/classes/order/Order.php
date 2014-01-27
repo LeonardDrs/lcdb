@@ -59,5 +59,26 @@ class Order extends OrderCore
 			'hour_delivery' => 				array('type' => self::TYPE_STRING),
 		),
 	);
+
+	/**
+	 * Return an object of relays
+	 */
+	public static function getRelays()
+	{
+		$relays = (object) array();
+		$sql = 'SELECT name, l.address, mention, lat, lon, phone, c.id_carrier
+				FROM '._DB_PREFIX_.'carrier c
+				LEFT join '._DB_PREFIX_.'carrier_lang l on c.id_carrier = l.id_carrier
+				WHERE c.`type_carrier` = 2
+				AND c.`active` = 1
+				AND c.`deleted` = 0
+				ORDER BY name ASC';
+		$relays = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+
+		foreach ($relays as &$relay) {
+			$relay['address'] = explode(',', $relay['address']);
+		}
+		return $relays;
+	}
 }
 

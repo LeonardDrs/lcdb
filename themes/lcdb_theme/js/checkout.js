@@ -164,7 +164,8 @@ $(document).ready(function(){
         return false;
     });
 
-    $('#show-map').click(function() {
+    // $('#show-map').click(function() {
+    $('.choose-relay_').click(function() {
         $('#relays').show();
         $('#relays').css({'height': $(document).height(), 'width': $(document).width()});
         if (google) {

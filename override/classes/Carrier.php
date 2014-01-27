@@ -99,8 +99,9 @@ class Carrier extends CarrierCore
 				WHERE c.`deleted` = '.($delete ? '1' : '0').
 					($active ? ' AND c.`active` = 1' : '').
 					($id_zone ? ' AND cz.`id_zone` = '.(int)$id_zone.'
-					AND c.`type_carrier` = 0
+					AND c.`type_carrier` != 2
 					AND z.`active` = 1 ' : ' ');
+					//AND c.`type_carrier` != 2 => no point relais
 		switch ($modules_filters)
 		{
 			case 1 :

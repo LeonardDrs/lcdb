@@ -28,7 +28,7 @@ function initialize() {
 
     //creates the markers and the list on the left
     for (var i=0; i< relaysLength; i++) {
-        createMarker(i, relays[i].nom, relays[i].adresse, relays[i].telephone, relays[i].mention, relays[i].lat, relays[i].lon);
+        createMarker(i, relays[i].nom, relays[i].address, relays[i].tel, relays[i].mention, relays[i].lat, relays[i].lon);
         var $listItem   = $j190(document.createElement('li')),
             $title      = $j190(document.createElement('h3')),
             $address1   = $j190(document.createElement('p')),
@@ -41,9 +41,9 @@ function initialize() {
             $separation = $j190(document.createElement('hr'));
 
         $title.text(relays[i].nom).addClass('relay-name');
-        $address1.text(relays[i].adresse[0]).addClass('relay-address');
-        $address2.text(relays[i].adresse[1]).addClass('relay-address');
-        $tel.text(relays[i].telephone);
+        $address1.text(relays[i].address[0]).addClass('relay-address');
+        $address2.text(relays[i].address[1]).addClass('relay-address');
+        $tel.text(relays[i].tel);
         $mention.text(relays[i].mention).addClass('relay-mention');
         $choose.text('choisir ce point relais').attr({'href': '#', 'title': 'choisir ce point relais'}).addClass('green-button choose-relay');
         $wrapper.append($choose);
@@ -69,7 +69,7 @@ function createMarker(index, nom, adresse, telephone, mention, lat, lon){
         map         : map,
         center      : new google.maps.LatLng(lat, lon),
         position    : new google.maps.LatLng(lat, lon),
-        icon        : new google.maps.MarkerImage(img_folder+'img/markers.png', new google.maps.Size(20, 34, "px", "px"), new google.maps.Point(0, (index*34+1)), null, null)
+        icon        : new google.maps.MarkerImage(img_folder+'/markers.png', new google.maps.Size(20, 34, "px", "px"), new google.maps.Point(0, (index*34+1)), null, null)
     };
 
     m = new google.maps.Marker(markerOptions);

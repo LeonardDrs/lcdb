@@ -261,7 +261,9 @@ function updateAddressSelection(addressType)
                             ];
         </script>
         {/literal}
-
+<script>
+	var relays = {$relays};
+</script>
 
 
 {capture name=path}{l s='Addresses'}{/capture}
@@ -372,7 +374,7 @@ function updateAddressSelection(addressType)
 						<!-- <div><a href="#" title="modifier votre adresse de livraison" id="modify-address-delivery">&rarr;&nbsp;<span>Modifier cette adresse</span></a></div> -->
 						<div><a href="{$link->getPageLink('address', true, NULL, "back={$back_order_page}?step=1{if $back}&mod={$back}{/if}")}" title="ajouter une nouvelle adresse" id="aadd-address-delivery">&rarr;&nbsp;<span>Ajouter une nouvelle adresse</span></a></div>
 					</div>
-					<div id="delivery-relay" class="hidden">
+<!-- 					<div id="delivery-relay" class="hidden">
 						<p>Adresse Point Relais</p>
 						<ul id="saved-address-relay">
 							<li>Bio Prestige</li>
@@ -380,6 +382,8 @@ function updateAddressSelection(addressType)
 							<li><span class="postal-code">75003</span> Paris</li>
 						</ul>
 						<div><a href="#" title="afficher la carte des points relais" id="show-map">&rarr;&nbsp;<span>afficher la carte des points relais</span></a></div>
+					</div> -->
+					<div id="delivery-relay">
 						<div id="relays">
 							<div class="popin">
 								<a href="#" title="Fermer" class="popin-close"></a>
@@ -407,7 +411,7 @@ function updateAddressSelection(addressType)
 											{if $option.unique_carrier}
 												{foreach $option.carrier_list as $carrier}
 													<p>
-														<label class="radio" for="delivery_option_{$id_address}_{$option@index}"><input type="radio" name="delivery" value="{$carrier.instance->id}" onchange="updateExtraCarrier('{$key}', {$id_address});" id="delivery_option_{$id_address}_{$option@index}"/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
+														<label class="radio" for="delivery_option_{$id_address}_{$option@index}"><input{if $carrier.instance->id == 24} class="choose-relay_"{/if} type="radio" name="delivery" value="{$carrier.instance->id}" onchange="updateExtraCarrier('{$key}', {$id_address});" id="delivery_option_{$id_address}_{$option@index}"/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
 														|	<span class="">
 															{if $option.total_price_with_tax && !$free_shipping}
 																{if $use_taxes == 1}
