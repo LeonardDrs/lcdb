@@ -93,7 +93,7 @@
                             </select>
                         {/if}
 						<button class="moreless minus" name="minus" type="button">-</button>
-						<input class="quantity" type="text" disabled="" name="qty" value="1" maxlength="2">
+						<input class="quantity" type="text" name="qty" value="1" maxlength="2">
 						<button class="moreless plus" name="plus" type="button">+</button>
 
 						<input type="hidden" name="token" value="{$static_token}" />
