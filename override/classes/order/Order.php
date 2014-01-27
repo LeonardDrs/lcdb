@@ -75,10 +75,9 @@ class Order extends OrderCore
 				ORDER BY name ASC';
 		$relays = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
 
-		// $orders = array();
-		// foreach ($result as $order)
-		// 	$orders[] = (int)($order['id_order']);
-		// return $orders;
+		foreach ($relays as &$relay) {
+			$relay['address'] = explode(',', $relay['address']);
+		}
 		return $relays;
 	}
 }

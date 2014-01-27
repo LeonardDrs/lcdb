@@ -261,7 +261,9 @@ function updateAddressSelection(addressType)
                             ];
         </script>
         {/literal}
-
+<script>
+	var relays = {$relays};
+</script>
 
 
 {capture name=path}{l s='Addresses'}{/capture}

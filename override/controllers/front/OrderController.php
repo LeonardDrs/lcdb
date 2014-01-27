@@ -301,11 +301,10 @@ class OrderController extends OrderControllerCore
 	protected function _assignRelays()
 	{
 		$relays = Order::getRelays();
-		echo "<pre>";
-		var_dump(json_encode($relays));
-		die();
-		$vars[0]['name'] = str_replace(' ', '_', strtolower($vars[0]['name']));
-		$this->context->smarty->assign($vars[0]);
+		// $vars[0]['name'] = str_replace(' ', '_', strtolower($vars[0]['name']));
+		$this->context->smarty->assign(
+			array('relays' => json_encode($relays))
+		);
 	}
 
 	protected function _assignZone()
