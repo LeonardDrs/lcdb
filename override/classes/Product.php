@@ -184,6 +184,21 @@ class Product extends ProductCore
 			));
 	}
 
+    public static function getAdvancedFeaturesStatic($id_product, $id_lang)
+    {
+        if (!Feature::isFeatureActive())
+            return array();
+
+        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+			SELECT p.`id_feature`, p.`id_product`, p.`id_feature_value`, fvl.`value`
+			FROM `'._DB_PREFIX_.'feature_product` p
+			LEFT JOIN `'._DB_PREFIX_.'feature_value_lang` fvl ON (p.id_feature_value = fvl.id_feature_value) AND fvl.`id_lang` = '.(int)$id_lang.'
+			WHERE p.`id_product` = '.(int)$id_product
+        );
+
+        return $result;
+    }
+
 	public static function getProductCategoriesFull($id_product = '', $id_lang = null)
 	{
 		if (!$id_lang)

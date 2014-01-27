@@ -1,4 +1,4 @@
-{capture name=path}{l s='Your shopping cart'}{/capture}
+-{capture name=path}{l s='Your shopping cart'}{/capture}
 <div id="columns" class="content clearfix">
 	<div id="left_column">
 		{include file="$tpl_dir./category-leftcol.tpl"}

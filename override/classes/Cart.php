@@ -613,7 +613,7 @@ class Cart extends CartCore
 						pl.`description_short`, pl.`available_now`, pl.`available_later`, p.`id_product`, product_shop.`id_category_default`, p.`id_supplier`,
 						p.`id_manufacturer`, product_shop.`on_sale`, product_shop.`ecotax`, product_shop.`additional_shipping_cost`, product_shop.`available_for_order`, product_shop.`price`, p.`weight`,
 						stock.`quantity` quantity_available, p.`width`, p.`height`, p.`depth`, stock.`out_of_stock`, product_shop.`active`, p.`date_add`,
-						p.`date_upd`,p.`date_start`,p.`date_end`, p.`unusual_product`, IFNULL(stock.quantity, 0) as quantity, pl.`link_rewrite`, cl.`link_rewrite` AS category,
+						p.`date_upd`,p.`date_start`, p.`limit_date`,p.`date_end`, p.`unusual_product`, IFNULL(stock.quantity, 0) as quantity, pl.`link_rewrite`, cl.`link_rewrite` AS category,
 						CONCAT(cp.`id_product`, cp.`id_product_attribute`, cp.`id_address_delivery`) AS unique_id, cp.id_address_delivery,
 						product_shop.`wholesale_price`, product_shop.advanced_stock_management');
 
@@ -839,7 +839,7 @@ class Cart extends CartCore
 			$row['quantity_discount_applies'] = ($specific_price_output && $row['cart_quantity'] >= (int)$specific_price_output['from_quantity']);
 			$row['id_image'] = Product::defineProductImage($row, $this->id_lang);
 			$row['allow_oosp'] = Product::isAvailableWhenOutOfStock($row['out_of_stock']);
-			$row['features'] = Product::getFeaturesStatic((int)$row['id_product']);
+			$row['features'] = Product::getAdvancedFeaturesStatic((int)$row['id_product'], $this->id_lang);
 
 			if (array_key_exists($row['id_product_attribute'].'-'.$this->id_lang, self::$_attributesLists))
 				$row = array_merge($row, self::$_attributesLists[$row['id_product_attribute'].'-'.$this->id_lang]);

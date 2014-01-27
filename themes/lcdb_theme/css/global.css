@@ -6,6 +6,7 @@
 /* ************************************************************************************************
 		fonts
 ************************************************************************************************ */
+
 @font-face {
 	font-family: 'MyriadWebPro';
 	src: url('../fonts/myriadwebpro.eot');
@@ -17,35 +18,36 @@
 	font-style: normal;
 }
 @font-face {
-	font-family: 'MyriadWebPro-Bold';
+	font-family: 'MyriadWebPro';
 	src: url('../fonts/myriadwebprobold.eot');
 	src: url('../fonts/myriadwebprobold.eot?#iefix') format('embedded-opentype'),
 			 url('../fonts/myriadwebprobold.woff') format('woff'),
 			 url('../fonts/myriadwebprobold.ttf') format('truetype'),
 			 url('../fonts/myriadwebprobold.svg#myriadwebprobold') format('svg');
-	font-weight: normal;
+	font-weight: bold;
 	font-style: normal;
 }
 @font-face {
-	font-family: 'MyriadWebPro-Italic';
+	font-family: 'MyriadWebPro';
 	src: url('../fonts/myriadwebproitalic.eot');
 	src: url('../fonts/myriadwebproitalic.eot?#iefix') format('embedded-opentype'),
 			 url('../fonts/myriadwebproitalic.woff') format('woff'),
 			 url('../fonts/myriadwebproitalic.ttf') format('truetype'),
 			 url('../fonts/myriadwebproitalic.svg#myriadwebproitalic') format('svg');
 	font-weight: normal;
-	font-style: normal;
+	font-style: italic;
 }
 @font-face {
-	font-family: 'MyriadWebPro-Semibold';
+	font-family: 'MyriadWebPro';
 	src: url('../fonts/myriadprosemibold.eot');
 	src: url('../fonts/myriadprosemibold.eot?#iefix') format('embedded-opentype'),
 			 url('../fonts/myriadprosemibold.woff') format('woff'),
 			 url('../fonts/myriadprosemibold.ttf') format('truetype'),
 			 url('../fonts/myriadprosemibold.svg#myriadprosemibold') format('svg');
-	font-weight: normal;
+	font-weight: 700;
 	font-style: normal;
 }
+
 @font-face {
     font-family: 'androgyne';
     src: url('../fonts/androgyne.eot');
@@ -198,7 +200,8 @@ hr.dashed {
 	padding: 8px 15px;
 	-webkit-border-radius: 4px;
 	        border-radius: 4px;
-	font: 13px 'MyriadWebPro-Semibold', Arial, sans-serif;
+	font-size: 13px;
+	font-weight: 700;
 	text-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
 	-webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, .4), inset 0 0 1px 1px #D44037;
 			box-shadow: 3px 3px 5px rgba(0, 0, 0, .4), inset 0 0 1px 1px #D44037;
@@ -241,7 +244,8 @@ a.red-button:active{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5eb11a', endColorstr='#4e9314',GradientType=0 );
 	-webkit-box-shadow: inset 0 0 1px 1px #8AD425;
 			box-shadow: inset 0 0 1px 1px #8AD425;
-	font: 16px 'MyriadWebPro-Semibold', Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 700;
 	text-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
 	text-transform: uppercase;
 	text-decoration: none;
@@ -286,7 +290,8 @@ a.green-button:active{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c5c5c', endColorstr='#444444', GradientType=0 );
 	-webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, .4), inset 0 0 1px 1px #6e6e6e;
 			box-shadow: 3px 3px 5px rgba(0, 0, 0, .4), inset 0 0 1px 1px #6e6e6e;
-	font: 16px 'MyriadWebPro-Semibold', Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 700;
 	text-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
 	text-transform: uppercase;
 	text-decoration: none;
@@ -379,12 +384,12 @@ p em {font-style:italic}
 	color: #4d9810;
 }
 .bold{
-	font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+	font-weight: bold;
 }
 a.green-title,
 .green-title{
 	color: #4d9810 !important;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size: 16px;
 	margin-bottom: 15px;
 }
@@ -760,7 +765,7 @@ div.star_hover a, div.star a:hover { background-position: 0 -32px }
 .sbHolder{
 	background-color: white;
 	border: solid 1px #c6c2be;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size: 14px;
 	font-weight: normal;
 	height: 20px;
@@ -1257,7 +1262,7 @@ header #basket span.illustration{
 	padding: 15px 0px 15px 0px;
 	border-top: 1px solid #342110;
 	border-bottom: 1px solid #342110;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 }.small-bloc{
 	position: relative;
 	background-color: rgba(255,255,255,.4);
@@ -1743,7 +1748,7 @@ header #basket span.illustration{
 	text-align: right;
 	text-transform: uppercase;
 	margin-top: 10px;
-	font-family: 'MyriadWebPro-Italic', Arial, sans-serif;
+	font-style: italic;
 }
 .content .order-meat-message .message span{
 	background: url('../img/asset/sprite_accueil.png') no-repeat 0 0;
@@ -1772,7 +1777,7 @@ header #basket span.illustration{
 	color: white;
 	text-transform: uppercase;
 	font-size: 18px;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 	text-decoration: none;
 	padding: 15px 50px 15px 50px;
 	border: 1px solid #d44137;
@@ -2050,13 +2055,13 @@ header #basket span.illustration{
 	text-align: right;
 }
 .basket-bold{
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 .empty-link{
 	text-align: right;
 }
 .empty-basket{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	color: #4d9810;
 	font-size: 12px;
 }
@@ -2112,7 +2117,7 @@ html body .place-order-button:hover,
 	border: 1px solid #C8C5C2;
 	padding: 3px 1px 3px 5px;
 	margin-right: 3px;
-	font-family: 'MyriadWebPro-italic';
+	font-style: italic;
 }
 #form-code-postal button{
 	background-color: #E0CEBA;
@@ -2170,7 +2175,7 @@ html body .place-order-button:hover,
   	height: 260px; /* ie */
 }
 #center_column h1{
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 	font-size: 20px;
 	color: #4D9810;
 	margin: 0 auto 14px;
@@ -2216,7 +2221,7 @@ html body .place-order-button:hover,
 .frais-livraison p,
 .mot-boucher p,
 .temoignage p{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 }
 .mot-boucher h3{
 	text-align: center;
@@ -2224,7 +2229,7 @@ html body .place-order-button:hover,
 	font-size: 15px;
 	margin-bottom: 10px;
 	font-weight: normal;
-	font-family: 'MyriadWebPro-italic';
+	font-style: italic;
 }
 .mot-boucher p{
 	font-size: 12px;
@@ -2234,7 +2239,7 @@ html body .place-order-button:hover,
 .mot-boucher a{
 	text-decoration: none;
 	color: #4D9810;
-	font-family: 'MyriadWebPro-italic';
+	font-style: italic;
 }
 .temoignage a:hover,
 .mot-boucher a:hover{
@@ -2251,11 +2256,11 @@ html body .place-order-button:hover,
 .temoignage .author{
 	margin: 7px 0;
 	text-align: center;
-	font-family: 'MyriadWebPro-italic';
+	font-style: italic;
 }
 .temoignage .author span{
 	color: #342110;
-	font-family: 'MyriadWebPro-bold';
+	font-weight: bold;
 }
 #form-search{
 	margin-bottom: 12px;
@@ -2265,7 +2270,7 @@ html body .place-order-button:hover,
 	margin-left: 4px;
 	width: 130px;
 	font-size: 13px;
-	font-family: 'MyriadWebPro-italic';
+	font-style: italic;
 	box-sizing: content-box;
 	-moz-box-sizing: content-box;
 }
@@ -2293,7 +2298,6 @@ nav.secondary-menu{
 	text-transform: uppercase;
 	color: #342110;
 	font-size: 15px;
-	font-family: 'MyriadWebPro-bold';
 	text-decoration: none;
 	display: block;
 	padding: 10px 0;
@@ -2546,7 +2550,7 @@ ul.idTabs li {
 .gldp-default .monyear,
 .gldp-default .monyear select {
 	font-size: 16px !important;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 .gldp-default .monyear.next{
 	text-align:right;
@@ -2662,6 +2666,18 @@ ul.idTabs li {
   	height: 260px; /* ie */ 
 }
 
+.bloc{
+	border: 1px solid #bead9f;
+	-webkit-border-radius: 8px;
+	   -moz-border-radius: 8px;
+			border-radius: 8px;
+	padding: 20px;
+	background-color: rgba(255,255,255,.4);
+	min-height: 260px;
+	height: auto !important; /* ie */ 
+  	height: 260px; /* ie */ 
+}
+
 
 /* ************************************************************************************************
 		STYLE DU CHECKOUT - 2) ADRESSE DE LIVRAISON
@@ -2713,7 +2729,7 @@ ul.idTabs li {
 #breadcrumb-checkout ol li.item-active{
 	background-color: #4d9810;
 	color: white;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 #breadcrumb-checkout ol li.adresse-livraison{
 	width:300px;
@@ -2731,7 +2747,7 @@ ul.idTabs li {
 	margin-left:0px;
 }
 #breadcrumb-checkout ol li a{
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 	font-size: 16px;
 	color: #342110;	
 	padding-left: 5px;
@@ -2851,7 +2867,7 @@ ul.idTabs li {
 	float:left;
 	margin-left: 10px;
 	font-size: 13px;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 }
 .content-delivery #calendar #legend ul li:first-child{
 	margin-left:0px;
@@ -2899,7 +2915,7 @@ ul.idTabs li {
 }
 .content-delivery .bloc-time .action a{
 	color: #4d9810;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-weight: bolder;
 	padding-top: 16px;
 	display:block;
@@ -3002,7 +3018,7 @@ ul.idTabs li {
 .content-delivery #selected-hours div.infos-hours span{
 	display:block;
 	color: #4D9810;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 .content-delivery #selected-hours div label{
 	float:left;
@@ -3071,7 +3087,7 @@ ul.idTabs li {
 	margin:0;
 	padding:0px 0px 0px 40px;
 	color: #ad2a24;
-	font-family:'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size: 16px;
 	background: url('../img/asset/img_solo/warning.png') no-repeat 0 center;
 }
@@ -3080,7 +3096,7 @@ ul.idTabs li {
 	text-decoration: underline;
 }
 .content-delivery .warning .bold{
-	font-family:'MyriadWebPro-Italic';
+	font-style: italic;
 	font-weight: bolder;
 }
 /* ************************************************************************************************
@@ -3123,7 +3139,7 @@ ul.idTabs li {
 	line-height: 1.2em;
 }
 #order .content-payment a{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	color: #4D9810;
 	font-size: 15px;
 	margin-bottom: 10px;
@@ -3181,7 +3197,7 @@ ul.idTabs li {
 	float:left;
 }
 #order .content-payment .bloc #delivery-date p + p{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 }
 #order .content-payment .bloc #mode-delivery{
 	border-bottom: 1px dashed #342110;
@@ -3238,7 +3254,7 @@ ul.idTabs li {
 	text-align:center;
 	color: white;
 	font-size:13px;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	vertical-align:middle;
 	display:inline-block;
 }
@@ -3255,7 +3271,7 @@ ul.idTabs li {
 	width: 39px;
 	text-align:center;
 	font-size: 13px;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 	padding: 15px 5px 15px 10px;
 }
 #order .content-payment .bloc #recap-basket #basket-content table td:first-child{
@@ -3386,7 +3402,7 @@ ul.idTabs li {
 	background: url('../img/asset/img_solo/virement_especes.png') no-repeat 10px 0;
 }
 #order .content-payment .bloc #payment-means > div p{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size:14px;
 	padding-left: 2px;
 }
@@ -3413,7 +3429,7 @@ ul.idTabs li {
 	height: 93px;
 }
 #order .content-payment .bloc #payment-message p{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size:14px;
 }
 #order .content-payment .bloc #payment-message textarea{
@@ -3508,7 +3524,7 @@ ul.idTabs li {
 	padding: 10px 12px 10px 10px;
 }
 #order .bloc-checkout #push p.title{
-	font-family: 'MyriadWebPro-Bold', Arial,sans-serif;
+	font-weight: bold;
 	border-bottom: 1px dashed #342110;
 	padding: 0px 0px 10px 35px;
 	background: url('../img/asset/img_solo/heart.png') no-repeat 0 0;
@@ -3589,7 +3605,7 @@ ul.idTabs li {
 .gldp-default .monyear,
 .gldp-default .monyear select {
 	font-size: 16px !important;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 .gldp-default .monyear.next{
 	text-align:right;
@@ -3739,7 +3755,7 @@ ul.idTabs li {
 #breadcrumb-checkout ol li.item-active{
 	background-color: #4d9810;
 	color: white;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 #breadcrumb-checkout ol li.adresse-livraison{
 	width:300px;
@@ -3757,7 +3773,7 @@ ul.idTabs li {
 	margin-left:0px;
 }
 #breadcrumb-checkout ol li a{
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 	font-size: 16px;
 	color: #342110;	
 	padding-left: 5px;
@@ -3883,7 +3899,7 @@ ul.idTabs li {
 	float:left;
 	margin-left: 10px;
 	font-size: 13px;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 }
 .content-checkout #calendar #legend ul li:first-child{
 	margin-left:0px;
@@ -3931,7 +3947,7 @@ ul.idTabs li {
 }
 .content-checkout .bloc-time .action a{
 	color: #4d9810;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-weight: bolder;
 	padding-top: 16px;
 	display:block;
@@ -4034,7 +4050,7 @@ ul.idTabs li {
 .content-checkout #selected-hours div.infos-hours span{
 	display:block;
 	color: #4D9810;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 .content-checkout #selected-hours div label{
 	float:left;
@@ -4103,7 +4119,7 @@ ul.idTabs li {
 	margin:0;
 	padding:0px 0px 0px 40px;
 	color: #ad2a24;
-	font-family:'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size: 16px;
 	background: url('../img/asset/img_solo/warning.png') no-repeat 0 center;
 }
@@ -4112,7 +4128,7 @@ ul.idTabs li {
 	text-decoration: underline;
 }
 .content-checkout .warning .bold{
-	font-family:'MyriadWebPro-Italic';
+	font-style: italic;
 	font-weight: bolder;
 }
 
@@ -4384,7 +4400,7 @@ div.pager .pager-first a{
 	display: inline-block;
 	text-decoration: none;
 	font-size: 16px;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 div.pager .pager-last a:hover,
 div.pager .pager-first a:hover{
@@ -4477,7 +4493,7 @@ div.pager .pager-last{
 }
 #pagenotfound .bloc a{
 	display: block;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	color: #4D9810;
 }
 #pagenotfound .bloc a span{

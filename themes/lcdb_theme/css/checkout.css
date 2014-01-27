@@ -44,7 +44,7 @@
 .gldp-default .monyear,
 .gldp-default .monyear select {
 	font-size: 16px !important;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 .gldp-default .monyear.next{
 	text-align:right;
@@ -171,7 +171,9 @@
 		STYLE DU CHECKOUT - 1) IDENTIFICATION
 ************************************************************************************************ */
 #order .bloc-checkout h2{
-	font: 16px/30px 'MyriadWebPro-Bold', Arial, sans-serif;
+	font-size: 16px;
+	line-height: 30px;
+	font-weight: bold;
 	border-bottom: 1px dashed #342110;
 	padding-bottom: 10px;
 	margin-bottom: 70px;
@@ -323,7 +325,7 @@
 .ie7 #order .content-register-form form label.radio { vertical-align: top; }
 
 #order .content-register-form form p.annotation {
-	font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
+	font-size: 12px; font-style: italic;
 }
 
 #order .content-register-form .register-button {
@@ -340,7 +342,7 @@
 }
 
 #order .content-register-form p.cnil {
-	font: 12px 'MyriadWebPro-Italic', Arial, sans-serif;
+	font-size: 12px; font-style: italic;
 }
 
 #order .content-register-form a {
@@ -456,7 +458,8 @@
 	border-left: 1px solid #342110;
 	margin-left: 5px;
 	padding-left: 6px;
-	font: 13px 'MyriadWebPro-Bold', Arial, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
 	color: #4D9810;
 }
 
@@ -526,7 +529,7 @@
 	margin-left: 25px;
 	padding-right: 10px;
 	text-align: justify;
-	font: 13px 'MyriadWebPro-Italic', Arial, sans-serif;
+	font-size: 13px; font-style: italic;
 	margin-bottom: 10px;
 }
 
@@ -548,7 +551,7 @@
 
 #order .content-delivery-mode .price {
 	color: #4d9810;
-	font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+	font-weight: bold;
 }
 
 #order #submit-address {
@@ -595,7 +598,8 @@
 }
 
 #order .content-address-delivery #relays .popin .popin-title {
-	font: 20px 'MyriadWebPro-Bold', Arial, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 #order .content-address-delivery #relays .popin .content-wrapper {
@@ -700,7 +704,7 @@
 #map .infoBox .relay-mention,
 #order .content-address-delivery #delivery-relay #relay-list li .relay-mention {
     color: #4d9810;
-    font: 14px 'MyriadWebPro-Italic', Arial, sans-serif;
+    font-size: 14px; font-style: italic;
     margin-bottom: 10px;
 }
 
@@ -764,7 +768,7 @@
 	list-style-position:inside;
 	padding:0;
 	margin:0;
-	font-family: 'MyriadWebPro-Bold', Arial, sans-serif;
+	font-weight: bold;
 }
 #breadcrumb-checkout ol:after{
 	content:"";
@@ -796,7 +800,7 @@
 #breadcrumb-checkout ol li.item-active{
 	background-color: #4d9810;
 	color: white;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 #breadcrumb-checkout ol li.adresse-livraison{
 	width:250px;
@@ -814,7 +818,7 @@
 	margin-left:0px;
 }
 #breadcrumb-checkout ol li a{
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 	font-size: 16px;
 	color: #342110;
 	text-decoration: none;
@@ -933,7 +937,7 @@
 	float:left;
 	margin-left: 10px;
 	font-size: 13px;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 }
 .content-delivery #calendar #legend ul li:first-child{
 	margin-left:0px;
@@ -981,7 +985,7 @@
 }
 .content-delivery .bloc-time .action a{
 	color: #4d9810;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-weight: bolder;
 	padding-top: 16px;
 	display:block;
@@ -1084,7 +1088,7 @@
 .content-delivery #selected-hours div.infos-hours span{
 	display:block;
 	color: #4D9810;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 }
 .content-delivery #selected-hours div label{
 	float:left;
@@ -1153,7 +1157,7 @@
 	margin:0;
 	padding:0px 0px 0px 40px;
 	color: #ad2a24;
-	font-family:'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size: 16px;
 	background: url('../img/asset/img_solo/warning.png') no-repeat 0 center;
 }
@@ -1162,7 +1166,7 @@
 	text-decoration: underline;
 }
 .content-delivery .warning .bold{
-	font-family:'MyriadWebPro-Italic';
+	font-style: italic;
 	font-weight: bolder;
 }
 /* ************************************************************************************************
@@ -1208,7 +1212,7 @@
 	line-height: 1.2em;
 }
 #order .content-payment a{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	color: #4D9810;
 	font-size: 15px;
 	margin-bottom: 10px;
@@ -1269,7 +1273,7 @@
 	float:left;
 }
 #order .content-payment .bloc #delivery-date p + p{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 }
 #order .content-payment .bloc #mode-delivery{
 	border-bottom: 1px dashed #342110;
@@ -1326,7 +1330,7 @@
 	text-align:center;
 	color: white;
 	font-size:13px;
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	vertical-align:middle;
 	display:inline-block;
 }
@@ -1343,7 +1347,7 @@
 	width: 39px;
 	text-align:center;
 	font-size: 13px;
-	font-family: 'MyriadWebPro-Bold';
+	font-weight: bold;
 	padding: 15px 5px 15px 10px;
 }
 #order .content-payment .bloc #recap-basket #basket-content table td:first-child{
@@ -1474,7 +1478,7 @@
 	background: url('../img/asset/img_solo/virement_especes.png') no-repeat 10px 0;
 }
 #order .content-payment .bloc #payment-means > div p{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size:14px;
 	padding-left: 2px;
 }
@@ -1501,7 +1505,7 @@
 	height: 93px;
 }
 #order .content-payment .bloc #payment-message p{
-	font-family: 'MyriadWebPro-Italic';
+	font-style: italic;
 	font-size:14px;
 }
 #order .content-payment .bloc #payment-message textarea{
@@ -1599,7 +1603,7 @@
 	padding: 10px 12px 10px 10px;
 }
 #order .bloc-checkout #push p.title{
-	font-family: 'MyriadWebPro-Bold', Arial,sans-serif;
+	font-weight: bold;
 	border-bottom: 1px dashed #342110;
 	padding: 0px 0px 10px 35px;
 	background: url('../img/asset/img_solo/heart.png') no-repeat 0 0;
