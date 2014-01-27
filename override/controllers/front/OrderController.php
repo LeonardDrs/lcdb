@@ -216,6 +216,7 @@ class OrderController extends OrderControllerCore
 			case 1:
 				$this->_assignAddress();
 				$this->_assignCarrier();
+				$this->_assignRelays();
 
 				$this->processAddressFormat();
 				if (Tools::getValue('multi-shipping') == 1)
@@ -295,6 +296,16 @@ class OrderController extends OrderControllerCore
 			'currencyFormat' => $this->context->currency->format,
 			'currencyBlank' => $this->context->currency->blank,
 		));
+	}
+
+	protected function _assignRelays()
+	{
+		$relays = Order::getRelays();
+		echo "<pre>";
+		var_dump(json_encode($relays));
+		die();
+		$vars[0]['name'] = str_replace(' ', '_', strtolower($vars[0]['name']));
+		$this->context->smarty->assign($vars[0]);
 	}
 
 	protected function _assignZone()
