@@ -19,9 +19,6 @@ class CategoryController extends CategoryControllerCore
 			case ID_CATEGORY_GIFT:
 				Tools::redirect('index.php?id_product='.ID_PRODUCT_GIFT.'&controller=product');
 				break;
-			//case 8:
-			//	Tools::redirect('index.php?id_category=11&controller=category');
-			//	break;
 			default: 
 				parent::init();
 				break;
@@ -55,7 +52,7 @@ class CategoryController extends CategoryControllerCore
 		
 	}
 	
-		protected function assignSubcategories()
+	protected function assignSubcategories()
 	{
 		if ($subCategories = $this->category->getFullSubCategories($this->context->language->id, true, $this->orderBy, $this->orderWay))
 		{
