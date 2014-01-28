@@ -432,6 +432,15 @@ function upQuantity(id, qty)
 				updateHookShoppingCartExtra(jsonData.HOOK_SHOPPING_CART_EXTRA);
 				if (typeof(getCarrierListAndUpdate) !== 'undefined')
 					getCarrierListAndUpdate();
+
+// override	
+				if (parseInt($('#total_price').text()) > window.lastMinOrder) {
+					$('#validate-cart').removeClass('disabled-button');
+					$('.rouge').removeClass('error');
+				} else {
+					$('#validate-cart').addClass('disabled-button');
+					$('th.rouge').addClass('error');
+				}
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -515,6 +524,15 @@ function downQuantity(id, qty)
 					
 					if (typeof(getCarrierListAndUpdate) !== 'undefined')
 						getCarrierListAndUpdate();
+
+					// override	
+					if (parseInt($('#total_price').text()) > window.lastMinOrder) {
+						$('#validate-cart').removeClass('disabled-button');
+						$('.rouge').addClass('error');
+					} else {
+						$('#validate-cart').addClass('disabled-button');
+						$('th.rouge').addClass('error');
+					}
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {

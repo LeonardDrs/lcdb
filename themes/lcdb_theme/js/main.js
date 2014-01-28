@@ -9,8 +9,20 @@ $(document).ready(function(){
 			e.preventDefault();
 	})
 
+	window.lastMinOrder = undefined;
 
 	if ($('#form-code-postal_cart').length) {
+		// setTimeout(function() {
+		// 	$('.cart_quantity_up').on('click',function() {
+		// 		console.log(checked && parseInt($('#total_price').text()) , lastMinOrder)
+		// 		if (checked && parseInt($('#total_price').text()) > lastMinOrder) {
+		// 			$('#validate-cart').removeClass('disabled-button');
+		// 		} else {
+		// 			$('#validate-cart').addClass('disabled-button');
+		// 		}
+		// 	})
+		// },1);
+
 		$('#form-code-postal_cart').on('submit', function(e) {
 			e.preventDefault();
 			var $this=$(this);
@@ -22,10 +34,10 @@ $(document).ready(function(){
 				dataType: 'json',
 				success: function(response) {
 					// console.log(response);
-					console.log(parseInt($('#total_price').text()) , parseInt(response.minimum_order))
-					if (parseInt($('#total_price').text()) > parseInt(response.minimum_order)) {
+					if (parseInt($('#total_price').text()) >= parseInt(response.minimum_order)) {
 						$('#validate-cart').removeClass('disabled-button');
-					};
+					}
+					window.lastMinOrder = parseInt(response.minimum_order);
 				}
 			})
 			$.ajax({
@@ -36,6 +48,9 @@ $(document).ready(function(){
 					$('.bloc_inf_livraison').remove();
 					var t = $(response).find('.bloc_inf_livraison');
 					$('#form-code-postal_cart').after(t);
+					if (parseInt($('#total_price').text()) < parseInt(window.lastMinOrder)) {
+						$('th.rouge').addClass('error');
+					}
 				}
 			})
 		})
