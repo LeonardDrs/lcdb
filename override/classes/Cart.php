@@ -3,7 +3,6 @@
 class Cart extends CartCore
 {
 	public $date_delivery;
-
 	public $hour_delivery;
 
 	/**

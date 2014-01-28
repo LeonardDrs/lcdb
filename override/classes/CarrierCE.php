@@ -91,6 +91,7 @@ class CarrierCECore extends ObjectModel
     public $address;
     public $phone;
     public $mention;
+    public $day_CE;
 
 	/**
 	 * @see ObjectModel::$definition
