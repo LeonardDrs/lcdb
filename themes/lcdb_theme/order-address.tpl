@@ -195,72 +195,7 @@ function updateAddressSelection(addressType)
 
 //]]>
 </script>
-{literal}
-        <script type="text/javascript">
-            
-            var relays     = [
-                                {
-                                    'nom'       : 'Diététique DP',
-                                    'adresse'   : ['210 bis Boulevard Pereire', '75017 Paris'],
-                                    'telephone' : '01 45 74 75 51',
-                                    'mention'   : 'Retrait des Colis 12h à 18h',
-                                    'lat'       : '48.8796788',
-                                    'lon'       : '2.2871024999999463'
 
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                },
-                                {
-                                    'nom'       : 'Bio Prestige',
-                                    'adresse'   : ['92 Boulevard Batignolles', '75017 Paris'],
-                                    'telephone' : '01 45 22 53 52',
-                                    'mention'   : 'Retrait des Colis entre 12h et 19h',
-                                    'lat'       : '48.8817472',
-                                    'lon'       : '2.317602899999997'
-                                }/*,
-                                    PHP -> suite points relai
-                                */
-                            ];
-        </script>
-        {/literal}
 <script>
 	var relays = {$relays};
 </script>

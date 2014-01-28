@@ -131,6 +131,7 @@ $(document).ready(function(){
     });
 
     $('#relay').change(function(){
+        console.log('?')
         var $home  = $('#delivery-address');
         var $relay = $('#delivery-relay');
         if ($('#relay').is(':checked')) {
