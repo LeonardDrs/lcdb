@@ -24,16 +24,16 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-{assign var='label_bio' value="label-bio"}
-{assign var='label_rouge' value="label-rouge"}
+{assign var='label_bio' value=""}
+{assign var='label_rouge' value=""}
 
 {foreach $product.features as $feature}
     {if ($feature.id_feature == $id_feature_label_bio) and ($feature.value|lower == "oui")}
-        {assign var='label_bio' value=$product.id_product}
+        {assign var='label_bio' value="label-bio"}
     {/if}
 
     {if ($feature.id_feature == $id_feature_label_rouge) and ($feature.value|lower == "oui")}
-        {assign var='label_rouge' value=$product.id_product}
+        {assign var='label_rouge' value="label-rouge"}
     {/if}
 {/foreach}
 

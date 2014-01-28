@@ -1,4 +1,5 @@
 
+
 {if isset($products)}
 	{foreach from=$products item=product name=products}
 
@@ -83,15 +84,16 @@
 				<div class="action-product">
 					<a href="{$product.link|escape:'htmlall':'UTF-8'}" class="Voir ce produit">{l s='View the product'}</a>
 					<form class="form-panier" method="post" action="{$link->getPageLink('cart')}" >
-						<label>Race :</label>
-						<select name="race" class="meat-race">
-							<option value="ramdom">Choisissez pour moi</option>
-							<option value="aubrac">Saler</option>
-							<option value="limousine">Limousine</option>
-							<option value="blonde_aquitaine">Charentaise</option>
-						</select>
+                        {if isset($product.attributes.0)}
+                            <label>Race :</label>
+                            <select name="id_product_attribute" class="meat-race">
+                                {foreach from=$product.attributes item=attribute}
+                                    <option value="{$attribute.id_product_attribute}">{$attribute.attribute_name}</option>
+                                {/foreach}
+                            </select>
+                        {/if}
 						<button class="moreless minus" name="minus" type="button">-</button>
-						<input class="quantity" type="text" disabled="" name="qty" value="1" maxlength="2">
+						<input class="quantity" type="text" name="qty" value="1" maxlength="2">
 						<button class="moreless plus" name="plus" type="button">+</button>
 
 						<input type="hidden" name="token" value="{$static_token}" />

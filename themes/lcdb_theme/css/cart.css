@@ -75,6 +75,11 @@
     padding: 8px 8px 8px 54px;
 }
 
+#order .form-panier td .label-bio {
+    background: url('../img/asset/img_solo/petit_label_bio.png') no-repeat 9px;
+    padding: 8px 8px 8px 54px;
+}
+
 #order .form-panier td .product-title {
     font-size: 15px;
     font-weight: bold;
