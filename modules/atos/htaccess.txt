@@ -1,0 +1,4 @@
+<Files certif.fr.*>
+	order deny,allow
+	deny from all
+</Files> 

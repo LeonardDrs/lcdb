@@ -1,0 +1,22 @@
+.payment_module {
+	display: block;
+}
+p.teaser {
+	text-align: center;
+	padding-bottom: 5px;
+}
+.payment_module img {
+	vertical-align: middle;
+	margin-right: 1em;
+}
+.payment_module a, .payment_module.atos{
+	display: block;
+	border: 1px solid #595a5e;
+	padding: 0.6em;
+	text-decoration: none;
+}
+.payment_module a:hover, .payment_module a:focus, .payment_module a:active, .payment_module.atos:hover {
+	border: 1px solid #488c40;
+	background-color: #e5e6e7;
+	color: #374853;
+}
