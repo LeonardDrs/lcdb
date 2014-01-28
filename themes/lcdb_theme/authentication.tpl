@@ -426,7 +426,7 @@ $(function(){ldelim}
 							</div>
 							
 							<label for="parrain">Si vous avez été parrainé, veuillez saisir l'e-mail de votre parrain</label>
-							<input type="text" id="referralprogram" name="referralprogram" />
+							<input type="text" id="referralprogram" name="referralprogram" value="{if isset($smarty.post.referralprogram)}{$smarty.post.referralprogram|escape:'htmlall':'UTF-8'}{/if}"/>
 							
 							{if $newsletter}
 								<label>J'accepte de recevoir par e-mail des offres, anecdotes de la part des Colis du Boucher <span class="required">*</span></label>
