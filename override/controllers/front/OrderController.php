@@ -303,7 +303,10 @@ class OrderController extends OrderControllerCore
 		$relays = Order::getRelays();
 		// $vars[0]['name'] = str_replace(' ', '_', strtolower($vars[0]['name']));
 		$this->context->smarty->assign(
-			array('relays' => json_encode($relays))
+			array(
+				'relays' => json_encode($relays),
+				'ID_RELAY_CARRIER' => ID_RELAY_CARRIER
+			)
 		);
 	}
 
@@ -360,7 +363,8 @@ class OrderController extends OrderControllerCore
 			'delivery_option' => $delivery_option,
 			'address_collection' => $this->context->cart->getAddressCollection(),
 			'minimum_order' => $minimumOrder,
-			'postcode' => $address_delivery->postcode
+			'postcode' => $address_delivery->postcode,
+			'ID_RELAY_CARRIER' => ID_RELAY_CARRIER
 		);
 		
 		Cart::addExtraCarriers($vars);

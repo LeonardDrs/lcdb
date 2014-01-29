@@ -56,7 +56,7 @@
 								{if $option.unique_carrier}
 									{foreach $option.carrier_list as $carrier}
 										<p>
-											<label class="radio" for="delivery_option_{$id_address}_{$option@index}"><input type="radio" name="delivery" value="{$carrier.instance->id}" onchange="{if $opc}updateCarrierSelectionAndGift();{else}updateExtraCarrier('{$key}', {$id_address});{/if}" id="delivery_option_{$id_address}_{$option@index}"/><span class="delivery_option_title"><span class="delivery_option_title bold">{$carrier.instance->name}</span>
+											<label class="radio" for="delivery_option_{$id_address}_{$option@index}"><input{if $carrier.instance->id == $ID_RELAY_CARRIER} class="choose-relay_"{/if} type="radio" name="delivery" value="{$carrier.instance->id}" onchange="{if $opc}updateCarrierSelectionAndGift();{else}updateExtraCarrier('{$key}', {$id_address});{/if}" id="delivery_option_{$id_address}_{$option@index}"/><span class="delivery_option_title"><span class="delivery_option_title bold">{$carrier.instance->name}</span>
 											|	<span class="">
 												{if $option.total_price_with_tax && !$free_shipping}
 													{if $use_taxes == 1}

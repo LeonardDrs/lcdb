@@ -11,7 +11,6 @@ class AdminCarriersRelaysControllerCore extends AdminController
 		$this->lang = false;
 		$this->deleted = true;
 		
-		$this->addRowAction('view');
 		$this->addRowAction('edit');
 		$this->addRowAction('delete');
 
