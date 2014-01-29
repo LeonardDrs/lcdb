@@ -28,7 +28,7 @@ function initialize() {
 
     //creates the markers and the list on the left
     for (var i=0; i< relaysLength; i++) {
-        createMarker(i, relays[i].nom, relays[i].address, relays[i].tel, relays[i].mention, relays[i].lat, relays[i].lon);
+        createMarker(i, relays[i].name, relays[i].address, relays[i].tel, relays[i].mention, relays[i].lat, relays[i].lon);
         var $listItem   = $j190(document.createElement('li')),
             $title      = $j190(document.createElement('h3')),
             $address1   = $j190(document.createElement('p')),
@@ -40,7 +40,7 @@ function initialize() {
             $marker     = $j190(document.createElement('span')),
             $separation = $j190(document.createElement('hr'));
 
-        $title.text(relays[i].nom).addClass('relay-name');
+        $title.text(relays[i].name).addClass('relay-name');
         $address1.text(relays[i].address[0]).addClass('relay-address');
         $address2.text(relays[i].address[1]).addClass('relay-address');
         $tel.text(relays[i].tel);
@@ -62,7 +62,7 @@ function initialize() {
 
 img_folder ='';
 
-function createMarker(index, nom, adresse, telephone, mention, lat, lon){
+function createMarker(index, name, adresse, telephone, mention, lat, lon){
     var markerOptions = {
         draggable   : false,
         Animation   : google.maps.Animation.DROP,
@@ -76,7 +76,7 @@ function createMarker(index, nom, adresse, telephone, mention, lat, lon){
 
     google.maps.event.addListener(m, 'click', function () {
         var cont = document.createElement("div");
-        $j190(cont).html('<h3 class="relay-name">'+nom+'</h3><p>'+adresse[0]+'</p><p>'+adresse[1]+'</p><p>'+telephone+'</p><p class="relay-mention">'+mention+'</p>');
+        $j190(cont).html('<h3 class="relay-name">'+name+'</h3><p>'+adresse[0]+'</p><p>'+adresse[1]+'</p><p>'+telephone+'</p><p class="relay-mention">'+mention+'</p>');
         infoBox.setOptions({
             alignBottom             : true,
             disableAutoPan          : true,

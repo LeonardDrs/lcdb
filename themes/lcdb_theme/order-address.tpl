@@ -129,10 +129,17 @@ function updateAddressSelection(addressType)
 		// @todo  check with theme 1.4
 		//if ($('#HOOK_EXTRACARRIER').length == 0 && json.HOOK_EXTRACARRIER !== null && json.HOOK_EXTRACARRIER != undefined)
 		//	html += json.HOOK_EXTRACARRIER;
-		
+		// console.log(html);
 		$('#carrier_area').replaceWith(html);
 		/* update hooks for carrier module */
 		$('#HOOK_BEFORECARRIER').html(json.HOOK_BEFORECARRIER);
+
+
+		if ($('#error-price').is(':visible')) {
+			$('#submit-address').addClass('disabled-button').attr('disabled','disabled');
+		} else {
+			$('#submit-address').removeClass('disabled-button').removeAttr('disabled');
+		}
 	}
 
 	function buildAddressBlock(id_address, address_type, dest_comp)
@@ -346,7 +353,7 @@ function updateAddressSelection(addressType)
 											{if $option.unique_carrier}
 												{foreach $option.carrier_list as $carrier}
 													<p>
-														<label class="radio" for="delivery_option_{$id_address}_{$option@index}"><input{if $carrier.instance->id == 24} class="choose-relay_"{/if} type="radio" name="delivery" value="{$carrier.instance->id}" onchange="updateExtraCarrier('{$key}', {$id_address});" id="delivery_option_{$id_address}_{$option@index}"/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
+														<label class="radio" for="delivery_option_{$id_address}_{$option@index}"><input{if $carrier.instance->id == $ID_RELAY_CARRIER} class="choose-relay_"{/if} type="radio" name="delivery" value="{$carrier.instance->id}" onchange="updateExtraCarrier('{$key}', {$id_address});" id="delivery_option_{$id_address}_{$option@index}"/><span class="delivery_option_title bold">{$carrier.instance->name}</span>
 														|	<span class="">
 															{if $option.total_price_with_tax && !$free_shipping}
 																{if $use_taxes == 1}
@@ -402,7 +409,11 @@ function updateAddressSelection(addressType)
 				</div>
 			</div>
 			<div id="continue-shopping">
-				<input type="submit" value="valider" id="submit-address" class="red-button gradient"  />
+				{if $minimum_order < $cart->getOrderTotal(true, $order_total_flag_without)}
+					<input type="submit" value="valider" id="submit-address" class="red-button gradient"  />
+				{else}
+					<input type="submit" value="valider" id="submit-address" class="red-button gradient disabled-button" disabled/>
+				{/if}
 				<a href="index.php?id_category=3&controller=category" title="Continuer mes achats">&rarr;&nbsp;<span>Continuer mes achats</span></a>
 			</div>
 		</form>

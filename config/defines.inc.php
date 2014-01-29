@@ -174,6 +174,8 @@ define('ID_ZONE_PETITE_BANLIEUE', 9);
 define('ID_ZONE_GRANDE_BANLIEUE', 10);
 define('ID_ZONE_PROVINCE', 11);
 
+define('ID_RELAY_CARRIER', 24);
+
 define('ID_CATEGORY_MAIN', 3);
 define('ID_CATEGORY_SURPRISE', 4);
 define('ID_CATEGORY_GIFT', 7);

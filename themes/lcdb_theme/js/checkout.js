@@ -166,7 +166,7 @@ $(document).ready(function(){
     });
 
     // $('#show-map').click(function() {
-    $('.choose-relay_').click(function() {
+    $('.bloc-checkout').on('click','.choose-relay_',function() {
         $('#relays').show();
         $('#relays').css({'height': $(document).height(), 'width': $(document).width()});
         if (google) {
@@ -292,15 +292,25 @@ $(document).ready(function(){
     if (google) {
         initialize();
     }
-    $('.choose-relay').on('click', function() {
-        $('#saved-address-relay li').empty();
+
+    $('#id_address_delivery').on('change',function() {
+        $('.content-address-delivery').removeClass('address_disabled');
+    });
+
+    $('.bloc-checkout').on('click','[name=delivery],[name=id_address_delivery]',function() {
+        $('.content-address-delivery').removeClass('address_disabled');
+    });
+
+    $('.choose-relay').on('click', function(e) {
+        e.preventDefault();
+        $('.content-address-delivery').addClass('address_disabled');
         var address = $(this).parents('li').find('.relay-address');
+        console.log(address);
         $('#saved-address-relay li:first').text($(this).parents('li').find('.relay-name').text());
         $.each(address, function(index, item) {
             $('#saved-address-relay li').eq(index+1).text($(item).text());
         });
         $('.popin-close').trigger('click');
-        return false;
     });
     
     checkInformations();
