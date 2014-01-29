@@ -83,10 +83,10 @@
 	{if isset($features) && $features}
 		<div class="misc-infos clearfix">
 			{foreach from=$features item=feature}
-	            {if  isset($feature.value) && $feature.id_feature == 6}
+	            {if  isset($feature.value) && $feature.id_feature == $id_feature_package}
 					<p class="portions"><span class="img-portions"></span> {$feature.value|escape:'htmlall':'UTF-8'} <span class="colis-portions">portions</span></p>
 				{/if}
-				{if  isset($feature.value) && $feature.id_feature == 7}
+				{if  isset($feature.value) && $feature.id_feature == $id_feature_number_of}
 					<p class="jours"><span class="img-jours"></span> {$feature.value|escape:'htmlall':'UTF-8'} <span class="colis-jours">jours</span></p>
 				{/if}
 			{/foreach}

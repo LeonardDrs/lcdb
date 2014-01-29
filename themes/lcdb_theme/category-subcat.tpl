@@ -3,7 +3,7 @@
 				{if $category->level_depth == 3}
 					{assign var=logo value="big_{$category->link_rewrite}"}
 				{else if $category->level_depth == 4}
-					{if $category->id_category == 8}
+					{if $category->id_category == $id_category_boeuf}
 						{assign var=logo value="big_cow"}
 					{else}
 						{assign var=logo value="big_autres-volailles"}

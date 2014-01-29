@@ -31,7 +31,7 @@
 								<th  colspan="4" class="rouge">Minimum de commande : {$delivery.minimum_order}</th>
 							</tr>
 
-							{if $delivery.zone == 1}	
+							{if $delivery.zone == $id_zone_paris}	
 
 								<tr class="fond_vert">
 									<td>Mode de livraison</td>

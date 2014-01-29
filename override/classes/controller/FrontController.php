@@ -51,8 +51,28 @@ class FrontController extends FrontControllerCore
 
         // assign id to smarty
         $this->context->smarty->assign(array(
+            'id_zone_paris' => ID_ZONE_PARIS,
+            'id_zone_petite_banlieue' => ID_ZONE_PETITE_BANLIEUE,
+            'id_zone_grande_banlieue' => ID_ZONE_GRANDE_BANLIEUE,
+            'id_zone_province' => ID_ZONE_PROVINCE,
+            'id_category_main' => ID_CATEGORY_MAIN,
+            'id_category_surprise' => ID_CATEGORY_SURPRISE,
+            'id_category_gift' => ID_CATEGORY_GIFT,
+            'id_category_boeuf' => ID_CATEGORY_BOEUF,
+            'id_product_surprise' => ID_PRODUCT_SURPRISE,
+            'id_product_gift' => ID_PRODUCT_GIFT,
+            'id_feature_package' => ID_FEATURE_PACKAGE,
+            'id_feature_number_of' => ID_FEATURE_NUMBER_OF,
+            'id_feature_preservation' => ID_FEATURE_PRESERVATION,
+            'id_feature_baking' => ID_FEATURE_BAKING,
             'id_feature_label_bio' => ID_FEATURE_LABEL_BIO,
-            'id_feature_label_rouge' => ID_FEATURE_LABEL_ROUGE
+            'id_feature_label_rouge' => ID_FEATURE_LABEL_ROUGE,
+            'id_feature_label_weight' => ID_FEATURE_WEIGHT,
+            'id_menu_cats' => ID_MENU_CATS,
+            'id_menu_infos' => ID_MENU_INFOS,
+            'id_menu_recipe' => ID_MENU_RECIPE,
+            'id_menu_approach' => ID_MENU_APPROACH,
+            'id_menu_faq' => ID_MENU_FAQ
         ));
 
 	}
