@@ -150,6 +150,7 @@ abstract class PaymentModule extends PaymentModuleCore
 
 					$order->date_delivery = $this->context->cart->date_delivery;
 					$order->hour_delivery = $this->context->cart->hour_delivery;
+					$order->custom_relay = $this->context->cart->custom_relay;
 
 					// Creating order
 					$result = $order->add();

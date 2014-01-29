@@ -164,36 +164,3 @@ define('_PS_SMARTY_CONSOLE_OPEN_', 2);
 
 define('_PS_JQUERY_VERSION_', '1.7.2');
 
-
-
-// 
-
-
-define('ID_ZONE_PARIS', 1);
-define('ID_ZONE_PETITE_BANLIEUE', 9);
-define('ID_ZONE_GRANDE_BANLIEUE', 10);
-define('ID_ZONE_PROVINCE', 11);
-
-define('ID_RELAY_CARRIER', 24);
-
-define('ID_CATEGORY_MAIN', 3);
-define('ID_CATEGORY_SURPRISE', 4);
-define('ID_CATEGORY_GIFT', 7);
-
-define('ID_PRODUCT_SURPRISE', 729);
-define('ID_PRODUCT_GIFT', 1029);
-
-define('ID_FEATURE_PACKAGE', 6);
-define('ID_FEATURE_NUMBER_OF', 7);
-define('ID_FEATURE_PRESERVATION', 8);
-define('ID_FEATURE_BAKING', 10);
-define('ID_FEATURE_LABEL_BIO', 11);
-define('ID_FEATURE_LABEL_ROUGE', 12);
-define('ID_FEATURE_WEIGHT', 13);
-
-define('ID_MENU_CATS','It works!');
-define('ID_MENU_INFOS','It works!');
-define('ID_MENU_RECIPE','It works!');
-define('ID_MENU_APPROACH','It works!');
-define('ID_MENU_FAQ','It works!');
-

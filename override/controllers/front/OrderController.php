@@ -75,6 +75,23 @@ class OrderController extends OrderControllerCore
 							die(Tools::jsonEncode($this->_getCarrierList()));
 							break;
 
+						case 'updateExtraCarrier':
+							// Change virtualy the currents delivery options
+							$delivery_option = $this->context->cart->getDeliveryOption();
+							$delivery_option[(int)Tools::getValue('id_address')] = Tools::getValue('id_delivery_option');
+							$this->context->cart->setDeliveryOption($delivery_option);
+							$this->context->cart->save();
+							$return = array(
+								'content' => Hook::exec(
+									'displayCarrierList',
+									array(
+										'address' => new Address((int)Tools::getValue('id_address'))
+									)
+								)
+							);
+							die(Tools::jsonEncode($return));
+							break;
+
 						case 'updateAddressesSelected':
 							if ($this->context->customer->isLogged(true))
 							{
@@ -226,13 +243,18 @@ class OrderController extends OrderControllerCore
 					$this->setTemplate(_PS_THEME_DIR_.'order-address-multishipping.tpl');
 				}
 				else
-					$this->setTemplate(_PS_THEME_DIR_.'order-address.tpl');
+					$this->setTemplate(_PS_THEME_DIR_.'order-carrier.tpl');
 					$this->addJS(_THEME_JS_DIR_.'checkout.js');
 			break;
 
 			case 2:
 				if (Tools::isSubmit('processAddress'))
 					$this->processAddress();
+				if (Tools::getValue('custom_relay'))
+				{
+					$this->context->cart->custom_relay = (int) Tools::getValue('custom_relay');
+					$this->context->cart->save();
+				}
 				$this->autoStep();
 				$this->_assignCarrier();
 				$this->processCarrier();
@@ -383,7 +405,7 @@ class OrderController extends OrderControllerCore
 					'delivery_option_list' => $this->context->cart->getDeliveryOptionList(),
 					'delivery_option' => $this->context->cart->getDeliveryOption(null, true)
 				)),
-				'carrier_block' => $this->context->smarty->fetch(_PS_THEME_DIR_.'order-carrier.tpl')
+				'carrier_block' => $this->context->smarty->fetch(_PS_THEME_DIR_.'order-carrier-ajax.tpl')
 			);
 			
 			Cart::addExtraCarriers($result);
@@ -393,7 +415,7 @@ class OrderController extends OrderControllerCore
 			return array(
 				'hasError' => true,
 				'errors' => $this->errors,
-				'carrier_block' => $this->context->smarty->fetch(_PS_THEME_DIR_.'order-carrier.tpl')
+				'carrier_block' => $this->context->smarty->fetch(_PS_THEME_DIR_.'order-carrier-ajax.tpl')
 			);
 	}
 	

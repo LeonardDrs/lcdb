@@ -113,7 +113,6 @@
   'AdminOrderPreferencesControllerCore' => 'controllers/admin/AdminOrderPreferencesController.php',
   'AdminOrdersController' => 'override/controllers/admin/AdminOrdersController.php',
   'AdminOrdersControllerCore' => 'controllers/admin/AdminOrdersController.php',
-  'AdminOrdersExportController' => 'override/controllers/admin/AdminOrdersExportController.php',
   'AdminOutstandingController' => 'override/controllers/admin/AdminOutstandingController.php',
   'AdminOutstandingControllerCore' => 'controllers/admin/AdminOutstandingController.php',
   'AdminPPreferencesController' => 'override/controllers/admin/AdminPPreferencesController.php',

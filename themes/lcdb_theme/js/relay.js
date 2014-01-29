@@ -8,7 +8,7 @@ var map,
     // $documentFragment   = $j190(document.createDocumentFragment());
     $documentFragment   = $j190('<div>');
 
-function initialize() { 
+function relayInitialize() { 
     
     infoBox = new InfoBox({
         content: '...'
@@ -56,6 +56,7 @@ function initialize() {
         
         $marker.addClass('marker'+(i+1));
         $documentFragment.append($listItem);
+        $($listItem[0]).data('relay',relays[i]);
     }
     $relayList.append($documentFragment.children());
 }

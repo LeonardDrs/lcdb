@@ -4,6 +4,7 @@ class Cart extends CartCore
 {
 	public $date_delivery;
 	public $hour_delivery;
+	public $custom_relay;
 
 	/**
 	 * @see ObjectModel::$definition
@@ -31,6 +32,7 @@ class Cart extends CartCore
 			'date_upd' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
 			'date_delivery' => 			array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
 			'hour_delivery' => 			array('type' => self::TYPE_STRING),
+			'custom_relay' => 			array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
 		),
 	);
 

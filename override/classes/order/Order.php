@@ -7,6 +7,8 @@ class Order extends OrderCore
 	public $date_delivery;
 
 	public $hour_delivery;
+
+	public $custom_relay;
 	
 	public static $definition = array(
 		'table' => 'orders',
@@ -57,6 +59,7 @@ class Order extends OrderCore
 			'date_upd' => 					array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
 			'date_delivery' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
 			'hour_delivery' => 				array('type' => self::TYPE_STRING),
+			'custom_relay' => 				array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
 		),
 	);
 
@@ -66,7 +69,7 @@ class Order extends OrderCore
 	public static function getRelays()
 	{
 		$relays = (object) array();
-		$sql = 'SELECT name, l.address, mention, lat, lon, phone, c.id_carrier
+		$sql = 'SELECT c.id_carrier, name, l.address, mention, lat, lon, phone, c.id_carrier
 				FROM '._DB_PREFIX_.'carrier c
 				LEFT join '._DB_PREFIX_.'carrier_lang l on c.id_carrier = l.id_carrier
 				WHERE c.`type_carrier` = 2

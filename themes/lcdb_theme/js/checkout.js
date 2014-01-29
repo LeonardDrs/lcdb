@@ -131,7 +131,6 @@ $(document).ready(function(){
     });
 
     $('#relay').change(function(){
-        console.log('?')
         var $home  = $('#delivery-address');
         var $relay = $('#delivery-relay');
         if ($('#relay').is(':checked')) {
@@ -166,15 +165,19 @@ $(document).ready(function(){
     });
 
     // $('#show-map').click(function() {
-    $('.bloc-checkout').on('click','.choose-relay_',function() {
-        $('#relays').show();
-        $('#relays').css({'height': $(document).height(), 'width': $(document).width()});
-        if (google) {
-            google.maps.event.trigger(map, 'resize');
-            map.setCenter(new google.maps.LatLng(defaultLat, defaultLon));
-        }
-        return false;
-    });
+    enablePR = function() {
+         $('.choose-relay_').on('click',function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('#relays').show();
+            $('#relays').css({'height': $(document).height(), 'width': $(document).width()});
+            if (google) {
+                google.maps.event.trigger(map, 'resize');
+                map.setCenter(new google.maps.LatLng(defaultLat, defaultLon));
+            }
+        });
+    }
+    enablePR();
 
     function checkInformations() {
         // var postalCode = $('#address_delivery .address_postcode').text();
@@ -290,26 +293,34 @@ $(document).ready(function(){
         // $('#submit-address').removeClass('red-button').addClass('disabled-button');
     }
     if (google) {
-        initialize();
+        relayInitialize();
     }
 
-    $('#id_address_delivery').on('change',function() {
-        $('.content-address-delivery').removeClass('address_disabled');
-    });
+    // $('#id_address_delivery').on('change',function() {
+    //     $('.content-address-delivery').removeClass('address_disabled');
+    // });
 
-    $('.bloc-checkout').on('click','[name=delivery],[name=id_address_delivery]',function() {
-        $('.content-address-delivery').removeClass('address_disabled');
-    });
+    // $('.bloc-checkout').on('click','[name=delivery],[name=id_address_delivery]',function() {
+    //     $('.content-address-delivery').removeClass('address_disabled');
+    // });
 
     $('.choose-relay').on('click', function(e) {
         e.preventDefault();
-        $('.content-address-delivery').addClass('address_disabled');
-        var address = $(this).parents('li').find('.relay-address');
-        console.log(address);
-        $('#saved-address-relay li:first').text($(this).parents('li').find('.relay-name').text());
-        $.each(address, function(index, item) {
-            $('#saved-address-relay li').eq(index+1).text($(item).text());
-        });
+        var relay = $(this).parents('li').data('relay');
+        // $('.content-address-delivery').addClass('address_disabled');
+        $('label.radio.checked').removeClass('checked');
+        $('.choose-relay_').parent().addClass('checked')
+        // $('.choose-relay_').val(relay.id_carrier);
+        $('#custom_relay').val(relay.id_carrier);
+        $('.choose-relay_').attr('checked','checked');
+        $('#address_delivery .add-new-addr').hide();
+        $('#address_delivery .address_address1').html(relay.name);
+        $('#address_delivery .address_address2').hide(); // bcs facultatif
+        $('#address_delivery .address_postcode').html(relay.address[0]);
+        $('#address_delivery .address_country').html(relay.address[1]);
+        $('#address_delivery .address_phone').html(relay.phone);
+        $('#address_delivery .address_update').html(relay.mention);
+
         $('.popin-close').trigger('click');
     });
     
