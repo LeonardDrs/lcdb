@@ -88,7 +88,7 @@
 	</table>
 	
 	<h5>Date de livraison</h5>
-	<p>Vendredi 1er mars 2013<br />Entre 20h30 et 21h30 ou encore 17h et 20h30</p>
+	<!-- <p>Vendredi 1er mars 2013<br />Entre 20h30 et 21h30 ou encore 17h et 20h30</p> -->
 	<hr />
 	<h5>Mode et frais de livraison</h5>
 	{if $carrier->id}
