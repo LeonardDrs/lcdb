@@ -1204,7 +1204,7 @@
 	line-height:1em;
 }
 #order .content-payment h2,
-#order .content-payment form#form-payment h2{
+#order .content-payment #form-payment h2{
 	margin-bottom:0px;
 	margin-top: 10px;
 	border-bottom: 1px dashed #342110;
@@ -1227,7 +1227,7 @@
 }
 #order .content-payment .bloc,
 #order .content-payment #total,
-#order .content-payment form#form-payment .bloc{
+#order .content-payment #form-payment .bloc{
 	width: 446px;
 	float: left;
 	padding:0;
@@ -1236,7 +1236,11 @@
 #order .content-payment .bloc > form{
 	margin: 0px 10px 0px 10px;
 }
-#order .content-payment form#form-payment .bloc > div{
+#order .content-payment .bloc #payment-message {
+	padding: 20px 0px 30px 0px;
+	height: 93px;
+}
+#order .content-payment #form-payment .bloc > div{
 	border: none;
 	padding: 0;
 }
@@ -1251,7 +1255,7 @@
 	margin-right: 18px;
 }
 #order .content-payment .bloc h2,
-#order .content-payment form#form-payment .bloc h2{
+#order .content-payment #form-payment .bloc h2{
 	margin-bottom: 30px;
 }
 #order .content-payment .bloc:first-child h2{
@@ -1504,7 +1508,21 @@
 	width: 0px;
 	height: 0px;
 }
-#order .content-payment form#form-payment .bloc #payment-message{
+#order .content-payment #form-payment #paypal_payment_form input{
+	font-style: italic;
+	color: #4D9810;
+	font-size: 15px;
+	margin-bottom: 10px;
+	padding: 0;
+	background: 0;
+	border: 0;
+	cursor: pointer;
+	display:block;
+}
+#order .content-payment #form-payment #paypal_payment_form input:hover{
+	text-decoration: underline;
+}
+#order .content-payment #form-payment .bloc #payment-message{
 	padding: 20px 0px 30px 0px;
 	height: 93px;
 }

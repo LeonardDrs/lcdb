@@ -9,10 +9,10 @@
 
 			{assign var="label" value=""}
 			{foreach from=$product.features item=feature name=feature}
-				{if ($feature.id_feature == 11) && ($feature.value == "Oui")}
+				{if ($feature.id_feature == $id_feature_label_bio) && ($feature.value|lower == "oui")}
 					{assign var="label" value="label-bio"}
 				{/if}
-				{if ($feature.id_feature == 12) && ($feature.value == "Oui")}
+				{if ($feature.id_feature == $id_feature_label_rouge) && ($feature.value|lower == "oui")}
 					{assign var="label" value="label-rouge"}
 				{/if}
 			{/foreach}
@@ -44,10 +44,10 @@
 					</div>
 					<div class="detail">
 						{foreach from=$product.features item=feature name=feature}
-							{if ($feature.id_feature == 7)}
+							{if ($feature.id_feature == $id_feature_number_of)}
 								<span class="person">x{$feature.value}</span>
 							{/if}
-							{if ($feature.id_feature == 8)}
+							{if ($feature.id_feature == $id_feature_preservation)}
 								<span class="preservation">{$feature.value}j</span>
 							{/if}
 						{/foreach}

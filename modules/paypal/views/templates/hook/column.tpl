@@ -1,28 +1,13 @@
-{*
-* 2007-2013 PrestaShop
-*
-* NOTICE OF LICENSE
-*
-* This source file is subject to the Academic Free License (AFL 3.0)
-* that is bundled with this package in the file LICENSE.txt.
-* It is also available through the world-wide-web at this URL:
-* http://opensource.org/licenses/afl-3.0.php
-* If you did not receive a copy of the license and are unable to
-* obtain it through the world-wide-web, please send an email
-* to license@prestashop.com so we can send you a copy immediately.
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
-* versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-*  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2013 PrestaShop SA
-*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
-*}
 
-<div id="paypal-column-block">
-	<p><a href="{$base_dir_ssl}modules/paypal/about.php" rel="nofollow"><img src="{$logo}" alt="PayPal" title="{l s='Pay with PayPal' mod='paypal'}" style="max-width: 100%" /></a></p>
+<div id="paypal">
+	<!-- <label class="radio" for="acc-paypal">
+		<input type="radio" id="acc-paypal" name="payment" value="paypal"/> Paypal
+	</label> -->
+	<p>Paiement en ligne sécurisé à l'aide du système Paypal en protocol SSL.<p>
+	<p>Paypal étant un outil de paiement payant, <span class="bold">un surcoût de 3%</span>
+	du montant total de votre commande sera ajouté pour l'utilisation de ce mode de paiement.
+	Le montant final que vous aurez alors à payer sur Paypal sera donc de 
+	<span id="total-paypal" class="bold">244,63€</span>.</p>
+	<p>Nous vous remercions par avance de votre compréhension</p>
+	<a href="{$base_dir_ssl}modules/paypal/about.php" rel="nofollow">accéder</a>
 </div>

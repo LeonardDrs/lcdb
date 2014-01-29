@@ -86,10 +86,10 @@
 				<div class="clearfix">
 					<div class="label">
 						{foreach from=$features item=feature}
-							{if $feature.id_feature == 11 && $feature.value == "Oui" }
+							{if $feature.id_feature == $id_feature_label_bio && $feature.value|lower == "oui" }
 								<img class="bio" src="{$base_dir}/themes/lcdb_theme/img/asset/img_solo/agriculture-biologique.jpg" alt="Agriculture biologique"/>
 							{/if}
-							{if $feature.id_feature == 12 && $feature.value == "Oui" }
+							{if $feature.id_feature == $id_feature_label_rouge && $feature.value|lower == "oui" }
 								 <img class="bio" src="{$base_dir}/themes/lcdb_theme/img/asset/img_solo/product_labelrouge.png" alt="Label Rouge"/>
 							{/if}
 						{/foreach}
@@ -165,16 +165,6 @@
 							<input type="hidden" name="id_product_attribute" id="idCombination" value="" />
 						</p>
 
-						<!-- availability -->
-						<!-- <p id="availability_statut"{if ($product->quantity <= 0 && !$product->available_later && $allow_oosp) OR ($product->quantity > 0 && !$product->available_now) OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
-							<span id="availability_label">{l s='Availability:'}</span>
-							<span id="availability_value"{if $product->quantity <= 0} class="warning_inline"{/if}>
-							{if $product->quantity <= 0}{if $allow_oosp}{$product->available_later}{else}{l s='This product is no longer in stock'}{/if}{else}{$product->available_now}{/if}
-							</span>
-						</p> -->
-
-						<!-- <p class="warning_inline" id="last_quantities"{if ($product->quantity > $last_qties OR $product->quantity <= 0) OR $allow_oosp OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none"{/if} >{l s='Warning: Last items in stock!'}</p> -->
-
 						{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
 
 						{if isset($HOOK_PRODUCT_FOOTER) && $HOOK_PRODUCT_FOOTER}{$HOOK_PRODUCT_FOOTER}{/if}
@@ -188,13 +178,13 @@
 		<hr />
 		<div class="misc-infos clearfix">
 			{foreach from=$features item=feature}
-				{if $feature.id_feature == 7 }
+				{if $feature.id_feature == $id_feature_number_of }
 					<p class="portions"><span class="img-portions"></span> {$feature.value} <span class="colis-portions">portions</span></p>
 				{/if}
-				{if $feature.id_feature == 8 }
+				{if $feature.id_feature == $id_feature_preservation }
 					<p class="jours"><span class="img-jours"></span> {$feature.value} <span class="colis-jours">jours</span></p>
 				{/if}
-				{if $feature.id_feature == 10 }
+				{if $feature.id_feature == $id_feature_baking }
 					<p class="cuisson"><span class="img-cuisson"></span> {$feature.value} <span class="mode-cuisson">min</span></p>
 				{/if}
 			{/foreach}
