@@ -1,8 +1,8 @@
 
 <div id="paypal">
-	<label class="radio" for="acc-paypal">
+	<!-- <label class="radio" for="acc-paypal">
 		<input type="radio" id="acc-paypal" name="payment" value="paypal"/> Paypal
-	</label>
+	</label> -->
 	<p>Paiement en ligne sécurisé à l'aide du système Paypal en protocol SSL.<p>
 	<p>Paypal étant un outil de paiement payant, <span class="bold">un surcoût de 3%</span>
 	du montant total de votre commande sera ajouté pour l'utilisation de ce mode de paiement.

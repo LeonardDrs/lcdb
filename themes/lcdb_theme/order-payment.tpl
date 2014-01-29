@@ -74,14 +74,14 @@ var txtProducts = "{l s='products' js=1}";
 						</div>
 						<div id="basket-content" class="scrollbar">
 							<table>
-								<tbody>
+								<!-- <tbody>
 									<tr class="row">
 										<td class="label-rouge label">Pavé (Rumsteak Olgache) 180gr</td>
 										<td>9 €</td>
 										<td>10</td>
 										<td>90 €</td>
 									</tr>
-								</tbody>
+								</tbody> -->
 								{foreach from=$products item=product name=productLoop}
 									{assign var='productId' value=$product.id_product}
 									{assign var='productAttributeId' value=$product.id_product_attribute}
@@ -153,7 +153,7 @@ var txtProducts = "{l s='products' js=1}";
 					<a href="#" title="Continuer mes achats" class="bold"><span>&rarr;</span> Continuer mes achats</a>
 				</div>
 			</div>
-		<!-- REDUCTION	<div class="bloc">
+			<!-- REDUCTION	<div class="bloc">
 				<div id="bloc-reduction">
 					<h2>Vos réductions</h2>
 					<form method="get" name="form-reduc" id="form-reduc">
@@ -202,35 +202,12 @@ var txtProducts = "{l s='products' js=1}";
 			<div id="total">
 				<p class="bold">Total TTC de votre commande: <span>{displayPrice price=$total_price}</span></p>
 			</div>
-			<form id="form-payment" name="form-payment" method="get">
+			<!-- <form id="form-payment" name="form-payment" method="get"> -->
+			<div id="form-payment" name="form-payment">
 				<div class="bloc">
 					{if $HOOK_PAYMENT}
 						<div id="payment-means">
 							<h2>Moyen de paiement</h2>
-							<!-- <div id="credit-card">
-								<label class="radio" for="cb">
-									<input type="radio" id="cb" name="payment" value="carte-credit"/> Carte Bancaire
-								</label>
-								<p>Lorsque vous achetez sur lescolisduboucher.com, votre paiement
-								est entièrement sécurisé via le protocole de cryptage de données SSL 3.</p>
-							</div>
-							<div id="paypal">
-								<label class="radio" for="acc-paypal">
-									<input type="radio" id="acc-paypal" name="payment" value="paypal"/> Paypal
-								</label>
-								<p>Paiement en ligne sécurisé à l'aide du système Paypal en protocol SSL.<p>
-								<p>Paypal étant un outil de paiement payant, <span class="bold">un surcoût de 3%</span>
-								du montant total de votre commande sera ajouté pour l'utilisation de ce mode de paiement.
-								Le montant final que vous aurez alors à payer sur Paypal sera donc de 
-								<span id="total-paypal" class="bold">244,63€</span>.</p>
-								<p>Nous vous remercions par avance de votre compréhension</p>
-							</div>
-							<div id="check-transfert">
-								<label class="radio" for="check-transfer">
-									<input type="radio" id="check-transfer" name="payment" value="cheque-especes"/> Chèque ou espèces
-								</label>
-								<p>Paiement à la réception de votre colis</p>
-							</div> -->
 							{$HOOK_PAYMENT}
 						</div>
 					{else}
@@ -243,12 +220,13 @@ var txtProducts = "{l s='products' js=1}";
 						à l'attention des Colis du Boucher :</p>
 						<textarea name="message" ></textarea>
 					</div>
-<!-- VALID AND PAY -->
+					<!-- VALID AND PAY -->
 					<!-- <div class="action">
 						<button class="red-button gradient" name="submit" type="submit">Valider et payer ma commande</button>
 					</div> -->
 				</div>
-			</form>
+			</div>
+			<!-- </form> -->
 		</div>
 	</div>
 </div>
