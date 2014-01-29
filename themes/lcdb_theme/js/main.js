@@ -520,80 +520,77 @@ $(document).ready(function(){
 				var monthNames = [ 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre' ];
 				var month_value = date.getMonth(); var day_value = date.getDate(); var year_value = date.getFullYear();
 				el.val(day_value+" "+monthNames[month_value]+" "+year_value);
-				
-				var html = "";
-				var daynum = date.getDay(); 
-				// if(place_delivery=="paris" || place_delivery=="proche_banlieue"){
-				$("#selected-hours").removeClass().addClass("near");
-				$('.action button').attr('disabled', 'disabled');
-				html = '<div class="infos-hours"><p>Précisez le ou les créneau(x) horaires souhaité(s)</p>';
-				html += '<p>(avec au moins un créneau de '+(hours_interval/60)+'h ou plus)</p></div>';
-				html += '<div class="error"></div>';
-				for (j=0; j<4; j++){
-					if(j%2!=0){
-						var label = " et ";
-						var name = "end_delivery_hour_"+j;
-					}else{
-						var label = (j==0) ? "Entre ":"ou entre ";
-						var name = "start_delivery_hour_"+j;
-						html += '<div class="combobox combobox_'+j+'">';
-					}
-					html += '<label>'+label+'</label>';
-					html = combobox_delivery(tabHours, name, html);
-					if(j==3) html += '<span>(facultatif)</span>';
-					if(j%2!=0) html += '</div>';
-				}
-				html += '<p class="infos-preferences">Votre boucher est plutôt est du matin</p>';
-
-
-
-
-				// if(place_delivery=="grande_banlieue" && (daynum==6) || place_delivery=="province" || place_delivery=="point_relais"){
-				// 	$("#selected-hours").removeClass().addClass("far far-sat");
-				// 	$('.action button').removeAttr('disabled');
-				// 	html = '<div class="infos-hours"><p>Votre colis vous sera livré entre <span class="hours">8h et 13h</span></p></div>';
-				// }
-
-
-				// }else if(place_delivery=="grande_banlieue" && (daynum!=6)){
-				// 	$("#selected-hours").removeClass().addClass("far");
-				// 	$('.action button').removeAttr('disabled');
-				// 	html = '<div class="infos-hours"><p>Précisez le créneau horaire de 2 heures souhaitées :</p></div>';
-				// 	html += '<div class="error"></div>';
-				// 	html = combobox_delivery(tabHours, "delivery_hour", html)
-				// }else if(place_delivery=="grande_banlieue" && (daynum==6) || place_delivery=="province" || place_delivery=="point_relais"){
-				// 	$("#selected-hours").removeClass().addClass("far far-sat");
-				// 	$('.action button').removeAttr('disabled');
-				// 	html = '<div class="infos-hours"><p>Votre colis vous sera livré entre <span class="hours">8h et 13h</span></p></div>';
-				// }
-				$("#selected-hours").html(html);
-				
-				drop_down_list_without_submit($(".delivery"));
-				
-				/* ---------- Vérification du contenu du formulaire ------------*/
-				$(".near .combobox_0 .sbOptions a").click(function(event){
-					// var hours_interval = 60;
-					// if (place_delivery == "proche_banlieue") hours_interval = 120;
+				if (!date_only && (!limitedDays || date.getDay != 6)) { // province or saturday
 					
-					var values = new  Array();
-					var i = 0;
-					$(this).parents('.near .combobox_0').children('.sbHolder').children('.sbSelector').each(function(){
-						values[i] = $(this).text().split('h');
-						values[i][0] *= 60;
-						values[i] =  parseInt(values[i][0]) +  parseInt(values[i][1]);
-						i++;
-					});
-					if(values[1] - values[0] < hours_interval){
-						$(this).parents('#date-livraison').find('.action button').attr('disabled', 'disabled');
-						$(this).parents('#selected-hours').find('.error').html("L'intervalle entre les heures n'est pas correct");
-					}else if(isNaN(values[1] - values[0])){
-						$(this).parents('#selected-hours').find('.error').html("");
-						$(this).parents('#date-livraison').find('.action button').attr('disabled', 'disabled');
-					}else{
-						$(this).parents('#selected-hours').find('.error').html("");
-						$(this).parents('#date-livraison').find('.action button').removeAttr('disabled');
+					var html = "";
+					var daynum = date.getDay(); 
+					// if(place_delivery=="paris" || place_delivery=="proche_banlieue"){
+					$("#selected-hours").removeClass().addClass("near");
+					$('.action button').attr('disabled', 'disabled');
+					html = '<div class="infos-hours"><p>Précisez le ou les créneau(x) horaires souhaité(s)</p>';
+					html += '<p>(avec au moins un créneau de '+(hours_interval/60)+'h ou plus)</p></div>';
+					html += '<div class="error"></div>';
+					for (j=0; j<4; j++){
+						if(j%2!=0){
+							var label = " et ";
+							var name = "end_delivery_hour_"+j;
+						}else{
+							var label = (j==0) ? "Entre ":"ou entre ";
+							var name = "start_delivery_hour_"+j;
+							html += '<div class="combobox combobox_'+j+'">';
+						}
+						html += '<label>'+label+'</label>';
+						html = combobox_delivery(tabHours, name, html);
+						if(j==3) html += '<span>(facultatif)</span>';
+						if(j%2!=0) html += '</div>';
 					}
-				});
+					html += '<p class="infos-preferences">Votre boucher est plutôt est du matin</p>';
+
+					$("#selected-hours").html(html);
+					
+					drop_down_list_without_submit($(".delivery"));
+					
+					/* ---------- Vérification du contenu du formulaire ------------*/
+					$(".near .combobox_0 .sbOptions a").click(function(event){
+						// var hours_interval = 60;
+						// if (place_delivery == "proche_banlieue") hours_interval = 120;
+						
+						var values = new  Array();
+						var i = 0;
+						$(this).parents('.near .combobox_0').children('.sbHolder').children('.sbSelector').each(function(){
+							values[i] = $(this).text().split('h');
+							values[i][0] *= 60;
+							values[i] =  parseInt(values[i][0]) +  parseInt(values[i][1]);
+							i++;
+						});
+						if(values[1] - values[0] < hours_interval){
+							$(this).parents('#date-livraison').find('.action button').attr('disabled', 'disabled');
+							$(this).parents('#selected-hours').find('.error').html("L'interval entre les heures n'est pas correct");
+						}else if(isNaN(values[1] - values[0])){
+							$(this).parents('#selected-hours').find('.error').html("");
+							$(this).parents('#date-livraison').find('.action button').attr('disabled', 'disabled');
+						}else{
+							$(this).parents('#selected-hours').find('.error').html("");
+							$(this).parents('#date-livraison').find('.action button').removeAttr('disabled');
+						}
+					});
+				} else {
+					$('#date-livraison').find('.action button').removeAttr('disabled');
+					if (limitedDays && date.getDay == 6) {
+						// var _min = hStart.getMinutes(),
+						// 	_hours = hStart.getHours(),
+						// 	min_ = hEnd.getMinutes(),
+						// 	hours_ = hEnd.getHours();
+						// if (_min < 10) _min = "0"+_min
+						// if (min_ < 10) min_ = "0"+min_
+						// if (_hours < 10) _hours = "0"+_hours
+						// if (hours_ < 10) hours_ = "0"+hours_
+						// _hstart = _hours+'h'+_min;
+						// _hend = hours_+'h'+min_;
+						var horaire = 'Livraison entre 8h et 13h';
+						$('#selected-hours').html(horaire)
+					}
+				}
 			})
 		});
 	}

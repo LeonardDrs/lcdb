@@ -248,13 +248,26 @@ class OrderController extends OrderControllerCore
 			break;
 
 			case 2:
+				$date_only = false;
+				$limitedDays = false;
 				if (Tools::isSubmit('processAddress'))
 					$this->processAddress();
 				if (Tools::getValue('custom_relay'))
 				{
 					$this->context->cart->custom_relay = (int) Tools::getValue('custom_relay');
 					$this->context->cart->save();
+					$date_only = true;
 				}
+				if (Address::getZoneById($this->context->cart->id_address_delivery) == ID_ZONE_PROVINCE) {
+					$date_only = true;
+					$limitedDays = true;
+				}
+
+				$this->context->smarty->assign(array(
+					'date_only' => $date_only,
+					'limitedDays' => $limitedDays,
+				));
+
 				$this->autoStep();
 				$this->_assignCarrier();
 				$this->processCarrier();
@@ -268,6 +281,13 @@ class OrderController extends OrderControllerCore
 					$this->context->cart->date_delivery = date('Y-m-d',strtotime(Tools::getValue('date_delivery')));
 					$this->context->cart->hour_delivery = Tools::getValue('hour_delivery');
 					$this->context->cart->save();
+				}
+
+				if ($this->context->cart->custom_relay) {
+					$customRelay = new Carrier($this->context->cart->custom_relay);
+					$this->context->smarty->assign(array(
+						'customRelay' => $customRelay,
+					));
 				}
 				// if (!$this->context->cart->isVirtualCart())
 				// 				{

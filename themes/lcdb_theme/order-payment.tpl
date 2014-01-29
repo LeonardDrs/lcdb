@@ -39,17 +39,25 @@ var txtProducts = "{l s='products' js=1}";
 					<div>
 						<h3>Adresse de livraison</h3>
 						<!-- <a href="#" title="modifier">modifier</a> -->
-						<p>{$delivery->firstname} {$delivery->lastname}</p>
-						<p>{$delivery->address1}</p>
-						{if $delivery->address2}
-						<p>{$delivery->address2}</p>
-						{/if}
-						<p>{$delivery->postcode} {$delivery->city}</p>
-						{if $delivery->phone}
-						<p>{$delivery->phone}</p>
-						{/if}
-						{if $delivery->phone_mobile}
-						<p>{$delivery->phone_mobile}</p>
+						{if $customRelay}
+							<p>{$delivery->firstname} {$delivery->lastname}</p>
+							<p>{$customRelay->name}</p>
+							<p>{$customRelay->address.1}</p>
+							<p>{$customRelay->phone.1}</p>
+							<p>{$customRelay->mention.1}</p>
+						{else}
+							<p>{$delivery->firstname} {$delivery->lastname}</p>
+							<p>{$delivery->address1}</p>
+							{if $delivery->address2}
+							<p>{$delivery->address2}</p>
+							{/if}
+							<p>{$delivery->postcode} {$delivery->city}</p>
+							{if $delivery->phone}
+							<p>{$delivery->phone}</p>
+							{/if}
+							{if $delivery->phone_mobile}
+							<p>{$delivery->phone_mobile}</p>
+							{/if}
 						{/if}
 					</div>
 				</div>
@@ -57,7 +65,9 @@ var txtProducts = "{l s='products' js=1}";
 					<h3>Date de livraison</h3>
 					<a href="{$link->getPageLink('order', true, NULL, "{$smarty.capture.url_back}&step=2&multi-shipping={$multi_shipping}")}" title="modifier">modifier</a>
 					<p>{$cart->date_delivery|date_format:"%A %e %B %Y"}</p>
-					<p>{$cart->hour_delivery}</p>
+					{if strpos($cart->hour_delivery, 'undefined') == false} 
+						<p>{$cart->hour_delivery}</p>
+					{/if}
 				</div>
 				<div id="mode-delivery">
 					<h3>Mode de livraison</h3>

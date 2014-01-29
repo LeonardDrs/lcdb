@@ -9,6 +9,8 @@
 	var tranche = '{$tranche}';
 	var hStart = '{$h_start}';
 	var hEnd = '{$h_end}';
+	var date_only = {if $date_only}true{else}false{/if};
+	var limitedDays = {if $limitedDays}true{else}false{/if};
 
 	$(function() {
 		$('form').on('submit',function(e) {
