@@ -67,12 +67,7 @@ class FrontController extends FrontControllerCore
             'id_feature_baking' => ID_FEATURE_BAKING,
             'id_feature_label_bio' => ID_FEATURE_LABEL_BIO,
             'id_feature_label_rouge' => ID_FEATURE_LABEL_ROUGE,
-            'id_feature_label_weight' => ID_FEATURE_WEIGHT,
-            'id_menu_cats' => ID_MENU_CATS,
-            'id_menu_infos' => ID_MENU_INFOS,
-            'id_menu_recipe' => ID_MENU_RECIPE,
-            'id_menu_approach' => ID_MENU_APPROACH,
-            'id_menu_faq' => ID_MENU_FAQ
+            'id_feature_label_weight' => ID_FEATURE_WEIGHT
         ));
 
 	}
