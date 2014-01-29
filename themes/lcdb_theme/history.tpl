@@ -16,7 +16,7 @@
 				<p id="empty-command"><span class="img-warning"></span>l s='If you have just placed an order, it may take a few minutes for it to be validated. Please refresh this page if your order is missing.'}</p>
 			{/if}
 			
-			{if $orders && count($orders) && "test" == "test"}
+			{if $orders && count($orders)}
 				<hr />
 
 				<div class="clearfix" id="mes-commandes">
@@ -28,7 +28,6 @@
 							<p>Commande réalisée le : <span class="bold">{dateFormat date=$last_delivered_order.date_add full=0}</span></p>
 							<p>Montant total : <span class="bold">{displayPrice price=$last_delivered_order.total_paid currency=$last_delivered_order.id_currency no_utf8=false convert=false}</span></p>
 							<p>Mode de règlement : <span class="bold">{$last_delivered_order.payment|escape:'htmlall':'UTF-8'}</span></p>
-							{$last_delivered_order|@var_dump}uiuo
 							<p>État du paiement : <span class="bold">
 								{if isset($last_delivered_order.order_state)}
 									{$last_delivered_order.order_state|escape:'htmlall':'UTF-8'}
