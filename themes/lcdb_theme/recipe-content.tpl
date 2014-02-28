@@ -15,9 +15,7 @@
 
 <div id="center_column" class="recipe_card">
 	<div class="backlink">
-		<a href="javascript:history.back()" title="retourner à la liste des recettes">
-			Retourner à la liste des recettes
-		</a>
+		<a href="javascript:history.back()" title="retourner à la liste des recettes">Retourner à la liste des recettes</a>
 	</div>
 	<div itemscope itemtype="http://schema.org/Recipe">
 		<div class="title_print_recipe">
