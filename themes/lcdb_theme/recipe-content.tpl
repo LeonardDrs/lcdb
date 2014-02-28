@@ -46,9 +46,7 @@
 			<div id="recipe_intro" class="content">{$recipe->prior_content}</div>
 			<div id="recipe_ingredients" class="content">
 				<h2>Ingredients</h2>
-				<div>
-					{$recipe->ingredients_content}
-				</div>
+				<div>{$recipe->ingredients_content}</div>
 			</div>
 			<div id="recipe_detail" class="content">
 				<h2>Recette</h2>
