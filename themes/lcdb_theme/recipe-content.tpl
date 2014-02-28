@@ -21,7 +21,7 @@
 	</div>
 	<div itemscope itemtype="http://schema.org/Recipe">
 		<div class="title_print_recipe">
-			<h1 class="title_list" itemprop="name">Paleron et ses champignons, sauce rouge</h1>
+			<h1 class="title_list" itemprop="name">{$recipe->title}</h1>
 			<a href="javascript:window.print()" title="imprimer" class="red-button">Imprimer</a>
 		</div>
 		<div id="presentation">
