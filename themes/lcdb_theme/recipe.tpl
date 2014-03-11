@@ -34,7 +34,7 @@
 		</nav>
 	</div>
 	
-	{if isset($recipe) && !isset($recipe_category)}
+	{if isset($recipe)}
 		{include file="$tpl_dir./recipe-content.tpl"}
 	{elseif isset($recipe_category)}
 		{include file="$tpl_dir./recipe-category.tpl"}
