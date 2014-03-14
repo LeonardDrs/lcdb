@@ -373,7 +373,7 @@ class RecipeCategoryCore extends ObjectModel
 		WHERE `id_parent` = '.(int)$id_cat.'
 		'.($active ? 'AND `active` = 1' : '').'
 		GROUP BY c.`id_recipe_category`
-		ORDER BY `name` ASC');
+		ORDER BY `position` ASC');
 		
 		if(isset($result[0])){
 			if($result[0]['level_depth'] != $depth){
