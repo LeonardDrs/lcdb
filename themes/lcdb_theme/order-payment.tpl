@@ -39,7 +39,7 @@ var txtProducts = "{l s='products' js=1}";
 					<div>
 						<h3>Adresse de livraison</h3>
 						<!-- <a href="#" title="modifier">modifier</a> -->
-						{if $customRelay}
+						{if isset($customRelay)}
 							<p>{$delivery->firstname} {$delivery->lastname}</p>
 							<p>{$customRelay->name}</p>
 							<p>{$customRelay->address.1}</p>
